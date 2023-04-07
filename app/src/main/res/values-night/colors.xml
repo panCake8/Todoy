@@ -7,9 +7,9 @@
 
     <color name="secondary_color">#CFE5FF</color>
 
-    <color name="text_primary">#DE121212</color>
-    <color name="text_secondary">#99121212</color>
-    <color name="text_light">#61121212</color>
+   <color name="text_primary">#DEFAFAFA</color>
+    <color name="text_secondary">#99FAFAFA</color>
+    <color name="text_light">#61FAFAFA</color>
 
     <color name="done_chart">#00B4D8</color>
     <color name="todo_chart">#0077B6</color>
