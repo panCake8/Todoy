@@ -1,6 +1,5 @@
 package com.tahaproject.todoy_app.data
 
-import android.nfc.Tag
 import android.util.Log
 import com.google.gson.Gson
 import com.tahaproject.todoy_app.data.requests.*
@@ -61,26 +60,26 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
     }
 
     override fun register() {
-        var request =RegisterRequest("","")
+        val request = RegisterRequest("", "", Constants.teamID)
         postRequest(request, EndPoint.signup)
     }
 
     override fun createPersonalTodo() {
-        var request =PersonalTodoRequest("","")
+        val request = PersonalTodoRequest("", "")
         postRequest(request, EndPoint.personalTodo)
     }
 
     override fun getPersonalTodos() {
-       getRequest(EndPoint.personalTodo)
+        getRequest(EndPoint.personalTodo)
     }
 
     override fun updatePersonalTodosStatus() {
-        var request =PersonalTodoUpdateRequest("",0)
+        val request = PersonalTodoUpdateRequest("", 0)
         postRequest(request, EndPoint.personalTodo)
     }
 
     override fun createTeamTodo() {
-        var request =TeamToDoPostRequest("","","")
+        val request = TeamToDoPostRequest("", "", "")
         postRequest(request, EndPoint.teamTodo)
     }
 
@@ -89,7 +88,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
     }
 
     override fun updateTeamTodosStatus() {
-        var request =PersonalTodoUpdateRequest("",0)
+        val request = PersonalTodoUpdateRequest("", 0)
         postRequest(request, EndPoint.teamTodo)
     }
 
