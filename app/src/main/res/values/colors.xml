@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+   <color name="black">#FAFAFA</color>
+    <color name="white">#121212</color>
 
     <color name="primary">#00629D</color>
 
     <color name="secondary">#CFE5FF</color>
 
-    <color name="tertiary_87">#DE121212</color>
-    <color name="tertiary_60">#99121212</color>
-    <color name="tertiary_38">#61121212</color>
+    <color name="text_primary">#DE121212</color>
+    <color name="text_secondary">#99121212</color>
+    <color name="text_light">#61121212</color>
 
     <color name="done_chart">#00B4D8</color>
     <color name="todo_chart">#0077B6</color>
