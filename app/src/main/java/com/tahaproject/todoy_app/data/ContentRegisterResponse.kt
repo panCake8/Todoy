@@ -1,6 +1,9 @@
 package com.tahaproject.todoy_app.data
 
+import com.google.gson.annotations.SerializedName
+
 data class ContentRegisterResponse(
-    val userId: String?,
-    val username: String?,
+    @SerializedName("userId") val userId: String?,
+    @SerializedName("username") val username: String?,
 )
+
