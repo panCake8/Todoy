@@ -1,5 +1,7 @@
 package com.tahaproject.todoy_app.data
 
+import android.nfc.Tag
+import android.util.Log
 import com.google.gson.Gson
 import com.tahaproject.todoy_app.data.requests.LoginRequest
 import com.tahaproject.todoy_app.data.responses.LogInResponse
@@ -15,7 +17,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
     private val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
-    private val client = OkHttpClient.Builder().addInterceptor(logInterceptor)
+    private val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
     private val token = Constants.token
     private fun postRequest(body: Any, endPoint: String): Request {
         return Request
@@ -39,6 +41,22 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
 
 
     override fun login() {
+        val request = getRequest("login")
+        // execute the request and handle the response
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // handle the error
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    val result = gson.fromJson(jsonString, LogInResponse::class.java)
+                    Log.i(TAG_LOGIN, "$result")
+                }
+                // handle the response
+            }
+        })
+
     }
 
     override fun register() {
@@ -66,5 +84,9 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
 
     override fun updateTeamTodosStatus() {
         TODO("Not yet implemented")
+    }
+
+    companion object {
+        const val TAG_LOGIN = "Login_Tag"
     }
 }
