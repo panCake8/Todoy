@@ -7,11 +7,15 @@ import com.tahaproject.todoy_app.util.Constants
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 
 class ApiRequest(private val gson: Gson) : IRequestApis {
 
-    private val client = OkHttpClient()
+    private val logInterceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+    private val client = OkHttpClient.Builder().addInterceptor(logInterceptor)
     private val token = Constants.token
     private fun postRequest(body: Any, endPoint: String): Request {
         return Request
@@ -20,7 +24,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
             .post(
                 Gson().toJson(body).toRequestBody("application/json".toMediaTypeOrNull())
             )
-            .header("Authorization", "Barear $token")
+            .header("Authorization", "Bearer $token")
             .build()
     }
 
@@ -29,7 +33,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
             .Builder()
             .url("${Constants.url}/$endPoint")
             .get()
-            .header("Authorization", "Barear $token")
+            .header("Authorization", "Bearer $token")
             .build()
     }
 
