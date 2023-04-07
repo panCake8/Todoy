@@ -8,8 +8,8 @@ import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.ActivityHomeBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseActivity
 
-class HomeActivity : BaseActivity<ActivityHomeBinding>() {
+class HomeActivity() : BaseActivity<ActivityHomeBinding>() {
 
-    override val bindingInflater: (LayoutInflater) -> ActivityHomeBinding
+    override val bindingInflate: (LayoutInflater) -> ActivityHomeBinding
         get() = ActivityHomeBinding::inflate
 }
