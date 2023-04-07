@@ -1,6 +1,7 @@
-package com.tahaproject.todoy_app.data
+package com.tahaproject.todoy_app.data.responses
 
 import com.google.gson.annotations.SerializedName
+import com.tahaproject.todoy_app.data.responses.ContentLoginResponse
 
 data class FailureResponse(
     @SerializedName("value") val value: ContentLoginResponse?,
