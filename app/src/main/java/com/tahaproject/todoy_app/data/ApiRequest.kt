@@ -1,9 +1,10 @@
 package com.tahaproject.todoy_app.data
 
 import com.google.gson.Gson
-import com.tahaproject.todoy_app.data.requests.LoginRequest
+import com.tahaproject.todoy_app.data.requests.*
 import com.tahaproject.todoy_app.data.responses.LogInResponse
 import com.tahaproject.todoy_app.util.Constants
+import com.tahaproject.todoy_app.util.EndPoint
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -20,7 +21,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
             .post(
                 Gson().toJson(body).toRequestBody("application/json".toMediaTypeOrNull())
             )
-            .header("Authorization", "Barear $token")
+            .header("Authorization", "Bearer $token")
             .build()
     }
 
@@ -29,38 +30,46 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
             .Builder()
             .url("${Constants.url}/$endPoint")
             .get()
-            .header("Authorization", "Barear $token")
+            .header("Authorization", "Bearer $token")
             .build()
     }
 
 
     override fun login() {
+        getRequest(EndPoint.login)
+
     }
 
     override fun register() {
+        var request =RegisterRequest("","")
+        postRequest(request, EndPoint.signup)
     }
 
     override fun createPersonalTodo() {
-        TODO("Not yet implemented")
+        var request =PersonalTodoRequest("","")
+        postRequest(request, EndPoint.personalTodo)
     }
 
     override fun getPersonalTodos() {
-        TODO("Not yet implemented")
+       getRequest(EndPoint.personalTodo)
     }
 
     override fun updatePersonalTodosStatus() {
-        TODO("Not yet implemented")
+        var request =PersonalTodoUpdateRequest("",0)
+        postRequest(request, EndPoint.personalTodo)
     }
 
     override fun createTeamTodo() {
-        TODO("Not yet implemented")
+        var request =TeamToDoPostRequest("","","")
+        postRequest(request, EndPoint.teamTodo)
     }
 
     override fun getTeamTodos() {
-        TODO("Not yet implemented")
+        getRequest(EndPoint.teamTodo)
     }
 
     override fun updateTeamTodosStatus() {
-        TODO("Not yet implemented")
+        var request =PersonalTodoUpdateRequest("",0)
+        postRequest(request, EndPoint.teamTodo)
     }
 }
