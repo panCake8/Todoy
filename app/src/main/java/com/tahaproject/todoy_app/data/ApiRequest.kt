@@ -12,7 +12,7 @@ import java.io.IOException
 class ApiRequest(private val gson: Gson) : IRequestApis {
 
     private val client = OkHttpClient()
-    private val token = ""
+    private val token = Constants.token
     private fun postRequest(body: Any, endPoint: String): Request {
         return Request
             .Builder()
