@@ -7,18 +7,17 @@
 
     <color name="secondary">#CFE5FF</color>
 
-    <color name="tertiary_87">#DE121212</color>
-    <color name="tertiary_60">#99121212</color>
-    <color name="tertiary_38">#61121212</color>
+    <color name="tertiary_87">#DEC1C1C1</color>
+    <color name="tertiary_60">#99C1C1C1</color>
+    <color name="tertiary_38">#5EC1C1C1</color>
 
     <color name="done_chart">#00B4D8</color>
     <color name="todo_chart">#0077B6</color>
     <color name="in_progress_chart">#03045E</color>
 
-    <color name="background">@color/white</color>
+    <color name="background">#1c1c1c</color>
 
-    <color name="card_background">#F8F8F8</color>
-    <color name="text_field_background">#F9F9FC</color>
-
+    <color name="card_background">#303030</color>
+    <color name="text_field_background">#303030</color>i
 
 </resources>
