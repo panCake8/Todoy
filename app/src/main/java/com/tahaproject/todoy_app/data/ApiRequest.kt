@@ -1,6 +1,7 @@
 package com.tahaproject.todoy_app.data
 
 import com.google.gson.Gson
+import com.tahaproject.todoy_app.BuildConfig
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -10,7 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 open class ApiRequest {
     val gson: Gson = Gson()
-    private val token = Constants.token
+    private val token = BuildConfig.token
     private val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -18,7 +19,7 @@ open class ApiRequest {
 
     private fun createRequest(endPoint: String): Request.Builder {
         return Request.Builder()
-            .url("${Constants.url}/$endPoint")
+            .url("${BuildConfig.url}/$endPoint")
             .header(Constants.auth, "${Constants.bearer} $token")
     }
 
