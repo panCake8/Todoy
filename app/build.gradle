@@ -23,6 +23,7 @@ android {
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -38,6 +39,9 @@ android {
     viewBinding {
         enabled = true
     }
+
+
+ 
 
     dependencies {
 
@@ -63,6 +67,7 @@ android {
         implementation 'com.mikhaellopez:circularimageview:4.3.0'
         //encrypted shared pref
         implementation "androidx.security:security-crypto:1.1.0-alpha05"
+
 
     }
 }
