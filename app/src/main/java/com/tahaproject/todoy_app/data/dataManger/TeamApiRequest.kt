@@ -10,7 +10,7 @@ import com.tahaproject.todoy_app.data.responses.*
 import com.tahaproject.todoy_app.util.EndPoint
 
 
-class TeamApi(private val apiRequest: ApiRequest) : ITeamTodoApi {
+class TeamApiRequest(private val apiRequest: ApiRequest) : ITeamTodoApi {
 
     override fun createTeamTodo():TeamToDoResponse {
         val teamTodoRequest = TeamToDoPostRequest("", "","")

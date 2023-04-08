@@ -11,7 +11,7 @@ import com.tahaproject.todoy_app.data.responses.PersonalTodoUpdateResponse
 import com.tahaproject.todoy_app.util.EndPoint
 
 
-class PersonalApi(private val apiRequest:ApiRequest) : IPersonalTodoApi {
+class PersonalApiRequest(private val apiRequest:ApiRequest) : IPersonalTodoApi {
 
     override fun createPersonalTodo(): PersonalTodoCreateResponse {
         val personalTodoRequest = PersonalTodoRequest("", "")

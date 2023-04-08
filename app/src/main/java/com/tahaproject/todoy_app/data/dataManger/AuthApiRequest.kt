@@ -2,18 +2,15 @@ package com.tahaproject.todoy_app.data.dataManger
 
 import android.util.Log
 import com.tahaproject.todoy_app.BuildConfig
-
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.ApiRequest.Companion.TAG_LOGIN
 import com.tahaproject.todoy_app.data.IAuthApi
 import com.tahaproject.todoy_app.data.requests.LoginRequest
 import com.tahaproject.todoy_app.data.requests.RegisterRequest
-import com.tahaproject.todoy_app.data.responses.*
-import com.tahaproject.todoy_app.util.Constants
+import com.tahaproject.todoy_app.data.responses.LogInResponse
+import com.tahaproject.todoy_app.data.responses.RegisterResponse
 import com.tahaproject.todoy_app.util.EndPoint
 
-
-class AuthApi(private val apiRequest: ApiRequest) : IAuthApi {
+class AuthApiRequest (private val apiRequest: ApiRequest) : IAuthApi {
 
     override fun login(): LogInResponse {
         val loginRequest = LoginRequest("", "")
@@ -22,7 +19,7 @@ class AuthApi(private val apiRequest: ApiRequest) : IAuthApi {
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->
             result = apiRequest.gson.fromJson(jsonString, LogInResponse::class.java)
-            Log.i(TAG_LOGIN, "$result")
+            Log.i(ApiRequest.TAG_LOGIN, "$result")
         }
         return result
     }
