@@ -1,12 +1,12 @@
 package com.tahaproject.todoy_app.data
 
 import android.util.Log
+import androidx.viewbinding.BuildConfig
 import com.google.gson.Gson
 import com.tahaproject.todoy_app.data.requests.*
 import com.tahaproject.todoy_app.data.responses.*
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.EndPoint
-import com.tahaproject.todoy_app.util.HttpMethods
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
