@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">todoy-app</string>
+    <string name="recently_card_body">Lorem ipsum dolor sit amet consectetur. Nec aliquam feugiat maecenas accumsan...</string>
 </resources>
