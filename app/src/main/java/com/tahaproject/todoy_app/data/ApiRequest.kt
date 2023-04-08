@@ -23,35 +23,28 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
     private val token = Constants.token
 
 
-    private fun createRequest(method: HttpMethods, body: Any?, endPoint: String): Request {
-        val requestBuilder = Request.Builder()
+    private fun createRequest(endPoint: String): Request.Builder {
+        return Request.Builder()
             .url("${Constants.url}/$endPoint")
             .header("Authorization", "Bearer $token")
-
-        when (method) {
-            HttpMethods.GET -> {
-                requestBuilder.get()
-            }
-
-            HttpMethods.POST -> {
-                requestBuilder.post(
-                    Gson().toJson(body).toRequestBody("application/json".toMediaTypeOrNull())
-                )
-            }
-
-            HttpMethods.PUT -> {
-                requestBuilder.put(
-                    Gson().toJson(body).toRequestBody("application/json".toMediaTypeOrNull())
-                )
-            }
-        }
-        return requestBuilder.build()
     }
+
+    private fun postRequest(body: Any, endPoint: String): Request =
+        createRequest(endPoint).post(
+            Gson().toJson(body).toRequestBody("application/json".toMediaTypeOrNull())
+        ).build()
+
+    private fun getRequest(body: Any, endPoint: String): Request = createRequest(endPoint).get().build()
+
+    private fun putRequest(body: Any, endPoint: String): Request =
+        createRequest(endPoint).put(
+            Gson().toJson(body).toRequestBody("application/json".toMediaTypeOrNull())
+        ).build()
 
 
     override fun login(): LogInResponse {
         val loginRequest = LoginRequest("", "")
-        val request = createRequest(HttpMethods.GET, loginRequest, EndPoint.login)
+        val request = getRequest(loginRequest, EndPoint.login)
         lateinit var result: LogInResponse
         // execute the request and handle the response
         client.newCall(request).enqueue(object : Callback {
@@ -72,7 +65,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
 
     override fun register(): RegisterResponse {
         val registerRequest = RegisterRequest("", "", Constants.teamID)
-        val request = createRequest(HttpMethods.POST, registerRequest, EndPoint.signup)
+        val request = postRequest(registerRequest, EndPoint.signup)
         lateinit var result: RegisterResponse
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
