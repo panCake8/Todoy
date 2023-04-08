@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">todoy-app</string>
+    <string name="search_here_hint">Search</string>
 </resources>

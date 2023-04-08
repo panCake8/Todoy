@@ -25,6 +25,9 @@
     <color name="back_icon_color">#121212</color>
     <color name="app_bar_text_color">#1A1C1E</color>
     <color name="stroke_app_bar">#5EFFFFFF</color>
+    <color name="search_icon_stroke_color">#61121212</color>
+    <color name="medium_black">#99121212</color>
+    <color name="filter_icon_color">#00000000</color>
 
 
 </resources>
