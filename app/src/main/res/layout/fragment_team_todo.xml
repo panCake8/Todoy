@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.todo.TeamTodoFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/app_bar_team_todo"
+        style="@style/AppBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/team_todo" />
+
+    <View
+        android:id="@+id/app_bar_stroke"
+        style="@style/AppBarStroke"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_team_todo" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_team_todo"
+        style="@style/ChipGroupTodo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_stroke">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chips_choice"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/done" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chips_choice"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/in_progress" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chips_choice"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/todo" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_large"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chip_group_team_todo"
+        tools:listitem="@layout/item_card_team_todo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

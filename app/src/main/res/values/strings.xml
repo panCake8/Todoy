@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">todoy-app</string>
     <string name="search_here_hint">Search</string>
+    <string name="recently_card_body">Lorem ipsum dolor sit amet consectetur. Nec aliquam feugiat maecenas accumsan...</string>
+    <string name="personal_todo">Personal Todo</string>
+    <string name="done">Done</string>
+    <string name="in_progress">In Progress</string>
+    <string name="todo">Todo</string>
+    <string name="team_todo">Team Todo</string>
+
 </resources>

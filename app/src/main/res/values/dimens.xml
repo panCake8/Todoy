@@ -20,6 +20,7 @@
     <dimen name="button_height">64dp</dimen>
     <dimen name="no_size">0dp</dimen>
     <dimen name="chip_height">20dp</dimen>
+    <dimen name="no_elevation">0dp</dimen>
     <dimen name="height_search_box">56dp</dimen>
     <dimen name="radius_search_box">28dp</dimen>
 
