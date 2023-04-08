@@ -63,6 +63,16 @@
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
+
+    <!-- assign name card todoo-->
+    <style name="Text.AssignNameToDo">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/text_selectedChips</item>
+        <item name="android:background">@drawable/text_assign_background</item>
+
+    </style>
+
     <!-- body card todoo-->
     <style name="Text.BodyToDo">
         <item name="android:fontFamily">@font/roboto</item>
