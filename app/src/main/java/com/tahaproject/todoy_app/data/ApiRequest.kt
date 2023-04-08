@@ -3,8 +3,7 @@ package com.tahaproject.todoy_app.data
 import android.util.Log
 import com.google.gson.Gson
 import com.tahaproject.todoy_app.data.requests.*
-import com.tahaproject.todoy_app.data.responses.LogInResponse
-import com.tahaproject.todoy_app.data.responses.RegisterResponse
+import com.tahaproject.todoy_app.data.responses.*
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.EndPoint
 import com.tahaproject.todoy_app.util.HttpMethods
@@ -14,8 +13,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 
-class ApiRequest(private val gson: Gson) : IRequestApis {
-
+class ApiRequest : IRequestApis {
+    val gson: Gson = Gson()
     private val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -26,12 +25,12 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
     private fun createRequest(endPoint: String): Request.Builder {
         return Request.Builder()
             .url("${Constants.url}/$endPoint")
-            .header("Authorization", "Bearer $token")
+            .header(Constants.auth, "${Constants.bearer} $token")
     }
 
     private fun postRequest(body: Any, endPoint: String): Request =
         createRequest(endPoint).post(
-            Gson().toJson(body).toRequestBody("application/json".toMediaTypeOrNull())
+            Gson().toJson(body).toRequestBody(Constants.applicationJson.toMediaTypeOrNull())
         ).build()
 
     private fun getRequest(body: Any, endPoint: String): Request = createRequest(endPoint).get().build()
@@ -75,7 +74,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
                     result = gson.fromJson(jsonString, RegisterResponse::class.java)
-                    Log.i(TAG_LOGIN, "$result")
+                    Log.i(TAG_REGISTER, "$result")
                 }
                 // handle the response
             }
@@ -83,35 +82,79 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
         return result
     }
 
-    override fun createPersonalTodo() {
-        val request = PersonalTodoRequest("", "")
-        postRequest(request, EndPoint.personalTodo)
+    override fun createPersonalTodo(): PersonalTodoCreateResponse {
+        val personalTodoRequest = PersonalTodoRequest("", "")
+        val request = postRequest(personalTodoRequest, EndPoint.personalTodo)
+        lateinit var result: PersonalTodoCreateResponse
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // handle the error
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    result = gson.fromJson(jsonString, PersonalTodoCreateResponse::class.java)
+                    Log.i(TAG_LOGIN, "$result")
+                }
+                // handle the response
+            }
+        })
+        return result
+
     }
 
-    override fun getPersonalTodos() {
-        getRequest(EndPoint.personalTodo)
+    override fun getPersonalTodos(): PersonalTodo {
+        val request = getRequest("", EndPoint.personalTodo)
+        lateinit var result: PersonalTodo
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // handle the error
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    result = gson.fromJson(jsonString, PersonalTodo::class.java)
+                    Log.i(TAG_LOGIN, "$result")
+                }
+                // handle the response
+            }
+        })
+        return result
+
     }
 
-    override fun updatePersonalTodosStatus() {
-        val request = PersonalTodoUpdateRequest("", 0)
-        postRequest(request, EndPoint.personalTodo)
+    override fun updatePersonalTodosStatus(): PersonalTodoUpdateResponse {
+        val personalTodoUpdateRequest = PersonalTodoUpdateRequest("", 0)
+        val request = postRequest(personalTodoUpdateRequest, EndPoint.personalTodo)
+        lateinit var result: PersonalTodoUpdateResponse
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // handle the error
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    result = gson.fromJson(jsonString, PersonalTodoUpdateResponse::class.java)
+                    Log.i(TAG_LOGIN, "$result")
+                }
+                // handle the response
+            }
+        })
+        return result
+
     }
 
     override fun createTeamTodo() {
-        val request = TeamToDoPostRequest("", "", "")
-        postRequest(request, EndPoint.teamTodo)
     }
 
     override fun getTeamTodos() {
-        getRequest(EndPoint.teamTodo)
     }
 
     override fun updateTeamTodosStatus() {
-        val request = PersonalTodoUpdateRequest("", 0)
-        postRequest(request, EndPoint.teamTodo)
     }
 
     companion object {
         const val TAG_LOGIN = "Login_Tag"
+        const val TAG_REGISTER = "Register_Tag"
     }
 }
