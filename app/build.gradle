@@ -20,6 +20,8 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         buildConfigField "String", "teamID", "\"${properties.getProperty('teamID')}\""
+        buildConfigField "String", "token", "\"${properties.getProperty('token')}\""
+        buildConfigField "String", "url", "\"${properties.getProperty('url')}\""
     }
 
     buildTypes {
@@ -68,4 +70,6 @@ android {
         //encrypted shared pref
         implementation "androidx.security:security-crypto:1.1.0-alpha05"
 
+
     }
+}
