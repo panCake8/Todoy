@@ -13,10 +13,10 @@ interface IRequestApis {
 
     fun updatePersonalTodosStatus():PersonalTodoUpdateResponse
 
-    fun createTeamTodo()
+    fun createTeamTodo() :TeamToDoResponse
 
-    fun getTeamTodos()
+    fun getTeamTodos() :TeamToDo
 
-    fun updateTeamTodosStatus()
+    fun updateTeamTodosStatus() :TeamTodoUpdateResponse
 
 }
