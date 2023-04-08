@@ -4,8 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class TeamToDo(
     @SerializedName("id") val id: String?,
-    @SerializedName("assignee") val title: String?,
+    @SerializedName("title")   val title:String?,
+    @SerializedName("assignee") val assignee: String?,
     @SerializedName("description") val description: String?,
     @SerializedName("status") val status: Int?,
     @SerializedName("creationTime") val creationTime: String?
 )
+
+
