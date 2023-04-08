@@ -40,8 +40,9 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
     }
 
 
-    override fun login() {
+    override fun login(): LogInResponse {
         val request = getRequest(EndPoint.login)
+        lateinit var result: LogInResponse
         // execute the request and handle the response
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -50,13 +51,13 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    val result = gson.fromJson(jsonString, LogInResponse::class.java)
+                    result = gson.fromJson(jsonString, LogInResponse::class.java)
                     Log.i(TAG_LOGIN, "$result")
                 }
                 // handle the response
             }
         })
-
+        return result
     }
 
     override fun register() {

@@ -1,7 +1,9 @@
 package com.tahaproject.todoy_app.data
 
+import com.tahaproject.todoy_app.data.responses.LogInResponse
+
 interface IRequestApis {
-    fun login()
+    fun login(): LogInResponse
 
     fun register()
 
