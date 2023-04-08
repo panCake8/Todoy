@@ -1,10 +1,12 @@
 package com.tahaproject.todoy_app.data
 
+import com.tahaproject.todoy_app.data.requests.LoginRequest
+import com.tahaproject.todoy_app.data.requests.RegisterRequest
 import com.tahaproject.todoy_app.data.responses.*
 
 interface IAuthApi {
-    fun login(): LogInResponse
-    fun register(): RegisterResponse
+    fun login(loginRequest: LoginRequest): LogInResponse
+    fun register(registerRequest: RegisterRequest): RegisterResponse
 }
 
 

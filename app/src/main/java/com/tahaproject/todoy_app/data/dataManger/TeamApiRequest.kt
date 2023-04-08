@@ -12,8 +12,7 @@ import com.tahaproject.todoy_app.util.EndPoint
 
 class TeamApiRequest(private val apiRequest: ApiRequest) : ITeamTodoApi {
 
-    override fun createTeamTodo():TeamToDoResponse {
-        val teamTodoRequest = TeamToDoPostRequest("", "","")
+    override fun createTeamTodo(teamTodoRequest: TeamToDoPostRequest): TeamToDoResponse {
         val request = apiRequest.postRequest(teamTodoRequest, EndPoint.teamTodo)
         lateinit var result: TeamToDoResponse
         val response = apiRequest.client.newCall(request).execute()
@@ -25,8 +24,7 @@ class TeamApiRequest(private val apiRequest: ApiRequest) : ITeamTodoApi {
 
     }
 
-    override fun getTeamTodos() :TeamToDo{
-
+    override fun getTeamTodos(): TeamToDo {
         val request = apiRequest.getRequest("", EndPoint.teamTodo)
         lateinit var result: TeamToDo
         val response = apiRequest.client.newCall(request).execute()
@@ -37,8 +35,7 @@ class TeamApiRequest(private val apiRequest: ApiRequest) : ITeamTodoApi {
         return result
     }
 
-    override fun updateTeamTodosStatus():TeamTodoUpdateResponse {
-        val teamTodoUpdateRequest = TeamToDoUpdateRequest("", 0)
+    override fun updateTeamTodosStatus(teamTodoUpdateRequest: TeamToDoUpdateRequest): TeamTodoUpdateResponse {
         val request = apiRequest.putRequest(teamTodoUpdateRequest, EndPoint.teamTodo)
         lateinit var result: TeamTodoUpdateResponse
         val response = apiRequest.client.newCall(request).execute()

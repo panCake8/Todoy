@@ -10,10 +10,9 @@ import com.tahaproject.todoy_app.data.responses.LogInResponse
 import com.tahaproject.todoy_app.data.responses.RegisterResponse
 import com.tahaproject.todoy_app.util.EndPoint
 
-class AuthApiRequest (private val apiRequest: ApiRequest) : IAuthApi {
+class AuthApiRequest(private val apiRequest: ApiRequest) : IAuthApi {
 
-    override fun login(): LogInResponse {
-        val loginRequest = LoginRequest("", "")
+    override fun login(loginRequest: LoginRequest): LogInResponse {
         val request = apiRequest.getRequest(loginRequest, EndPoint.login)
         lateinit var result: LogInResponse
         val response = apiRequest.client.newCall(request).execute()
@@ -24,9 +23,10 @@ class AuthApiRequest (private val apiRequest: ApiRequest) : IAuthApi {
         return result
     }
 
-    override fun register(): RegisterResponse {
-        val registerRequest = RegisterRequest("", "", BuildConfig.teamID)
-        val request = apiRequest.postRequest(registerRequest, EndPoint.signup)
+    override fun register(registerRequest: RegisterRequest): RegisterResponse {
+        val registerRequestLocal =
+            RegisterRequest(registerRequest.username, registerRequest.password, BuildConfig.teamID)
+        val request = apiRequest.postRequest(registerRequestLocal, EndPoint.signup)
         lateinit var result: RegisterResponse
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->
