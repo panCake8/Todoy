@@ -63,7 +63,7 @@
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
-    <!-- title card todoo-->
+    <!-- body card todoo-->
     <style name="Text.BodyToDo">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">@dimen/text_medium</item>
