@@ -24,7 +24,9 @@ class PersonalTodoFragment : ToDoFragment<FragmentPersonalTodoBinding>() {
     }
 
     override fun addCallBack() {
-
+        binding.appBarPersonalTodo.setNavigationOnClickListener {
+            back()
+        }
     }
 
 
