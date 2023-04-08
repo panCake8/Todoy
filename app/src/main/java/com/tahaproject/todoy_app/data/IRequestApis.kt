@@ -1,18 +1,17 @@
 package com.tahaproject.todoy_app.data
 
-import com.tahaproject.todoy_app.data.responses.LogInResponse
-import com.tahaproject.todoy_app.data.responses.RegisterResponse
+import com.tahaproject.todoy_app.data.responses.*
 
 interface IRequestApis {
     fun login(): LogInResponse
 
     fun register(): RegisterResponse
 
-    fun createPersonalTodo()
+    fun createPersonalTodo(): PersonalTodoCreateResponse
 
-    fun getPersonalTodos()
+    fun getPersonalTodos():PersonalTodo
 
-    fun updatePersonalTodosStatus()
+    fun updatePersonalTodosStatus():PersonalTodoUpdateResponse
 
     fun createTeamTodo()
 
