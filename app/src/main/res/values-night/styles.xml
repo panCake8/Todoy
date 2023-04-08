@@ -92,4 +92,5 @@
         <item name="drawableStartCompat">@drawable/clock_count_down</item>
         <item name="drawableTint">@color/text_light</item>
     </style>
+
 </resources>
