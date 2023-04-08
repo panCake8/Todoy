@@ -45,6 +45,7 @@ class ApiRequest(private val gson: Gson) : IRequestApis {
                 )
             }
         }
+        return requestBuilder.build()
     }
 
 
