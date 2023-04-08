@@ -8,9 +8,9 @@
         android:topRightRadius="32dp" />
 
     <padding
-        android:Left="16dp"
-        android:right="16dp"
-        android:top="16dp"
-        android:bottom="16dp"/>
+        android:Left="@dimen/padding_large"
+        android:right="@dimen/padding_large"
+        android:top="@dimen/padding_large"
+        android:bottom="@dimen/padding_large"/>
 
 </shape>
