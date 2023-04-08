@@ -16,9 +16,14 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField "String", "teamID", "\"${properties.getProperty('teamID')}\""
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -34,7 +39,9 @@ android {
     viewBinding {
         enabled = true
     }
-}
+
+
+
 
     dependencies {
 
@@ -61,4 +68,6 @@ android {
         //encrypted shared pref
         implementation "androidx.security:security-crypto:1.1.0-alpha05"
 
+
     }
+}
