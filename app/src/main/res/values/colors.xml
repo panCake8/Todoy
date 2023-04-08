@@ -28,6 +28,7 @@
     <color name="search_icon_stroke_color">#61121212</color>
     <color name="medium_black">#99121212</color>
     <color name="filter_icon_color">#00000000</color>
+    <color name="background_search_box">#F8F8F8</color>
 
 
 </resources>
