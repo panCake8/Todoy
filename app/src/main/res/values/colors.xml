@@ -20,7 +20,7 @@
     <color name="card_background">#F8F8F8</color>
     <color name="text_field_background">#F9F9FC</color>
     <color name="chips_stroke_color">#72777F</color>
-    <color name="text_selectedChips">#DE001D33</color>
+    <color name="text_selectedChips">#DE121212</color>
     <color name="text_unselectedChips">#DE42474E</color>
     <color name="back_icon_color">#121212</color>
     <color name="app_bar_text_color">#1A1C1E</color>
