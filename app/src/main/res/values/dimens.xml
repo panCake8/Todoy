@@ -20,5 +20,6 @@
     <dimen name="button_height">64dp</dimen>
     <dimen name="no_size">0dp</dimen>
     <dimen name="chip_height">20dp</dimen>
+    <dimen name="no_elevation">0dp</dimen>
 
 </resources>

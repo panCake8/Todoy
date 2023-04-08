@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">todoy-app</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="personal_todo">Personal Todo</string>
+    <string name="done">Done</string>
+    <string name="in_progress">In Progress</string>
+    <string name="todo">Todo</string>
 </resources>
