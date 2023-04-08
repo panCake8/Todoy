@@ -144,13 +144,65 @@ class ApiRequest : IRequestApis {
 
     }
 
-    override fun createTeamTodo() {
+    override fun createTeamTodo():TeamToDoResponse {
+            val teamTodoRequest = TeamToDoPostRequest("", "","")
+            val request = postRequest(teamTodoRequest, EndPoint.teamTodo)
+            lateinit var result: TeamToDoResponse
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    // handle the error
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    response.body?.string().let { jsonString ->
+                        result = gson.fromJson(jsonString, TeamToDoResponse::class.java)
+                        Log.i(TAG_LOGIN, "$result")
+                    }
+                    // handle the response
+                }
+            })
+            return result
+
     }
 
-    override fun getTeamTodos() {
+    override fun getTeamTodos() :TeamToDo{
+
+        val request = getRequest("", EndPoint.teamTodo)
+        lateinit var result: TeamToDo
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // handle the error
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    result = gson.fromJson(jsonString, TeamToDo::class.java)
+                    Log.i(TAG_LOGIN, "$result")
+                }
+                // handle the response
+            }
+        })
+        return result
     }
 
-    override fun updateTeamTodosStatus() {
+    override fun updateTeamTodosStatus() :TeamTodoUpdateResponse{
+        val teamTodoUpdateRequest = TeamToDoUpdateRequest("", 0)
+        val request = postRequest(teamTodoUpdateRequest, EndPoint.teamTodo)
+        lateinit var result: TeamTodoUpdateResponse
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // handle the error
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    result = gson.fromJson(jsonString, TeamTodoUpdateResponse::class.java)
+                    Log.i(TAG_LOGIN, "$result")
+                }
+                // handle the response
+            }
+        })
+        return result
     }
 
     companion object {
