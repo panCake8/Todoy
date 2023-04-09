@@ -11,7 +11,7 @@
         android:id="@+id/edit_text_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/margin_x_large"
         android:background="@drawable/search_background"
         android:hint="Search"
         android:textColorHint="@color/text_primary"
@@ -19,8 +19,8 @@
         app:startIconDrawable="@drawable/search_svgrepo_com" />
 
     <TextView
-        style="@style/Text.Title"
         android:id="@+id/view_text_statistics"
+        style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_large"
@@ -41,6 +41,7 @@
 
     <TextView
         android:id="@+id/view_text_category"
+        style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
@@ -52,27 +53,31 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/personal_card"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:cardElevation="@dimen/no_elevation"
         app:layout_constraintStart_toStartOf="@+id/view_text_category"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_category">
+        app:layout_constraintTop_toBottomOf="@+id/view_text_category"
+        app:layout_constraintWidth_percent=".48">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
-
-            >
+            android:background="@drawable/recently_card_home_background">
 
             <TextView
                 android:id="@+id/text_view_personal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
                 android:drawableStart="@drawable/user"
-                android:drawablePadding="12dp"
-                android:text="personal ToDo"
+                android:drawablePadding="@dimen/padding_large"
+                android:maxLines="1"
+                android:text="@string/personal_todo"
+                app:layout_constraintBottom_toTopOf="@id/personal_tasks_left"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
 
                 />
@@ -82,24 +87,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginVertical="16dp"
-                android:text="10 Tasks Left"
+                android:layout_marginVertical="@dimen/margin_large"
+                android:text="@string/text_tasks_left"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_personal" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_personal"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
+            <Button
                 android:id="@+id/view_all_personal"
+                style="@style/ButtonHomeViewAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/view_all_home_background"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="8dp"
-                android:text="View all"
-                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/margin_large"
+
+                android:layout_marginBottom="@dimen/margin_large"
+                android:text="@string/text_view_all"
+
+                android:textSize="@dimen/text_medium"
+
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/personal_tasks_left" />
@@ -107,29 +116,36 @@
 
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/team_card"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        app:layout_constraintStart_toEndOf="@+id/personal_card"
-        app:layout_constraintTop_toTopOf="@id/personal_card">
+        android:layout_marginTop="@dimen/margin_medium"
+        app:cardElevation="@dimen/no_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_text_category"
+        app:layout_constraintWidth_percent=".48"
+
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
-            >
+            android:background="@drawable/recently_card_home_background">
 
             <TextView
                 android:id="@+id/text_view_team"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_large"
                 android:drawableStart="@drawable/usersthree"
-                android:drawablePadding="12dp"
-                android:text="@string/team_todo_text"
+                android:drawablePadding="@dimen/padding_large"
+                android:maxLines="1"
+                android:text="@string/text_team_todo"
+                app:layout_constraintBottom_toTopOf="@id/team_tasks_left"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
 
                 />
@@ -139,37 +155,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginVertical="16dp"
-                android:text="@string/home_team_tasks_left"
+                android:layout_marginVertical="@dimen/margin_large"
+                android:text="@string/text_tasks_left"
+
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_team" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_team"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
+            <Button
                 android:id="@+id/view_all_team"
+                style="@style/ButtonHomeViewAll"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/view_all_home_background"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="8dp"
+                android:layout_marginTop="@dimen/margin_large"
+
+                android:layout_marginBottom="@dimen/margin_large"
                 android:text="@string/text_view_all"
-                android:textColor="@color/white"
+
+                android:textSize="@dimen/text_medium"
+
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/team_tasks_left" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
 
     <TextView
-        style="@style/Text.Title"
         android:id="@+id/recently"
+        style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="@dimen/margin_large"
         android:text="@string/text_view_recently"
         app:layout_constraintStart_toStartOf="@+id/edit_text_search"
         app:layout_constraintTop_toBottomOf="@+id/personal_card" />
@@ -179,14 +202,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/recently_card_home_background"
+        app:cardElevation="@dimen/no_elevation"
         app:layout_constraintTop_toBottomOf="@id/recently">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/recently_card_home_background"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp">
+            android:paddingHorizontal="@dimen/padding_large"
+            android:paddingVertical="@dimen/padding_medium">
 
             <TextView
                 android:id="@+id/text_view_recently_title"
@@ -204,7 +228,7 @@
                 style="@style/Text.BodyToDo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto"
                 android:maxLines="2"
@@ -216,7 +240,7 @@
                 android:id="@+id/view_recently_card_seperator"
                 android:layout_width="match_parent"
                 android:layout_height=".5dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:background="#42474E"
                 app:layout_constraintTop_toBottomOf="@id/text_view_recently_body" />
 
@@ -249,15 +273,15 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_FAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:backgroundTint="@color/primary_color"
         android:elevation="6dp"
         android:src="@drawable/add_24"
-        android:tint="@color/background"
         app:layout_constraintBottom_toBottomOf="@id/card_view_recently"
         app:layout_constraintEnd_toEndOf="@id/card_view_recently"
-        app:maxImageSize="56dp"
+        app:tint="@color/background"
+
 
         />
 

@@ -16,6 +16,8 @@
     <string name="team_todo">Team Todo</string>
     <string name="text_view_recently">Recently</string>
     <string name="text_view_all">View all</string>
+    <string name="text_team_todo">Team Todo</string>
+    <string name="text_tasks_left">10 Tasks Left</string>
     <string name="filter">Filter</string>
     <string name="category">Category</string>
     <string name="datePacker">Date Picker</string>
