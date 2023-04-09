@@ -8,8 +8,6 @@
     <string name="todo">Todo</string>
     <string name="team_todo">Team Todo</string>
     <string name="filter">Filter</string>
-    <string name="inProgress">In progress</string>
-    <string name="toDo">To do</string>
     <string name="category">Category</string>
     <string name="datePacker">Date Picker</string>
 
