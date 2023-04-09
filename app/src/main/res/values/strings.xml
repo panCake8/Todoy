@@ -8,4 +8,13 @@
     <string name="todo">Todo</string>
     <string name="team_todo">Team Todo</string>
 
+
+
+
+
+
+
+    <string name="team_add_new_task">Team</string>
+    <string name="personal_add_new_task">Personal</string>
+
 </resources>

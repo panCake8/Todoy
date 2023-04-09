@@ -62,6 +62,14 @@
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
+
+    <!-- title bottom sheet -->
+    <style name="Text.TitleBottomSheet">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
     <!-- assign name card todoo-->
     <style name="Text.AssignNameToDo">
         <item name="android:fontFamily">@font/roboto</item>
