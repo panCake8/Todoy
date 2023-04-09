@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_add_new_task"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.AddNewTaskFragment">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="32dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bottom_sheet_lien"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textview_add_new_task_title"
+        style="@style/Text.TitleBottomSheet"
+
+        android:text="Add New Task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textview_task_title"
+        style="@style/Text.TitleBottomSheet"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Task Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_add_new_task_title" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_background_style"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:hint="Title"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_task_title" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_personal_team"
+        style="@style/ChipGroupBottomSheet"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chips_choice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/personal_add_new_task" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chips_choice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/team_add_new_task" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/textview_add_assinee_name"
+        style="@style/Text.TitleBottomSheet"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Assignee Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chip_group_personal_team" />
+
+    <EditText
+        android:id="@+id/editText_add_assignee_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_background_style"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:hint="Name"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_add_assinee_name" />
+
+    <TextView
+        android:id="@+id/textview_add_task_date"
+        style="@style/Text.TitleBottomSheet"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Creation Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_assignee_name" />
+
+    <EditText
+        android:id="@+id/editText_add_Task_Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_background_style"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:hint="Name"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_add_task_date" />
+
+    <Button
+        android:layout_width="match_parent"
+        style="@style/Button"
+        android:text="Add New Task"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@drawable/baseline_add_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Date"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
