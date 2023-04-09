@@ -7,6 +7,11 @@
     <string name="in_progress">In Progress</string>
     <string name="todo">Todo</string>
     <string name="team_todo">Team Todo</string>
+    <string name="text_title_task">Header</string>
+    <string name="text_description">Body</string>
+    <string name="filter">Filter</string>
+    <string name="category">Category</string>
+    <string name="datePacker">Date Picker</string>
     <string name="details">Details</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
