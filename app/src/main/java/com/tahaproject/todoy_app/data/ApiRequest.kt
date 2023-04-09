@@ -11,7 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 open class ApiRequest {
     val gson: Gson = Gson()
-    private val token = BuildConfig.token
+
     private val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -19,8 +19,8 @@ open class ApiRequest {
 
     private fun createRequest(endPoint: String): Request.Builder {
         return Request.Builder()
-            .url("${BuildConfig.url}/$endPoint")
-            .header(Constants.auth, "${Constants.bearer} $token")
+            .url("${Constants.url}/$endPoint")
+            .header(Constants.auth, "${Constants.bearer} ${Constants.token}")
     }
 
      fun postRequest(body: Any, endPoint: String): Request =
