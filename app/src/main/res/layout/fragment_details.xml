@@ -76,6 +76,15 @@
         android:drawablePadding="@dimen/margin_x_small"
         app:layout_constraintTop_toBottomOf="@id/text_view_task_stats"
         app:layout_constraintEnd_toEndOf="@+id/chip_member_name"/>
+    <Button
+        android:id="@+id/button"
+        style="@style/Button"
+        android:layout_marginTop="@dimen/margin_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_body"
+        android:text="@string/test"
+        android:layout_marginVertical="@dimen/margin_x_large" />
 
     
 </androidx.constraintlayout.widget.ConstraintLayout>
