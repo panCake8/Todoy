@@ -84,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_task_body"
         android:text="@string/test"
-        android:layout_marginVertical="@dimen/margin_x_large" />
+        android:layout_marginVertical="@dimen/margin_xx_large" />
 
     
 </androidx.constraintlayout.widget.ConstraintLayout>
