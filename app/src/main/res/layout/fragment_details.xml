@@ -3,4 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.todo.DetailsFragment"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.todo.DetailsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/app_bar_details"
+        style="@style/AppBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="@string/details" />
+    <TextView
+        android:id="@+id/text_view_task_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_details"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="@dimen/text_medium"
+        android:textColor="@color/text_primary"
+         />
+    <TextView
+        android:id="@+id/text_view_task_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="test"
+        app:layout_constraintStart_toStartOf="@id/text_view_task_title"
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_title"
+        android:fontFamily="@font/roboto"
+        android:textSize="@dimen/text_small"
+        android:textColor="@color/primary_color_light"
+        />
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_member_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Chips_choice"
+        app:layout_constraintTop_toTopOf="@id/text_view_task_title"
+        tools:text="@string/test" />
+    <TextView
+        android:id="@+id/text_view_task_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_task_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/margin_large"
+        tools:text="@string/details_body"/>
+    <TextView
+        android:id="@+id/text_view_task_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/clock_count_down"
+        android:text="@string/test"
+        android:layout_marginTop="@dimen/margin_large"
+        android:drawablePadding="@dimen/margin_x_small"
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_stats"
+        app:layout_constraintStart_toStartOf="@+id/text_view_task_title"/>
+    <TextView
+        android:id="@+id/text_view_task_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/calendar_blank"
+        android:text="@string/test"
+        android:layout_marginTop="@dimen/margin_large"
+        android:drawablePadding="@dimen/margin_x_small"
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_stats"
+        app:layout_constraintEnd_toEndOf="@+id/chip_member_name"/>
+
+    
+</androidx.constraintlayout.widget.ConstraintLayout>

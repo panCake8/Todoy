@@ -23,5 +23,6 @@
     <dimen name="no_elevation">0dp</dimen>
     <dimen name="height_search_box">56dp</dimen>
     <dimen name="radius_search_box">28dp</dimen>
+    <dimen name="margin_x_small">4dp</dimen>
 
 </resources>
