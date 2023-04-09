@@ -14,20 +14,23 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/search_background"
         android:hint="Search"
+        android:textColorHint="@color/text_primary"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/search_svgrepo_com" />
 
     <TextView
+        style="@style/Text.Title"
         android:id="@+id/view_text_statistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Statistics"
+        android:layout_marginTop="@dimen/margin_large"
+        android:fontFamily="@font/roboto"
+        android:text="@string/text_view_statistics"
         app:layout_constraintStart_toStartOf="@+id/edit_text_search"
         app:layout_constraintTop_toBottomOf="@id/edit_text_search" />
 
 
-    <com.github.mikephil.charting.charts.PieChart
+    <View
         android:id="@+id/pie_chart"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -40,10 +43,12 @@
         android:id="@+id/view_text_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Category"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/text_view_category"
         app:layout_constraintStart_toStartOf="@+id/edit_text_search"
-        app:layout_constraintTop_toBottomOf="@+id/pie_chart" />
+        app:layout_constraintTop_toBottomOf="@+id/pie_chart"
+
+        />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/personal_card"
@@ -107,7 +112,7 @@
         android:id="@+id/team_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/margin_medium"
         app:layout_constraintStart_toEndOf="@+id/personal_card"
         app:layout_constraintTop_toTopOf="@id/personal_card">
 
@@ -115,17 +120,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
-
             >
 
             <TextView
                 android:id="@+id/text_view_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/margin_large"
                 android:drawableStart="@drawable/usersthree"
                 android:drawablePadding="12dp"
-                android:text="team ToDo"
+                android:text="@string/team_todo_text"
                 app:layout_constraintTop_toTopOf="parent"
 
                 />
@@ -136,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginVertical="16dp"
-                android:text="10 Tasks Left"
+                android:text="@string/home_team_tasks_left"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_team" />
@@ -151,7 +155,7 @@
                 android:background="@drawable/view_all_home_background"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="8dp"
-                android:text="View all"
+                android:text="@string/text_view_all"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -161,11 +165,12 @@
 
 
     <TextView
+        style="@style/Text.Title"
         android:id="@+id/recently"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
-        android:text="Recently"
+        android:text="@string/text_view_recently"
         app:layout_constraintStart_toStartOf="@+id/edit_text_search"
         app:layout_constraintTop_toBottomOf="@+id/personal_card" />
 
@@ -184,22 +189,28 @@
             android:paddingVertical="8dp">
 
             <TextView
-                android:id="@+id/text_view_recently_header"
+                android:id="@+id/text_view_recently_title"
+                style="@style/Text.TitleToDo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="weather app"
+                android:fontFamily="@font/roboto"
+                android:text="@string/home_recently_card_title"
+                android:textSize="@dimen/text_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_view_recently_body"
+                style="@style/Text.BodyToDo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/roboto"
                 android:maxLines="2"
                 android:text="@string/recently_card_body"
-                app:layout_constraintTop_toBottomOf="@id/text_view_recently_header" />
+                android:textSize="@dimen/text_medium"
+                app:layout_constraintTop_toBottomOf="@id/text_view_recently_title" />
 
             <View
                 android:id="@+id/view_recently_card_seperator"
@@ -213,10 +224,10 @@
                 android:id="@+id/recently_card_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:drawableStart="@drawable/clockcountdown"
-                android:drawablePadding="8dp"
-                android:text="21:22"
+                android:drawablePadding="@dimen/padding_medium"
+                android:text="@string/home_recently_card_time"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
 
@@ -224,10 +235,10 @@
                 android:id="@+id/recently_card_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawableStart="@drawable/calendarblank"
-                android:drawablePadding="8dp"
-                android:text="3 April 2022"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:drawablePadding="@dimen/padding_medium"
+                android:text="@string/home_recently_card_date"
+                app:drawableStartCompat="@drawable/calendarblank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
 
@@ -243,8 +254,11 @@
         android:backgroundTint="@color/primary_color"
         android:elevation="6dp"
         android:src="@drawable/add_24"
-        android:tint="@color/white"
+        android:tint="@color/background"
         app:layout_constraintBottom_toBottomOf="@id/card_view_recently"
         app:layout_constraintEnd_toEndOf="@id/card_view_recently"
-        app:maxImageSize="56dp" />
+        app:maxImageSize="56dp"
+
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

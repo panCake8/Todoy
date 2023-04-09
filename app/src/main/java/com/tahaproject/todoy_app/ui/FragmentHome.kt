@@ -11,18 +11,4 @@ class FragmentHome : BaseFragmentWithTransition<FragmentHomeBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        addCallBacks()
-    }
-
-    private fun addCallBacks(){
-        binding.viewAllTeam.setOnClickListener {
-
-
-        }
-
-
-    }
-
 }
