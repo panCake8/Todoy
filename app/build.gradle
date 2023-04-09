@@ -19,9 +19,7 @@ android {
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
-        buildConfigField "String", "teamID", "\"${properties.getProperty('teamID')}\""
-        buildConfigField "String", "token", "\"${properties.getProperty('token')}\""
-        buildConfigField "String", "url", "\"${properties.getProperty('url')}\""
+        buildConfigField "String", "teamID", "${properties.getProperty('teamID')}"
     }
 
     buildTypes {

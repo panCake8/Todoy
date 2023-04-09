@@ -7,13 +7,15 @@
     <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_large">16dp</dimen>
+    <dimen name="margin_x_large">24dp</dimen>
     <dimen name="padding_small">4dp</dimen>
     <dimen name="padding_medium">8dp</dimen>
     <dimen name="padding_large">16dp</dimen>
     <dimen name="no_width">0dp</dimen>
     <dimen name="no_height">0dp</dimen>
     <dimen name="elevation_small">8dp</dimen>
-    <dimen name="radius_small">8dp</dimen>
+    <dimen name="radius_small">4dp</dimen>
+    <dimen name="radius_meduim">8dp</dimen>
     <dimen name="radius_large">16dp</dimen>
     <dimen name="small_stroke">1dp</dimen>
     <dimen name="app_bar_height">64dp</dimen>
@@ -23,5 +25,8 @@
     <dimen name="no_elevation">0dp</dimen>
     <dimen name="height_search_box">56dp</dimen>
     <dimen name="radius_search_box">28dp</dimen>
+    <dimen name="view_height">4dp</dimen>
+    <dimen name="view_width">32dp</dimen>
+    <dimen name="assigne_text_padding">12dp</dimen>
 
 </resources>
