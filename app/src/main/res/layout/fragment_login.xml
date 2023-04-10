@@ -5,30 +5,30 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/app_bar_personal_todo"
-        style="@style/AppBar"
+        android:id="@+id/app_bar_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        app:title="@string/login"
+        app:titleTextColor="@color/app_bar_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/login" />
-
+       />
     <ImageView
         android:id="@+id/login_image"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
+        android:layout_width="@dimen/login_image_width"
+        android:layout_height="@dimen/login_image_width"
         android:src="@drawable/person_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar_personal_todo" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_login" />
     <EditText
         android:id="@+id/username"
         style="@style/input_text_field"
         android:layout_marginTop="36dp"
         android:layout_marginHorizontal="@dimen/margin_large"
         android:paddingHorizontal="@dimen/padding_large"
-        android:hint="Username"
+        android:hint="@string/username_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_image" />
@@ -38,21 +38,23 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginHorizontal="@dimen/margin_large"
         android:paddingHorizontal="@dimen/padding_large"
-        android:hint="Password"
+        android:hint="@string/password_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_button"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginHorizontal="16dp"
-        android:fontFamily="@font/roboto_medium"
-        android:backgroundTint="#00629D"
-        android:text="Login"
+        android:layout_height="@dimen/height_button"
+        android:layout_marginHorizontal="@dimen/margin_large"
+        android:fontFamily="@font/roboto_bold"
+        android:background="@drawable/button_background"
+        android:text="@string/login"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_large"
+        android:layout_marginTop="@dimen/margin_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +64,7 @@
         android:id="@+id/do_not_have_an_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don’t have an account? "
+        android:text="@string/donot_have_an_account"
         android:textSize="@dimen/text_small"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
