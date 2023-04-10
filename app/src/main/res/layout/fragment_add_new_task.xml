@@ -20,6 +20,7 @@
     <TextView
         android:id="@+id/textview_add_new_task_title"
         style="@style/Text.Title"
+        android:layout_marginTop="@dimen/margin_x_large"
         android:text="@string/new_task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +122,7 @@
 
     <EditText
         android:id="@+id/editText_add_Task_Description"
-        android:layout_height="114dp"
+        android:layout_height="@dimen/input_text_field_descirption"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_large"
@@ -129,8 +130,7 @@
         android:background="@drawable/edittext_background_style"
         android:minHeight="@dimen/input_text_field_mini_height"
         android:hint="@string/description"
-        android:paddingTop="16dp"
-        android:paddingLeft="16dp"
+        android:paddingTop="@dimen/padding_large"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:lines="5"
@@ -140,11 +140,13 @@
         tools:ignore="Autofill" />
 
     <Button
-        android:layout_width="match_parent"
         style="@style/Button"
-        android:text="@string/add"
+        android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Description"/>
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
