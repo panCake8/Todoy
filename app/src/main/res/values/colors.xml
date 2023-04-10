@@ -31,6 +31,8 @@
     <color name="medium_black">#99121212</color>
     <color name="filter_icon_color">#00000000</color>
     <color name="background_search_box">#F8F8F8</color>
+    <color name="primary_color_light">#9900629D</color>
+
 
 
 </resources>

@@ -12,14 +12,18 @@
     <string name="text_view_statistics">Statistics</string>
     <string name="text_view_category">Category</string>
     <string name="team_todo_text">team ToDo</string>
-
     <string name="team_todo">Team Todo</string>
     <string name="text_view_recently">Recently</string>
     <string name="text_view_all">View all</string>
     <string name="text_team_todo">Team Todo</string>
     <string name="text_tasks_left">10 Tasks Left</string>
+    <string name="login">Login</string>
+    <string name="text_title_task">Header</string>
+    <string name="text_description">Body</string>
     <string name="filter">Filter</string>
     <string name="category">Category</string>
     <string name="datePacker">Date Picker</string>
-
+    <string name="details">Details</string>
+    <string name="details_body">Semper dignissim egestas donec ipsum semper. Ipsum amet nibh ultrices nunc nunc tempus in eget. Facilisis aliquam odio libero nibh sed viverra quisque. Bibendum at tristique fermentum magna blandit morbi tortor rhoncus elementum. Nunc augue libero rhoncus sit fringilla pharetra pellentesque imperdiet. Pharetra risus mauris leo mauris massa amet ac facilisis consequat.</string>
+    <string name="test">test</string>
 </resources>
