@@ -8,7 +8,7 @@
     tools:context=".ui.addtask.AddNewTaskFragment">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/bottom_sheet_line"
         android:layout_width="@dimen/view_width"
         android:layout_height="@dimen/view_height"
         android:layout_marginTop="@dimen/margin_large"
@@ -24,7 +24,7 @@
         android:text="@string/new_task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line" />
 
     <TextView
         android:id="@+id/textview_task_title"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textview_add_new_task_title" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText_add_Task_Title"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_large"
@@ -58,7 +58,7 @@
         android:layout_marginEnd="@dimen/margin_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText">
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -133,7 +133,6 @@
         android:paddingTop="@dimen/padding_large"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:lines="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_add_task_Description"
@@ -143,7 +142,7 @@
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_large"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_large"
         android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

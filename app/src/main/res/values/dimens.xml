@@ -42,5 +42,7 @@
     <dimen name="height_button">56dp</dimen>
     <dimen name="fab_size">56dp</dimen>
     <dimen name="input_text_field_descirption">114dp</dimen>
+    <dimen name="bottom_sheet_radius">32dp</dimen>
+    <dimen name="bottom_sheet_line_radius">360dp</dimen>
 
 </resources>
