@@ -12,5 +12,4 @@
         android:right="@dimen/padding_large"
         android:top="@dimen/padding_large"
         android:bottom="@dimen/padding_large"/>
-
 </shape>
