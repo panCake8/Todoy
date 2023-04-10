@@ -31,39 +31,41 @@ class FragmentSignUp:BaseFragmentWithTransition<FragmentSignupBinding>() {
     }
     
     private  fun goToLogin(){
-       //to login
+       //TODO:
     }
     private  fun onSignUp(){
-            val regex = Regex("^(?=.*[a-z])(?=.*[A-Z]).+\$")
-            if (binding.editTextUsername.length() < 4) {
-                Toast.makeText(
-                    requireContext(),
-                    "username should be 4 characters at least",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else if (binding.editTextPassword.length() < 8) {
-                Toast.makeText(
-                    requireContext(),
-                    "password should be 8 characters at least",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else if (!regex.matches(binding.editTextPassword.toString())) {
-                Toast.makeText(
-                    requireContext(),
-                    "password should content at least one letter small and capital",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else if (binding.editTextPassword != binding.editTextConfirmPassword) {
-                Toast.makeText(
-                    requireContext(),
-                    "password not match",
-                    Toast.LENGTH_LONG
-                ).show()
-            }else {
-                //TODO
-            }
+        val username = binding.editTextUsername.text.toString()
+        val password = binding.editTextPassword.text.toString()
+        val confirmPassword = binding.editTextConfirmPassword.text.toString()
+        if (!isUsernameValid(username)) {
+            showToast("Username should be at least 4 characters.")
+            return
+        }
+        else if (!isPasswordValid(password)) {
+            showToast("Password should be at least 8 characters and contain at least one lowercase and one uppercase letter.")
+            return
+        }
+        else if (!isPasswordMatch(password, confirmPassword)) {
+            showToast("Passwords do not match.")
+            return
+        }else{
+           // TODO:
+        }
+    }
+    private fun isUsernameValid(username: String): Boolean {
+        return username.length >= 4
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        val regex = Regex("^(?=.*[a-z])(?=.*[A-Z]).+\$")
+        return password.length >= 8 && regex.matches(password)
+    }
+
+    private fun isPasswordMatch(password: String, confirmPassword: String): Boolean {
+        return password == confirmPassword
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }
+
