@@ -32,5 +32,6 @@
     <color name="medium_black">#676767</color>
     <color name="filter_icon_color">#00000000</color>
     <color name="background_search_box">#303030</color>
-
+    <color name="hint_color">#86C1C1C1</color>
+    <color name="text_extra_light">#38C1C1C1</color>
 </resources>

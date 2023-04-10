@@ -67,11 +67,6 @@
         <item name="android:layout_marginTop">@dimen/margin_medium</item>
     </style>
     <!-- title signup todoo-->
-    <style name="SignUpTitle">
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textSize">@dimen/text_extra_large</item>
-        <item name="android:textColor">@color/text_primary</item>
-    </style>
     <style name="SubTitle">
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">@dimen/text_small</item>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
+import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragment
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
@@ -23,7 +24,6 @@ class FragmentSignUp:BaseFragmentWithTransition<FragmentSignupBinding>() {
     }
     private  fun goToLogin(){
         binding.textViewLogin.setOnClickListener {
-            //TODO:
         }
     }
     private  fun onSignUp(){
