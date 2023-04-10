@@ -121,6 +121,7 @@
 
     <EditText
         android:id="@+id/editText_add_Task_Description"
+        android:layout_height="114dp"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_large"
@@ -128,6 +129,11 @@
         android:background="@drawable/edittext_background_style"
         android:minHeight="@dimen/input_text_field_mini_height"
         android:hint="@string/description"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_add_task_Description"
