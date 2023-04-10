@@ -28,42 +28,37 @@ class FragmentSignUp:BaseFragmentWithTransition<FragmentSignupBinding>() {
     }
     private  fun onSignUp(){
         binding.buttonSignup.setOnClickListener {
-            validateInput()
+            val regex = Regex("^(?=.*[a-z])(?=.*[A-Z]).+\$")
+            if (binding.editTextUsername.length() < 4) {
+                Toast.makeText(
+                    requireContext(),
+                    "username should be 4 characters at least",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else if (binding.editTextPassword.length() < 8) {
+                Toast.makeText(
+                    requireContext(),
+                    "password should be 8 characters at least",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else if (!regex.matches(binding.editTextPassword.toString())) {
+                Toast.makeText(
+                    requireContext(),
+                    "password should content at least one letter small and capital",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else if (binding.editTextPassword != binding.editTextConfirmPassword) {
+                Toast.makeText(
+                    requireContext(),
+                    "password not match",
+                    Toast.LENGTH_LONG
+                ).show()
+            }else {
+                //TODO
+            }
         }
     }
-
-
-    private fun validateInput() {
-        val regex = Regex("^(?=.*[a-z])(?=.*[A-Z]).+\$")
-        if (binding.editTextUsername.length() < 4) {
-            Toast.makeText(
-                requireContext(),
-                "username should be 4 characters at least",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-        if (binding.editTextPassword.length() < 8) {
-            Toast.makeText(
-                requireContext(),
-                "password should be 8 characters at least",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-        if (!regex.matches(binding.editTextPassword.toString())) {
-            Toast.makeText(
-                requireContext(),
-                "password should content at least one letter small and capital",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-        if (binding.editTextPassword != binding.editTextConfirmPassword) {
-            Toast.makeText(
-                requireContext(),
-                "password not match",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
-
 }
