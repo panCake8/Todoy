@@ -88,6 +88,13 @@
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
+    <!-- header-->
+    <style name="Text.Title">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
 
     <!-- assign name card todoo-->
     <style name="Text.AssignNameToDo">
@@ -139,6 +146,23 @@
         <item name="android:paddingStart">@dimen/padding_large</item>
         <item name="android:paddingEnd">@dimen/padding_medium</item>
     </style>
+
+    <style name="ButtonHomeViewAll">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_marginStart">@dimen/margin_large</item>
+        <item name="android:layout_marginEnd">@dimen/margin_large</item>
+
+        <item name="textAllCaps">false</item>
+        <item name="cornerRadius">@dimen/radius_large</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:backgroundTint">@color/primary_color</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
     <!-- input_text_field -->
     <style name="input_text_field">
         <item name="android:layout_width">match_parent</item>
@@ -148,5 +172,4 @@
         <item name="android:textColorHint">@color/medium_black</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
-
 </resources>
