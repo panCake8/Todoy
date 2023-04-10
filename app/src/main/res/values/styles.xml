@@ -52,7 +52,7 @@
     <style name="TextTitleChips">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/title_filter_color</item>
         <item name="android:layout_marginTop">@dimen/margin_large</item>
         <item name="android:layout_marginBottom">@dimen/margin_medium</item>
         <item name="android:layout_marginStart">@dimen/margin_large</item>

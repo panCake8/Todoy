@@ -43,10 +43,13 @@
             android:text="@string/category"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_filter" />
+
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group_category"
             style="@style/ChipGroupTodo"
+            android:layout_marginTop="@dimen/margin_large"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_Category"
             app:singleSelection="true">
@@ -61,13 +64,15 @@
                     android:id="@+id/chip_done"
                     style="@style/Chips_choice"
                     android:layout_weight="1"
-                    android:text="@string/done" />
+                    android:text="@string/done"
+                    android:checked="true"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_inProgress"
                     style="@style/Chips_choice"
                     android:layout_weight="1"
                     android:text="@string/in_progress" />
+
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_toDo"
                     style="@style/Chips_choice"
@@ -82,23 +87,18 @@
             android:text="@string/datePacker"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chip_group_category" />
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/dateTextField"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_datePicker"
-            android:hint="dd/mm/yy"
+            style="@style/input_text_field"
             android:layout_marginTop="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:layout_marginStart="@dimen/margin_large">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:paddingHorizontal="@dimen/padding_large"
+            android:hint="dd/mm/yy"
+            android:drawableLeft="@drawable/calendar_blank"
+            android:drawablePadding="@dimen/margin_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_datePicker" />
 
         <Button
             android:id="@+id/button"
