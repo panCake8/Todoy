@@ -185,6 +185,5 @@
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textColorHint">@color/medium_black</item>
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:inputType">text</item>
     </style>
 </resources>
