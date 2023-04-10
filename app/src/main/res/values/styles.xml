@@ -66,7 +66,21 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/margin_medium</item>
     </style>
+    <!-- title signup todoo-->
+    <style name="SubTitle">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/text_extra_light</item>
+    </style>
+    <style name="HintInput">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/hint_color</item>
+    </style>
+    <style name="SubTitle.withPrimaryColor">
 
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
     <!-- title card todoo-->
     <style name="Text.TitleToDo">
         <item name="android:fontFamily">@font/roboto_medium</item>
