@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">todoy-app</string>
+    <string name="search_here_hint">Search</string>
     <string name="recently_card_body">Lorem ipsum dolor sit amet consectetur. Nec aliquam feugiat maecenas accumsan...</string>
     <string name="personal_todo">Personal Todo</string>
     <string name="done">Done</string>
@@ -13,6 +14,17 @@
     <string name="text_view_category">Category</string>
     <string name="team_todo_text">team ToDo</string>
     <string name="team_todo">Team Todo</string>
+
+
+    <string name="team_add_new_task">Team</string>
+    <string name="personal_add_new_task">Personal</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="new_task">New Task</string>
+    <string name="title_task">Title Task</string>
+    <string name="assignee_name">Assignee name</string>
+    <string name="name">Name</string>
+
     <string name="text_view_recently">Recently</string>
     <string name="text_view_all">View all</string>
     <string name="text_team_todo">Team Todo</string>
