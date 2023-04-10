@@ -7,5 +7,6 @@
     <string name="in_progress">In Progress</string>
     <string name="todo">Todo</string>
     <string name="team_todo">Team Todo</string>
+    <string name="login">Login</string>
 
 </resources>
