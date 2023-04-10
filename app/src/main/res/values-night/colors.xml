@@ -7,7 +7,7 @@
 
     <color name="secondary_color">#CFE5FF</color>
 
-    <color name="text_primary">#DEFAFAFA</color>
+   <color name="text_primary">#DEFAFAFA</color>
     <color name="text_secondary">#99FAFAFA</color>
     <color name="text_light">#61FAFAFA</color>
 
@@ -25,5 +25,9 @@
     <color name="back_icon_color">#FAFAFA</color>
     <color name="app_bar_text_color">#FAFAFA</color>
     <color name="stroke_app_bar">#5EFFFFFF</color>
-    <color name="card_todo_background">#303030</color>
+    <color name="search_icon_stroke_color">#61FAFAFA</color>
+    <color name="medium_black">#676767</color>
+    <color name="filter_icon_color">#00000000</color>
+    <color name="background_search_box">#303030</color>
+
 </resources>

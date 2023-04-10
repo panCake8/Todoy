@@ -20,13 +20,17 @@
     <color name="card_background">#F8F8F8</color>
     <color name="text_field_background">#F9F9FC</color>
     <color name="chips_stroke_color">#72777F</color>
-    <color name="text_selectedChips">#DE001D33</color>
+    <color name="text_selectedChips">#DE121212</color>
     <color name="text_unselectedChips">#DE42474E</color>
     <color name="back_icon_color">#121212</color>
     <color name="app_bar_text_color">#1A1C1E</color>
     <color name="stroke_app_bar">#5EFFFFFF</color>
     <color name="card_todo_background">#F9F9FC</color>
     <color name="line_todo_personal_color">#3342474E</color>
+    <color name="search_icon_stroke_color">#61121212</color>
+    <color name="medium_black">#99121212</color>
+    <color name="filter_icon_color">#00000000</color>
+    <color name="background_search_box">#F8F8F8</color>
 
 
 </resources>

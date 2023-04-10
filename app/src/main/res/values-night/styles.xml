@@ -39,7 +39,7 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_medium</item>
-        <item name="chipCornerRadius">@dimen/radius_small</item>
+        <item name="chipCornerRadius">@dimen/radius_meduim</item>
         <item name="chipEndPadding">@dimen/margin_large</item>
         <item name="chipStartPadding">@dimen/margin_large</item>
         <item name="android:checkable">true</item>
@@ -62,7 +62,14 @@
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
+    <!-- assign name card todoo-->
+    <style name="Text.AssignNameToDo">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/text_selectedChips</item>
+        <item name="android:background">@drawable/text_assign_background</item>
 
+    </style>
     <!-- title card todoo-->
     <style name="Text.BodyToDo">
         <item name="android:fontFamily">@font/roboto</item>
@@ -102,5 +109,14 @@
         <item name="android:layout_marginTop">@dimen/margin_large</item>
         <item name="android:paddingStart">@dimen/padding_large</item>
         <item name="android:paddingEnd">@dimen/padding_medium</item>
+    </style>
+    <!-- input_text_field -->
+    <style name="input_text_field">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColorHint">@color/medium_black</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 </resources>
