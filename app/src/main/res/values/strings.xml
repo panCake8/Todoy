@@ -10,5 +10,15 @@
     <string name="filter">Filter</string>
     <string name="category">Category</string>
     <string name="datePacker">Date Picker</string>
+    <string name="signUp">Sign Up</string>
+    <string name="do_have_an_account">Do have an account?</string>
+    <string name="login">Login</string>
+    <string name="password_confirmation">password confirmation</string>
+    <string name="password">password</string>
+    <string name="username">username</string>
+
+
+
+
 
 </resources>
