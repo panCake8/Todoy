@@ -18,16 +18,22 @@ class FragmentSignUp:BaseFragmentWithTransition<FragmentSignupBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        goToLogin()
-        onSignUp()
-
+        addCallBacks()
     }
-    private  fun goToLogin(){
-        binding.textViewLogin.setOnClickListener {
+    
+    private fun addCallBacks(){
+     binding.textViewLogin.setOnClickListener {
+            goToLogin()
         }
+         binding.buttonSignup.setOnClickListener {
+         onSignUp()
+         }
+    }
+    
+    private  fun goToLogin(){
+       //to login
     }
     private  fun onSignUp(){
-        binding.buttonSignup.setOnClickListener {
             val regex = Regex("^(?=.*[a-z])(?=.*[A-Z]).+\$")
             if (binding.editTextUsername.length() < 4) {
                 Toast.makeText(
@@ -59,6 +65,5 @@ class FragmentSignUp:BaseFragmentWithTransition<FragmentSignupBinding>() {
             }else {
                 //TODO
             }
-        }
     }
 }
