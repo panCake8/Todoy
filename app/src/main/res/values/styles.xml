@@ -76,7 +76,6 @@
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/text_selectedChips</item>
         <item name="android:background">@drawable/text_assign_background</item>
-
     </style>
 
     <!-- body card todoo-->
