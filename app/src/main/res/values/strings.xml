@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">todoy-app</string>
+    <string name="search_here_hint">Search</string>
     <string name="recently_card_body">Lorem ipsum dolor sit amet consectetur. Nec aliquam feugiat maecenas accumsan...</string>
     <string name="personal_todo">Personal Todo</string>
     <string name="done">Done</string>
@@ -13,6 +14,17 @@
     <string name="text_view_category">Category</string>
     <string name="team_todo_text">team ToDo</string>
     <string name="team_todo">Team Todo</string>
+
+
+    <string name="team_add_new_task">Team</string>
+    <string name="personal_add_new_task">Personal</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="new_task">New Task</string>
+    <string name="title_task">Title Task</string>
+    <string name="assignee_name">Assignee name</string>
+    <string name="name">Name</string>
+
     <string name="text_view_recently">Recently</string>
     <string name="text_view_all">View all</string>
     <string name="text_team_todo">Team Todo</string>
@@ -24,6 +36,11 @@
     <string name="add">Add</string>
     <string name="category">Category</string>
     <string name="datePacker">Date Picker</string>
+    <string name="signUp">Sign Up</string>
+    <string name="do_have_an_account">Do have an account?</string>
+    <string name="password_confirmation">password confirmation</string>
+    <string name="password">password</string>
+    <string name="username">username</string>
     <string name="details">Details</string>
     <string name="details_body">Semper dignissim egestas donec ipsum semper. Ipsum amet nibh ultrices nunc nunc tempus in eget. Facilisis aliquam odio libero nibh sed viverra quisque. Bibendum at tristique fermentum magna blandit morbi tortor rhoncus elementum. Nunc augue libero rhoncus sit fringilla pharetra pellentesque imperdiet. Pharetra risus mauris leo mauris massa amet ac facilisis consequat.</string>
     <string name="test">test</string>
@@ -34,3 +51,4 @@
     <string name="dd_mm_yy">dd/mm/yy</string>
     <string name="sign_up">sign up</string>
 </resources>
+
