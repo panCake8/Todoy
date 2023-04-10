@@ -8,5 +8,9 @@
     <string name="todo">Todo</string>
     <string name="team_todo">Team Todo</string>
     <string name="login">Login</string>
-
+    <string name="text_title_task">Header</string>
+    <string name="text_description">Body</string>
+    <string name="filter">Filter</string>
+    <string name="category">Category</string>
+    <string name="datePacker">Date Picker</string>
 </resources>
