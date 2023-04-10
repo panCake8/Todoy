@@ -14,11 +14,3 @@ class FragmentHome : BaseFragmentWithTransition<FragmentHomeBinding>() {
         get() = FragmentHomeBinding::inflate
 
 }
-
-
-fun startthreads(){
-
-//        Log.i()
-
-
-}
