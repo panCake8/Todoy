@@ -17,26 +17,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/view"
-            android:layout_height="@dimen/view_height"
             android:layout_width="@dimen/view_width"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/bottom_sheet_lien"
+            android:layout_height="@dimen/view_height"
             android:layout_marginTop="@dimen/margin_large"
-            app:layout_constraintTop_toBottomOf="@id/drag_handle"/>
+            android:background="@drawable/bottom_sheet_lien"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/drag_handle"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/text_filter"
             style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/filter"
             android:layout_marginTop="@dimen/margin_x_large"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/filter"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
+
         <TextView
             android:id="@+id/text_Category"
             style="@style/TextTitleChips"
@@ -63,8 +66,8 @@
                     android:id="@+id/chip_done"
                     style="@style/Chips_choice"
                     android:layout_weight="1"
-                    android:text="@string/done"
-                    android:checked="true"/>
+                    android:checked="true"
+                    android:text="@string/done" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_inProgress"
@@ -86,15 +89,18 @@
             android:text="@string/datePacker"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chip_group_category" />
+
         <EditText
             android:id="@+id/dateTextField"
             style="@style/input_text_field"
-            android:layout_marginTop="@dimen/margin_large"
             android:layout_marginHorizontal="@dimen/margin_large"
-            android:paddingHorizontal="@dimen/padding_large"
-            android:hint="dd/mm/yy"
-            android:drawableLeft="@drawable/calendar_blank"
+            android:layout_marginTop="@dimen/margin_large"
+            android:drawableStart="@drawable/calendar_blank"
             android:drawablePadding="@dimen/margin_medium"
+            android:hint="@string/dd_mm_yy"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            android:paddingHorizontal="@dimen/padding_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_datePicker" />
@@ -103,10 +109,10 @@
             android:id="@+id/button"
             style="@style/Button"
             android:layout_marginTop="@dimen/margin_large"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/add"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateTextField"
-            android:text="@string/add" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateTextField" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
