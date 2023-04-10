@@ -34,5 +34,7 @@
     <dimen name="icon_search_result_radius">100dp</dimen>
     <dimen name="icon_search_result_height">40dp</dimen>
     <dimen name="icon_search_result_width">40dp</dimen>
+    <dimen name="margin_x_small">4dp</dimen>
+    <dimen name="margin_xx_large">80dp</dimen>
 
 </resources>
