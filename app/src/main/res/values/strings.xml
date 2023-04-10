@@ -9,12 +9,9 @@
     <string name="team_todo">Team Todo</string>
 
 
-
-
-
-
-
     <string name="team_add_new_task">Team</string>
     <string name="personal_add_new_task">Personal</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -5,7 +5,7 @@
     android:id="@+id/bottom_sheet_add_new_task"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.AddNewTaskFragment">
+    tools:context=".ui.addtask.AddNewTaskFragment">
 
     <View
         android:id="@+id/view"
@@ -16,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/textview_add_new_task_title"
