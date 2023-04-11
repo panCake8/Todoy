@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/padding_large"
                 android:maxLines="1"
-                android:text="@string/text_team_todo"
+                android:text="@string/team_todo"
                 app:drawableStartCompat="@drawable/ic_team"
                 app:layout_constraintBottom_toTopOf="@id/team_tasks_left"
                 app:layout_constraintEnd_toEndOf="parent"
