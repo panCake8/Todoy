@@ -107,7 +107,7 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/text_primary</item>
-        <item name="android:background">@drawable/text_assign_background</item>
+        <item name="android:background">@drawable/text_assignee_background</item>
 
     </style>
 

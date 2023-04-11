@@ -23,7 +23,7 @@
             android:layout_width="@dimen/view_width"
             android:layout_height="@dimen/view_height"
             android:layout_marginTop="@dimen/margin_large"
-            android:background="@drawable/bottom_sheet_lien"
+            android:background="@drawable/bottom_sheet_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/drag_handle"

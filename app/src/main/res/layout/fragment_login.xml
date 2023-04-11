@@ -19,7 +19,7 @@
         android:id="@+id/login_image"
         android:layout_width="@dimen/login_image_width"
         android:layout_height="@dimen/login_image_width"
-        android:src="@drawable/person_1"
+        android:src="@drawable/login_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_login" />
