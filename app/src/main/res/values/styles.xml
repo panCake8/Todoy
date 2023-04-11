@@ -39,7 +39,7 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_medium</item>
-        <item name="chipCornerRadius">@dimen/radius_meduim</item>
+        <item name="chipCornerRadius">@dimen/radius_medium</item>
         <item name="chipEndPadding">@dimen/margin_large</item>
         <item name="chipStartPadding">@dimen/margin_large</item>
         <item name="android:checkable">true</item>
@@ -47,17 +47,6 @@
         <item name="chipBackgroundColor">@color/chip_background</item>
         <item name="chipStrokeColor">@color/chip_stroke</item>
         <item name="chipStrokeWidth">@dimen/small_stroke</item>
-    </style>
-
-    <style name="TextTitleChips">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/text_field_background</item>
-        <item name="android:layout_marginTop">@dimen/margin_large</item>
-        <item name="android:layout_marginBottom">@dimen/margin_medium</item>
-        <item name="android:layout_marginStart">@dimen/margin_large</item>
-        <item name="android:textSize">@dimen/text_medium</item>
-        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <!--text card-->
@@ -107,7 +96,7 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/text_primary</item>
-        <item name="android:background">@drawable/text_assign_background</item>
+        <item name="android:background">@drawable/text_assignee_background</item>
 
     </style>
 

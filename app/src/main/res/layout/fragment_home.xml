@@ -74,7 +74,7 @@
                 android:drawablePadding="@dimen/padding_large"
                 android:maxLines="1"
                 android:text="@string/personal_todo"
-                app:drawableStartCompat="@drawable/user"
+                app:drawableStartCompat="@drawable/ic_personal"
                 app:layout_constraintBottom_toTopOf="@id/personal_tasks_left"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -140,8 +140,8 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/padding_large"
                 android:maxLines="1"
-                android:text="@string/text_team_todo"
-                app:drawableStartCompat="@drawable/usersthree"
+                android:text="@string/team_todo"
+                app:drawableStartCompat="@drawable/ic_team"
                 app:layout_constraintBottom_toTopOf="@id/team_tasks_left"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -253,7 +253,7 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:drawablePadding="@dimen/padding_medium"
                 android:text="@string/home_recently_card_time"
-                app:drawableStartCompat="@drawable/clockcountdown"
+                app:drawableStartCompat="@drawable/clock_count_down"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
 
@@ -264,7 +264,7 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:drawablePadding="@dimen/padding_medium"
                 android:text="@string/home_recently_card_date"
-                app:drawableStartCompat="@drawable/calendarblank"
+                app:drawableStartCompat="@drawable/calendar_blank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
 
@@ -279,11 +279,11 @@
         android:layout_height="@dimen/fab_size"
         android:backgroundTint="@color/primary_color"
         android:elevation="@dimen/elevation_small"
-        android:src="@drawable/add_24"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="@id/card_view_recently"
         app:layout_constraintEnd_toEndOf="@id/card_view_recently"
-        app:tint="@color/background"
 
-        />
+        app:tint="@color/background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
