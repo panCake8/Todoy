@@ -37,7 +37,7 @@
         android:background="@drawable/edittext_background_style"
         android:hint="@string/username_hint"
         android:importantForAutofill="no"
-        android:inputType="text"
+        android:inputType="textPersonName"
         android:padding="@dimen/padding_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

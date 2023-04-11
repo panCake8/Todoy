@@ -18,11 +18,11 @@
         android:id="@+id/login_image"
         android:layout_width="@dimen/login_image_width"
         android:layout_height="@dimen/login_image_width"
+        android:contentDescription="@string/description"
         android:src="@drawable/login_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar_login"
-        android:contentDescription="@string/description" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_login" />
 
     <EditText
         android:id="@+id/edit_text_username"
@@ -30,12 +30,12 @@
         android:layout_marginHorizontal="@dimen/margin_large"
         android:layout_marginTop="36dp"
         android:hint="@string/username_hint"
-        android:inputType="text"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
         android:paddingHorizontal="@dimen/padding_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_image"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/login_image" />
 
     <EditText
         android:id="@+id/edit_text_password"
@@ -75,10 +75,10 @@
         android:layout_marginEnd="@dimen/margin_medium"
         android:text="@string/do_not_have_an_account"
         android:textSize="@dimen/text_small"
-        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sign_up"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
