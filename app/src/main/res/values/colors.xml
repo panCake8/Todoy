@@ -10,16 +10,16 @@
     <color name="text_primary">#DE121212</color>
     <color name="text_secondary">#99121212</color>
     <color name="text_light">#61121212</color>
+    <color name="text_extra_light">#38121212</color>
 
-    <color name="done_chart">#00B4D8</color>
-    <color name="todo_chart">#0077B6</color>
-    <color name="in_progress_chart">#03045E</color>
 
     <color name="background">@color/white</color>
 
     <color name="card_background">#F8F8F8</color>
     <color name="text_field_background">#F9F9FC</color>
     <color name="chips_stroke_color">#72777F</color>
+    <color name="background_selectedChips">#CFE5FF</color>
+    <color name="background_unselectedChips">#FAFAFA</color>
     <color name="text_selectedChips">#DE121212</color>
     <color name="text_unselectedChips">#DE42474E</color>
     <color name="back_icon_color">#121212</color>
@@ -30,7 +30,10 @@
     <color name="search_icon_stroke_color">#61121212</color>
     <color name="medium_black">#99121212</color>
     <color name="filter_icon_color">#00000000</color>
+    <color name="hint_color">#86000000</color>
+
     <color name="background_search_box">#F8F8F8</color>
+    <color name="primary_color_light">#9900629D</color>
 
 
 </resources>

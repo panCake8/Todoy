@@ -21,7 +21,7 @@
             style="@style/Text.AssignNameToDo"
             android:id="@+id/text_view_assign_name"
             android:layout_marginBottom="@dimen/margin_large"
-            android:paddingHorizontal="@dimen/assigne_text_padding"
+            android:paddingHorizontal="@dimen/assignee_text_padding"
             android:paddingVertical="@dimen/padding_small"
             app:layout_constraintBottom_toTopOf="@+id/text_view_body_team_todo"
             app:layout_constraintEnd_toEndOf="parent"

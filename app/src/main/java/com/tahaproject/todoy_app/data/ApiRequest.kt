@@ -28,7 +28,7 @@ open class ApiRequest {
             Gson().toJson(body).toRequestBody(Constants.applicationJson.toMediaTypeOrNull())
         ).build()
 
-     fun getRequest(body: Any, endPoint: String): Request = createRequest(endPoint).get().build()
+     fun getRequest(endPoint: String): Request = createRequest(endPoint).get().build()
 
      fun putRequest(body: Any, endPoint: String): Request =
         createRequest(endPoint).put(

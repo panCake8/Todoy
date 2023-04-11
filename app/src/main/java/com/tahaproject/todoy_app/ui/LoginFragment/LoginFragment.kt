@@ -12,7 +12,7 @@ import com.tahaproject.todoy_app.ui.baseview.BaseFragment
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
-        get() =FragmentLoginBinding::inflate
+        get() = FragmentLoginBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,10 +22,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun onClick() {
-        val username = binding.username.text.toString()
-        val password = binding.password.text.toString()
+        val username = binding.editTextUsername.text.toString()
+        val password = binding.editTextPassword.text.toString()
         binding.loginButton.setOnClickListener {
-        AuthApiRequest(ApiRequest()).login(LoginRequest(username,password))
+            AuthApiRequest(ApiRequest()).login(LoginRequest(username, password))
 
         }
     }

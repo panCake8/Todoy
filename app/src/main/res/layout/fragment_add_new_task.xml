@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_add_new_task"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.addtask.AddNewTaskFragment">
+
+    <View
+        android:id="@+id/bottom_sheet_line"
+        android:layout_width="@dimen/view_width"
+        android:layout_height="@dimen/view_height"
+        android:layout_marginTop="@dimen/margin_large"
+        android:background="@drawable/bottom_sheet_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_add_new_task_title"
+        style="@style/Text.Title"
+        android:layout_marginTop="@dimen/margin_x_large"
+        android:text="@string/new_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line" />
+
+    <TextView
+        android:id="@+id/textview_task_title"
+        style="@style/Text.TitleBottomSheet"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/title_task"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_add_new_task_title" />
+
+    <EditText
+        android:id="@+id/editText_add_Task_Title"
+        style="@style/input_text_field"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:background="@drawable/edittext_background_style"
+        android:hint="@string/title"
+        android:inputType="text"
+        android:minHeight="@dimen/input_text_field_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_task_title"
+        tools:ignore="Autofill" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_personal_team"
+        style="@style/ChipGroupBottomSheet"
+        android:layout_height="@dimen/chip_group_height"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chips_choice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/personal_add_new_task" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chips_choice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/team_add_new_task" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/textview_add_assignee_name"
+        style="@style/Text.TitleBottomSheet"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/assignee_name"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chip_group_personal_team" />
+
+    <EditText
+        android:id="@+id/editText_add_assignee_name"
+        style="@style/input_text_field"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:background="@drawable/edittext_background_style"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:minHeight="@dimen/input_text_field_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_add_assignee_name"
+        tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/textview_add_task_Description"
+        style="@style/Text.TitleBottomSheet"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/description"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_assignee_name" />
+
+    <EditText
+        android:id="@+id/editText_add_Task_Description"
+        style="@style/input_text_field"
+        android:layout_height="@dimen/input_text_field_description"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:background="@drawable/edittext_background_style"
+        android:gravity="top"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        android:minHeight="@dimen/input_text_field_height"
+        android:paddingTop="@dimen/padding_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_add_task_Description"
+        tools:ignore="Autofill" />
+
+    <Button
+        style="@style/Button"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:text="@string/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
