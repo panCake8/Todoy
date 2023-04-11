@@ -4,49 +4,58 @@
     <dimen name="text_medium">14sp</dimen>
     <dimen name="text_large">16sp</dimen>
     <dimen name="text_x_large">18sp</dimen>
-    <dimen name="text_extra_large">22sp</dimen>
 
     <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_large">16dp</dimen>
     <dimen name="margin_x_large">24dp</dimen>
+    <dimen name="margin_x_small">4dp</dimen>
+    <dimen name="margin_xx_large">80dp</dimen>
+
     <dimen name="padding_small">4dp</dimen>
     <dimen name="padding_medium">8dp</dimen>
     <dimen name="padding_large">16dp</dimen>
-    <dimen name="no_width">0dp</dimen>
-    <dimen name="no_height">0dp</dimen>
+
     <dimen name="elevation_small">8dp</dimen>
+    <dimen name="no_elevation">0dp</dimen>
+
     <dimen name="radius_small">4dp</dimen>
-    <dimen name="radius_meduim">8dp</dimen>
+    <dimen name="radius_medium">8dp</dimen>
     <dimen name="radius_large">16dp</dimen>
+
     <dimen name="small_stroke">1dp</dimen>
+
     <dimen name="app_bar_height">64dp</dimen>
     <dimen name="button_height">64dp</dimen>
+
     <dimen name="no_size">0dp</dimen>
-    <dimen name="chip_height">20dp</dimen>
-    <dimen name="no_elevation">0dp</dimen>
+
     <dimen name="height_search_box">56dp</dimen>
     <dimen name="radius_search_box">28dp</dimen>
-    <dimen name="input_text_field_mini_height">52dp</dimen>
-    <dimen name="chip_group_mini_height">56dp</dimen>
+
+    <dimen name="input_text_field_height">52dp</dimen>
+    <dimen name="chip_group_height">56dp</dimen>
+
     <dimen name="view_height">4dp</dimen>
     <dimen name="view_width">32dp</dimen>
-    <dimen name="assigne_text_padding">12dp</dimen>
-    <dimen name="image_singup_height">241dp</dimen>
+
+    <dimen name="assignee_text_padding">12dp</dimen>
+
+    <dimen name="image_sing_up_height">241dp</dimen>
 
     <dimen name="search_result_card_radius">12dp</dimen>
     <dimen name="status_background_radius">100dp</dimen>
+
     <dimen name="search_result_height">80dp</dimen>
+
     <dimen name="icon_search_result_radius">100dp</dimen>
     <dimen name="icon_search_result_height">40dp</dimen>
     <dimen name="icon_search_result_width">40dp</dimen>
-    <dimen name="margin_x_small">4dp</dimen>
-    <dimen name="margin_xx_large">80dp</dimen>
+
     <dimen name="login_image_width">256dp</dimen>
     <dimen name="height_button">56dp</dimen>
     <dimen name="fab_size">56dp</dimen>
-    <dimen name="input_text_field_descirption">114dp</dimen>
-    <dimen name="bottom_sheet_radius">32dp</dimen>
+    <dimen name="input_text_field_description">114dp</dimen>
     <dimen name="bottom_sheet_line_radius">360dp</dimen>
 
 </resources>

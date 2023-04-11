@@ -17,7 +17,7 @@
     <ImageView
         android:id="@+id/image_view_cover"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_singup_height"
+        android:layout_height="@dimen/image_sing_up_height"
         android:layout_marginHorizontal="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_medium"
         android:contentDescription="@string/description"
