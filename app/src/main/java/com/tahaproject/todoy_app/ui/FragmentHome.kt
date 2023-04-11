@@ -25,7 +25,7 @@ class FragmentHome : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ///
+
         val pieChart: PieChart = binding.pieChart
 
         pieChart.apply {
