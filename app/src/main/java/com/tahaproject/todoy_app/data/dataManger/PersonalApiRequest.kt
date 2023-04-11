@@ -23,7 +23,7 @@ class PersonalApiRequest(private val apiRequest:ApiRequest) : IPersonalTodoApi {
     }
 
     override fun getPersonalTodos(): PersonalTodo {
-        val request = apiRequest.getRequest("", EndPoint.personalTodo)
+        val request = apiRequest.getRequest(EndPoint.personalTodo)
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->
             Log.i(ApiRequest.TAG_PERSONAL_GET, "$jsonString")

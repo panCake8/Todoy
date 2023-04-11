@@ -22,7 +22,7 @@ class TeamApiRequest(private val apiRequest: ApiRequest) : ITeamTodoApi {
     }
 
     override fun getTeamTodos(): TeamToDo {
-        val request = apiRequest.getRequest("", EndPoint.teamTodo)
+        val request = apiRequest.getRequest(EndPoint.teamTodo)
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->
             Log.i(ApiRequest.TAG_TEAM_GET, "$jsonString")

@@ -13,7 +13,7 @@ import com.tahaproject.todoy_app.util.EndPoint
 class AuthApiRequest(private val apiRequest: ApiRequest) : IAuthApi {
 
     override fun login(loginRequest: LoginRequest): LogInResponse {
-        val request = apiRequest.getRequest(loginRequest, EndPoint.login)
+        val request = apiRequest.postRequest(loginRequest, EndPoint.login)
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->
             Log.i(ApiRequest.TAG_LOGIN, "$jsonString")
