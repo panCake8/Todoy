@@ -28,7 +28,7 @@ class AuthApiRequest(private val apiRequest: ApiRequest) : IAuthApi {
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->
             Log.i(ApiRequest.TAG_REGISTER, "$jsonString")
-            return  apiRequest.gson.fromJson(jsonString, RegisterResponse::class.java)
+            return apiRequest.gson.fromJson(jsonString, RegisterResponse::class.java)
         }
     }
 }

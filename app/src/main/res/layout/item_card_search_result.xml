@@ -24,44 +24,42 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/cardview_light_background" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+
+        <TextView
+            android:id="@+id/text_title_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/text_title_task"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintBottom_toTopOf="@+id/text_Description_task"
+            app:layout_constraintStart_toEndOf="@id/icon_personal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/text_Description_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:fontFamily="@font/roboto"
+            android:text="@string/text_description"
+            android:textColor="@color/text_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_personal"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/text_title_task"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/text_title_task"
-                android:textColor="@color/text_secondary" />
-
-            <TextView
-                android:id="@+id/text_Description_task"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:fontFamily="@font/roboto"
-                android:text="@string/text_description"
-                android:textColor="@color/text_light" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/text_title_task" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_large"
             android:background="@drawable/status_background"
+            android:contentDescription="@string/description"
             android:src="@drawable/ic_done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/description" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
