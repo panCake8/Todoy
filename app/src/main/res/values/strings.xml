@@ -35,7 +35,7 @@
     <string name="test">test</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
-    <string name="donot_have_an_account">Don’t have an account?</string>
+    <string name="do_not_have_an_account">Don’t have an account?</string>
     <string name="text_search">Search</string>
 </resources>
 
