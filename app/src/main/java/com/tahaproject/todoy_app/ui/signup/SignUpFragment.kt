@@ -62,16 +62,21 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
     }
 
     private fun isUsernameValid(username: String): Boolean {
-        return username.length >= 4
+        return username.length >= SHORT_NAME
     }
 
     private fun isPasswordValid(password: String): Boolean {
         val regex = Regex("^(?=.*[a-z])(?=.*[A-Z]).+\$")
-        return password.length >= 8 && regex.matches(password)
+        return password.length >= SHORT_PASSWORD && regex.matches(password)
     }
 
     private fun isPasswordMatch(password: String, confirmPassword: String): Boolean {
         return password == confirmPassword
+    }
+
+    companion object {
+        const val SHORT_NAME = 4
+        const val SHORT_PASSWORD = 8
     }
 }
 
