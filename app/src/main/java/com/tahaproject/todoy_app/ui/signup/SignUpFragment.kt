@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
+import com.tahaproject.todoy_app.ui.home.HomeFragment
 
-class SignUpFragment:BaseFragmentWithTransition<FragmentSignupBinding>() {
+class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
         get() = FragmentSignupBinding::inflate
 
@@ -17,38 +19,44 @@ class SignUpFragment:BaseFragmentWithTransition<FragmentSignupBinding>() {
         super.onViewCreated(view, savedInstanceState)
         addCallBacks()
     }
-    
-    private fun addCallBacks(){
-     binding.textViewLogin.setOnClickListener {
+
+    private fun addCallBacks() {
+        binding.textViewLogin.setOnClickListener {
             goToLogin()
         }
-         binding.buttonSignup.setOnClickListener {
-         onSignUp()
-         }
+        binding.buttonSignup.setOnClickListener {
+            onSignUp()
+        }
     }
-    
-    private  fun goToLogin(){
-       //TODO:
+
+    private fun goToLogin() {
+        back()
     }
-    private  fun onSignUp(){
+
+    private fun onSignUp() {
         val username = binding.editTextUsername.text.toString()
         val password = binding.editTextPassword.text.toString()
         val confirmPassword = binding.editTextConfirmPassword.text.toString()
         if (!isUsernameValid(username)) {
             showToast("Username should be at least 4 characters.")
             return
-        }
-        else if (!isPasswordValid(password)) {
+        } else if (!isPasswordValid(password)) {
             showToast("Password should be at least 8 characters and contain at least one lowercase and one uppercase letter.")
             return
-        }
-        else if (!isPasswordMatch(password, confirmPassword)) {
+        } else if (!isPasswordMatch(password, confirmPassword)) {
             showToast("Passwords do not match.")
             return
-        }else{
-           // TODO:
+        } else {
+            parentFragmentManager.popBackStack()
+            transitionTo(
+                false,
+                R.id.fragment_register_container,
+                HomeFragment(),
+                HomeFragment::class.java.name
+            )
         }
     }
+
     private fun isUsernameValid(username: String): Boolean {
         return username.length >= 4
     }
@@ -61,6 +69,7 @@ class SignUpFragment:BaseFragmentWithTransition<FragmentSignupBinding>() {
     private fun isPasswordMatch(password: String, confirmPassword: String): Boolean {
         return password == confirmPassword
     }
+
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
