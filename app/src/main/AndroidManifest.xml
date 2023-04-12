@@ -16,7 +16,7 @@
         tools:replace="android:supportsRtl"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activites.RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MyApp.MySplash">
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activites.HomeActivity"
+            android:name=".ui.activities.HomeActivity"
             android:exported="false"
             android:screenOrientation="portrait">
 

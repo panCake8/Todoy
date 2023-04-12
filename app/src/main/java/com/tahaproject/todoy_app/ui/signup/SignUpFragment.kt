@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
-import com.tahaproject.todoy_app.ui.activites.HomeActivity
+import com.tahaproject.todoy_app.ui.HomeActivity
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.login.LoginFragment
 
