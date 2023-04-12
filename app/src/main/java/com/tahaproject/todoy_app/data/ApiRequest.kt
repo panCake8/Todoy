@@ -15,7 +15,12 @@ open class ApiRequest {
     private val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
-    val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
+    private val authInterceptor = AuthInterceptor()
+    private val errorInterceptor=ErrorInterceptor()
+    val client = OkHttpClient.Builder()
+                 .addInterceptor(logInterceptor)
+                 .addInterceptor(authInterceptor)
+                  .addInterceptor(errorInterceptor).build()
 
     private fun createRequest(endPoint: String): Request.Builder {
         return Request.Builder()
