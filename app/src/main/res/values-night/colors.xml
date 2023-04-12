@@ -7,7 +7,7 @@
 
     <color name="secondary_color">#CFE5FF</color>
 
-   <color name="text_primary">#DEFAFAFA</color>
+    <color name="text_primary">#DEFAFAFA</color>
     <color name="text_secondary">#99FAFAFA</color>
     <color name="text_light">#61FAFAFA</color>
 
@@ -29,4 +29,7 @@
     <color name="background_search_box">#303030</color>
     <color name="hint_color">#86C1C1C1</color>
     <color name="text_extra_light">#38C1C1C1</color>
+
+    <color name="light_black">#61FAFAFA</color>
+    <color name="dark_black">#DEFAFAFA</color>
 </resources>
