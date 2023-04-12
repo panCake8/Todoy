@@ -6,6 +6,7 @@ object Constants {
     const val applicationJson = "application/json"
     const val auth = "Authorization"
     const val bearer = "Bearer"
+    const val EMPTY_STRING = "Bearer"
 
     object SharedPref {
         const val SHARED_PREF_NAME = "MySharedPref"
