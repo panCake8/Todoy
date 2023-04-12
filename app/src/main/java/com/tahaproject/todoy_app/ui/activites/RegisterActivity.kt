@@ -4,8 +4,11 @@ package com.tahaproject.todoy_app.ui.activites
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.commit
+import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.ActivityRegisterBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseActivity
+import com.tahaproject.todoy_app.ui.login.LoginFragment
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     override val bindingInflate: (LayoutInflater) -> ActivityRegisterBinding
@@ -18,7 +21,14 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     }
 
     private fun setup() {
-
+        supportFragmentManager.commit {
+            replace(
+                R.id.fragment_register_container,
+                LoginFragment(),
+                LoginFragment::class.java.name
+            )
+            setReorderingAllowed(true)
+        }
     }
 
 }
