@@ -17,13 +17,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUp()
-        navigateToHomeTemporarily()
-    }
-
-    private fun navigateToHomeTemporarily() {
-        supportFragmentManager.beginTransaction()
-            .replace(binding.fragmentContainer.id, FragmentHome())
-            .commit()
     }
 
     override fun onBackPressed() {
