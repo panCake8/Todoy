@@ -16,10 +16,10 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addCallBack()
+        addCallBacks()
     }
 
-    private fun addCallBack() {
+    private fun addCallBacks() {
         binding.loginButton.setOnClickListener {
 //            val username = binding.editTextUsername.text.toString()
 //            val password = binding.editTextPassword.text.toString()
