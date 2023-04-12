@@ -8,7 +8,6 @@ import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.home.HomeFragment
-import com.tahaproject.todoy_app.util.showToast
 
 class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
@@ -55,7 +54,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
                 "Password should be at least 8 characters and contain at least one lowercase and one uppercase letter."
             return
         } else if (!isPasswordMatch(password, confirmPassword)) {
-            showToast("Passwords do not match.")
+            binding.editTextConfirmPassword.error = "Passwords do not match."
             return
         } else {
             goToHome()
