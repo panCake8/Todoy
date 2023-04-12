@@ -20,7 +20,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
     }
 
     private fun addCallBacks() {
-        binding.textViewLogin.setOnClickListener {
+        binding.textviewLogin.setOnClickListener {
             goToLogin()
         }
         binding.buttonSignup.setOnClickListener {
