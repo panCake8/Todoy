@@ -32,4 +32,5 @@
 
     <color name="light_black">#61FAFAFA</color>
     <color name="dark_black">#DEFAFAFA</color>
+    <color name="grey">#676768</color>
 </resources>
