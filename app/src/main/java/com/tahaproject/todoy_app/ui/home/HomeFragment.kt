@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
+import com.tahaproject.todoy_app.ui.search.SearchFragment
+import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 
@@ -16,9 +18,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         addCallBacks()
-
     }
 
     private fun addCallBacks() {
@@ -41,6 +41,21 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
             )
 
         }
-
+        binding.editTextSearch.setOnClickListener {
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
+        }
+        binding.cardViewRecently.setOnClickListener {
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
+        }
     }
 }

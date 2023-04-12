@@ -1,13 +1,14 @@
 package com.tahaproject.todoy_app.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
+import com.tahaproject.todoy_app.ui.activites.HomeActivity
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.home.HomeFragment
 import com.tahaproject.todoy_app.ui.signup.SignUpFragment
 
 class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>() {
@@ -24,12 +25,9 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>() {
 //            val username = binding.editTextUsername.text.toString()
 //            val password = binding.editTextPassword.text.toString()
             //AuthApiRequest(ApiRequest()).login(LoginRequest(username, password))
-            transitionTo(
-                false,
-                R.id.fragment_register_container,
-                HomeFragment(),
-                HomeFragment::class.java.name
-            )
+            val intent = Intent(requireActivity(), HomeActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
         binding.textviewSignUp.setOnClickListener {
             transitionTo(

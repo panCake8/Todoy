@@ -1,13 +1,15 @@
 package com.tahaproject.todoy_app.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.R
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
+import com.tahaproject.todoy_app.ui.activites.HomeActivity
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.home.HomeFragment
+import com.tahaproject.todoy_app.ui.login.LoginFragment
 
 class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
@@ -33,13 +35,10 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
     }
 
     private fun goToHome() {
-        parentFragmentManager.popBackStack()
-        transitionTo(
-            false,
-            R.id.fragment_register_container,
-            HomeFragment(),
-            HomeFragment::class.java.name
-        )
+        parentFragmentManager.popBackStack(LoginFragment::class.java.name, POP_BACK_STACK_INCLUSIVE)
+        val intent = Intent(activity, HomeActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun onSignUp() {
