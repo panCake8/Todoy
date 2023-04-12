@@ -15,7 +15,6 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import kotlin.math.roundToInt
 
 
 class FragmentHome : BaseFragmentWithTransition<FragmentHomeBinding>() {
@@ -25,9 +24,24 @@ class FragmentHome : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        renderPieChart(binding.pieChart)
+    }
 
-        val pieChart: PieChart = binding.pieChart
+    private fun renderPieChart(pieChart: PieChart) {
+        setPieChartDesign(pieChart)
+        val dataSet = PieDataSet(getPieChartDataList(), "")
+        pieChart.data = getFormattedDataSet(dataSet, pieChart)
+        pieChart.invalidate()
+        pieChart.animateY(1500, Easing.EaseInOutQuad)
+    }
 
+    private fun getPieChartDataList() = listOf(
+        PieEntry(15f, "Done"),
+        PieEntry(60f, "In progress"),
+        PieEntry(35f, "Todo")
+    )
+
+    private fun setPieChartDesign(pieChart: PieChart) {
         pieChart.apply {
             setUsePercentValues(true)
             description.isEnabled = false
@@ -39,14 +53,11 @@ class FragmentHome : BaseFragmentWithTransition<FragmentHomeBinding>() {
             legend.orientation = Legend.LegendOrientation.VERTICAL
             setEntryLabelTextSize(12f)
         }
-        ///
-        val entries = listOf(
-            PieEntry(15f, "Done"),
-            PieEntry(60f, "In progress"),
-            PieEntry(35f, "Todo")
-        )
-        ///
-        val dataSet = PieDataSet(entries, "")
+
+    }
+
+
+    private fun getFormattedDataSet(dataSet: PieDataSet, pieChart: PieChart): PieData {
         dataSet.colors = listOf(
             Color.parseColor("#00B4D8"),
             Color.parseColor("#03045E"),
@@ -56,41 +67,19 @@ class FragmentHome : BaseFragmentWithTransition<FragmentHomeBinding>() {
         dataSet.selectionShift = 10f
         dataSet.valueTextSize = 12f
         dataSet.valueFormatter = CustomPercentFormatter(pieChart)
-
-
-        ///
         val data = PieData(dataSet)
         data.setDrawValues(true)
         data.setValueTextColor(Color.WHITE)
         data.setValueTextSize(12f)
-
-        ///
-//        val formatter = LabelValueFormatter(entries)
-//        for (i in data.dataSets) {
-//            i.valueFormatter = formatter
-//        }
-
-
-        ///
-        pieChart.data = data
-        pieChart.invalidate()
-        pieChart.animateY(1500, Easing.EaseInOutQuad)
+        return data
     }
 
-    class CustomPercentFormatter(pieChart: PieChart) : PercentFormatter(pieChart) {
-        override fun getFormattedValue(value: Float): String {
-            return "${value.toInt()} %"
-        }
-    }
 
-    class LabelValueFormatter(private val mEntries: List<String>) : ValueFormatter() {
-        override fun getFormattedValue(value: Float): String {
-            val index = value.toInt()
-            return if (index >= 0 && index < mEntries.size) {
-                mEntries[index]
-            } else {
-                ""
-            }
-        }
+}
+
+class CustomPercentFormatter(pieChart: PieChart) : PercentFormatter(pieChart) {
+    override fun getFormattedValue(value: Float): String {
+        return "${value.toInt()} %"
     }
 }
+
