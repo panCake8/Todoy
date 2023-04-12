@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.LoginFragment
+package com.tahaproject.todoy_app.ui.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
