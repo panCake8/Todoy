@@ -1,9 +1,16 @@
 package com.tahaproject.todoy_app.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
@@ -11,6 +18,7 @@ import com.tahaproject.todoy_app.ui.search.SearchFragment
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
+import com.tahaproject.todoy_app.util.CustomPercentFormatter
 
 class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
@@ -22,6 +30,8 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
     }
 
     private fun addCallBacks() {
+        renderPieChart(binding.pieChart)
+
         binding.viewAllTeam.setOnClickListener {
             transitionTo(
                 true,
@@ -32,7 +42,6 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
         }
 
         binding.viewAllPersonal.setOnClickListener {
-
             transitionTo(
                 true,
                 R.id.fragment_home_container,
@@ -41,6 +50,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
             )
 
         }
+
         binding.editTextSearch.setOnClickListener {
             transitionTo(
                 true,
@@ -49,6 +59,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
                 SearchFragment::class.java.name
             )
         }
+
         binding.cardViewRecently.setOnClickListener {
             transitionTo(
                 true,
@@ -58,4 +69,51 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
             )
         }
     }
+
+    private fun renderPieChart(pieChart: PieChart) {
+        setPieChartDesign(pieChart)
+        val dataSet = PieDataSet(getPieChartDataList(), "")
+        pieChart.data = getFormattedDataSet(dataSet, pieChart)
+        pieChart.invalidate()
+        pieChart.animateY(1500, Easing.EaseInOutQuad)
+    }
+
+    private fun getPieChartDataList() = listOf(
+        PieEntry(15f, "Done"),
+        PieEntry(60f, "In progress"),
+        PieEntry(35f, "Todo")
+    )
+
+    private fun setPieChartDesign(pieChart: PieChart) {
+        pieChart.apply {
+            setUsePercentValues(true)
+            description.isEnabled = false
+            legend.isEnabled = true
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+            legend.xOffset = 12f
+            legend.yOffset = 12f
+            legend.orientation = Legend.LegendOrientation.VERTICAL
+            setEntryLabelTextSize(12f)
+        }
+
+    }
+
+    private fun getFormattedDataSet(dataSet: PieDataSet, pieChart: PieChart): PieData {
+        dataSet.colors = listOf(
+            Color.parseColor("#00B4D8"),
+            Color.parseColor("#03045E"),
+            Color.parseColor("#0077B6")
+        )
+        dataSet.sliceSpace = 5f
+        dataSet.selectionShift = 10f
+        dataSet.valueTextSize = 12f
+        dataSet.valueFormatter = CustomPercentFormatter(pieChart)
+        val data = PieData(dataSet)
+        data.setDrawValues(true)
+        data.setValueTextColor(Color.WHITE)
+        data.setValueTextSize(12f)
+        return data
+    }
+
 }
