@@ -11,9 +11,9 @@ import com.tahaproject.todoy_app.data.responses.PersonalTodoUpdateResponse
 import com.tahaproject.todoy_app.util.EndPoint
 
 
-class PersonalApiRequest(private val apiRequest:ApiRequest) : IPersonalTodoApi {
+class PersonalApiRequest(private val apiRequest: ApiRequest) : IPersonalTodoApi {
 
-    override fun createPersonalTodo(personalTodoRequest:PersonalTodoRequest): PersonalTodoCreateResponse {
+    override fun createPersonalTodo(personalTodoRequest: PersonalTodoRequest): PersonalTodoCreateResponse {
         val request = apiRequest.postRequest(personalTodoRequest, EndPoint.personalTodo)
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->
@@ -31,7 +31,8 @@ class PersonalApiRequest(private val apiRequest:ApiRequest) : IPersonalTodoApi {
         }
     }
 
-    override fun updatePersonalTodosStatus(personalTodoUpdateRequest:PersonalTodoUpdateRequest): PersonalTodoUpdateResponse {
+    override fun updatePersonalTodosStatus(personalTodoUpdateRequest: PersonalTodoUpdateRequest):
+            PersonalTodoUpdateResponse {
         val request = apiRequest.putRequest(personalTodoUpdateRequest, EndPoint.personalTodo)
         val response = apiRequest.client.newCall(request).execute()
         response.body?.string().let { jsonString ->

@@ -12,7 +12,7 @@
         android:layout_height="@dimen/height_search_box"
         android:layout_marginHorizontal="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_large"
-        android:background="@drawable/edittext_background_style"
+        android:background="@drawable/edit_text_background_style"
         android:drawableLeft="@drawable/ic_search"
         android:drawableRight="@drawable/ic_filter"
         android:drawablePadding="@dimen/padding_medium"
