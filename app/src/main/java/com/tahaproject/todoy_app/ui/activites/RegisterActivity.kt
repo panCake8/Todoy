@@ -14,6 +14,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        setup()
+    }
+
+    private fun setup() {
+
     }
 
 }
