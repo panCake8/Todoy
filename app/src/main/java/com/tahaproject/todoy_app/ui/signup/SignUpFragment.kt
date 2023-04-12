@@ -48,7 +48,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>() {
         val password = binding.editTextPassword.text.toString()
         val confirmPassword = binding.editTextConfirmPassword.text.toString()
         if (!isUsernameValid(username)) {
-            binding.editTextPassword.error = "Username should be at least 4 characters."
+            binding.editTextUsername.error = "Username should be at least 4 characters."
             return
         } else if (!isPasswordValid(password)) {
             binding.editTextPassword.error =
