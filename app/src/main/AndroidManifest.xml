@@ -18,7 +18,8 @@
         <activity
             android:name=".ui.activites.RegisterActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyApp.MySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
