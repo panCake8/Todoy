@@ -1,12 +1,11 @@
-package com.tahaproject.todoy_app.ui.todo
+package com.tahaproject.todoy_app.ui.todo.personal
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentPersonalTodoBinding
+import com.tahaproject.todoy_app.ui.todo.ToDoFragment
 
 
 class PersonalTodoFragment : ToDoFragment<FragmentPersonalTodoBinding>() {

@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui
+package com.tahaproject.todoy_app.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.todo.PersonalTodoFragment
-import com.tahaproject.todoy_app.ui.todo.TeamTodoFragment
+import com.tahaproject.todoy_app.ui.search.SearchFragment
+import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
+import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
+import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 
 class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
@@ -16,16 +18,14 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         addCallBacks()
-
     }
 
     private fun addCallBacks() {
         binding.viewAllTeam.setOnClickListener {
             transitionTo(
                 true,
-                R.id.fragment_container,
+                R.id.fragment_home_container,
                 TeamTodoFragment(),
                 TeamTodoFragment::class.java.name
             )
@@ -35,12 +35,27 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
             transitionTo(
                 true,
-                R.id.fragment_container,
+                R.id.fragment_home_container,
                 PersonalTodoFragment(),
                 PersonalTodoFragment::class.java.name
             )
 
         }
-
+        binding.editTextSearch.setOnClickListener {
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
+        }
+        binding.cardViewRecently.setOnClickListener {
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
+        }
     }
 }
