@@ -20,12 +20,12 @@
         android:pathData="M11.5,11.5m-9.5,0a9.5,9.5 0,1 1,19 0a9.5,9.5 0,1 1,-19 0"
         android:strokeWidth="1.5"
         android:strokeAlpha="0.87"
-        android:strokeColor="#00000000" />
+        android:strokeColor="@color/search_icon_stroke_color" />
     <path
-        android:fillColor="@color/search_icon_stroke_color"
+        android:fillColor="#00000000"
         android:pathData="M18.5,18.5L22,22"
         android:strokeWidth="1.5"
         android:strokeAlpha="0.87"
-        android:strokeColor="#00000000"
+        android:strokeColor="@color/search_icon_stroke_color"
         android:strokeLineCap="round" />
 </vector>
