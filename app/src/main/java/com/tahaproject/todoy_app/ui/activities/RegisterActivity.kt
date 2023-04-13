@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.activites
+package com.tahaproject.todoy_app.ui.activities
 
 
 import android.os.Bundle

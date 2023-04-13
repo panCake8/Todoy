@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
-import com.tahaproject.todoy_app.ui.activites.HomeActivity
+import com.tahaproject.todoy_app.ui.HomeActivity
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.signup.SignUpFragment
 
