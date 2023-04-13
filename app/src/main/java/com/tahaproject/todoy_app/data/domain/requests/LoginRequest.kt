@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.data.requests
+package com.tahaproject.todoy_app.data.domain.requests
 
 data class LoginRequest(
     val username: String,
