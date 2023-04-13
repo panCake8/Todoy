@@ -7,7 +7,7 @@ import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 
 
-abstract class ApiRequest {
+open class ApiRequest {
     val gson = Gson()
     val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
