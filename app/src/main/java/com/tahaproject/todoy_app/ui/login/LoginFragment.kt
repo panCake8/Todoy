@@ -1,24 +1,20 @@
 package com.tahaproject.todoy_app.ui.login
 
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.apiManger.AuthApiRequest
-import com.tahaproject.todoy_app.data.requests.LoginRequest
-import com.tahaproject.todoy_app.data.responses.ContentLoginResponse
+import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
+import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
 import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
 import com.tahaproject.todoy_app.ui.signup.SignUpFragment
-import com.tahaproject.todoy_app.util.PrefsUtil
-import com.tahaproject.todoy_app.util.put
+import java.io.IOException
 
 class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginContract.View {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
@@ -27,7 +23,8 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginPresenter = LoginPresenter(this)
+        loginPresenter = LoginPresenter()
+        loginPresenter.attach(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,7 +36,7 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
         binding.loginButton.setOnClickListener {
             val username = binding.editTextUsername.text.toString()
             val password = binding.editTextPassword.text.toString()
-            AuthApiRequest(ApiRequest(), loginPresenter).login(LoginRequest(username, password))
+            loginPresenter.fetchData(LoginRequest(username, password))
 //            val intent = Intent(requireActivity(), HomeActivity::class.java)
 //            startActivity(intent)
 //            requireActivity().finish()
@@ -54,16 +51,20 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
         }
     }
 
-    override fun showData(contentLoginResponse: ContentLoginResponse) {
+    override fun showData(contentLoginResponse: LoginResponse) {
         requireActivity().runOnUiThread {
+            Log.i("TAG", contentLoginResponse.isSuccess.toString())
         }
     }
 
-    override fun showError(error: String) {
+    override fun showError(error: IOException) {
         requireActivity().runOnUiThread {
-            Log.i("TAG", error)
+            error.localizedMessage?.let { Log.i("TAG", it) }
         }
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        loginPresenter.deAttach()
+    }
 }

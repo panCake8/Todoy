@@ -26,8 +26,8 @@ object Constants {
         const val TITLE = "title"
         const val DESCRIPTION = "description"
         const val ASSIGNEE = "assignee"
-        const val ID="id"
-        const val STATUS="status"
+        const val ID = "id"
+        const val STATUS = "status"
     }
 
 }

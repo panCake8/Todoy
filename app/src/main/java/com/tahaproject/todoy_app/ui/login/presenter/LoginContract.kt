@@ -1,15 +1,19 @@
 package com.tahaproject.todoy_app.ui.login.presenter
 
-import com.tahaproject.todoy_app.data.responses.ContentLoginResponse
+import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
+import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
+import java.io.IOException
 
- interface LoginContract {
+
+interface LoginContract {
     interface View {
-        fun showData(contentLoginResponse: ContentLoginResponse)
-        fun showError(error: String)
+        fun showData(contentLoginResponse: LoginResponse)
+        fun showError(error: IOException)
     }
 
     interface Presenter {
-        fun onSuccess(contentLoginResponse: ContentLoginResponse)
-        fun onFailure(error: String)
+        fun fetchData(loginRequest: LoginRequest)
+        fun attach(view: View)
+        fun deAttach()
     }
 }
