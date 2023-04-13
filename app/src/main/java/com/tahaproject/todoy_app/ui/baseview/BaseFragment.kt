@@ -24,7 +24,6 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         cleanupBindings()
-        _binding = null
     }
 
     protected open fun cleanupBindings() {
