@@ -8,34 +8,64 @@ import com.tahaproject.todoy_app.data.requests.TeamToDoPostRequest
 import com.tahaproject.todoy_app.data.requests.TeamToDoUpdateRequest
 import com.tahaproject.todoy_app.data.responses.*
 import com.tahaproject.todoy_app.util.EndPoint
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
 
 
 class TeamApiRequest(private val apiRequest: ApiRequest) : ITeamTodoApi {
 
-    override fun createTeamTodo(teamTodoRequest: TeamToDoPostRequest): TeamToDoResponse {
+    override fun createTeamTodo(
+        teamTodoRequest: TeamToDoPostRequest,
+        onSuccess: (TeamToDoResponse) -> Unit,
+        onFailure: (Throwable) -> Unit) {
         val request = apiRequest.postRequest(teamTodoRequest, EndPoint.teamTodo)
-        val response = apiRequest.client.newCall(request).execute()
-        response.body?.string().let { jsonString ->
-            Log.i(ApiRequest.TAG_TEAM_CREATE, "$jsonString")
-            return apiRequest.gson.fromJson(jsonString, TeamToDoResponse::class.java)
-        }
+        apiRequest.client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                onFailure(e)
+            }
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    onSuccess(apiRequest.gson.fromJson(jsonString, TeamToDoResponse::class.java))
+                    Log.i(ApiRequest.TAG_TEAM_CREATE, "$jsonString")
+                }
+            }
+        })
     }
 
-    override fun getTeamTodos(): TeamToDo {
+    override fun getTeamTodos(onSuccess: (TeamToDo) -> Unit,
+                              onFailure: (Throwable) -> Unit) {
         val request = apiRequest.getRequest(EndPoint.teamTodo)
-        val response = apiRequest.client.newCall(request).execute()
-        response.body?.string().let { jsonString ->
-            Log.i(ApiRequest.TAG_TEAM_GET, "$jsonString")
-            return apiRequest.gson.fromJson(jsonString, TeamToDo::class.java)
-        }
+        apiRequest.client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                onFailure(e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    onSuccess(apiRequest.gson.fromJson(jsonString, TeamToDo::class.java))
+                    Log.i(ApiRequest.TAG_TEAM_GET, "$jsonString")
+                }
+            }
+        })
     }
 
-    override fun updateTeamTodosStatus(teamTodoUpdateRequest: TeamToDoUpdateRequest): TeamTodoUpdateResponse {
+    override fun updateTeamTodosStatus(
+        teamTodoUpdateRequest: TeamToDoUpdateRequest,
+        onSuccess: (TeamTodoUpdateResponse) -> Unit,
+        onFailure: (Throwable) -> Unit) {
         val request = apiRequest.putRequest(teamTodoUpdateRequest, EndPoint.teamTodo)
-        val response = apiRequest.client.newCall(request).execute()
-        response.body?.string().let { jsonString ->
-            Log.i(ApiRequest.TAG_TEAM_UPDATE, "$jsonString")
-            return apiRequest.gson.fromJson(jsonString, TeamTodoUpdateResponse::class.java)
-        }
+        apiRequest.client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                onFailure(e)
+            }
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string().let { jsonString ->
+                    onSuccess(apiRequest.gson.fromJson(jsonString, TeamTodoUpdateResponse::class.java))
+                    Log.i(ApiRequest.TAG_TEAM_UPDATE, "$jsonString")
+                }
+            }
+        })
     }
 }

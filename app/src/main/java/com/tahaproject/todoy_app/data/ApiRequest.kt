@@ -16,11 +16,12 @@ open class ApiRequest {
         level = HttpLoggingInterceptor.Level.BODY
     }
     private val authInterceptor = AuthInterceptor()
-    private val errorInterceptor=ErrorInterceptor()
+    private val errorNetworkInterceptor=ErrorNetworkInterceptor()
     val client = OkHttpClient.Builder()
-                 .addInterceptor(logInterceptor)
+                 .addInterceptor(errorNetworkInterceptor)
                  .addInterceptor(authInterceptor)
-                  .addInterceptor(errorInterceptor).build()
+                 .addInterceptor(logInterceptor)
+                 .build()
 
     private fun createRequest(endPoint: String): Request.Builder {
         return Request.Builder()
@@ -39,6 +40,8 @@ open class ApiRequest {
         createRequest(endPoint).put(
             Gson().toJson(body).toRequestBody(Constants.applicationJson.toMediaTypeOrNull())
         ).build()
+
+
     companion object {
         const val TAG_LOGIN = "Login_Tag"
         const val TAG_REGISTER = "Register_Tag"
