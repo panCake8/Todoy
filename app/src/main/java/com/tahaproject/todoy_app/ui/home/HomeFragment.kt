@@ -2,6 +2,7 @@ package com.tahaproject.todoy_app.ui.home
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +15,26 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 
 import com.tahaproject.todoy_app.R
+import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
+import com.tahaproject.todoy_app.ui.home.Presenter.HomeContract
+import com.tahaproject.todoy_app.ui.home.Presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.search.SearchFragment
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
+import java.io.IOException
 
-class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
+class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(),
+    HomeContract.View {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
+
+    lateinit var homePresenter: HomePresenter
 
     private val getPieChartDataList: List<PieEntry> = listOf(
         PieEntry(15f, "Done"),
@@ -37,9 +45,9 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        homePresenter = HomePresenter()
+        homePresenter.attach(this)
         addCallBacks()
-
     }
 
     private fun addCallBacks() {
@@ -58,12 +66,13 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
         }
 
         binding.viewAllPersonal.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                PersonalTodoFragment(),
-                PersonalTodoFragment::class.java.name
-            )
+
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                PersonalTodoFragment(),
+//                PersonalTodoFragment::class.java.name
+//            )
 
         }
 
@@ -95,12 +104,15 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+
+
+//
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -165,6 +177,17 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
             Color.parseColor("#03045E"),
             Color.parseColor("#0077B6")
         )
+    }
+
+    override fun showData(contentHomeResponse: PersonalTodosResponse) {
+        requireActivity().runOnUiThread {
+            Log.i("TAG", contentHomeResponse.value.last().description)
+
+        }
+    }
+
+    override fun showError(error: IOException) {
+
     }
 
 }
