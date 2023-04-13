@@ -55,6 +55,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/margin_medium</item>
     </style>
+
     <!-- title signup todoo-->
     <style name="SubTitle">
         <item name="android:fontFamily">@font/roboto_medium</item>
@@ -90,6 +91,21 @@
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
+
+    <!-- bottom sheet Dialog Theme -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+
+        <item name="android:typeface">monospace</item>
+        <item name="android:background">@drawable/bottom_sheet_dialog_background</item>
+    </style>
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:typeface">monospace</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 
     <!-- assign name card todoo-->
     <style name="Text.AssignNameToDo">

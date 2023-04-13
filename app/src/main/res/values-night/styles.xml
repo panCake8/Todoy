@@ -59,6 +59,20 @@
         <item name="chipStrokeWidth">@dimen/small_stroke</item>
     </style>
 
+    <!-- bottom sheet Dialog Theme -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:typeface">monospace</item>
+        <item name="android:background">@drawable/bottom_sheet_dialog_background</item>
+    </style>
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:typeface">monospace</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
     <!--text card-->
     <style name="Text" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
