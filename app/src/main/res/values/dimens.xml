@@ -22,6 +22,7 @@
     <dimen name="radius_small">4dp</dimen>
     <dimen name="radius_medium">8dp</dimen>
     <dimen name="radius_large">16dp</dimen>
+    <dimen name="radius_x_large">32dp</dimen>
 
     <dimen name="small_stroke">1dp</dimen>
 
