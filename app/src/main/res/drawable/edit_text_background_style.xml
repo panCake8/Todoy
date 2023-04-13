@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="@dimen/radius_search_box"/>
-    <solid android:color="@color/background_search_box"/>
+    <corners android:radius="@dimen/radius_search_box" />
+    <solid android:color="@color/background_search_box" />
     <padding
+        android:bottom="@dimen/padding_medium"
         android:left="@dimen/padding_large"
         android:right="@dimen/padding_large"
-        android:bottom="@dimen/padding_medium"
         android:top="@dimen/padding_medium" />
 </shape>

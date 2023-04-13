@@ -18,16 +18,16 @@
             tools:text="Note title" />
 
         <TextView
-            style="@style/Text.AssignNameToDo"
             android:id="@+id/text_view_assign_name"
+            style="@style/Text.AssignNameToDo"
             android:layout_marginBottom="@dimen/margin_large"
             android:paddingHorizontal="@dimen/assignee_text_padding"
             android:paddingVertical="@dimen/padding_small"
             app:layout_constraintBottom_toTopOf="@+id/text_view_body_team_todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/text_view_title_team_todo"
-            tools:text="Yassen"
-         />
+            tools:text="Yassen" />
+
         <TextView
             android:id="@+id/text_view_body_team_todo"
             style="@style/Text.BodyToDo"

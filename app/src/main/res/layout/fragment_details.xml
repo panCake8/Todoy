@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.todo.details.DetailsTodoFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,76 +15,81 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back_black"
         app:title="@string/details" />
+
     <TextView
         android:id="@+id/text_view_task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/test"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_details"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_large"
         android:fontFamily="@font/roboto_medium"
-        android:textSize="@dimen/text_medium"
         android:textColor="@color/text_primary"
-         />
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_details"
+        tools:text="@string/test" />
+
     <TextView
         android:id="@+id/text_view_task_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="test"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_color_light"
+        android:textSize="@dimen/text_small"
         app:layout_constraintStart_toStartOf="@id/text_view_task_title"
         app:layout_constraintTop_toBottomOf="@id/text_view_task_title"
-        android:fontFamily="@font/roboto"
-        android:textSize="@dimen/text_small"
-        android:textColor="@color/primary_color_light"
-        />
+        tools:text="test" />
+
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_member_name"
+        style="@style/Chips_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        style="@style/Chips_choice"
         app:layout_constraintTop_toTopOf="@id/text_view_task_title"
         tools:text="@string/test" />
+
     <TextView
         android:id="@+id/text_view_task_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_task_time"
+        android:layout_margin="@dimen/margin_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/margin_large"
-        tools:text="@string/details_body"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_view_task_time"
+        tools:text="@string/details_body" />
+
     <TextView
         android:id="@+id/text_view_task_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test"
         android:layout_marginTop="@dimen/margin_large"
         android:drawablePadding="@dimen/margin_x_small"
-        app:layout_constraintTop_toBottomOf="@id/text_view_task_stats"
+        android:text="@string/test"
+        app:drawableStartCompat="@drawable/clock_count_down"
         app:layout_constraintStart_toStartOf="@+id/text_view_task_title"
-        app:drawableStartCompat="@drawable/clock_count_down" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_stats" />
+
     <TextView
         android:id="@+id/text_view_task_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test"
         android:layout_marginTop="@dimen/margin_large"
         android:drawablePadding="@dimen/margin_x_small"
-        app:layout_constraintTop_toBottomOf="@id/text_view_task_stats"
+        android:text="@string/test"
+        app:drawableStartCompat="@drawable/calendar_blank"
         app:layout_constraintEnd_toEndOf="@+id/chip_member_name"
-        app:drawableStartCompat="@drawable/calendar_blank" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_stats" />
+
     <Button
         android:id="@+id/button"
         style="@style/Button"
+        android:layout_marginVertical="@dimen/margin_xx_large"
         android:layout_marginTop="@dimen/margin_large"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_task_body"
         android:text="@string/test"
-        android:layout_marginVertical="@dimen/margin_xx_large" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_body" />
 
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

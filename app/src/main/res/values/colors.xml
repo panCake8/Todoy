@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white">#FAFAFA</color>
+    <color name="white">#FFFFFF</color>
     <color name="black">#1C1C1C</color>
 
     <color name="primary_color">#00629D</color>
@@ -15,25 +15,25 @@
 
     <color name="background">@color/white</color>
 
-    <color name="card_background">#F8F8F8</color>
+    <color name="card_background">#F9F9F9</color>
     <color name="text_field_background">#F9F9FC</color>
     <color name="chips_stroke_color">#72777F</color>
     <color name="background_selectedChips">#CFE5FF</color>
-    <color name="background_unselectedChips">#FAFAFA</color>
+    <color name="background_unselectedChips">#FFFFFF</color>
     <color name="text_selectedChips">#DE121212</color>
     <color name="text_unselectedChips">#DE42474E</color>
-    <color name="back_icon_color">#121212</color>
+    <color name="back_icon_color">#191A32</color>
     <color name="app_bar_text_color">#1A1C1E</color>
     <color name="stroke_app_bar">#5EFFFFFF</color>
-    <color name="card_todo_background">#F9F9FC</color>
-    <color name="line_todo_personal_color">#3342474E</color>
     <color name="search_icon_stroke_color">#61121212</color>
-    <color name="medium_black">#99121212</color>
+    <color name="card_todo_background">#F9F9FC</color>
     <color name="filter_icon_color">#00000000</color>
     <color name="hint_color">#86000000</color>
-
     <color name="background_search_box">#F8F8F8</color>
+    <color name="medium_black">#99121212</color>
     <color name="primary_color_light">#9900629D</color>
+    <color name="chips_username_color">#CFE5FF</color>
+    <color name="line_todo_personal_color">#3342474E</color>
 
     <color name="light_black">#61121212</color>
     <color name="dark_black">#DE121212</color>

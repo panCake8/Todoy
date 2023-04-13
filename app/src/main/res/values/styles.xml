@@ -61,11 +61,13 @@
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/text_extra_light</item>
     </style>
+
     <style name="HintInput">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textColor">@color/hint_color</item>
     </style>
+
     <style name="SubTitle.withPrimaryColor">
 
         <item name="android:textColor">@color/primary_color</item>
