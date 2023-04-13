@@ -32,7 +32,7 @@ class PrefsUtil {
         )
             .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
             .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-            .setKeySize(16)
+            .setKeySize(32)
             .build()
 
     }
