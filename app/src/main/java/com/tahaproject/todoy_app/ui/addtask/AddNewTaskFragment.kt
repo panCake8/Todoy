@@ -4,31 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
+import com.tahaproject.todoy_app.ui.baseview.BaseBottomSheetDialogFragment
 
 
-class AddNewTaskFragment : BottomSheetDialogFragment() {
+class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>() {
+    override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddNewTaskBinding
+        get() = FragmentAddNewTaskBinding::inflate
 
-
-    private var _binding: FragmentAddNewTaskBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAddNewTaskBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getLayoutResourceId(): Int = R.layout.fragment_add_new_task
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.PieEntry
 
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
+import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.search.SearchFragment
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
@@ -36,7 +37,9 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         addCallBacks()
+
     }
 
     private fun addCallBacks() {
@@ -81,6 +84,33 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
                 DetailsTodoFragment::class.java.name
             )
         }
+
+        binding.editTextSearch.setOnClickListener {
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
+        }
+
+        binding.cardViewRecently.setOnClickListener {
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
+        }
+
+        binding.addFAB.setOnClickListener {
+            AddNewTaskFragment().show(parentFragmentManager, Const.NEW_TASK_TAG)
+        }
+    }
+
+    object Const {
+        const val NEW_TASK_TAG = "newTaskTag"
+
     }
 
     private fun renderPieChart(pieChart: PieChart) {

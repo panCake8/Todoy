@@ -37,5 +37,9 @@
     <string name="password_hint">Password</string>
     <string name="do_not_have_an_account">Don’t have an account?</string>
     <string name="text_search">Search</string>
+    <string name="date_format">dd/mm/yy</string>
+    <string name="filter">Filter</string>
+    <string name="category">Category</string>
+    <string name="date_picker">Date Picker</string>
 </resources>
 
