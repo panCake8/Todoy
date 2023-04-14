@@ -23,7 +23,6 @@ class AddNewTaskPresenter : AddNewTaskContract.Presenter {
         )
         val personalTodoRequest = PersonalTodoRequest(personalTodo, null, false)
 
-        // Perform any necessary business logic, e.g., add the personalTodoRequest to a database or make a network request
         personalTodoApiImpl.createPersonalTodo(
             personalTodoRequest,
             onSuccess = { response ->
@@ -46,15 +45,12 @@ class AddNewTaskPresenter : AddNewTaskContract.Presenter {
         )
         val teamTodoRequest = TeamTodoRequest(teamTodo, null, false)
 
-        // Perform any necessary business logic, e.g., add the teamTodoRequest to a database or make a network request
         teamTodoApiImpl.createTeamTodo(
             teamTodoRequest,
             onSuccess = { response ->
-                // Handle success, e.g., show a success message to the view
                 view?.showTaskAdded(response)
             },
             onFailed = { ioException ->
-                // Handle failure, e.g., show an error message to the view
                 view?.showError(ioException)
             }
         )
