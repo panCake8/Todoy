@@ -104,5 +104,10 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        signupPresenter.deAttach()
+    }
 }
 
