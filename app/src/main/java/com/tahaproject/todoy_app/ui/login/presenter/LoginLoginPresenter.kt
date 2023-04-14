@@ -4,10 +4,10 @@ import com.tahaproject.todoy_app.data.apiManger.auth.login.LoginApiImpl
 import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
 
 
-class LoginPresenter :
-    LoginContract.Presenter {
-    private var view: LoginContract.View? = null
-    private val loginRequestApiImpl=LoginApiImpl()
+class LoginLoginPresenter :
+    LoginContract.LoginPresenter {
+    private var view: LoginContract.LoginView? = null
+    private val loginRequestApiImpl = LoginApiImpl()
     override fun fetchData(loginRequest: LoginRequest) {
         view?.let { view ->
             loginRequestApiImpl.login(loginRequest, { loginResponse ->
@@ -18,8 +18,8 @@ class LoginPresenter :
         }
     }
 
-    override fun attach(view: LoginContract.View) {
-        this.view = view
+    override fun attach(loginView: LoginContract.LoginView) {
+        this.view = loginView
     }
 
     override fun deAttach() {
