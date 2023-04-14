@@ -1,6 +1,7 @@
 package com.tahaproject.todoy_app.ui.addtask
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskContract
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskPresenter
 import com.tahaproject.todoy_app.ui.baseview.BaseBottomSheetDialogFragment
+import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
 
@@ -60,11 +62,11 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
 
 
     override fun showTaskAdded(task: String) {
-        TODO("Not yet implemented")
+        showToast(task)
     }
 
     override fun showError(error: IOException) {
-        TODO("Not yet implemented")
+        Log.ERROR
     }
 
 }
