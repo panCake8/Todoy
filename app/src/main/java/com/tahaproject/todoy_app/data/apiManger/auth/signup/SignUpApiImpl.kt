@@ -34,7 +34,8 @@ class SignUpApiImpl : ApiRequest(), ISignUpApi {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
-                        gson.fromJson(jsonString, SignUpResponse::class.java)
+                        val signUpResponse = gson.fromJson(jsonString, SignUpResponse::class.java)
+                        onSuccess(signUpResponse)
                     }
                 }
             }
