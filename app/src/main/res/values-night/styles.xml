@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- button style-->
+    <style name="Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_marginStart">@dimen/margin_large</item>
+        <item name="android:layout_marginEnd">@dimen/margin_large</item>
+        <item name="cornerRadius">@dimen/radius_large</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:backgroundTint">@color/primary_color</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_x_large</item>
+    </style>
+
+    <!-- app bar-->
+    <style name="AppBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/app_bar_height</item>
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="titleTextColor">@color/app_bar_text_color</item>
+        <item name="elevation">@dimen/elevation_small</item>
+        <item name="navigationIcon">@drawable/ic_back_black</item>
+    </style>
+
+    <style name="AppBarStroke">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/small_stroke</item>
+        <item name="android:background">@color/stroke_app_bar</item>
+    </style>
+
+    <style name="SubTitle">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/text_extra_light</item>
+    </style>
+
+    <style name="HintInput">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/hint_color</item>
+    </style>
+    <!-- chips style-->
+    <style name="Chips_choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/margin_medium</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="chipCornerRadius">@dimen/radius_medium</item>
+        <item name="chipEndPadding">@dimen/margin_large</item>
+        <item name="chipStartPadding">@dimen/margin_large</item>
+        <item name="android:checkable">true</item>
+        <item name="chipMinTouchTargetSize">@dimen/no_size</item>
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+        <item name="chipStrokeWidth">@dimen/small_stroke</item>
+    </style>
+
+    <!-- bottom sheet Dialog Theme -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:typeface">monospace</item>
+        <item name="android:background">@drawable/bottom_sheet_dialog_background</item>
+    </style>
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:typeface">monospace</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
+    <!--text card-->
+    <style name="Text" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_medium</item>
+    </style>
+
+    <!-- title card todoo-->
+    <style name="Text.TitleToDo">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- title bottom sheet -->
+    <style name="Text.TitleBottomSheet">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- assign name card todoo-->
+    <style name="Text.AssignNameToDo">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/text_selectedChips</item>
+        <item name="android:background">@drawable/text_assignee_background</item>
+
+    </style>
+    <!-- title card todoo-->
+    <style name="Text.BodyToDo">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <!-- card todoo-->
+    <style name="CardTodo" parent="CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/margin_large</item>
+        <item name="android:layout_marginEnd">@dimen/margin_large</item>
+        <item name="android:layout_marginBottom">@dimen/margin_medium</item>
+        <item name="android:backgroundTint">@color/card_todo_background</item>
+        <item name="cornerRadius">@dimen/radius_large</item>
+        <item name="cardElevation">@dimen/no_elevation</item>
+    </style>
+
+    <!-- text time todoo-->
+    <style name="TextTimeCard" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_medium</item>
+        <item name="android:drawablePadding">@dimen/padding_small</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="drawableStartCompat">@drawable/clock_count_down</item>
+        <item name="drawableTint">@color/text_light</item>
+    </style>
+    <!-- chip group style-->
+    <style name="ChipGroupTodo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_large</item>
+        <item name="android:paddingStart">@dimen/padding_large</item>
+        <item name="android:paddingEnd">@dimen/padding_medium</item>
+    </style>
+    <!-- input_text_field -->
+    <style name="input_text_field">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColorHint">@color/medium_black</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+</resources>
