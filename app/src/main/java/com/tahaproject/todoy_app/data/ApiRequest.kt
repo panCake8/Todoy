@@ -13,10 +13,22 @@ open class ApiRequest {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-   private fun makeRequest(endPoint: String): Request.Builder {
-        return Request.Builder()
+    private fun makeRequest(endPoint: String,formData: Map<String, String> = emptyMap()): Request.Builder {
+        val builder = Request.Builder()
             .url("${Constants.URL}/$endPoint")
+
+        if (formData.isNotEmpty()) {
+            val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
+            for ((key, value) in formData) {
+                requestBodyBuilder.addFormDataPart(key, value)
+            }
+            builder.post(requestBodyBuilder.build())
+        }
+
+        return builder
     }
+    fun postFormDataRequest(formData: Map<String, String>, endPoint: String): Request =
+        makeRequest(endPoint, formData).build()
 
     fun postRequest(body: FormBody, endPoint: String): Request =
         makeRequest(endPoint).post(
