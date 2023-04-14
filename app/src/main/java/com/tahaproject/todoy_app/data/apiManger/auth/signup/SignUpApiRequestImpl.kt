@@ -27,7 +27,7 @@ class SignUpApiRequestImpl : ApiRequest(), ISignUpApiRequest {
         val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.i("Signup",e.toString())
+                Log.i(SIGNUP_TAG,e.toString())
                 onFailed(e)
             }
             override fun onResponse(call: Call, response: Response) {
@@ -35,7 +35,7 @@ class SignUpApiRequestImpl : ApiRequest(), ISignUpApiRequest {
                     val signUpResponse =
                         gson.fromJson(jsonString, SignUpResponse::class.java)
                     if (jsonString != null) {
-                        Log.i("SIGNUP_TAG",jsonString)
+                        Log.i(SIGNUP_TAG,jsonString)
                     }
                     onSuccess(signUpResponse)
                 }
@@ -47,6 +47,7 @@ class SignUpApiRequestImpl : ApiRequest(), ISignUpApiRequest {
         const val USER_NAME = "username"
         const val PASSWORD = "password"
         const val TEAM_ID = "teamId"
+        const val SIGNUP_TAG="SIGNUP_TAG"
     }
 
 
