@@ -6,6 +6,7 @@ import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
 import com.tahaproject.todoy_app.data.domain.requests.TeamTodoUpdateRequest
 import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.data.domain.responses.TeamTodoUpdateResponse
+import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
@@ -18,7 +19,7 @@ import java.io.IOException
 
 class TeamTodoApiImpl : ApiRequest(), ITeamTodoApi {
     private val client =
-        OkHttpClient.Builder().addInterceptor(TodoInterceptor()).addInterceptor(logInterceptor)
+        OkHttpClient.Builder().addInterceptor(AuthInterceptor()).addInterceptor(TodoInterceptor()).addInterceptor(logInterceptor)
             .build()
 
     override fun createTeamTodo(
