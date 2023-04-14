@@ -30,6 +30,6 @@ class SharedPreferenceUtil(context: Context) {
     }
 
     fun getToken(): String {
-        return sharedPreferences.getString(TOKEN_KEY, "")
+        return sharedPreferences.getString(TOKEN_KEY, "")?: ""
     }
 }

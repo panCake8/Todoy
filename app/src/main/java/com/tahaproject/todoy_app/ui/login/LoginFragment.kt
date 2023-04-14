@@ -49,6 +49,8 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
     }
 
     override fun showData(contentLoginResponse: LoginResponse) {
+        println("@@loginResponse $contentLoginResponse")
+
         requireActivity().runOnUiThread {
             Log.i("TAG", contentLoginResponse.isSuccess.toString())
         }
@@ -56,6 +58,8 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
 
     override fun showError(error: IOException) {
         requireActivity().runOnUiThread {
+            // navigate to home
+
             error.localizedMessage?.let { Log.i("TAG", it) }
         }
     }
