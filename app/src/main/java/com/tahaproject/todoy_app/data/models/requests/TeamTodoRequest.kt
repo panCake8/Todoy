@@ -4,7 +4,6 @@ data class TeamTodoRequest(
     val value: TeamTodo,
     val message: String?,
     val isSuccess: Boolean,
-
     ) {
     data class TeamTodo(
         val id: String,

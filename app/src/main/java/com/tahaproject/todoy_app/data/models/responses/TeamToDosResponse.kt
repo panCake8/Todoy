@@ -1,6 +1,10 @@
 package com.tahaproject.todoy_app.data.models.responses
 
 
+import kotlinx.parcelize.Parcelize
+import android.os.Parcelable
+
+
 data class TeamToDosResponse(
     val value: List<TeamToDo>,
     val message: String?,
