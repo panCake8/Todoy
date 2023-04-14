@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -14,6 +15,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.models.TaskDetails
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.activities.RegisterActivity
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
@@ -105,6 +107,14 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
         }
 
         binding.cardViewRecently.setOnClickListener {
+            val title =binding.textViewRecentlyTitle
+            val description = binding.textViewRecentlyBody
+            val creationTime= binding.recentlyCardDate
+            val assigns = listOf("")
+            val taskDetails  = TaskDetails(title.text.toString(), description.text.toString(),creationTime.toString(),"",assigns)
+            parentFragmentManager.commit {
+                replace(R.id.fragment_home_container,DetailsTodoFragment.newInstance(taskDetails))
+            }
             transitionTo(
                 true,
                 R.id.fragment_home_container,
