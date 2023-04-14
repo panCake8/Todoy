@@ -12,18 +12,18 @@ import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
-import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
+import com.tahaproject.todoy_app.ui.login.presenter.LoginLoginPresenter
 import com.tahaproject.todoy_app.ui.signup.SignUpFragment
 import java.io.IOException
 
-class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginContract.View {
+class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginContract.LoginView {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
         get() = FragmentLoginBinding::inflate
-    private lateinit var loginPresenter: LoginPresenter
+    private lateinit var loginPresenter: LoginLoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginPresenter = LoginPresenter()
+        loginPresenter = LoginLoginPresenter()
         loginPresenter.attach(this)
     }
 
@@ -37,9 +37,6 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
             val username = binding.editTextUsername.text.toString()
             val password = binding.editTextPassword.text.toString()
             loginPresenter.fetchData(LoginRequest(username, password))
-//            val intent = Intent(requireActivity(), HomeActivity::class.java)
-//            startActivity(intent)
-//            requireActivity().finish()
         }
         binding.textviewSignUp.setOnClickListener {
             transitionTo(

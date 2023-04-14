@@ -5,7 +5,10 @@ import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoUpdateRequest
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodoUpdateResponse
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
+import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
+import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -17,7 +20,8 @@ import java.io.IOException
 
 class PersonalTodoApiImpl : ApiRequest(), IPersonalTodoApi {
     private val client =
-        OkHttpClient.Builder().addInterceptor(TodoInterceptor()).addInterceptor(logInterceptor)
+        OkHttpClient.Builder().addInterceptor(AuthInterceptor()).addInterceptor(TodoInterceptor())
+            .addInterceptor(logInterceptor)
             .build()
 
     override fun createPersonalTodo(
@@ -46,11 +50,14 @@ class PersonalTodoApiImpl : ApiRequest(), IPersonalTodoApi {
 
     override fun getPersonalTodos(
         onSuccess: (PersonalTodosResponse) -> Unit,
-        onFailed: (IOException) -> Unit
+        onFailed: (IOException) -> Unit, presenter: HomePresenter
     ) {
         val request = getRequest(Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                if (e is UnAuthorizedException) {
+                    presenter.onUnauthorizedError()
+                }
                 onFailed(e)
             }
 

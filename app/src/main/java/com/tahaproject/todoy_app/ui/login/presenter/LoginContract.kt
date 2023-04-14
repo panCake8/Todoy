@@ -6,14 +6,14 @@ import java.io.IOException
 
 
 interface LoginContract {
-    interface View {
-        fun showData(contentLoginResponse: LoginResponse)
+    interface LoginView {
+        fun showData(loginResponse: LoginResponse)
         fun showError(error: IOException)
     }
 
-    interface Presenter {
+    interface LoginPresenter {
         fun fetchData(loginRequest: LoginRequest)
-        fun attach(view: View)
+        fun attach(loginView: LoginView)
         fun deAttach()
     }
 }
