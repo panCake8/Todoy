@@ -14,7 +14,7 @@ import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.activities.HomeActivity
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
-import com.tahaproject.todoy_app.ui.login.presenter.LoginLoginPresenter
+import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
 import com.tahaproject.todoy_app.ui.signup.SignUpFragment
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
@@ -23,11 +23,11 @@ import java.io.IOException
 class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginContract.LoginView {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
         get() = FragmentLoginBinding::inflate
-    private lateinit var loginPresenter: LoginLoginPresenter
+    private lateinit var loginPresenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginPresenter = LoginLoginPresenter()
+        loginPresenter = LoginPresenter()
         loginPresenter.attach(this)
     }
 

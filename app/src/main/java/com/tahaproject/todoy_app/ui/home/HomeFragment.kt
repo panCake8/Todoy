@@ -122,7 +122,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
 
     private fun renderPieChart(pieChart: PieChart) {
         setPieChartDesign(pieChart)
-        val dataSet = PieDataSet(getPieChartDataList, Constants.EMPTY_STRING)
+        val dataSet = PieDataSet(getPieChartDataList, "")
         pieChart.data = createFormattedPieData(dataSet, pieChart)
         pieChart.invalidate()
         pieChart.animateY(1500, Easing.EaseInOutQuad)

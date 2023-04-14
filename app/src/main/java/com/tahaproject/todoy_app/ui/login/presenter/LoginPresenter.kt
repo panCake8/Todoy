@@ -4,7 +4,7 @@ import com.tahaproject.todoy_app.data.apiManger.auth.login.LoginApiImpl
 import com.tahaproject.todoy_app.data.models.requests.LoginRequest
 
 
-class LoginLoginPresenter :
+class LoginPresenter :
     LoginContract.LoginPresenter {
     private var view: LoginContract.LoginView? = null
     private val loginRequestApiImpl = LoginApiImpl()
