@@ -9,7 +9,7 @@ interface AddNewTaskContract {
     }
 
     interface Presenter {
-        fun addPersonalTask(title: String, description: String, status: Int)
-        fun addTeamTask(title: String, description: String, assignee: String, status: Int)
+        fun addPersonalTask(title: String, description: String)
+        fun addTeamTask(title: String, description: String, assignee: String)
     }
 }

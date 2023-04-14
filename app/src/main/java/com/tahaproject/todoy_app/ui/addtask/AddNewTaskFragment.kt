@@ -25,19 +25,20 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
 
         presenter = AddNewTaskPresenter()
 
+        binding.chipTeamTodo.isClickable = false
+
+
         binding.buttonAdd.setOnClickListener {
             val title =  binding.editTextAddTaskTitle.text.toString()
             val description = binding.editTextAddTaskDescription.text.toString()
-            val assignee = if (binding.chipGroupPersonalTeam.checkedChipId == R.id.chip_personal_todo) binding.editTextAddAssigneeName.text.toString() else ""
-            val status = 0
+            val assignee =  binding.editTextAddAssigneeName.text.toString()
+            chooseChips(title, description, assignee)
 
         }
 
-        binding.chipTeamTodo.isClickable = false
-        chooseChips()
 
     }
-    private fun chooseChips() {
+    private fun chooseChips(title: String, description: String, assignee: String) {
         binding.chipGroupPersonalTeam.setOnCheckedStateChangeListener { group, checkedIds ->
             if (checkedIds.size != 0) {
                 val chip: Chip? = group.findViewById(checkedIds[0])
@@ -45,9 +46,11 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
                     if (it.text.toString() == getString(R.string.personal_todo)) {
                         binding.chipPersonalTodo.isClickable = true
                         binding.chipTeamTodo.isClickable = false
+                        presenter.addPersonalTask(title, description)
                     } else if (it.text.toString() == getString(R.string.team_todo)) {
                         binding.chipTeamTodo.isClickable = false
                         binding.chipPersonalTodo.isClickable = true
+                        presenter.addTeamTask(title, description, assignee)
                     }
                 }
             }

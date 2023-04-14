@@ -13,12 +13,12 @@ class AddNewTaskPresenter : AddNewTaskContract.Presenter {
     private val personalTodoApiImpl = PersonalTodoApiImpl()
     private val teamTodoApiImpl = TeamTodoApiImpl() // Change the variable name to teamTodoApiImpl to match the class name
 
-    override fun addPersonalTask(title: String, description: String, status: Int) {
+    override fun addPersonalTask(title: String, description: String) {
         val personalTodo = PersonalTodoRequest.PersonalTodo(
             id = "",
             title = title,
             description = description,
-            status = status,
+            status = 0, // for todo
             creationTime = ""
         )
         val personalTodoRequest = PersonalTodoRequest(personalTodo, null, false)
@@ -35,13 +35,13 @@ class AddNewTaskPresenter : AddNewTaskContract.Presenter {
         )
     }
 
-    override fun addTeamTask(title: String, description: String, assignee: String, status: Int) {
+    override fun addTeamTask(title: String, description: String, assignee: String) {
         val teamTodo = TeamTodoRequest.TeamTodo(
             id = "",
             title = title,
             description = description,
             assignee = assignee,
-            status = status,
+            status = 0, // for todo
             creationTime = ""
         )
         val teamTodoRequest = TeamTodoRequest(teamTodo, null, false)
