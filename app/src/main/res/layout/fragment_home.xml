@@ -54,6 +54,7 @@
         />
 
     <androidx.cardview.widget.CardView
+        app:cardCornerRadius="@dimen/radius_large"
         android:id="@+id/personal_card"
         android:layout_width="@dimen/no_size"
         android:layout_height="wrap_content"
@@ -118,6 +119,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        app:cardCornerRadius="@dimen/radius_large"
         android:id="@+id/team_card"
         android:layout_width="@dimen/no_size"
         android:layout_height="wrap_content"
@@ -198,23 +200,27 @@
         app:layout_constraintTop_toBottomOf="@+id/personal_card" />
 
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="@dimen/margin_medium"
+        app:cardCornerRadius="@dimen/radius_large"
         android:id="@+id/card_view_recently"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/recently_card_home_background"
+        app:background="@drawable/recently_card_home_background"
         app:cardElevation="@dimen/no_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recently">
+        app:layout_constraintTop_toBottomOf="@id/recently"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/recently_card_home_background"
             android:paddingHorizontal="@dimen/padding_large"
             android:paddingVertical="@dimen/padding_medium">
 
             <TextView
+                android:background="@drawable/recently_card_home_background"
+
                 android:id="@+id/text_view_recently_title"
                 style="@style/Text.TitleToDo"
                 android:layout_width="wrap_content"
