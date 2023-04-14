@@ -5,10 +5,10 @@ import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.models.requests.TeamTodoRequest
 import com.tahaproject.todoy_app.data.models.requests.TeamTodoUpdateRequest
-import com.tahaproject.todoy_app.data.models.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.TeamTodoUpdateResponse
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
+import com.tahaproject.todoy_app.data.models.responses.ToDosResponse
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -53,7 +53,7 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
     }
 
     override fun getTeamTodos(
-        onSuccess: (TeamToDosResponse) -> Unit,
+        onSuccess: (ToDosResponse) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
         val request = getRequest(Constants.EndPoints.teamTodo)
@@ -64,7 +64,7 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    val teamTodosResponse = gson.fromJson(jsonString, TeamToDosResponse::class.java)
+                    val teamTodosResponse = gson.fromJson(jsonString, ToDosResponse::class.java)
                     onSuccess(teamTodosResponse)
                 }
             }

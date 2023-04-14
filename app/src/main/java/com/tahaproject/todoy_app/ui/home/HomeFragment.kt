@@ -13,8 +13,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.FakeDataManager
-import com.tahaproject.todoy_app.data.models.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.models.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.ToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
@@ -32,7 +31,7 @@ import java.io.IOException
 class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeContract.HomeView {
     private lateinit var presenter: HomePresenter
     val fakeDataManager = FakeDataManager()
-    private lateinit var personalTodosResponse: PersonalTodosResponse.PersonalTodo
+    private lateinit var personalTodosResponse: ToDosResponse
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
@@ -166,8 +165,9 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
         return data
     }
 
-    fun showData(personalResponse: PersonalTodosResponse.PersonalTodo?) {
+    fun showData(personalResponse: ToDosResponse?) {
         requireActivity().runOnUiThread {
+            presenter.fetchData()
 //            binding.textViewRecentlyTitle.text = personalResponse?.title
 //            binding.textViewRecentlyBody.text = personalResponse?.description
 //            binding.recentlyCardTime.text = personalResponse?.creationTime
@@ -180,8 +180,9 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
         presenter.deAttach()
     }
 
+    // TODO: make others like this
     private fun getTaskStatusCount(status: Int): Int =
-        makeAllTodosList(fakeDataManager).count { (it as? PersonalTodosResponse.PersonalTodo)?.status == status || (it as? TeamToDosResponse.TeamToDo)?.status == status }
+        makeAllTodosList(fakeDataManager).count { it.status == status }
 
     private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
     private fun getTodoPercentage() = getTodoCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
@@ -207,7 +208,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
         )
         const val NEW_TASK_TAG = "newTaskTag"
 
-        fun newInstance(personalTodosResponse: PersonalTodosResponse.PersonalTodo) =
+        fun newInstance(personalTodosResponse: ToDosResponse) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(Constants.Home, personalTodosResponse)

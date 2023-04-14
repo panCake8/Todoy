@@ -2,12 +2,12 @@ package com.tahaproject.todoy_app.ui.todo.team.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.data.models.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.ToDosResponse
 import com.tahaproject.todoy_app.databinding.ItemCardTeamTodoBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseRecyclerAdapter
 
-class TeamAdapter(private val view: List<TeamToDosResponse.TeamToDo>) :
-    BaseRecyclerAdapter<TeamToDosResponse.TeamToDo, ItemCardTeamTodoBinding>(view) {
+class TeamAdapter(private val view: List<ToDosResponse>) :
+    BaseRecyclerAdapter<ToDosResponse, ItemCardTeamTodoBinding>(view) {
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCardTeamTodoBinding =
         ItemCardTeamTodoBinding::inflate
 
