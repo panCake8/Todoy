@@ -1,4 +1,5 @@
 package com.tahaproject.todoy_app.util
+
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -30,6 +31,6 @@ class SharedPreferenceUtil(context: Context) {
     }
 
     fun getToken(): String {
-        return sharedPreferences.getString(TOKEN_KEY, "")?: ""
+        return sharedPreferences.getString(TOKEN_KEY, "").toString()
     }
 }

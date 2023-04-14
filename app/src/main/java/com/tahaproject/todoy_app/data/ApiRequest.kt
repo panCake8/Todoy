@@ -13,19 +13,19 @@ open class ApiRequest {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-   private fun makeRequest(endPoint: String): Request.Builder {
+    private fun makeRequest(endPoint: String): Request.Builder {
         return Request.Builder()
             .url("${Constants.URL}/$endPoint")
     }
 
-    fun postRequest(body: FormBody, endPoint: String): Request =
+    open fun postRequest(body: FormBody, endPoint: String): Request =
         makeRequest(endPoint).post(
             body
         ).build()
 
-    fun getRequest(endPoint: String): Request = makeRequest(endPoint).get().build()
+    open fun getRequest(endPoint: String): Request = makeRequest(endPoint).get().build()
 
-    fun putRequest(body: FormBody, endPoint: String): Request =
+    open fun putRequest(body: FormBody, endPoint: String): Request =
         makeRequest(endPoint).put(
             body
         ).build()

@@ -13,9 +13,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.FakeDataManager
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.activities.RegisterActivity
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
@@ -27,9 +25,9 @@ import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
-import com.tahaproject.todoy_app.util.showToast
-import java.io.IOException
 
+class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
+    private var personalTodosResponse: PersonalTodosResponse.PersonalTodo? = null
 class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeContract.HomeView {
     private lateinit var presenter: HomePresenter
     val fakeDataManager = FakeDataManager()
@@ -39,9 +37,8 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = HomePresenter()
-        presenter.attach(this)
-        presenter.fetchData()
+//        personalTodosResponse =
+//            arguments?.getParcelable(Constants.Home)!!
     }
 
 
@@ -154,6 +151,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
 
     }
 
+
     private fun createFormattedPieData(dataSet: PieDataSet, pieChart: PieChart): PieData {
         dataSet.colors = LABELS_COLORS
         dataSet.sliceSpace = 5f
@@ -167,26 +165,11 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
         return data
     }
 
-    override fun navigateToLoginScreen() {
-        parentFragmentManager.popBackStack()
-        val intent = Intent(requireActivity(), RegisterActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
-    }
-
-    override fun showData(personalResponse: PersonalTodosResponse) {
+    fun showData(personalResponse: PersonalTodosResponse.PersonalTodo?) {
         requireActivity().runOnUiThread {
-            personalTodosResponse = personalResponse.value.last()
-            binding.textViewRecentlyTitle.text = personalResponse.value.last().title
-            binding.textViewRecentlyBody.text = personalResponse.value.last().description
-            binding.recentlyCardTime.text = personalResponse.value.last().creationTime
-        }
-
-    }
-
-    override fun showError(ioException: IOException) {
-        requireActivity().runOnUiThread {
-            ioException.localizedMessage?.let { showToast(it) }
+//            binding.textViewRecentlyTitle.text = personalResponse?.title
+//            binding.textViewRecentlyBody.text = personalResponse?.description
+//            binding.recentlyCardTime.text = personalResponse?.creationTime
         }
 
     }
@@ -222,6 +205,13 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
             Color.parseColor("#0077B6")
         )
         const val NEW_TASK_TAG = "newTaskTag"
+
+        fun newInstance(personalTodosResponse: PersonalTodosResponse.PersonalTodo) =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(Constants.Home, personalTodosResponse)
+                }
+            }
     }
 
 }

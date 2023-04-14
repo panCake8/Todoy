@@ -19,6 +19,7 @@ object Constants {
 
     const val ADDED = "Added!"
     const val UPDATED = "Updated"
+    const val Home = "Home"
     const val DETAILS = "Details"
 
     object SharedPref {
@@ -26,7 +27,6 @@ object Constants {
         private const val KEY_USERNAME = "UserName"
         private const val KEY_PASSWORD = "Password"
     }
-
     object EndPoints {
         const val personalTodo = "todo/personal"
         const val signup = "signup"
