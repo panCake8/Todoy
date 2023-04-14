@@ -1,16 +1,16 @@
 package com.tahaproject.todoy_app.ui.signup.presenter
 
-import com.tahaproject.todoy_app.data.apiManger.auth.signup.SignUpApiRequestImpl
+import com.tahaproject.todoy_app.data.apiManger.auth.signup.SignUpApiImpl
 import com.tahaproject.todoy_app.data.domain.requests.SignUpRequest
 import com.tahaproject.todoy_app.ui.signup.SignUpFragment
 
 class SignupPresenter(signUpFragment: SignUpFragment) :SignupContract.Presenter{
     private var view: SignupContract.View? = null
-    private val signUpApiRequestImpl= SignUpApiRequestImpl()
+    private val signUpApiImpl= SignUpApiImpl()
     override fun fetchData(signUpRequest: SignUpRequest) {
 
         view?.let { view ->
-            signUpApiRequestImpl.signUp(signUpRequest, { signupResponse ->
+            signUpApiImpl.signUp(signUpRequest, { signupResponse ->
                 view.showData(signupResponse)
             }, { ioException ->
                 view.showError(ioException)

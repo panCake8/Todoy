@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.data.apiManger.auth.signup
 
+import android.util.Log
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.domain.requests.SignUpRequest
 import com.tahaproject.todoy_app.data.domain.responses.SignUpResponse
@@ -11,7 +12,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
 
-class SignUpApiRequestImpl : ApiRequest(), ISignUpApiRequest {
+
+class SignUpApiImpl : ApiRequest(), ISignUpApi {
 
     override fun signUp(
         signUpRequest: SignUpRequest, onSuccess: (SignUpResponse) -> Unit,
@@ -32,6 +34,7 @@ class SignUpApiRequestImpl : ApiRequest(), ISignUpApiRequest {
                 response.body?.string().let { jsonString ->
                     val signUpResponse =
                         gson.fromJson(jsonString, SignUpResponse::class.java)
+                    Log.i("TAG_SIGNUP", signUpResponse.toString())
                     onSuccess(signUpResponse)
                 }
             }

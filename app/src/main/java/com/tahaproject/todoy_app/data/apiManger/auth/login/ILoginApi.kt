@@ -4,7 +4,7 @@ import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
 import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
 import java.io.IOException
 
-interface ILoginApiRequest {
+interface ILoginApi {
     fun login(
         loginRequest: LoginRequest,
         onSuccess: (LoginResponse) -> Unit,

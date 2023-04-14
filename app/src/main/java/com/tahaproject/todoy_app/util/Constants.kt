@@ -8,6 +8,9 @@ object Constants {
     const val BEARER = "Bearer"
     const val EMPTY_STRING = "Bearer"
 
+    const val ADDED = "Added!"
+    const val UPDATED = "Updated"
+
     object SharedPref {
         const val SHARED_PREF_NAME = "MySharedPref"
         private const val KEY_USERNAME = "UserName"

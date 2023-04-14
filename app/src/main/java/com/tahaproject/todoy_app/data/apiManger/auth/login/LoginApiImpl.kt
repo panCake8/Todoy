@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
 
-class LoginApiRequestImpl : ApiRequest(), ILoginApiRequest {
+class LoginApiImpl : ApiRequest(), ILoginApi {
     override fun login(
         loginRequest: LoginRequest,
         onSuccess: (LoginResponse) -> Unit,

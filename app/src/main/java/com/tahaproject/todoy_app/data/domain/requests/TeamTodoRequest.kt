@@ -1,6 +1,6 @@
 package com.tahaproject.todoy_app.data.domain.requests
 
-data class TeamToDoPostRequest(
+data class TeamTodoRequest(
     val value: TeamTodo,
     val message: String?,
     val isSuccess: Boolean,
