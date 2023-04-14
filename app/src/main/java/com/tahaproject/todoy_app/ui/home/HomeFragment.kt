@@ -12,8 +12,12 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
+import com.tahaproject.todoy_app.data.FakeDataManager
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
+import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
+import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.search.SearchFragment
@@ -22,9 +26,13 @@ import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
+import java.io.IOException
 
-class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
-    private var personalTodosResponse: PersonalTodosResponse.PersonalTodo? = null
+
+class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeContract.HomeView {
+    private lateinit var presenter: HomePresenter
+    val fakeDataManager = FakeDataManager()
+    private lateinit var personalTodosResponse: PersonalTodosResponse.PersonalTodo
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
@@ -34,10 +42,11 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 //            arguments?.getParcelable(Constants.Home)!!
     }
 
+
     private val getPieChartDataList: List<PieEntry> = listOf(
-        PieEntry(15f, "Done"),
-        PieEntry(60f, "In progress"),
-        PieEntry(35f, "Todo")
+        PieEntry(getDonePercentage(), Constants.DONE_STRING),
+        PieEntry(getInProgressPercentage(), Constants.IN_PROGRESS_STRING),
+        PieEntry(getTodoPercentage(), Constants.TODO_STRING)
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -127,6 +136,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
             setEntryLabelColor(Color.WHITE)
             isDrawHoleEnabled = true
             description.isEnabled = false
+
             setPieChartLegendDesign(legend)
         }
 
@@ -165,6 +175,30 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.deAttach()
+    }
+
+    private fun getTaskStatusCount(status: Int): Int =
+        makeAllTodosList(fakeDataManager).count { (it as? PersonalTodosResponse.PersonalTodo)?.status == status || (it as? TeamToDosResponse.TeamToDo)?.status == status }
+
+    private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
+    private fun getTodoPercentage() = getTodoCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+
+    private fun getDoneCount(): Int = getTaskStatusCount(Constants.DONE_STATUS)
+    private fun getDonePercentage() = getDoneCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+
+    private fun getInProgressCount(): Int = getTaskStatusCount(Constants.IN_PROGRESS_STATUS)
+    private fun getInProgressPercentage() =
+        getInProgressCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+
+    private fun Int.todoPercentage(totalCount: Int) =
+        (this.toFloat() / totalCount.toFloat()) * Constants.ONE_HUNDRED_PERCENT
+
+    private fun makeAllTodosList(fakeDataManager: FakeDataManager) =
+        fakeDataManager.personalTodosList + fakeDataManager.teamToDosList
+
     companion object {
         private val LABELS_COLORS = listOf(
             Color.parseColor("#00B4D8"),
@@ -179,5 +213,17 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
                     putParcelable(Constants.Home, personalTodosResponse)
                 }
             }
+    }
+
+    override fun navigateToLoginScreen() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToHomeScreen() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showError(ioException: IOException) {
+        TODO("Not yet implemented")
     }
 }
