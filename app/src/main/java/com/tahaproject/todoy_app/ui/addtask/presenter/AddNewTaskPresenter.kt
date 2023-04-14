@@ -25,7 +25,7 @@ class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
             status = DEFAULT_STATUS, // for todo
             creationTime = DEFAULT_CREATION_TIME
         )
-        val personalTodoRequest = PersonalTodoRequest(personalTodo, null, false)
+        val personalTodoRequest = PersonalTodoRequest(personalTodo, "personal", true)
 
         personalTodoApiImpl.createPersonalTodo(
             personalTodoRequest,
@@ -47,7 +47,7 @@ class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
             status = DEFAULT_STATUS, // for todo
             creationTime = DEFAULT_CREATION_TIME
         )
-        val teamTodoRequest = TeamTodoRequest(teamTodo, null, false)
+        val teamTodoRequest = TeamTodoRequest(teamTodo, "something", true)
 
         teamTodoApiImpl.createTeamTodo(
             teamTodoRequest,
