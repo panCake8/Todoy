@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/margin_large"
-    android:background="@color/white">
+    android:background="@color/background">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -58,7 +58,8 @@
         android:layout_width="@dimen/no_size"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/recently_card_home_background"
+        android:backgroundTint="@color/card_todo_background"
+        app:cardCornerRadius="@dimen/radius_large"
         app:cardElevation="@dimen/no_elevation"
         app:layout_constraintStart_toStartOf="@+id/view_text_category"
         app:layout_constraintTop_toBottomOf="@+id/view_text_category"
@@ -124,6 +125,7 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
         android:background="@drawable/recently_card_home_background"
+        app:cardCornerRadius="@dimen/radius_large"
         app:cardElevation="@dimen/no_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_text_category"
@@ -201,7 +203,9 @@
         android:id="@+id/card_view_recently"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/recently_card_home_background"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:backgroundTint="@color/card_todo_background"
+        app:cardCornerRadius="@dimen/radius_large"
         app:cardElevation="@dimen/no_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -210,15 +214,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/recently_card_home_background"
             android:paddingHorizontal="@dimen/padding_large"
             android:paddingVertical="@dimen/padding_medium">
 
             <TextView
                 android:id="@+id/text_view_recently_title"
+
                 style="@style/Text.TitleToDo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/recently_card_home_background"
                 android:fontFamily="@font/roboto"
                 android:text="@string/home_recently_card_title"
                 android:textSize="@dimen/text_large"
