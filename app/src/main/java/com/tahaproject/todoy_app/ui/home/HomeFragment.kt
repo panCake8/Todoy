@@ -1,6 +1,5 @@
 package com.tahaproject.todoy_app.ui.home
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,30 +14,24 @@ import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.activities.RegisterActivity
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.home.presenter.*
 import com.tahaproject.todoy_app.ui.search.SearchFragment
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
-import com.tahaproject.todoy_app.util.showToast
-import java.io.IOException
 
-class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeContract.HomeView {
-    private lateinit var presenter: HomePresenter
-    private lateinit var personalTodosResponse: PersonalTodosResponse.PersonalTodo
+class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
+    private var personalTodosResponse: PersonalTodosResponse.PersonalTodo? = null
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = HomePresenter()
-        presenter.attach(this)
-        presenter.fetchData()
+//        personalTodosResponse =
+//            arguments?.getParcelable(Constants.Home)!!
     }
 
     private val getPieChartDataList: List<PieEntry> = listOf(
@@ -134,7 +127,6 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
             setEntryLabelColor(Color.WHITE)
             isDrawHoleEnabled = true
             description.isEnabled = false
-
             setPieChartLegendDesign(legend)
         }
 
@@ -164,33 +156,13 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
         return data
     }
 
-    override fun navigateToLoginScreen() {
-        parentFragmentManager.popBackStack()
-        val intent = Intent(requireActivity(), RegisterActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
-    }
-
-    override fun showData(personalResponse: PersonalTodosResponse) {
+    fun showData(personalResponse: PersonalTodosResponse.PersonalTodo?) {
         requireActivity().runOnUiThread {
-            personalTodosResponse = personalResponse.value.last()
-            binding.textViewRecentlyTitle.text = personalResponse.value.last().title
-            binding.textViewRecentlyBody.text = personalResponse.value.last().description
-            binding.recentlyCardTime.text = personalResponse.value.last().creationTime
+//            binding.textViewRecentlyTitle.text = personalResponse?.title
+//            binding.textViewRecentlyBody.text = personalResponse?.description
+//            binding.recentlyCardTime.text = personalResponse?.creationTime
         }
 
-    }
-
-    override fun showError(ioException: IOException) {
-        requireActivity().runOnUiThread {
-            ioException.localizedMessage?.let { showToast(it) }
-        }
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
     }
 
     companion object {
@@ -200,5 +172,12 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
             Color.parseColor("#0077B6")
         )
         const val NEW_TASK_TAG = "newTaskTag"
+
+        fun newInstance(personalTodosResponse: PersonalTodosResponse.PersonalTodo) =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(Constants.Home, personalTodosResponse)
+                }
+            }
     }
 }

@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
+import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoUpdateRequest
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
@@ -8,7 +9,7 @@ import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
-import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -18,9 +19,10 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class PersonalTodoApiImpl : ApiRequest(), IPersonalTodoApi {
+class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersonalTodoApi {
     private val client =
-        OkHttpClient.Builder().addInterceptor(AuthInterceptor()).addInterceptor(TodoInterceptor())
+        OkHttpClient.Builder().addInterceptor(AuthInterceptor())
+            .addInterceptor(TodoInterceptor(context))
             .addInterceptor(logInterceptor)
             .build()
 
@@ -62,6 +64,7 @@ class PersonalTodoApiImpl : ApiRequest(), IPersonalTodoApi {
             }
 
             override fun onResponse(call: Call, response: Response) {
+                presenter.onHome()
                 response.body?.string().let { jsonString ->
                     val personalTodosResponse =
                         gson.fromJson(jsonString, PersonalTodosResponse::class.java)
