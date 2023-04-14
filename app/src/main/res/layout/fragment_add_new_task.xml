@@ -69,6 +69,7 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/Chips_choice"
+                android:id="@+id/chip_personal_todo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -77,6 +78,7 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/Chips_choice"
+                android:id="@+id/chip_Team_todo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -142,6 +144,7 @@
 
     <Button
         style="@style/Button"
+        android:id="@+id/button_add"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"
