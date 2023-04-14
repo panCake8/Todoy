@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.home.presenter
+package com.tahaproject.todoy_app.ui.activities.presenter
 
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
 import java.io.IOException
@@ -7,7 +7,7 @@ import java.io.IOException
 interface HomeContract {
     interface HomeView {
         fun navigateToLoginScreen()
-        fun showData(personalResponse: PersonalTodosResponse)
+        fun navigateToHomeScreen()
         fun showError(ioException: IOException)
     }
 
@@ -16,5 +16,6 @@ interface HomeContract {
         fun attach(homeView: HomeView)
         fun deAttach()
         fun onUnauthorizedError()
+        fun onHome()
     }
 }
