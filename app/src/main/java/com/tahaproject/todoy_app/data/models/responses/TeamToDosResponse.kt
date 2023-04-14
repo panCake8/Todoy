@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.data.domain.responses
+package com.tahaproject.todoy_app.data.models.responses
 
 
 data class TeamToDosResponse(

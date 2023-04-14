@@ -3,10 +3,10 @@ package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
 import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
-import com.tahaproject.todoy_app.data.domain.requests.TeamTodoUpdateRequest
-import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
-import com.tahaproject.todoy_app.data.domain.responses.TeamTodoUpdateResponse
+import com.tahaproject.todoy_app.data.models.requests.TeamTodoRequest
+import com.tahaproject.todoy_app.data.models.requests.TeamTodoUpdateRequest
+import com.tahaproject.todoy_app.data.models.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.TeamTodoUpdateResponse
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.util.Constants
@@ -20,8 +20,9 @@ import java.io.IOException
 
 class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi {
     private val client =
-        OkHttpClient.Builder().addInterceptor(AuthInterceptor())
-            .addInterceptor(TodoInterceptor(context)).addInterceptor(logInterceptor)
+        OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor())
+            .addInterceptor(TodoInterceptor(context))
             .build()
 
     override fun createTeamTodo(

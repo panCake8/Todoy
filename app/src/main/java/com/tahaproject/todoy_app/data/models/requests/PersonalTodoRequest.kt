@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.data.domain.requests
+package com.tahaproject.todoy_app.data.models.requests
 
 
 data class PersonalTodoRequest(

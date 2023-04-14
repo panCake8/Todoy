@@ -2,7 +2,7 @@ package com.tahaproject.todoy_app.ui.todo.personal.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.models.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.databinding.ItemCardPersonalTodoBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseRecyclerAdapter
 

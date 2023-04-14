@@ -1,8 +1,8 @@
 package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
-import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoUpdateRequest
-import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.models.requests.PersonalTodoUpdateRequest
+import com.tahaproject.todoy_app.data.models.requests.PersonalTodoRequest
+import com.tahaproject.todoy_app.data.models.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import java.io.IOException
 

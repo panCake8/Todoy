@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
-import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
+import com.tahaproject.todoy_app.data.models.requests.LoginRequest
+import com.tahaproject.todoy_app.data.models.responses.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.activities.HomeActivity
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition

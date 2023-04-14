@@ -1,9 +1,9 @@
 package com.tahaproject.todoy_app.data.apiManger.auth.login
 
+import android.util.Log
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
-import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
-import com.tahaproject.todoy_app.data.interceptors.LoginInterceptor
+import com.tahaproject.todoy_app.data.models.requests.LoginRequest
+import com.tahaproject.todoy_app.data.models.responses.LoginResponse
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -19,10 +19,9 @@ class LoginApiImpl : ApiRequest(), ILoginApi {
         onFailed: (IOException) -> Unit
     ) {
         val credentials = Credentials.basic(loginRequest.username, loginRequest.password)
-        val loginClient = OkHttpClient.Builder().addInterceptor(LoginInterceptor(credentials))
-            .addInterceptor(logInterceptor)
-            .build()
-        val request = getRequest(Constants.EndPoints.login)
+//        LoginInterceptor(credentials)
+        val loginClient = OkHttpClient.Builder().build()
+        val request = getLoginRequest(Constants.EndPoints.login, credentials)
         loginClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
@@ -35,7 +34,6 @@ class LoginApiImpl : ApiRequest(), ILoginApi {
                     onSuccess(loginResponse)
                 }
             }
-
         })
     }
 }

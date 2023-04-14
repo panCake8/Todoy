@@ -1,7 +1,7 @@
 package com.tahaproject.todoy_app.ui.login.presenter
 
 import com.tahaproject.todoy_app.data.apiManger.auth.login.LoginApiImpl
-import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
+import com.tahaproject.todoy_app.data.models.requests.LoginRequest
 
 
 class LoginLoginPresenter :

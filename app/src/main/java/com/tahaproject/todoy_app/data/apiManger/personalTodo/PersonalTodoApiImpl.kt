@@ -2,10 +2,10 @@ package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
 import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoUpdateRequest
-import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodoUpdateResponse
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.models.requests.PersonalTodoUpdateRequest
+import com.tahaproject.todoy_app.data.models.requests.PersonalTodoRequest
+import com.tahaproject.todoy_app.data.models.responses.PersonalTodoUpdateResponse
+import com.tahaproject.todoy_app.data.models.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
@@ -21,9 +21,9 @@ import java.io.IOException
 
 class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersonalTodoApi {
     private val client =
-        OkHttpClient.Builder().addInterceptor(AuthInterceptor())
+        OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor())
             .addInterceptor(TodoInterceptor(context))
-            .addInterceptor(logInterceptor)
             .build()
 
     override fun createPersonalTodo(

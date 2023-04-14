@@ -13,7 +13,7 @@ open class ApiRequest {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private fun makeRequest(endPoint: String): Request.Builder {
+    fun makeRequest(endPoint: String): Request.Builder {
         return Request.Builder()
             .url("${Constants.URL}/$endPoint")
     }
@@ -23,7 +23,10 @@ open class ApiRequest {
             body
         ).build()
 
+
     open fun getRequest(endPoint: String): Request = makeRequest(endPoint).get().build()
+    open fun getLoginRequest(endPoint: String, credentials: String): Request =
+        makeRequest(Constants.EndPoints.login).addHeader(Constants.AUTH, credentials).get().build()
 
     open fun putRequest(body: FormBody, endPoint: String): Request =
         makeRequest(endPoint).put(

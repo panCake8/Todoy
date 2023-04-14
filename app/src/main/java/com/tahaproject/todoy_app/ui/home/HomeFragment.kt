@@ -13,8 +13,8 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.FakeDataManager
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.models.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter

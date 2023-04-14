@@ -1,6 +1,5 @@
 package com.tahaproject.todoy_app.ui.activities.presenter
 
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
 import java.io.IOException
 
 
