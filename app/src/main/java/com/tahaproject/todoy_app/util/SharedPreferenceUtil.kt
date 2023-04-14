@@ -29,7 +29,7 @@ class SharedPreferenceUtil(context: Context) {
         sharedPreferences.edit().putString(TOKEN_KEY, token).apply()
     }
 
-    fun getToken(): String? {
-        return sharedPreferences.getString(TOKEN_KEY, null)
+    fun getToken(): String {
+        return sharedPreferences.getString(TOKEN_KEY, "")
     }
 }
