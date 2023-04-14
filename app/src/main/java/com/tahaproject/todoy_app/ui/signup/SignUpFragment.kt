@@ -1,6 +1,7 @@
 package com.tahaproject.todoy_app.ui.signup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signupPresenter = SignupPresenter(this)
+        signupPresenter.attach(this)
         addCallBacks()
     }
 
@@ -82,13 +84,20 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
 
     override fun showData(signUpResponse: SignUpResponse) {
         requireActivity().runOnUiThread {
-            showToast(SuccessMessage.SIGNUP_SUCCESSFULLY)
-            goToLogin()
+            if(signUpResponse.isSuccess){
+                showToast(SuccessMessage.SIGNUP_SUCCESSFULLY)
+                goToLogin()
+            }else{
+                showToast(signUpResponse.message!!)
+
+            }
+
         }
     }
 
     override fun showError(error: IOException) {
         requireActivity().runOnUiThread {
+            Log.i("TAAAAD",error.toString())
             showToast(error.message!!)
         }
     }
