@@ -1,6 +1,5 @@
 package com.tahaproject.todoy_app.ui.home
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,21 +12,23 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
+import com.tahaproject.todoy_app.data.FakeDataManager
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.activities.RegisterActivity
+import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
+import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.home.presenter.*
 import com.tahaproject.todoy_app.ui.search.SearchFragment
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
+import java.io.IOException
 
-class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
-    private var personalTodosResponse: PersonalTodosResponse.PersonalTodo? = null
+
 class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeContract.HomeView {
     private lateinit var presenter: HomePresenter
     val fakeDataManager = FakeDataManager()
@@ -214,4 +215,15 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
             }
     }
 
+    override fun navigateToLoginScreen() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToHomeScreen() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showError(ioException: IOException) {
+        TODO("Not yet implemented")
+    }
 }
