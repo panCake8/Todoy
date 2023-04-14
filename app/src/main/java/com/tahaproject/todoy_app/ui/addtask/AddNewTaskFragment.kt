@@ -25,7 +25,7 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = AddNewTaskPresenter()
+        presenter = AddNewTaskPresenter(requireContext())
 
         binding.chipTeamTodo.isClickable = false
 

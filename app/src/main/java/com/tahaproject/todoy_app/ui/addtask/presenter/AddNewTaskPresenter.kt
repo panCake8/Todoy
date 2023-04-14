@@ -1,14 +1,15 @@
 package com.tahaproject.todoy_app.ui.addtask.presenter
 
+import android.content.Context
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
 import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
 
-class AddNewTaskPresenter : AddNewTaskContract.Presenter {
+class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
     private var view: AddNewTaskContract.View? = null
-    private val personalTodoApiImpl = PersonalTodoApiImpl()
-    private val teamTodoApiImpl = TeamTodoApiImpl()
+    private val personalTodoApiImpl = PersonalTodoApiImpl(context)
+    private val teamTodoApiImpl = TeamTodoApiImpl(context)
 
     companion object {
         private const val DEFAULT_ID = ""
