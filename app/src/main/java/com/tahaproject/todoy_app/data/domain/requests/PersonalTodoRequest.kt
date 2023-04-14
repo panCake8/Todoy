@@ -1,7 +1,7 @@
 package com.tahaproject.todoy_app.data.domain.requests
 
 
-data class PersonalTodoPostRequest(
+data class PersonalTodoRequest(
     val value: PersonalTodo,
     val message: String?,
     val isSuccess: Boolean

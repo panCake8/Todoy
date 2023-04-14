@@ -1,14 +1,13 @@
 package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoUpdateRequest
-import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoPostRequest
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodoUpdateResponse
+import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
 import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
 import java.io.IOException
 
 interface IPersonalTodoApi {
     fun createPersonalTodo(
-        personalTodoPostRequest: PersonalTodoPostRequest, onSuccess: (PersonalTodoPostRequest) -> Unit,
+        personalTodoRequest: PersonalTodoRequest, onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )
 
@@ -19,7 +18,7 @@ interface IPersonalTodoApi {
 
     fun updatePersonalTodosStatus(
         personalTodoUpdateRequest: PersonalTodoUpdateRequest,
-        onSuccess: (PersonalTodoUpdateResponse) -> Unit,
+        onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )
 }
