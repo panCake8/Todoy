@@ -1,12 +1,12 @@
 package com.tahaproject.todoy_app.ui.addtask.presenter
 
-interface AddNewTaskContract {
-    interface View {
+interface IAddNewTaskContract {
+    interface IView {
         fun showTaskAdded(successMessage: String)
         fun showError(error: Throwable)
     }
 
-    interface Presenter {
+    interface IPresenter {
         fun addPersonalTask(title: String, description: String)
         fun addTeamTask(title: String, description: String, assignee: String)
     }
