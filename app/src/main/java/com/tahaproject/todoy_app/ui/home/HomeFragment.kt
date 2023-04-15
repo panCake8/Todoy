@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -17,21 +18,18 @@ import com.tahaproject.todoy_app.data.FakeDataManager
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todos
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
-import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
+import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.search.SearchFragment
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
-import java.io.IOException
 
 
-class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
-    private lateinit var presenter: HomePresenter
+class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
     private val fakeDataManager = FakeDataManager()
     private var makeAllTodosList: List<Todos> = emptyList()
 
@@ -40,7 +38,6 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = HomePresenter(requireContext())
         makeAllTodosList = presenter.personalData + presenter.teamData
         Log.i("makeAllTodosList", makeAllTodosList.toString())
     }
@@ -57,58 +54,58 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     private fun setListeners(binding: FragmentHomeBinding) {
         binding.viewAllTeam.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                TeamTodoFragment(),
-                TeamTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                TeamTodoFragment(),
+//                TeamTodoFragment::class.java.name
+//            )
         }
 
         binding.viewAllPersonal.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                PersonalTodoFragment(),
-                PersonalTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                PersonalTodoFragment(),
+//                PersonalTodoFragment::class.java.name
+//            )
 
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -206,5 +203,8 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
                 }
             }
     }
+
+    override val presenter: HomePresenter
+        get() = HomePresenter(requireContext())
 
 }

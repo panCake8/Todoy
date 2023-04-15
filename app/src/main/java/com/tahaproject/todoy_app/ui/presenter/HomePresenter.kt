@@ -1,17 +1,17 @@
-package com.tahaproject.todoy_app.ui.activities.presenter
+package com.tahaproject.todoy_app.ui.presenter
 
 import android.content.Context
 import android.util.Log
-import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
-import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
+import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
+import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todos
 
 
 class HomePresenter(private val context: Context) :
     HomeContract.HomePresenter {
     private var view: HomeContract.HomeView? = null
-    private val personalTodoApiImpl = PersonalTodoApiImpl(context)
-    private val teamTodoApiImpl = TeamTodoApiImpl(context)
+    private val personalTodoApiImpl = PersonalTodoApi(context)
+    private val teamTodoApi = TeamTodoApi(context)
 
     lateinit var personalData: List<Todos>
     lateinit var teamData: List<Todos>
@@ -29,7 +29,7 @@ class HomePresenter(private val context: Context) :
 
     override fun fetchTeamData() {
         view?.let { view ->
-            teamTodoApiImpl.getTeamTodos({
+            teamTodoApi.getTeamTodos({
                 teamData = it.value
                 Log.i("teamData", teamData.toString())
 

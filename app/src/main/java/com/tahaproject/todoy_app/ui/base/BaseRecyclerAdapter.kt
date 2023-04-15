@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.baseview
+package com.tahaproject.todoy_app.ui.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.activities.presenter
+package com.tahaproject.todoy_app.ui.presenter
 
 import java.io.IOException
 

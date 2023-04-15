@@ -7,9 +7,8 @@ import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
-import com.tahaproject.todoy_app.data.models.responses.BaseResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -19,11 +18,12 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersonalTodoApi {
+class PersonalTodoApi( context: Context) : ApiRequest(), IPersonalTodoApi {
     private val client =
         OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor())
             .addInterceptor(TodoInterceptor(context))
+            .addInterceptor(logInterceptor)
             .build()
 
     override fun createPersonalTodo(
