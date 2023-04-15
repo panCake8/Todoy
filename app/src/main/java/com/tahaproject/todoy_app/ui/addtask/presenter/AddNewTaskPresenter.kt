@@ -5,6 +5,7 @@ import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
 import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
+import com.tahaproject.todoy_app.util.Constants
 
 class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
     private var view: AddNewTaskContract.View? = null
@@ -25,12 +26,12 @@ class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
             status = DEFAULT_STATUS, // for todo
             creationTime = DEFAULT_CREATION_TIME
         )
-        val personalTodoRequest = PersonalTodoRequest(personalTodo, "personal", true)
+        val personalTodoRequest = PersonalTodoRequest(personalTodo, null, true)
 
         personalTodoApiImpl.createPersonalTodo(
             personalTodoRequest,
             onSuccess = { response ->
-                view?.showTaskAdded(response)
+                view?.showTaskAdded(Constants.ADDED)
             },
             onFailed = { ioException ->
                 view?.showError(ioException)
@@ -47,16 +48,24 @@ class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
             status = DEFAULT_STATUS, // for todo
             creationTime = DEFAULT_CREATION_TIME
         )
-        val teamTodoRequest = TeamTodoRequest(teamTodo, "something", true)
+        val teamTodoRequest = TeamTodoRequest(teamTodo, null, false)
 
         teamTodoApiImpl.createTeamTodo(
             teamTodoRequest,
             onSuccess = { response ->
-                view?.showTaskAdded(response)
+                view?.showTaskAdded(Constants.ADDED)
             },
             onFailed = { ioException ->
                 view?.showError(ioException)
             }
         )
+    }
+
+    override fun attachView(view: AddNewTaskContract.View) {
+        this.view = view
+    }
+
+    override fun detachView() {
+        this.view = null
     }
 }

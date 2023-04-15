@@ -45,9 +45,7 @@ class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersona
                 }
                 onSuccess(Constants.ADDED)
             }
-
         })
-
     }
 
     override fun getPersonalTodos(
@@ -71,9 +69,7 @@ class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersona
                     onSuccess(personalTodosResponse)
                 }
             }
-
         })
-
     }
 
     override fun updatePersonalTodosStatus(
@@ -96,7 +92,6 @@ class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersona
                 }
                 onSuccess(Constants.UPDATED)
             }
-
         })
 
     }
