@@ -1,8 +1,8 @@
 package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
-import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
-import com.tahaproject.todoy_app.data.domain.requests.TeamTodoUpdateRequest
-import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.requests.TeamTodoRequest
+import com.tahaproject.todoy_app.data.requests.TeamTodoUpdateRequest
+import com.tahaproject.todoy_app.data.responses.TeamToDosResponse
 import java.io.IOException
 
 interface ITeamTodoApi {

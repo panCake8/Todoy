@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.data.domain.requests
+package com.tahaproject.todoy_app.data.requests
 
 data class TeamTodoRequest(
     val value: TeamTodo,

@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.baseview
+package com.tahaproject.todoy_app.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,10 +23,6 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        cleanupBindings()
-    }
-
-    protected open fun cleanupBindings() {
         _binding = null
     }
 }

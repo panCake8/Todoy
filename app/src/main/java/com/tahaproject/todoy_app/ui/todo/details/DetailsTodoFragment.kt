@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.databinding.FragmentDetailsBinding
+import com.tahaproject.todoy_app.ui.base.BaseFragment
 
-class DetailsTodoFragment : BaseFragmentWithTransition<FragmentDetailsBinding>() {
+class DetailsTodoFragment : BaseFragment<FragmentDetailsBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailsBinding
         get() = FragmentDetailsBinding::inflate
 
@@ -22,7 +22,7 @@ class DetailsTodoFragment : BaseFragmentWithTransition<FragmentDetailsBinding>()
 
     private fun addCallBacks() {
         binding.appBarDetails.setNavigationOnClickListener {
-            back()
+//            back()
         }
     }
 }

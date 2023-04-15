@@ -1,19 +1,17 @@
-package com.tahaproject.todoy_app.data.domain.responses
+package com.tahaproject.todoy_app.data.requests
 
 
-data class TeamToDosResponse(
-    val value: List<TeamToDo>,
+data class PersonalTodoRequest(
+    val value: PersonalTodo,
     val message: String?,
     val isSuccess: Boolean
 ) {
-    data class TeamToDo(
+    data class PersonalTodo(
         val id: String,
         val title: String,
         val description: String,
-        val assignee: String,
         val status: Int,
         val creationTime: String
     )
-
 
 }

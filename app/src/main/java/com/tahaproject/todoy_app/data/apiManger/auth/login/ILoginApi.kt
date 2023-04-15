@@ -1,7 +1,7 @@
 package com.tahaproject.todoy_app.data.apiManger.auth.login
 
-import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
-import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
+import com.tahaproject.todoy_app.data.requests.LoginRequest
+import com.tahaproject.todoy_app.data.responses.LoginResponse
 import java.io.IOException
 
 interface ILoginApi {

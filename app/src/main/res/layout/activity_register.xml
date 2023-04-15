@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.activities.RegisterActivity">
+    tools:context=".ui.RegisterActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_register_container"

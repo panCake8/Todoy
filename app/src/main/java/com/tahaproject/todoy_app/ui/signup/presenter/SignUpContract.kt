@@ -1,7 +1,7 @@
 package com.tahaproject.todoy_app.ui.signup.presenter
 
-import com.tahaproject.todoy_app.data.domain.requests.SignUpRequest
-import com.tahaproject.todoy_app.data.domain.responses.SignUpResponse
+import com.tahaproject.todoy_app.data.requests.SignUpRequest
+import com.tahaproject.todoy_app.data.responses.SignUpResponse
 import java.io.IOException
 
 interface SignUpContract {

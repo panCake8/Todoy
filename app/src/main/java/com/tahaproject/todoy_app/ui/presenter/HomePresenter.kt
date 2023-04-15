@@ -1,14 +1,10 @@
-package com.tahaproject.todoy_app.ui.activities.presenter
+package com.tahaproject.todoy_app.ui.presenter
 
 import android.content.Context
-import com.tahaproject.todoy_app.data.FakeDataManager
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
-import com.tahaproject.todoy_app.util.Constants
 
 
-class HomePresenter(private val context: Context) :
+class HomePresenter(context: Context) :
     HomeContract.HomePresenter {
     private var view: HomeContract.HomeView? = null
     private val personalTodoApiImpl = PersonalTodoApiImpl(context)

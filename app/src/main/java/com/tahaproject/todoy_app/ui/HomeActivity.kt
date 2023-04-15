@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.activities
+package com.tahaproject.todoy_app.ui
 
 
 import android.content.Intent
@@ -8,9 +8,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.commit
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.ActivityHomeBinding
-import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
-import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
-import com.tahaproject.todoy_app.ui.baseview.BaseActivity
+import com.tahaproject.todoy_app.ui.presenter.HomeContract
+import com.tahaproject.todoy_app.ui.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.base.BaseActivity
 import com.tahaproject.todoy_app.ui.home.HomeFragment
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
