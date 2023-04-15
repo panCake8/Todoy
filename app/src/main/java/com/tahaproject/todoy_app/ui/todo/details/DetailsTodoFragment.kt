@@ -13,7 +13,7 @@ import com.tahaproject.todoy_app.databinding.FragmentDetailsBinding
 import com.tahaproject.todoy_app.ui.home.HomeFragment
 import com.tahaproject.todoy_app.util.Constants
 
-class DetailsTodoFragment : BaseFragmentWithTransition<FragmentDetailsBinding>() {
+class DetailsTodoFragment(taskDetails: TaskDetails) : BaseFragmentWithTransition<FragmentDetailsBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailsBinding
         get() = FragmentDetailsBinding::inflate
 
@@ -30,12 +30,8 @@ class DetailsTodoFragment : BaseFragmentWithTransition<FragmentDetailsBinding>()
     }
 
     companion object {
-        fun newInstance(taskDetails: TaskDetails): DetailsTodoFragment =
-            DetailsTodoFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(Constants.DETAILS, taskDetails)
-                }
-            }
-
+        fun newInstance(taskDetails: TaskDetails): DetailsTodoFragment {
+            return DetailsTodoFragment(taskDetails)
+        }
     }
 }

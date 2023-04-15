@@ -88,14 +88,14 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
             )
         }
 
-        binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
-        }
+//        binding.cardViewRecently.setOnClickListener {
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment.newInstance(taskDetails),
+//                DetailsTodoFragment::class.java.name
+//            )
+//        }
 
         binding.editTextSearch.setOnClickListener {
             transitionTo(
@@ -118,7 +118,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
             transitionTo(
                 true,
                 R.id.fragment_home_container,
-                DetailsTodoFragment(),
+                DetailsTodoFragment.newInstance(taskDetails),
                 DetailsTodoFragment::class.java.name
             )
         }
