@@ -53,12 +53,16 @@ class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
         teamTodoApiImpl.createTeamTodo(
             teamTodoRequest,
             onSuccess = { response ->
-                view?.showTaskAdded(Constants.ADDED)
+
             },
             onFailed = { ioException ->
                 view?.showError(ioException)
             }
         )
+    }
+
+    private fun onTaskSuccess() {
+        view?.showTaskAdded(Constants.ADDED)
     }
 
     override fun attachView(view: AddNewTaskContract.View) {
