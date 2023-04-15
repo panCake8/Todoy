@@ -7,13 +7,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import com.tahaproject.todoy_app.R
+import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
+import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
 import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskContract
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskPresenter
 import com.tahaproject.todoy_app.ui.baseview.BaseBottomSheetDialogFragment
+import com.tahaproject.todoy_app.util.Constants
+import com.tahaproject.todoy_app.util.showToast
 
 
 class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>(), AddNewTaskContract.View {
@@ -22,14 +25,13 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
         get() = FragmentAddNewTaskBinding::inflate
 
     private var selectedTaskChip: TaskChip = TaskChip.PERSONAL
-    private lateinit var presenter: AddNewTaskContract.Presenter
+    private lateinit var addNewTaskPresenter: AddNewTaskContract.Presenter
 
     override fun getLayoutResourceId(): Int = R.layout.fragment_add_new_task
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = AddNewTaskPresenter(requireContext())
-        presenter.attachView(this)
+        addNewTaskPresenter = AddNewTaskPresenter(this, PersonalTodoApiImpl(requireContext()), TeamTodoApiImpl(requireContext()))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,45 +45,41 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
             }
         }
 
-        binding.chipTeamTodo.setOnClickListener {
-            selectedTaskChip = TaskChip.TEAM
-            binding.chipPersonalTodo.isChecked = false
-            changeVisibility()
-        }
+        binding.chipTeamTodo.setOnClickListener { onChipTeamClicked() }
 
-        binding.chipPersonalTodo.setOnClickListener {
-            selectedTaskChip = TaskChip.PERSONAL
-            binding.chipTeamTodo.isChecked = false
-            changeVisibility()
-        }
+        binding.chipPersonalTodo.setOnClickListener { onChipPersonalClicked() }
 
-        binding.buttonAdd.setOnClickListener {
-            val title = binding.editTextAddTaskTitle.text.toString()
-            val description = binding.editTextAddTaskDescription.text.toString()
-            val assignee = binding.editTextAddAssigneeName.text.toString()
+        binding.buttonAdd.setOnClickListener { onButtonAddClicked() }
+    }
+    private fun onChipTeamClicked() {
+        selectedTaskChip = TaskChip.TEAM
+        binding.chipPersonalTodo.isChecked = false
+        changeVisibility()
+    }
 
-            when (selectedTaskChip) {
-                TaskChip.TEAM -> presenter.addTeamTask(title, description, assignee)
-                TaskChip.PERSONAL -> presenter.addPersonalTask(title, description)
-            }
-            hideBottomSheet()
+    private fun onChipPersonalClicked() {
+        selectedTaskChip = TaskChip.PERSONAL
+        binding.chipTeamTodo.isChecked = false
+        changeVisibility()
+    }
+
+    private fun onButtonAddClicked() {
+        val title = binding.editTextAddTaskTitle.text.toString()
+        val description = binding.editTextAddTaskDescription.text.toString()
+        val assignee = binding.editTextAddAssigneeName.text.toString()
+
+        when (selectedTaskChip) {
+            TaskChip.TEAM -> addNewTaskPresenter.addTeamTask(title, description, assignee)
+            TaskChip.PERSONAL -> addNewTaskPresenter.addPersonalTask(title, description)
         }
+        showToast(Constants.ADDED)
+        hideBottomSheet()
     }
 
     private fun changeVisibility() {
         with(binding.root as ViewGroup) {
-            val textViewVisibility = binding.textviewAddAssigneeName.isVisible
-            val editTextVisibility = binding.editTextAddAssigneeName.isVisible
-
-            if (textViewVisibility && editTextVisibility) {
-                // If both views are visible, set their visibility to gone
-                transitionVisibility(binding.textviewAddAssigneeName, View.GONE)
-                transitionVisibility(binding.editTextAddAssigneeName, View.GONE)
-            } else {
-                // If any of the views are gone, set their visibility to visible
-                transitionVisibility(binding.textviewAddAssigneeName, View.VISIBLE)
-                transitionVisibility(binding.editTextAddAssigneeName, View.VISIBLE)
-            }
+            transitionVisibility(binding.textviewAddAssigneeName, if (binding.textviewAddAssigneeName.isVisible) View.GONE else View.VISIBLE)
+            transitionVisibility(binding.editTextAddAssigneeName, if (binding.editTextAddAssigneeName.isVisible) View.GONE else View.VISIBLE)
         }
     }
 
@@ -92,23 +90,22 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
         }
     }
 
-    override fun showTaskAdded(task: String) {
-        Toast.makeText(requireContext(), task, Toast.LENGTH_SHORT).show()
+    override fun showTaskAdded(successMessage: String) {
+        // nothing is passed
     }
 
     override fun showError(error: Throwable) {
-        requireActivity().runOnUiThread {
-            error.localizedMessage?.let { Log.i("TAG", it) }
-        }
+        error.localizedMessage?.let { Log.i("TAG", it) }
     }
 
     private fun hideBottomSheet() {
         dismiss()
-        presenter.detachView()
+    }
+
+    enum class TaskChip {
+        PERSONAL, TEAM
     }
 }
 
-enum class TaskChip {
-    PERSONAL, TEAM
-}
+
 

@@ -1,42 +1,28 @@
 package com.tahaproject.todoy_app.ui.addtask.presenter
 
-import android.content.Context
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
 import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
 import com.tahaproject.todoy_app.util.Constants
 
-class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
-    private var view: AddNewTaskContract.View? = null
-    private val personalTodoApiImpl = PersonalTodoApiImpl(context)
-    private val teamTodoApiImpl = TeamTodoApiImpl(context)
-
-    companion object {
-        private const val DEFAULT_ID = ""
-        private const val DEFAULT_STATUS = 0
-        private const val DEFAULT_CREATION_TIME = ""
-    }
+class AddNewTaskPresenter(
+    private val view: AddNewTaskContract.View,
+    private val personalTodoApi: PersonalTodoApiImpl,
+    private val teamTodoApi: TeamTodoApiImpl
+) : AddNewTaskContract.Presenter {
 
     override fun addPersonalTask(title: String, description: String) {
         val personalTodo = PersonalTodoRequest.PersonalTodo(
             id = DEFAULT_ID,
             title = title,
             description = description,
-            status = DEFAULT_STATUS, // for todo
+            status = TODO_STATUS,
             creationTime = DEFAULT_CREATION_TIME
         )
-        val personalTodoRequest = PersonalTodoRequest(personalTodo, null, true)
+        val personalTodoRequest = PersonalTodoRequest(personalTodo, Constants.ADDED, true)
 
-        personalTodoApiImpl.createPersonalTodo(
-            personalTodoRequest,
-            onSuccess = { response ->
-                view?.showTaskAdded(Constants.ADDED)
-            },
-            onFailed = { ioException ->
-                view?.showError(ioException)
-            }
-        )
+        personalTodoApi.createPersonalTodo(personalTodoRequest, ::onTaskSuccess, ::onTaskFailed)
     }
 
     override fun addTeamTask(title: String, description: String, assignee: String) {
@@ -45,31 +31,26 @@ class AddNewTaskPresenter(context: Context) : AddNewTaskContract.Presenter {
             title = title,
             description = description,
             assignee = assignee,
-            status = DEFAULT_STATUS, // for todo
+            status = TODO_STATUS,
             creationTime = DEFAULT_CREATION_TIME
         )
-        val teamTodoRequest = TeamTodoRequest(teamTodo, null, false)
 
-        teamTodoApiImpl.createTeamTodo(
-            teamTodoRequest,
-            onSuccess = { response ->
+        val teamTodoRequest = TeamTodoRequest(teamTodo, Constants.ADDED, true)
 
-            },
-            onFailed = { ioException ->
-                view?.showError(ioException)
-            }
-        )
+        teamTodoApi.createTeamTodo(teamTodoRequest, ::onTaskSuccess, ::onTaskFailed)
     }
 
-    private fun onTaskSuccess() {
-        view?.showTaskAdded(Constants.ADDED)
+    private fun onTaskSuccess(successMessage: String) {
+        view.showTaskAdded(successMessage)
     }
 
-    override fun attachView(view: AddNewTaskContract.View) {
-        this.view = view
+    private fun onTaskFailed(throwable: Throwable) {
+        view.showError(throwable)
     }
 
-    override fun detachView() {
-        this.view = null
+    companion object {
+        private const val DEFAULT_ID = ""
+        private const val TODO_STATUS = 0
+        private const val DEFAULT_CREATION_TIME = ""
     }
 }
