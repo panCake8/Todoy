@@ -1,9 +1,8 @@
 package com.tahaproject.todoy_app.data.apiManger.auth.login
 
-import android.util.Log
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.models.requests.LoginRequest
-import com.tahaproject.todoy_app.data.models.responses.LoginResponse
+import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -34,6 +33,7 @@ class LoginApiImpl : ApiRequest(), ILoginApi {
                     onSuccess(loginResponse)
                 }
             }
+
         })
     }
 }

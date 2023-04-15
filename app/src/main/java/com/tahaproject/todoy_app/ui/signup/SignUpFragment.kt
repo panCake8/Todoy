@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.tahaproject.todoy_app.BuildConfig
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
-import com.tahaproject.todoy_app.data.models.responses.SignUpResponse
+import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
 import com.tahaproject.todoy_app.ui.login.LoginFragment

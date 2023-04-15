@@ -1,10 +1,10 @@
-package com.tahaproject.todoy_app.data.models.responses
+package com.tahaproject.todoy_app.data.models.responses.todosListResponse
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ToDosResponse(
+data class Todos(
     val id: String,
     val title: String,
     val description: String,

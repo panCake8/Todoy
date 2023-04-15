@@ -34,7 +34,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), HomeContract.HomeView 
     private fun setUp() {
         presenter = HomePresenter(this)
         presenter.attach(this)
-        presenter.fetchData()
+        presenter.fetchTeamData()
+        presenter.fetchPersonalData()
     }
 
     override fun navigateToLoginScreen() {

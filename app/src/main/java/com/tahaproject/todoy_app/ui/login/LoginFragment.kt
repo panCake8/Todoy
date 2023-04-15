@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.requests.LoginRequest
-import com.tahaproject.todoy_app.data.models.responses.LoginResponse
+import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.activities.HomeActivity
 import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
@@ -65,7 +65,8 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
     override fun showData(loginResponse: LoginResponse) {
         requireActivity().runOnUiThread {
             if (loginResponse.isSuccess) {
-                SharedPreferenceUtil(requireContext()).saveToken(loginResponse.value.token)
+                // TODO see if this is correct when make it empty if null
+                SharedPreferenceUtil(requireContext()).saveToken(loginResponse.value.token?:"")
                 parentFragmentManager.popBackStack()
                 goToHome()
             } else

@@ -13,7 +13,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.FakeDataManager
-import com.tahaproject.todoy_app.data.models.responses.ToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
@@ -30,17 +30,13 @@ import java.io.IOException
 
 class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeContract.HomeView {
     private lateinit var presenter: HomePresenter
-    val fakeDataManager = FakeDataManager()
-    private lateinit var personalTodosResponse: ToDosResponse
+    private val fakeDataManager = FakeDataManager()
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        personalTodosResponse =
-//            arguments?.getParcelable(Constants.Home)!!
     }
-
 
     private val getPieChartDataList: List<PieEntry> = listOf(
         PieEntry(getDonePercentage(), Constants.DONE_STRING),
@@ -167,7 +163,6 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
 
     fun showData(personalResponse: ToDosResponse?) {
         requireActivity().runOnUiThread {
-            presenter.fetchData()
 //            binding.textViewRecentlyTitle.text = personalResponse?.title
 //            binding.textViewRecentlyBody.text = personalResponse?.description
 //            binding.recentlyCardTime.text = personalResponse?.creationTime

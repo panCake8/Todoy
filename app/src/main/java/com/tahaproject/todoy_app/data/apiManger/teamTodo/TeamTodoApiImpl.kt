@@ -5,10 +5,11 @@ import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.models.requests.TeamTodoRequest
 import com.tahaproject.todoy_app.data.models.requests.TeamTodoUpdateRequest
-import com.tahaproject.todoy_app.data.models.responses.TeamTodoUpdateResponse
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
-import com.tahaproject.todoy_app.data.models.responses.ToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.BaseResponse
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -54,7 +55,8 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
 
     override fun getTeamTodos(
         onSuccess: (ToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit
+        onFailed: (IOException) -> Unit,
+        homePresenter: HomePresenter
     ) {
         val request = getRequest(Constants.EndPoints.teamTodo)
         client.newCall(request).enqueue(object : Callback {
@@ -89,7 +91,7 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, TeamTodoUpdateResponse::class.java)
+                    gson.fromJson(jsonString, ToDosResponse::class.java)
                 }
                 onSuccess(Constants.UPDATED)
 

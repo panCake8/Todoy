@@ -10,7 +10,7 @@ data class PersonalTodoRequest(
         val id: String,
         val title: String,
         val description: String,
-        val asignee: String,
+        val assignee: String,
         val status: Int,
         val creationTime: String
     )
