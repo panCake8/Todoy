@@ -19,7 +19,7 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersonalTodoApi {
+class PersonalTodoApiImpl(context: Context) : ApiRequest(), IPersonalTodoApi {
     private val client =
         OkHttpClient.Builder().addInterceptor(AuthInterceptor())
             .addInterceptor(TodoInterceptor(context))
