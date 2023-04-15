@@ -2,11 +2,11 @@ package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
 import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.models.requests.PersonalTodoUpdateRequest
-import com.tahaproject.todoy_app.data.models.requests.PersonalTodoRequest
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
+import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
+import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.BaseResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
@@ -27,11 +27,11 @@ class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersona
             .build()
 
     override fun createPersonalTodo(
-        personalTodoRequest: PersonalTodoRequest, onSuccess: (String) -> Unit,
+        personalTodoRequest: SingleTodoTask, onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
-        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, personalTodoRequest.value.title)
-            .add(Constants.Todo.DESCRIPTION, personalTodoRequest.value.description)
+        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, personalTodoRequest.title)
+            .add(Constants.Todo.DESCRIPTION, personalTodoRequest.description)
             .build()
         val request = postRequest(formBody, Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
@@ -41,7 +41,7 @@ class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersona
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, PersonalTodoRequest::class.java)
+                    gson.fromJson(jsonString, SingleTodoTask::class.java)
                 }
                 onSuccess(Constants.ADDED)
             }
@@ -77,7 +77,7 @@ class PersonalTodoApiImpl(private val context: Context) : ApiRequest(), IPersona
     }
 
     override fun updatePersonalTodosStatus(
-        personalTodoUpdateRequest: PersonalTodoUpdateRequest,
+        personalTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {

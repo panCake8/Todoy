@@ -3,11 +3,10 @@ package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
 import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.models.requests.TeamTodoRequest
-import com.tahaproject.todoy_app.data.models.requests.TeamTodoUpdateRequest
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
-import com.tahaproject.todoy_app.data.models.responses.BaseResponse
+import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
+import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
@@ -27,13 +26,13 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
             .build()
 
     override fun createTeamTodo(
-        teamTodoRequest: TeamTodoRequest,
+        teamTodoRequest: SingleTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
-        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, teamTodoRequest.value.title)
-            .add(Constants.Todo.DESCRIPTION, teamTodoRequest.value.description)
-            .add(Constants.Todo.ASSIGNEE, teamTodoRequest.value.assignee)
+        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, teamTodoRequest.title)
+            .add(Constants.Todo.DESCRIPTION, teamTodoRequest.description)
+            .add(Constants.Todo.ASSIGNEE, teamTodoRequest.assignee)
 
             .build()
         val request = postRequest(formBody, Constants.EndPoints.teamTodo)
@@ -44,7 +43,7 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, TeamTodoRequest::class.java)
+                    gson.fromJson(jsonString, SingleTodoTask::class.java)
                 }
                 onSuccess(Constants.ADDED)
             }
@@ -76,7 +75,7 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
 
 
     override fun updateTeamTodosStatus(
-        teamTodoUpdateRequest: TeamTodoUpdateRequest,
+        teamTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {

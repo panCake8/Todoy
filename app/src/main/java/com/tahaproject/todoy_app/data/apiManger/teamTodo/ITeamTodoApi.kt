@@ -1,14 +1,14 @@
 package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
-import com.tahaproject.todoy_app.data.models.requests.TeamTodoRequest
-import com.tahaproject.todoy_app.data.models.requests.TeamTodoUpdateRequest
+import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
+import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import java.io.IOException
 
 interface ITeamTodoApi {
     fun createTeamTodo(
-        teamTodoRequest: TeamTodoRequest,
+        teamTodoRequest: SingleTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )
@@ -20,7 +20,7 @@ interface ITeamTodoApi {
     )
 
     fun updateTeamTodosStatus(
-        teamTodoUpdateRequest: TeamTodoUpdateRequest,
+        teamTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )
