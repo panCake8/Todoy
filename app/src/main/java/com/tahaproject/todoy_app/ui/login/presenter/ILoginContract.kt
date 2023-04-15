@@ -5,15 +5,13 @@ import com.tahaproject.todoy_app.data.responses.LoginResponse
 import java.io.IOException
 
 
-interface LoginContract {
-    interface LoginView {
+interface ILoginContract {
+    interface ILoginView {
         fun showData(loginResponse: LoginResponse)
         fun showError(error: IOException)
     }
 
-    interface LoginPresenter {
+    interface ILoginPresenter {
         fun fetchData(loginRequest: LoginRequest)
-        fun attach(loginView: LoginView)
-        fun deAttach()
     }
 }

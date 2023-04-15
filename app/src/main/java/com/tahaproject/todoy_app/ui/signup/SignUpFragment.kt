@@ -9,13 +9,16 @@ import com.tahaproject.todoy_app.data.requests.SignUpRequest
 import com.tahaproject.todoy_app.data.responses.SignUpResponse
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.signup.presenter.SignUpContract
+import com.tahaproject.todoy_app.ui.signup.presenter.ISignUpContract
 import com.tahaproject.todoy_app.ui.signup.presenter.SignUpPresenter
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class SignUpFragment : BaseFragment<FragmentSignupBinding>(), SignUpContract.View {
-    private lateinit var presenter: SignUpPresenter
+class SignUpFragment : BaseFragment<SignUpPresenter, FragmentSignupBinding>(),
+    ISignUpContract.IView {
+    override val presenter: SignUpPresenter
+        get() = SignUpPresenter(this)
+
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
         get() = FragmentSignupBinding::inflate
 
@@ -25,8 +28,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding>(), SignUpContract.Vie
     }
 
     private fun setUp() {
-        presenter = SignUpPresenter()
-        presenter.attach(this)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,11 +101,6 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding>(), SignUpContract.Vie
 //            LoginFragment(),
 //            LoginFragment::class.java.name
 //        )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
     }
 
     companion object {

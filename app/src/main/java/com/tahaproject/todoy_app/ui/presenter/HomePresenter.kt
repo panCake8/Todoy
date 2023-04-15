@@ -1,36 +1,37 @@
 package com.tahaproject.todoy_app.ui.presenter
 
 import android.content.Context
-import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
+import com.tahaproject.todoy_app.data.apiManger.personalTodo.IPersonalTodoApi
+import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
+import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
+import java.io.IOException
 
 
-class HomePresenter(context: Context) :
-    HomeContract.HomePresenter {
-    private var view: HomeContract.HomeView? = null
-    private val personalTodoApiImpl = PersonalTodoApiImpl(context)
+class HomePresenter(private val view: IHomeContract.IView, context: Context) :
+    IHomeContract.IPresenter {
+    private val personalTodoApi: IPersonalTodoApi = PersonalTodoApi(context)
     override fun fetchData() {
-        view?.let { view ->
-            personalTodoApiImpl.getPersonalTodos({
-            }, { ioException ->
-                view.showError(ioException)
-            }, this@HomePresenter)
-        }
+        personalTodoApi.getPersonalTodos(::showData, ::showError, this)
     }
 
-    override fun attach(homeView: HomeContract.HomeView) {
-        this.view = homeView
+
+    private fun showData(personalTodosResponse: PersonalTodosResponse) {
+//        view.showData(personalTodosResponse)
     }
 
-    override fun deAttach() {
-        view = null
+
+    private fun showError(ioException: IOException) {
+        view.showError(ioException)
     }
+
 
     override fun onUnauthorizedError() {
-        view?.navigateToLoginScreen()
+        view.navigateToLoginScreen()
     }
 
+
     override fun onHome() {
-        view?.navigateToHomeScreen()
+        view.navigateToHomeScreen()
     }
 
 }

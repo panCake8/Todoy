@@ -18,7 +18,7 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class TeamTodoApiImpl(context: Context) : ApiRequest(), ITeamTodoApi {
+class TeamTodoApi(context: Context) : ApiRequest(), ITeamTodoApi {
     private val client =
         OkHttpClient.Builder().addInterceptor(AuthInterceptor())
             .addInterceptor(TodoInterceptor(context)).addInterceptor(logInterceptor)

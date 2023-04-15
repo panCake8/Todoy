@@ -4,15 +4,13 @@ import com.tahaproject.todoy_app.data.requests.SignUpRequest
 import com.tahaproject.todoy_app.data.responses.SignUpResponse
 import java.io.IOException
 
-interface SignUpContract {
-    interface View {
+interface ISignUpContract {
+    interface IView {
         fun showData(signUpResponse: SignUpResponse)
         fun showError(error: IOException)
     }
 
-    interface Presenter {
+    interface IPresenter {
         fun fetchData(signUpRequest: SignUpRequest)
-        fun attach(signUpView: View)
-        fun deAttach()
     }
 }

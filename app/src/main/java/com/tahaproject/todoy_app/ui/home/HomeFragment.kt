@@ -15,7 +15,7 @@ import com.tahaproject.todoy_app.data.FakeDataManager
 import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.data.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.presenter.HomeContract
+import com.tahaproject.todoy_app.ui.presenter.IHomeContract
 import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
@@ -24,10 +24,12 @@ import com.tahaproject.todoy_app.util.CustomPercentFormatter
 import java.io.IOException
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeContract.HomeView {
-    private lateinit var presenter: HomePresenter
+class HomeFragment : BaseFragment<HomePresenter, FragmentHomeBinding>(), IHomeContract.IView {
+
     private val fakeDataManager = FakeDataManager()
     private lateinit var personalTodosResponse: PersonalTodosResponse.PersonalTodo
+    override val presenter: HomePresenter
+        get() = TODO()
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
@@ -170,19 +172,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), HomeContract.HomeView 
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
-    }
-
     private fun getTaskStatusCount(status: Int): Int =
         makeAllTodosList(fakeDataManager).count { (it as? PersonalTodosResponse.PersonalTodo)?.status == status || (it as? TeamToDosResponse.TeamToDo)?.status == status }
 
     private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
-    private fun getTodoPercentage() = getTodoCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+    private fun getTodoPercentage() =
+        getTodoCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
 
     private fun getDoneCount(): Int = getTaskStatusCount(Constants.DONE_STATUS)
-    private fun getDonePercentage() = getDoneCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+    private fun getDonePercentage() =
+        getDoneCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
 
     private fun getInProgressCount(): Int = getTaskStatusCount(Constants.IN_PROGRESS_STATUS)
     private fun getInProgressPercentage() =
