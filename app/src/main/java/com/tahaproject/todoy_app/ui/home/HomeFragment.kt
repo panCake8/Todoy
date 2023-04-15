@@ -11,28 +11,25 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.FakeDataManager
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.responses.TeamToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.activities.presenter.HomeContract
-import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.presenter.IHomeContract
+import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.search.SearchFragment
-import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
-import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
-import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
+import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
 import java.io.IOException
 
 
-class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeContract.HomeView {
-    private lateinit var presenter: HomePresenter
-    val fakeDataManager = FakeDataManager()
+class HomeFragment : BaseFragment<HomePresenter, FragmentHomeBinding>(), IHomeContract.IView {
+
+    private val fakeDataManager = FakeDataManager()
     private lateinit var personalTodosResponse: PersonalTodosResponse.PersonalTodo
+    override val presenter: HomePresenter
+        get() = TODO()
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
@@ -61,58 +58,58 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
 
     private fun setListeners(binding: FragmentHomeBinding) {
         binding.viewAllTeam.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                TeamTodoFragment(),
-                TeamTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                TeamTodoFragment(),
+//                TeamTodoFragment::class.java.name
+//            )
         }
 
         binding.viewAllPersonal.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                PersonalTodoFragment(),
-                PersonalTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                PersonalTodoFragment(),
+//                PersonalTodoFragment::class.java.name
+//            )
 
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -175,19 +172,16 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>(), HomeCont
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
-    }
-
     private fun getTaskStatusCount(status: Int): Int =
         makeAllTodosList(fakeDataManager).count { (it as? PersonalTodosResponse.PersonalTodo)?.status == status || (it as? TeamToDosResponse.TeamToDo)?.status == status }
 
     private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
-    private fun getTodoPercentage() = getTodoCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+    private fun getTodoPercentage() =
+        getTodoCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
 
     private fun getDoneCount(): Int = getTaskStatusCount(Constants.DONE_STATUS)
-    private fun getDonePercentage() = getDoneCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+    private fun getDonePercentage() =
+        getDoneCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
 
     private fun getInProgressCount(): Int = getTaskStatusCount(Constants.IN_PROGRESS_STATUS)
     private fun getInProgressPercentage() =

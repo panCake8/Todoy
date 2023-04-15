@@ -5,19 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.BuildConfig
-import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.domain.requests.SignUpRequest
-import com.tahaproject.todoy_app.data.domain.responses.SignUpResponse
+import com.tahaproject.todoy_app.data.requests.SignUpRequest
+import com.tahaproject.todoy_app.data.responses.SignUpResponse
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.login.LoginFragment
-import com.tahaproject.todoy_app.ui.signup.presenter.SignUpContract
+import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.signup.presenter.ISignUpContract
 import com.tahaproject.todoy_app.ui.signup.presenter.SignUpPresenter
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), SignUpContract.View {
-    private lateinit var presenter: SignUpPresenter
+class SignUpFragment : BaseFragment<SignUpPresenter, FragmentSignupBinding>(),
+    ISignUpContract.IView {
+    override val presenter: SignUpPresenter
+        get() = SignUpPresenter(this)
+
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
         get() = FragmentSignupBinding::inflate
 
@@ -27,8 +28,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
     }
 
     private fun setUp() {
-        presenter = SignUpPresenter()
-        presenter.attach(this)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +46,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
     }
 
     private fun goToLogin() {
-        back()
+//        back()
     }
 
     private fun onSignUp() {
@@ -95,17 +95,12 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
 
     private fun navigateToLoginScreen() {
         parentFragmentManager.popBackStack()
-        transitionTo(
-            false,
-            R.id.fragment_register_container,
-            LoginFragment(),
-            LoginFragment::class.java.name
-        )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
+//        transitionTo(
+//            false,
+//            R.id.fragment_register_container,
+//            LoginFragment(),
+//            LoginFragment::class.java.name
+//        )
     }
 
     companion object {

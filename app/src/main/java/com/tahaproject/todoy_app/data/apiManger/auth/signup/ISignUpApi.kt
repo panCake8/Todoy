@@ -1,8 +1,8 @@
 package com.tahaproject.todoy_app.data.apiManger.auth.signup
 
-import com.tahaproject.todoy_app.data.domain.requests.SignUpRequest
-import com.tahaproject.todoy_app.data.domain.responses.SignUpResponse
-import com.tahaproject.todoy_app.ui.signup.presenter.SignUpContract
+import com.tahaproject.todoy_app.data.requests.SignUpRequest
+import com.tahaproject.todoy_app.data.responses.SignUpResponse
+import com.tahaproject.todoy_app.ui.signup.presenter.ISignUpContract
 import java.io.IOException
 
 interface ISignUpApi {
@@ -10,7 +10,7 @@ interface ISignUpApi {
         signUpRequest: SignUpRequest,
         onSuccess: (SignUpResponse) -> Unit,
         onFailed: (IOException) -> Unit,
-        presenter: SignUpContract.Presenter
+        presenter: ISignUpContract.IPresenter
     )
 }
 

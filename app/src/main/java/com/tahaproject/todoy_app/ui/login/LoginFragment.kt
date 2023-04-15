@@ -7,29 +7,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
-import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
+import com.tahaproject.todoy_app.data.requests.LoginRequest
+import com.tahaproject.todoy_app.data.responses.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
-import com.tahaproject.todoy_app.ui.activities.HomeActivity
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
-import com.tahaproject.todoy_app.ui.login.presenter.LoginLoginPresenter
-import com.tahaproject.todoy_app.ui.signup.SignUpFragment
+import com.tahaproject.todoy_app.ui.HomeActivity
+import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.login.presenter.ILoginContract
+import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginContract.LoginView {
+class LoginFragment : BaseFragment<LoginPresenter, FragmentLoginBinding>(),
+    ILoginContract.ILoginView {
+    override val presenter: LoginPresenter
+        get() = LoginPresenter(this)
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
         get() = FragmentLoginBinding::inflate
-    private lateinit var loginPresenter: LoginLoginPresenter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        loginPresenter = LoginLoginPresenter()
-        loginPresenter.attach(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,19 +41,19 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
             else login(username, password)
         }
         binding.textviewSignUp.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_register_container,
-                SignUpFragment(),
-                SignUpFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_register_container,
+//                SignUpFragment(),
+//                SignUpFragment::class.java.name
+//            )
         }
     }
 
     private fun validateUserName(username: String) = username.isNotEmpty()
     private fun validatePassword(password: String) = password.isNotEmpty()
     private fun login(username: String, password: String) {
-        loginPresenter.fetchData(LoginRequest(username, password))
+        presenter.fetchData(LoginRequest(username, password))
     }
 
     override fun showData(loginResponse: LoginResponse) {
@@ -83,11 +77,6 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
         requireActivity().runOnUiThread {
             error.localizedMessage?.let { Log.i("TAG", it) }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        loginPresenter.deAttach()
     }
 
     companion object {
