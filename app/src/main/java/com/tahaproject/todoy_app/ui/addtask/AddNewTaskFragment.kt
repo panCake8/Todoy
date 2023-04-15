@@ -7,14 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskContract
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskPresenter
 import com.tahaproject.todoy_app.ui.baseview.BaseBottomSheetDialogFragment
-import com.tahaproject.todoy_app.util.showToast
-import java.io.IOException
+
 
 class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>(), AddNewTaskContract.View {
 
@@ -93,7 +93,7 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
     }
 
     override fun showTaskAdded(task: String) {
-        showToast(task)
+        Toast.makeText(requireContext(), task, Toast.LENGTH_SHORT).show()
     }
 
     override fun showError(error: Throwable) {
