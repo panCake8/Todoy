@@ -3,29 +3,28 @@ package com.tahaproject.todoy_app.ui.addtask
 
 import android.os.Bundle
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
 import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
-import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskContract
+import com.tahaproject.todoy_app.ui.addtask.presenter.IAddNewTaskContract
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskPresenter
 import com.tahaproject.todoy_app.ui.baseview.BaseBottomSheetDialogFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.showToast
+import java.io.IOException
 
 
-class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>(), AddNewTaskContract.View {
+class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>(), IAddNewTaskContract.View {
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddNewTaskBinding
         get() = FragmentAddNewTaskBinding::inflate
 
     private var selectedTaskChip: TaskChip = TaskChip.PERSONAL
-    private lateinit var addNewTaskPresenter: AddNewTaskContract.Presenter
+    private lateinit var addNewTaskPresenter: IAddNewTaskContract.Presenter
 
     override fun getLayoutResourceId(): Int = R.layout.fragment_add_new_task
 
@@ -37,6 +36,13 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        chooseGroup()
+        addCallback()
+
+    }
+
+    private fun chooseGroup() {
         binding.choiceGroupChips.setOnCheckedStateChangeListener { _, checkedId ->
             selectedTaskChip = when (checkedId[0]) {
                 R.id.chip_personal_todo -> TaskChip.PERSONAL
@@ -44,23 +50,26 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
                 else -> TaskChip.PERSONAL // Default value
             }
         }
+    }
 
+    private fun addCallback() {
         binding.chipTeamTodo.setOnClickListener { onChipTeamClicked() }
 
         binding.chipPersonalTodo.setOnClickListener { onChipPersonalClicked() }
 
         binding.buttonAdd.setOnClickListener { onButtonAddClicked() }
     }
+
     private fun onChipTeamClicked() {
         selectedTaskChip = TaskChip.TEAM
         binding.chipPersonalTodo.isChecked = false
-        changeVisibility()
+        showAssignee()
     }
 
     private fun onChipPersonalClicked() {
         selectedTaskChip = TaskChip.PERSONAL
         binding.chipTeamTodo.isChecked = false
-        changeVisibility()
+        hideAssignee()
     }
 
     private fun onButtonAddClicked() {
@@ -76,26 +85,33 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
         hideBottomSheet()
     }
 
-    private fun changeVisibility() {
+    private fun showAssignee() {
         with(binding.root as ViewGroup) {
-            transitionVisibility(binding.textviewAddAssigneeName, if (binding.textviewAddAssigneeName.isVisible) View.GONE else View.VISIBLE)
-            transitionVisibility(binding.editTextAddAssigneeName, if (binding.editTextAddAssigneeName.isVisible) View.GONE else View.VISIBLE)
+            transitionVisibility(binding.textviewAddAssigneeName, View.VISIBLE)
+            transitionVisibility(binding.editTextAddAssigneeName, View.VISIBLE)
+        }
+    }
+
+    private fun hideAssignee() {
+        with(binding.root as ViewGroup) {
+            transitionVisibility(binding.textviewAddAssigneeName, View.GONE)
+            transitionVisibility(binding.editTextAddAssigneeName, View.GONE)
         }
     }
 
     private fun ViewGroup.transitionVisibility(view: View, visibility: Int) {
         if (view.visibility != visibility) {
-            TransitionManager.beginDelayedTransition(this)
+            TransitionManager.beginDelayedTransition(this )
             view.visibility = visibility
         }
     }
 
     override fun showTaskAdded(successMessage: String) {
-        // nothing is passed
+        showToast(successMessage)
     }
 
-    override fun showError(error: Throwable) {
-        error.localizedMessage?.let { Log.i("TAG", it) }
+    override fun showError(error: IOException) {
+        showToast(error)
     }
 
     private fun hideBottomSheet() {

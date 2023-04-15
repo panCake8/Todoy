@@ -1,9 +1,11 @@
 package com.tahaproject.todoy_app.ui.addtask.presenter
 
-interface AddNewTaskContract {
+import okio.IOException
+
+interface IAddNewTaskContract {
     interface View {
         fun showTaskAdded(successMessage: String)
-        fun showError(error: Throwable)
+        fun showError(error: IOException)
     }
 
     interface Presenter {

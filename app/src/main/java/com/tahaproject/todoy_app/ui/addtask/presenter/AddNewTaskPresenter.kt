@@ -5,12 +5,13 @@ import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
 import com.tahaproject.todoy_app.data.domain.requests.PersonalTodoRequest
 import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
 import com.tahaproject.todoy_app.util.Constants
+import java.io.IOException
 
 class AddNewTaskPresenter(
-    private val view: AddNewTaskContract.View,
+    private val view: IAddNewTaskContract.View,
     private val personalTodoApi: PersonalTodoApiImpl,
     private val teamTodoApi: TeamTodoApiImpl
-) : AddNewTaskContract.Presenter {
+) : IAddNewTaskContract.Presenter {
 
     override fun addPersonalTask(title: String, description: String) {
         val personalTodo = PersonalTodoRequest.PersonalTodo(
@@ -35,7 +36,7 @@ class AddNewTaskPresenter(
             creationTime = DEFAULT_CREATION_TIME
         )
 
-        val teamTodoRequest = TeamTodoRequest(teamTodo, Constants.ADDED, true)
+        val teamTodoRequest = TeamTodoRequest(teamTodo, Constants.ADDED, false)
 
         teamTodoApi.createTeamTodo(teamTodoRequest, ::onTaskSuccess, ::onTaskFailed)
     }
@@ -44,8 +45,8 @@ class AddNewTaskPresenter(
         view.showTaskAdded(successMessage)
     }
 
-    private fun onTaskFailed(throwable: Throwable) {
-        view.showError(throwable)
+    private fun onTaskFailed(error: IOException) {
+        view.showError(error)
     }
 
     companion object {
