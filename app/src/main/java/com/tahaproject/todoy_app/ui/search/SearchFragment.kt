@@ -8,11 +8,11 @@ import com.mindorks.editdrawabletext.DrawablePosition
 import com.mindorks.editdrawabletext.onDrawableClickListener
 import com.tahaproject.todoy_app.databinding.FragmentSearchBinding
 import com.tahaproject.todoy_app.ui.baseview.BaseFragment
-import com.tahaproject.todoy_app.ui.search.presenter.IPersonalContract
-import com.tahaproject.todoy_app.ui.search.presenter.PersonalPresenter
+import com.tahaproject.todoy_app.ui.search.presenter.ISearchContract
+import com.tahaproject.todoy_app.ui.search.presenter.SearchPresenter
 import java.io.IOException
 
-class SearchFragment (override val presenter: PersonalPresenter): BaseFragment<PersonalPresenter,FragmentSearchBinding,>(),IPersonalContract.ISearchView {
+class SearchFragment (override val presenter: SearchPresenter): BaseFragment<SearchPresenter,FragmentSearchBinding,>(),ISearchContract.ISearchView {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchBinding
         get() = FragmentSearchBinding::inflate
 
