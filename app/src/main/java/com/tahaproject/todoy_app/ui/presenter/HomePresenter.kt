@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
-import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todos
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 
 
 class HomePresenter(private val context: Context) :
@@ -13,8 +13,8 @@ class HomePresenter(private val context: Context) :
     private val personalTodoApiImpl = PersonalTodoApi(context)
     private val teamTodoApi = TeamTodoApi(context)
 
-    lateinit var personalData: List<Todos>
-    lateinit var teamData: List<Todos>
+    lateinit var personalData: List<Todo>
+    lateinit var teamData: List<Todo>
 
     override fun fetchPersonalData() {
         view?.let { view ->
