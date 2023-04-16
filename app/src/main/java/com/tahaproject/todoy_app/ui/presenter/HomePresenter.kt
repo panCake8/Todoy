@@ -1,50 +1,19 @@
-package com.tahaproject.todoy_app.ui.presenter
+import com.tahaproject.todoy_app.ui.presenter.HomeContract
+
 
 import android.content.Context
-<<<<<<< HEAD
+import android.util.Log
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.IPersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
-import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
-import java.io.IOException
-
-
-class HomePresenter(private val view: IHomeContract.IView, context: Context) :
-    IHomeContract.IPresenter {
-    private val personalTodoApi: IPersonalTodoApi = PersonalTodoApi(context)
-    override fun fetchData() {
-        personalTodoApi.getPersonalTodos(::showData, ::showError, this)
-    }
-
-
-    private fun showData(personalTodosResponse: PersonalTodosResponse) {
-//        view.showData(personalTodosResponse)
-    }
-
-
-    private fun showError(ioException: IOException) {
-        view.showError(ioException)
-    }
-
-
-    override fun onUnauthorizedError() {
-        view.navigateToLoginScreen()
-    }
-
-
-    override fun onHome() {
-        view.navigateToHomeScreen()
-=======
-import android.util.Log
-import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
+import com.tahaproject.todoy_app.data.apiManger.teamTodo.ITeamTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 
 
-class HomePresenter(private val context: Context) :
+class HomePresenter(private val view: HomeContract.HomeView, token: String) :
     HomeContract.HomePresenter {
-    private var view: HomeContract.HomeView? = null
-    private val personalTodoApiImpl = PersonalTodoApi(context)
-    private val teamTodoApi = TeamTodoApi(context)
+    private val personalTodoApiImpl: IPersonalTodoApi = PersonalTodoApi(token)
+    private val teamTodoApi: ITeamTodoApi = TeamTodoApi(token)
 
     lateinit var personalData: List<Todo>
     lateinit var teamData: List<Todo>
@@ -75,13 +44,7 @@ class HomePresenter(private val context: Context) :
     }
 
 
-    override fun attach(homeView: HomeContract.HomeView) {
-        this.view = homeView
-    }
 
-    override fun deAttach() {
-        view = null
-    }
 
     override fun onUnauthorizedError() {
         view?.navigateToLoginScreen()
@@ -89,7 +52,6 @@ class HomePresenter(private val context: Context) :
 
     override fun onHome() {
         view?.navigateToHomeScreen()
->>>>>>> fix/develop-fix-conflict
     }
 
 }

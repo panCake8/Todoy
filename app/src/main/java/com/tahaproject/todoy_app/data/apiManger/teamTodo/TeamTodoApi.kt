@@ -19,11 +19,11 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class TeamTodoApi( context: Context) : ApiRequest(), ITeamTodoApi {
+class TeamTodoApi(token:String) : ApiRequest(), ITeamTodoApi {
     private val client =
         OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor())
-            .addInterceptor(TodoInterceptor(context))
+            .addInterceptor(TodoInterceptor(token))
             .addInterceptor(logInterceptor)
             .build()
 
