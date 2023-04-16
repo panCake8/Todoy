@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.base
+package com.tahaproject.todoy_app.ui.baseview
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VB : ViewBinding, T> : Fragment() {
+abstract class BaseFragment<T, VB : ViewBinding> : Fragment() {
     private var _binding: VB? = null
     val binding get() = _binding!!
     abstract val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> VB

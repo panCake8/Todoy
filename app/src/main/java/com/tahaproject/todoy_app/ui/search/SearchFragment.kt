@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import com.mindorks.editdrawabletext.DrawablePosition
 import com.mindorks.editdrawabletext.onDrawableClickListener
 import com.tahaproject.todoy_app.databinding.FragmentSearchBinding
+import com.tahaproject.todoy_app.ui.baseview.BaseFragment
+import com.tahaproject.todoy_app.ui.search.presenter.IPersonalContract
+import com.tahaproject.todoy_app.ui.search.presenter.PersonalPresenter
+import java.io.IOException
 
-class SearchFragment:BaseFragmentWithTransition<FragmentSearchBinding>() {
+class SearchFragment (override val presenter: PersonalPresenter): BaseFragment<PersonalPresenter,FragmentSearchBinding,>(),IPersonalContract.ISearchView {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchBinding
         get() = FragmentSearchBinding::inflate
 
@@ -25,5 +29,13 @@ class SearchFragment:BaseFragmentWithTransition<FragmentSearchBinding>() {
 
     object Const {
         const val FILTER_TAG = "newFilterTag"
+    }
+
+    override fun showData() {
+
+    }
+
+    override fun showError(error: IOException) {
+
     }
 }

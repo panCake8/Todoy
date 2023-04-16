@@ -13,7 +13,6 @@ import com.tahaproject.todoy_app.databinding.ActivityHomeBinding
 import com.tahaproject.todoy_app.ui.presenter.HomeContract
 import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.base.BaseActivity
-import com.tahaproject.todoy_app.ui.home.HomeFragment
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 

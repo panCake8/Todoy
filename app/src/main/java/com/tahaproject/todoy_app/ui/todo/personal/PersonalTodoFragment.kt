@@ -9,23 +9,15 @@ import com.tahaproject.todoy_app.ui.todo.ToDoFragment
 
 
 class PersonalTodoFragment : ToDoFragment<FragmentPersonalTodoBinding>() {
-    override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPersonalTodoBinding
+     val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPersonalTodoBinding
         get() = FragmentPersonalTodoBinding::inflate
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setup()
-        addCallBack()
-    }
 
     override fun setup() {
 
     }
 
     override fun addCallBack() {
-        binding.appBarPersonalTodo.setNavigationOnClickListener {
-            back()
-        }
+
     }
 
 
