@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import com.tahaproject.todoy_app.databinding.FragmentDetailsBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.todo.team.presenter.ITeamContract
 
-class DetailsTodoFragment : BaseFragment<FragmentDetailsBinding>() {
+class DetailsTodoFragment(override val presenter: ITeamContract.IView) : BaseFragment<ITeamContract.IView,FragmentDetailsBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailsBinding
         get() = FragmentDetailsBinding::inflate
 

@@ -8,8 +8,9 @@ import com.mindorks.editdrawabletext.DrawablePosition
 import com.mindorks.editdrawabletext.onDrawableClickListener
 import com.tahaproject.todoy_app.databinding.FragmentSearchBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.search.presenter.SearchPresenter
 
-class SearchFragment:BaseFragment<FragmentSearchBinding>() {
+class SearchFragment(override val presenter: SearchPresenter) :BaseFragment<SearchPresenter,FragmentSearchBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchBinding
         get() = FragmentSearchBinding::inflate
 

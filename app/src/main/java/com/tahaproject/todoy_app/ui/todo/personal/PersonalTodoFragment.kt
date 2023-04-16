@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.databinding.FragmentPersonalTodoBinding
 import com.tahaproject.todoy_app.ui.todo.ToDoFragment
+import com.tahaproject.todoy_app.ui.todo.team.presenter.ITeamContract
 
 
-class PersonalTodoFragment : ToDoFragment<FragmentPersonalTodoBinding>() {
+class PersonalTodoFragment(override val presenter: ITeamContract.IView) : ToDoFragment<FragmentPersonalTodoBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPersonalTodoBinding
         get() = FragmentPersonalTodoBinding::inflate
 
