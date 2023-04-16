@@ -2,14 +2,14 @@ package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
 import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.requests.PersonalTodoUpdateRequest
-import com.tahaproject.todoy_app.data.requests.PersonalTodoRequest
-import com.tahaproject.todoy_app.data.responses.PersonalTodoUpdateResponse
-import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
-import com.tahaproject.todoy_app.ui.presenter.HomePresenter
+import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
+import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.ui.presenter.HomeContract
+
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -19,19 +19,20 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class PersonalTodoApi(context: Context) : ApiRequest(), IPersonalTodoApi {
+class PersonalTodoApi( context: Context) : ApiRequest(), IPersonalTodoApi {
     private val client =
-        OkHttpClient.Builder().addInterceptor(AuthInterceptor())
+        OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor())
             .addInterceptor(TodoInterceptor(context))
             .addInterceptor(logInterceptor)
             .build()
 
     override fun createPersonalTodo(
-        personalTodoRequest: PersonalTodoRequest, onSuccess: (String) -> Unit,
+        personalTodoRequest: SingleTodoTask, onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
-        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, personalTodoRequest.value.title)
-            .add(Constants.Todo.DESCRIPTION, personalTodoRequest.value.description)
+        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, personalTodoRequest.title)
+            .add(Constants.Todo.DESCRIPTION, personalTodoRequest.description)
             .build()
         val request = postRequest(formBody, Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
@@ -41,7 +42,7 @@ class PersonalTodoApi(context: Context) : ApiRequest(), IPersonalTodoApi {
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, PersonalTodoRequest::class.java)
+                    gson.fromJson(jsonString, SingleTodoTask::class.java)
                 }
                 onSuccess(Constants.ADDED)
             }
@@ -51,8 +52,8 @@ class PersonalTodoApi(context: Context) : ApiRequest(), IPersonalTodoApi {
     }
 
     override fun getPersonalTodos(
-        onSuccess: (PersonalTodosResponse) -> Unit,
-        onFailed: (IOException) -> Unit, presenter: HomePresenter
+        onSuccess: (ToDosResponse) -> Unit,
+        onFailed: (IOException) -> Unit, presenter: HomeContract.HomePresenter
     ) {
         val request = getRequest(Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
@@ -67,7 +68,7 @@ class PersonalTodoApi(context: Context) : ApiRequest(), IPersonalTodoApi {
                 presenter.onHome()
                 response.body?.string().let { jsonString ->
                     val personalTodosResponse =
-                        gson.fromJson(jsonString, PersonalTodosResponse::class.java)
+                        gson.fromJson(jsonString, ToDosResponse::class.java)
                     onSuccess(personalTodosResponse)
                 }
             }
@@ -77,7 +78,7 @@ class PersonalTodoApi(context: Context) : ApiRequest(), IPersonalTodoApi {
     }
 
     override fun updatePersonalTodosStatus(
-        personalTodoUpdateRequest: PersonalTodoUpdateRequest,
+        personalTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
@@ -92,7 +93,7 @@ class PersonalTodoApi(context: Context) : ApiRequest(), IPersonalTodoApi {
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, PersonalTodoUpdateResponse::class.java)
+                    gson.fromJson(jsonString, ToDosResponse::class.java)
                 }
                 onSuccess(Constants.UPDATED)
             }

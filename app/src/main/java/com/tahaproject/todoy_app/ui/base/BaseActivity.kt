@@ -5,7 +5,12 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<T, VB : ViewBinding> : AppCompatActivity() {
+
+
+
+
+abstract class BaseActivity<VB : ViewBinding,T> : AppCompatActivity() {
+
     lateinit var binding: VB
     abstract val bindingInflate: (LayoutInflater) -> VB
     abstract val presenter: T

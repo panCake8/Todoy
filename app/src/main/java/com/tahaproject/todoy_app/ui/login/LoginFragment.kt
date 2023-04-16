@@ -7,23 +7,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.data.requests.LoginRequest
-import com.tahaproject.todoy_app.data.responses.LoginResponse
+import com.tahaproject.todoy_app.data.models.requests.LoginRequest
+import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.HomeActivity
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.login.presenter.ILoginContract
+import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
 import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class LoginFragment : BaseFragment<LoginPresenter, FragmentLoginBinding>(),
-    ILoginContract.ILoginView {
-    override val presenter: LoginPresenter
-        get() = LoginPresenter(this)
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(),
+    LoginContract.IView {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
         get() = FragmentLoginBinding::inflate
+    override val presenter: LoginPresenter
+        get() = LoginPresenter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +34,9 @@ class LoginFragment : BaseFragment<LoginPresenter, FragmentLoginBinding>(),
         binding.loginButton.setOnClickListener {
             val username = binding.editTextUsername.text.toString()
             val password = binding.editTextPassword.text.toString()
+            presenter.validateUserName(username)
+            presenter.validateUserName(password)
+            login(username,password)
             if (!validateUserName(username))
                 binding.editTextUsername.error = "You have to enter Your user name"
             else if (!validatePassword(password))
@@ -59,7 +62,8 @@ class LoginFragment : BaseFragment<LoginPresenter, FragmentLoginBinding>(),
     override fun showData(loginResponse: LoginResponse) {
         requireActivity().runOnUiThread {
             if (loginResponse.isSuccess) {
-                SharedPreferenceUtil(requireContext()).saveToken(loginResponse.value.token)
+                // TODO see if this is correct when make it empty if null
+                SharedPreferenceUtil(requireContext()).saveToken(loginResponse.value.token ?: "")
                 parentFragmentManager.popBackStack()
                 goToHome()
             } else
@@ -79,7 +83,13 @@ class LoginFragment : BaseFragment<LoginPresenter, FragmentLoginBinding>(),
         }
     }
 
+    override fun showMessage(message: String) {
+        binding.editTextUsername.error = message
+    }
+
     companion object {
         const val WRONG_USER = "Wrong User"
     }
+
+
 }

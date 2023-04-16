@@ -12,6 +12,7 @@ abstract class BaseFragment<T, VB : ViewBinding> : Fragment() {
     abstract val presenter: T
     val binding get() = _binding!!
     abstract val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> VB
+    abstract val presenter: T
 
     override fun onCreateView(
         inflater: LayoutInflater,

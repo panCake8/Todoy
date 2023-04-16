@@ -3,12 +3,13 @@ package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
 import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
-import com.tahaproject.todoy_app.data.requests.TeamTodoRequest
-import com.tahaproject.todoy_app.data.requests.TeamTodoUpdateRequest
-import com.tahaproject.todoy_app.data.responses.TeamToDosResponse
-import com.tahaproject.todoy_app.data.responses.TeamTodoUpdateResponse
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
+import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
+import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.ui.presenter.HomeContract
+
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -18,20 +19,22 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class TeamTodoApi(context: Context) : ApiRequest(), ITeamTodoApi {
+class TeamTodoApi( context: Context) : ApiRequest(), ITeamTodoApi {
     private val client =
-        OkHttpClient.Builder().addInterceptor(AuthInterceptor())
-            .addInterceptor(TodoInterceptor(context)).addInterceptor(logInterceptor)
+        OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor())
+            .addInterceptor(TodoInterceptor(context))
+            .addInterceptor(logInterceptor)
             .build()
 
     override fun createTeamTodo(
-        teamTodoRequest: TeamTodoRequest,
+        teamTodoRequest: SingleTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
-        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, teamTodoRequest.value.title)
-            .add(Constants.Todo.DESCRIPTION, teamTodoRequest.value.description)
-            .add(Constants.Todo.ASSIGNEE, teamTodoRequest.value.assignee)
+        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, teamTodoRequest.title)
+            .add(Constants.Todo.DESCRIPTION, teamTodoRequest.description)
+            .add(Constants.Todo.ASSIGNEE, teamTodoRequest.assignee)
 
             .build()
         val request = postRequest(formBody, Constants.EndPoints.teamTodo)
@@ -42,7 +45,7 @@ class TeamTodoApi(context: Context) : ApiRequest(), ITeamTodoApi {
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, TeamTodoRequest::class.java)
+                    gson.fromJson(jsonString, SingleTodoTask::class.java)
                 }
                 onSuccess(Constants.ADDED)
             }
@@ -52,8 +55,9 @@ class TeamTodoApi(context: Context) : ApiRequest(), ITeamTodoApi {
     }
 
     override fun getTeamTodos(
-        onSuccess: (TeamToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit
+        onSuccess: (ToDosResponse) -> Unit,
+        onFailed: (IOException) -> Unit,
+        homePresenter: HomeContract.HomePresenter
     ) {
         val request = getRequest(Constants.EndPoints.teamTodo)
         client.newCall(request).enqueue(object : Callback {
@@ -63,7 +67,7 @@ class TeamTodoApi(context: Context) : ApiRequest(), ITeamTodoApi {
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    val teamTodosResponse = gson.fromJson(jsonString, TeamToDosResponse::class.java)
+                    val teamTodosResponse = gson.fromJson(jsonString, ToDosResponse::class.java)
                     onSuccess(teamTodosResponse)
                 }
             }
@@ -73,7 +77,7 @@ class TeamTodoApi(context: Context) : ApiRequest(), ITeamTodoApi {
 
 
     override fun updateTeamTodosStatus(
-        teamTodoUpdateRequest: TeamTodoUpdateRequest,
+        teamTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
@@ -88,7 +92,7 @@ class TeamTodoApi(context: Context) : ApiRequest(), ITeamTodoApi {
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, TeamTodoUpdateResponse::class.java)
+                    gson.fromJson(jsonString, ToDosResponse::class.java)
                 }
                 onSuccess(Constants.UPDATED)
 

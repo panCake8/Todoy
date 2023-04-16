@@ -5,30 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.BuildConfig
-import com.tahaproject.todoy_app.data.requests.SignUpRequest
-import com.tahaproject.todoy_app.data.responses.SignUpResponse
+import com.tahaproject.todoy_app.R
+import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
+import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse
+import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.signup.presenter.ISignUpContract
+import com.tahaproject.todoy_app.ui.signup.presenter.SignUpContract
 import com.tahaproject.todoy_app.ui.signup.presenter.SignUpPresenter
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class SignUpFragment : BaseFragment<SignUpPresenter, FragmentSignupBinding>(),
-    ISignUpContract.IView {
-    override val presenter: SignUpPresenter
-        get() = SignUpPresenter(this)
+class SignUpFragment : BaseFragment<SignUpPresenter, FragmentSignupBinding, >(), SignUpContract.View {
+
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
         get() = FragmentSignupBinding::inflate
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUp()
     }
 
     private fun setUp() {
-
+        presenter.attach(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +45,7 @@ class SignUpFragment : BaseFragment<SignUpPresenter, FragmentSignupBinding>(),
     }
 
     private fun goToLogin() {
-//        back()
+
     }
 
     private fun onSignUp() {
@@ -103,10 +102,17 @@ class SignUpFragment : BaseFragment<SignUpPresenter, FragmentSignupBinding>(),
 //        )
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.deAttach()
+    }
+
     companion object {
         const val SHORT_NAME = 4
         const val SHORT_PASSWORD = 8
         const val ALREADY_USED = "Already Used!"
     }
-}
 
+    override val presenter: SignUpPresenter
+        get() = SignUpPresenter()
+}
