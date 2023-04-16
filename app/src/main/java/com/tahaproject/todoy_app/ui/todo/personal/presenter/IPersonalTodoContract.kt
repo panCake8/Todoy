@@ -6,16 +6,16 @@ import java.io.IOException
 
 interface IPersonalTodoContract {
 
-    interface  IPersonalTodoView{
+    interface  IView{
 
-        fun showData(toDosResponse: ToDosResponse)
+        fun showTodos(toDosResponse: ToDosResponse)
 
         fun showError(error: IOException)
     }
 
 
-    interface IPersonalTodoPresenter{
+    interface IPresenter{
 
-        fun fetch(singleTodoTask: SingleTodoTask)
+        fun fetchData(singleTodoTask: SingleTodoTask)
     }
 }

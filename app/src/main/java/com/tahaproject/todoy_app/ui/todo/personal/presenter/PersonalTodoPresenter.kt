@@ -8,21 +8,21 @@ import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosRe
 import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import java.io.IOException
 
-class PersonalTodoPresenter(private val view: IPersonalTodoContract.IPersonalTodoView):
-    IPersonalTodoContract.IPersonalTodoPresenter{
+class PersonalTodoPresenter(private val view: IPersonalTodoContract.IView):
+    IPersonalTodoContract.IPresenter{
     private lateinit var context: Context
     private lateinit var homePresenter: HomePresenter
     private val personalTodoRequestImpl: IPersonalTodoApi = PersonalTodoApiImpl(context)
 
 
-    override fun fetch(singleTodoTask: SingleTodoTask) {
-        personalTodoRequestImpl.getPersonalTodos(::showData,::showError, homePresenter)
+    override fun fetchData(singleTodoTask: SingleTodoTask) {
+        personalTodoRequestImpl.getPersonalTodos(::showTodos,::showError, homePresenter)
     }
 
 
 
-    private fun showData(toDosResponse: ToDosResponse) {
-        view.showData(toDosResponse)
+    private fun showTodos(toDosResponse: ToDosResponse) {
+        view.showTodos(toDosResponse)
     }
 
 
