@@ -1,29 +1,30 @@
 package com.tahaproject.todoy_app.ui.login.presenter
 
+import com.tahaproject.todoy_app.data.apiManger.auth.login.ILoginApi
 import com.tahaproject.todoy_app.data.apiManger.auth.login.LoginApi
 import com.tahaproject.todoy_app.data.models.requests.LoginRequest
+import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
+import java.io.IOException
 
 
-class LoginPresenter :
-    LoginContract.LoginPresenter {
-    private var view: LoginContract.LoginView? = null
-    private val loginRequestApiImpl = LoginApi()
-    override fun fetchData(loginRequest: LoginRequest) {
-        view?.let { view ->
-            loginRequestApiImpl.login(loginRequest, { loginResponse ->
-                view.showData(loginResponse)
-            }, { ioException ->
-                view.showError(ioException)
-            })
-        }
+class LoginPresenter(private val view: LoginContract.IView) : LoginContract.IPresenter {
+    private val loginRequestApiImpl: ILoginApi = LoginApi()
+    override fun fetchToken(loginRequest: LoginRequest) {
+        loginRequestApiImpl.login(loginRequest, ::getToken, ::showError)
     }
 
-    override fun attach(loginView: LoginContract.LoginView) {
-        this.view = loginView
+    override fun validateUserName(userName: String) {
+        if (userName.isEmpty())
+            view.showMessage("You should fill inputs")
+
     }
 
-    override fun deAttach() {
-        view = null
+    private fun getToken(loginResponse: LoginResponse) {
+        view.getToken(loginResponse.value.token.toString())
+    }
+
+    private fun showError(ioException: IOException) {
+        view.showError(ioException)
     }
 
 }

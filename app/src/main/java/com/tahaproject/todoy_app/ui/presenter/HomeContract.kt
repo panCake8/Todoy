@@ -13,8 +13,6 @@ interface HomeContract {
     interface HomePresenter {
         fun fetchPersonalData()
         fun fetchTeamData()
-        fun attach(homeView: HomeView)
-        fun deAttach()
         fun onUnauthorizedError()
         fun onHome()
     }

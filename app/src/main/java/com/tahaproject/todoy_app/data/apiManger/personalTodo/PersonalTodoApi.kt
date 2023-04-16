@@ -1,6 +1,5 @@
 package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
-import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
@@ -18,11 +17,11 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class PersonalTodoApi( context: Context) : ApiRequest(), IPersonalTodoApi {
+class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
     private val client =
         OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor())
-            .addInterceptor(TodoInterceptor(context))
+            .addInterceptor(TodoInterceptor(token))
             .addInterceptor(logInterceptor)
             .build()
 

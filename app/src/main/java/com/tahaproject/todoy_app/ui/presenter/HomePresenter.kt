@@ -1,23 +1,23 @@
 package com.tahaproject.todoy_app.ui.presenter
 
-import android.content.Context
 import android.util.Log
+import com.tahaproject.todoy_app.data.apiManger.personalTodo.IPersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
+import com.tahaproject.todoy_app.data.apiManger.teamTodo.ITeamTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 
 
-class HomePresenter(private val context: Context) :
+class HomePresenter(private val view: HomeContract.HomeView, token: String) :
     HomeContract.HomePresenter {
-    private var view: HomeContract.HomeView? = null
-    private val personalTodoApiImpl = PersonalTodoApi(context)
-    private val teamTodoApi = TeamTodoApi(context)
+    private val personalTodoApiImpl: IPersonalTodoApi = PersonalTodoApi(token)
+    private val teamTodoApi: ITeamTodoApi = TeamTodoApi(token)
 
     lateinit var personalData: List<Todo>
     lateinit var teamData: List<Todo>
 
     override fun fetchPersonalData() {
-        view?.let { view ->
+        view.let { view ->
             personalTodoApiImpl.getPersonalTodos({
                 personalData = it.value
                 Log.i("personalData", personalData.toString())
@@ -28,7 +28,7 @@ class HomePresenter(private val context: Context) :
     }
 
     override fun fetchTeamData() {
-        view?.let { view ->
+        view.let { view ->
             teamTodoApi.getTeamTodos({
                 teamData = it.value
                 Log.i("teamData", teamData.toString())
@@ -41,21 +41,12 @@ class HomePresenter(private val context: Context) :
         }
     }
 
-
-    override fun attach(homeView: HomeContract.HomeView) {
-        this.view = homeView
-    }
-
-    override fun deAttach() {
-        view = null
-    }
-
     override fun onUnauthorizedError() {
-        view?.navigateToLoginScreen()
+        view.navigateToLoginScreen()
     }
 
     override fun onHome() {
-        view?.navigateToHomeScreen()
+        view.navigateToHomeScreen()
     }
 
 }
