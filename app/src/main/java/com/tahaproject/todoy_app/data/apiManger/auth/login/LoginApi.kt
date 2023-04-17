@@ -11,35 +11,31 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
 
-class LoginApiImpl : ApiRequest() {
-    val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
-
-    fun login(
+class LoginApi : ApiRequest(), ILoginApi {
+    override fun login(
         loginRequest: LoginRequest,
-        onFailRequest: (e: IOException) -> Unit,
-        getResponse: (loginResponse: LoginResponse) -> LoginResponse
+        onSuccess: (LoginResponse) -> Unit,
+        onFailed: (IOException) -> Unit
     ) {
-        val credential = Credentials.basic(loginRequest.username, loginRequest.password)
-
-        val request = getRequest(Constants.URL + Constants.EndPoints.login).newBuilder()
-            .addHeader(Constants.AUTH, credential).build()
-
-        client.newCall(request).enqueue(object : Callback {
+        val credentials = Credentials.basic(loginRequest.username, loginRequest.password)
+        val loginClient = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
+        val request = getLoginRequest(Constants.EndPoints.login, credentials)
+        loginClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                onFailRequest(e)
+                onFailed(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
-                        val signUpResponse = gson.fromJson(jsonString, LoginResponse::class.java)
-                        getResponse(signUpResponse)
+                        val loginResponse = gson.fromJson(jsonString, LoginResponse::class.java)
+                        onSuccess(loginResponse)
                     }
+
                 }
 
             }
 
         })
     }
-
 }
