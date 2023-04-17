@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/margin_large"
@@ -125,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/recently_card_home_background"
+        android:backgroundTint="@color/card_todo_background"
         app:cardCornerRadius="@dimen/radius_large"
         app:cardElevation="@dimen/no_elevation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -222,14 +223,21 @@
                 android:id="@+id/text_view_recently_title"
 
                 style="@style/Text.TitleToDo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/recently_card_home_background"
                 android:fontFamily="@font/roboto"
                 android:text="@string/home_recently_card_title"
-                android:textSize="@dimen/text_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_assign_name"
+                style="@style/Text.AssignNameToDo"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:paddingHorizontal="@dimen/assignee_text_padding"
+                android:paddingVertical="@dimen/padding_small"
+                android:text="@string/assign_name"
+                app:layout_constraintBottom_toTopOf="@id/text_view_recently_body"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_view_recently_title" />
 
             <TextView
                 android:id="@+id/text_view_recently_body"

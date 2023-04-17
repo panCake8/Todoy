@@ -1,16 +1,20 @@
-package com.tahaproject.todoy_app.ui.home.homePresenter
+package com.tahaproject.todoy_app.ui.presenter
 
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import java.io.IOException
 
 
-interface HomeContract {
-    interface HomeView {
+interface IHomeContract {
+    interface IView {
+        fun showPersonalToDoData(personalTodoResponse : ToDosResponse)
+        fun showTeamToDoData(teamTodoResponse : ToDosResponse)
         fun navigateToLoginScreen()
         fun navigateToHomeScreen()
         fun showError(ioException: IOException)
     }
 
-    interface HomePresenter {
+    interface IPresenter {
         fun fetchPersonalData()
         fun fetchTeamData()
         fun onUnauthorizedError()
