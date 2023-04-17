@@ -3,7 +3,6 @@ package com.tahaproject.todoy_app.data.apiManger.personalTodo
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import java.io.IOException
 
 interface IPersonalTodoApi {
@@ -14,7 +13,7 @@ interface IPersonalTodoApi {
 
     fun getPersonalTodos(
         onSuccess: (ToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit, presenter: HomePresenter
+        onFailed: (IOException) -> Unit
     )
 
     fun updatePersonalTodosStatus(

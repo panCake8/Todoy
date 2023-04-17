@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.ui.home
 
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +17,13 @@ import com.tahaproject.todoy_app.data.FakeDataManager
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>() {
     private val fakeDataManager = FakeDataManager()
     private var makeAllTodosList: List<Todo> = emptyList()
 
@@ -152,11 +152,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
         return data
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
-    }
-
     // TODO: make others like this
     private val getPieChartDataList: List<PieEntry> = listOf(
         PieEntry(getDonePercentage(), Constants.DONE_STRING),
@@ -199,6 +194,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
     }
 
     override val presenter: HomePresenter
-        get() = HomePresenter(requireContext())
+        get() = HomePresenter("")
 
 }

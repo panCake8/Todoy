@@ -1,4 +1,5 @@
-package com.tahaproject.todoy_app.ui.presenter
+package com.tahaproject.todoy_app.ui.home.homePresenter
+
 
 import android.util.Log
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.IPersonalTodoApi
@@ -17,7 +18,7 @@ class HomePresenter(private val view: HomeContract.HomeView, token: String) :
     lateinit var teamData: List<Todo>
 
     override fun fetchPersonalData() {
-        view.let { view ->
+        view?.let { view ->
             personalTodoApiImpl.getPersonalTodos({
                 personalData = it.value
                 Log.i("personalData", personalData.toString())
@@ -28,7 +29,7 @@ class HomePresenter(private val view: HomeContract.HomeView, token: String) :
     }
 
     override fun fetchTeamData() {
-        view.let { view ->
+        view?.let { view ->
             teamTodoApi.getTeamTodos({
                 teamData = it.value
                 Log.i("teamData", teamData.toString())
@@ -41,12 +42,15 @@ class HomePresenter(private val view: HomeContract.HomeView, token: String) :
         }
     }
 
+
+
+
     override fun onUnauthorizedError() {
-        view.navigateToLoginScreen()
+        view?.navigateToLoginScreen()
     }
 
     override fun onHome() {
-        view.navigateToHomeScreen()
+        view?.navigateToHomeScreen()
     }
 
 }

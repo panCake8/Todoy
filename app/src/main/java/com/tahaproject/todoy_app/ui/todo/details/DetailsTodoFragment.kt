@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.databinding.FragmentDetailsBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.search.presenter.DeatilsPresenter
 
-class DetailsTodoFragment : BaseFragment<FragmentDetailsBinding>() {
+class DetailsTodoFragment(override val presenter: DeatilsPresenter) : BaseFragment<DeatilsPresenter, FragmentDetailsBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailsBinding
         get() = FragmentDetailsBinding::inflate
 
