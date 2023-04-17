@@ -14,7 +14,13 @@ class LoginPresenter(private val view: LoginContract.IView) : LoginContract.IPre
             loginRequestApiImpl.login(loginRequest,::onLoginSuccess,::onLoginFailed)
         }
         else{
-            validate(loginRequest)
+            if(loginRequest.username.isNullOrEmpty()){
+
+                view?.showInvalidMassage("please enter your username","")
+            }
+            else if(loginRequest.password.isNullOrEmpty()){
+                view?.showInvalidMassage("","please enter your password",)
+            }
         }
     }
 
@@ -26,15 +32,8 @@ class LoginPresenter(private val view: LoginContract.IView) : LoginContract.IPre
     }
 
     override fun validate(loginRequest: LoginRequest): Boolean {
-        return if(loginRequest.username.isNullOrEmpty()){
-            view?.showInvalidMassage("please enter username","")
-            false
-        } else if(loginRequest.password.isNullOrEmpty()){
-            view?.showInvalidMassage("","please enter password")
-            false
-        } else{
-            true
-        }
+        return loginRequest.username.isNotEmpty() &&
+                loginRequest.password.isNotEmpty()
 
     }
 
