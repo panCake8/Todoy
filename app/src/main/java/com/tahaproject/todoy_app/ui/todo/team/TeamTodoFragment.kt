@@ -24,5 +24,4 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding,TeamPresenter>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTeamTodoBinding
         get() = TODO("Not yet implemented")
 
-
 }
