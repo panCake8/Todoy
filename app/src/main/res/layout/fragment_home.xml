@@ -6,6 +6,7 @@
     android:layout_marginHorizontal="@dimen/margin_large"
     android:background="@color/background">
 
+<!--    TODO: adding recyclerview for home-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_text_search"

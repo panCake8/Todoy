@@ -1,7 +1,9 @@
 package com.tahaproject.todoy_app.ui.home
 
+import HomePresenter
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,34 +13,28 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.domain.responses.PersonalTodosResponse
+import com.tahaproject.todoy_app.data.FakeDataManager
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.search.SearchFragment
-import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
-import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
-import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
+import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
 
-class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
-    private var personalTodosResponse: PersonalTodosResponse.PersonalTodo? = null
+
+class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
+    private val fakeDataManager = FakeDataManager()
+    private var makeAllTodosList: List<Todo> = emptyList()
+
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        personalTodosResponse =
-//            arguments?.getParcelable(Constants.Home)!!
+        makeAllTodosList = presenter.personalData + presenter.teamData
+        Log.i("makeAllTodosList", makeAllTodosList.toString())
     }
-
-    private val getPieChartDataList: List<PieEntry> = listOf(
-        PieEntry(15f, "Done"),
-        PieEntry(60f, "In progress"),
-        PieEntry(35f, "Todo")
-    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,58 +48,58 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     private fun setListeners(binding: FragmentHomeBinding) {
         binding.viewAllTeam.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                TeamTodoFragment(),
-                TeamTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                TeamTodoFragment(),
+//                TeamTodoFragment::class.java.name
+//            )
         }
 
         binding.viewAllPersonal.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                PersonalTodoFragment(),
-                PersonalTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                PersonalTodoFragment(),
+//                PersonalTodoFragment::class.java.name
+//            )
 
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -113,7 +109,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     private fun renderPieChart(pieChart: PieChart) {
         setPieChartDesign(pieChart)
-        val dataSet = PieDataSet(getPieChartDataList, Constants.EMPTY_STRING)
+        val dataSet = PieDataSet(getPieChartDataList, "")
         pieChart.data = createFormattedPieData(dataSet, pieChart)
         pieChart.invalidate()
         pieChart.animateY(1500, Easing.EaseInOutQuad)
@@ -127,6 +123,7 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
             setEntryLabelColor(Color.WHITE)
             isDrawHoleEnabled = true
             description.isEnabled = false
+
             setPieChartLegendDesign(legend)
         }
 
@@ -142,7 +139,6 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
 
     }
 
-
     private fun createFormattedPieData(dataSet: PieDataSet, pieChart: PieChart): PieData {
         dataSet.colors = LABELS_COLORS
         dataSet.sliceSpace = 5f
@@ -156,14 +152,29 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
         return data
     }
 
-    fun showData(personalResponse: PersonalTodosResponse.PersonalTodo?) {
-        requireActivity().runOnUiThread {
-//            binding.textViewRecentlyTitle.text = personalResponse?.title
-//            binding.textViewRecentlyBody.text = personalResponse?.description
-//            binding.recentlyCardTime.text = personalResponse?.creationTime
-        }
+    // TODO: make others like this
+    private val getPieChartDataList: List<PieEntry> = listOf(
+        PieEntry(getDonePercentage(), Constants.DONE_STRING),
+        PieEntry(getInProgressPercentage(), Constants.IN_PROGRESS_STRING),
+        PieEntry(getTodoPercentage(), Constants.TODO_STRING)
+    )
 
-    }
+    private fun getTaskStatusCount(status: Int): Int =
+        makeAllTodosList.count { it.status == status }
+
+    private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
+    private fun getTodoPercentage() = getTodoCount().todoPercentage(makeAllTodosList.size)
+
+    private fun getDoneCount(): Int = getTaskStatusCount(Constants.DONE_STATUS)
+    private fun getDonePercentage() = getDoneCount().todoPercentage(makeAllTodosList.size)
+
+    private fun getInProgressCount(): Int = getTaskStatusCount(Constants.IN_PROGRESS_STATUS)
+    private fun getInProgressPercentage() =
+        getInProgressCount().todoPercentage(makeAllTodosList.size)
+
+    private fun Int.todoPercentage(totalCount: Int) =
+        (this.toFloat() / totalCount.toFloat()) * Constants.ONE_HUNDRED_PERCENT
+
 
     companion object {
         private val LABELS_COLORS = listOf(
@@ -173,11 +184,16 @@ class HomeFragment : BaseFragmentWithTransition<FragmentHomeBinding>() {
         )
         const val NEW_TASK_TAG = "newTaskTag"
 
-        fun newInstance(personalTodosResponse: PersonalTodosResponse.PersonalTodo) =
+        // TODO what to do here
+        fun newInstance(personalTodosResponse: ToDosResponse) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(Constants.Home, personalTodosResponse)
                 }
             }
     }
+
+    override val presenter: HomePresenter
+        get() = HomePresenter("")
+
 }

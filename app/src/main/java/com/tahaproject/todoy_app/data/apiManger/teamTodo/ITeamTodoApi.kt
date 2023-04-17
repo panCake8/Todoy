@@ -1,24 +1,26 @@
 package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
-import com.tahaproject.todoy_app.data.domain.requests.TeamTodoRequest
-import com.tahaproject.todoy_app.data.domain.requests.TeamTodoUpdateRequest
-import com.tahaproject.todoy_app.data.domain.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
+import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.ui.presenter.HomeContract
 import java.io.IOException
 
 interface ITeamTodoApi {
     fun createTeamTodo(
-        teamTodoRequest: TeamTodoRequest,
+        teamTodoRequest: SingleTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )
 
     fun getTeamTodos(
-        onSuccess: (TeamToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit
+        onSuccess: (ToDosResponse) -> Unit,
+        onFailed: (IOException) -> Unit,
+        homePresenter: HomeContract.HomePresenter
     )
 
     fun updateTeamTodosStatus(
-        teamTodoUpdateRequest: TeamTodoUpdateRequest,
+        teamTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )

@@ -6,28 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.BuildConfig
 import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.domain.requests.SignUpRequest
-import com.tahaproject.todoy_app.data.domain.responses.SignUpResponse
+import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
+import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse
+import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.login.LoginFragment
+import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.signup.presenter.SignUpContract
 import com.tahaproject.todoy_app.ui.signup.presenter.SignUpPresenter
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), SignUpContract.View {
-    private lateinit var presenter: SignUpPresenter
+class SignUpFragment : BaseFragment<SignUpPresenter, FragmentSignupBinding, >(), SignUpContract.View {
+
+
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
         get() = FragmentSignupBinding::inflate
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUp()
     }
 
     private fun setUp() {
-        presenter = SignUpPresenter()
         presenter.attach(this)
     }
 
@@ -46,7 +45,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
     }
 
     private fun goToLogin() {
-        back()
+
     }
 
     private fun onSignUp() {
@@ -95,12 +94,12 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
 
     private fun navigateToLoginScreen() {
         parentFragmentManager.popBackStack()
-        transitionTo(
-            false,
-            R.id.fragment_register_container,
-            LoginFragment(),
-            LoginFragment::class.java.name
-        )
+//        transitionTo(
+//            false,
+//            R.id.fragment_register_container,
+//            LoginFragment(),
+//            LoginFragment::class.java.name
+//        )
     }
 
     override fun onDestroy() {
@@ -113,5 +112,7 @@ class SignUpFragment : BaseFragmentWithTransition<FragmentSignupBinding>(), Sign
         const val SHORT_PASSWORD = 8
         const val ALREADY_USED = "Already Used!"
     }
-}
 
+    override val presenter: SignUpPresenter
+        get() = SignUpPresenter()
+}
