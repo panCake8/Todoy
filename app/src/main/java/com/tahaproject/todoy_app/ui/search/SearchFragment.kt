@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import com.mindorks.editdrawabletext.DrawablePosition
 import com.mindorks.editdrawabletext.onDrawableClickListener
 import com.tahaproject.todoy_app.databinding.FragmentSearchBinding
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
+import com.tahaproject.todoy_app.ui.base.BaseFragment
 
-class SearchFragment:BaseFragmentWithTransition<FragmentSearchBinding>() {
+class SearchFragment:BaseFragment<FragmentSearchBinding>() {
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchBinding
         get() = FragmentSearchBinding::inflate
 

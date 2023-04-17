@@ -1,31 +1,29 @@
 package com.tahaproject.todoy_app.ui.login
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.domain.requests.LoginRequest
-import com.tahaproject.todoy_app.data.domain.responses.LoginResponse
+import com.tahaproject.todoy_app.data.requests.LoginRequest
+import com.tahaproject.todoy_app.data.responses.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
-import com.tahaproject.todoy_app.ui.baseview.BaseFragmentWithTransition
-import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
-import com.tahaproject.todoy_app.ui.login.presenter.LoginLoginPresenter
-import com.tahaproject.todoy_app.ui.signup.SignUpFragment
+import com.tahaproject.todoy_app.ui.HomeActivity
+import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.login.presenter.ILoginContract
+import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
+import com.tahaproject.todoy_app.util.SharedPreferenceUtil
+import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginContract.LoginView {
+class LoginFragment : BaseFragment<LoginPresenter, FragmentLoginBinding>(),
+    ILoginContract.ILoginView {
+    override val presenter: LoginPresenter
+        get() = LoginPresenter(this)
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
         get() = FragmentLoginBinding::inflate
-    private lateinit var loginPresenter: LoginLoginPresenter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        loginPresenter = LoginLoginPresenter()
-        loginPresenter.attach(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,22 +34,43 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
         binding.loginButton.setOnClickListener {
             val username = binding.editTextUsername.text.toString()
             val password = binding.editTextPassword.text.toString()
-            loginPresenter.fetchData(LoginRequest(username, password))
+            if (!validateUserName(username))
+                binding.editTextUsername.error = "You have to enter Your user name"
+            else if (!validatePassword(password))
+                binding.editTextPassword.error = "You have to enter Password"
+            else login(username, password)
         }
         binding.textviewSignUp.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_register_container,
-                SignUpFragment(),
-                SignUpFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_register_container,
+//                SignUpFragment(),
+//                SignUpFragment::class.java.name
+//            )
         }
     }
 
-    override fun showData(contentLoginResponse: LoginResponse) {
+    private fun validateUserName(username: String) = username.isNotEmpty()
+    private fun validatePassword(password: String) = password.isNotEmpty()
+    private fun login(username: String, password: String) {
+        presenter.fetchData(LoginRequest(username, password))
+    }
+
+    override fun showData(loginResponse: LoginResponse) {
         requireActivity().runOnUiThread {
-            Log.i("TAG", contentLoginResponse.isSuccess.toString())
+            if (loginResponse.isSuccess) {
+                SharedPreferenceUtil(requireContext()).saveToken(loginResponse.value.token)
+                parentFragmentManager.popBackStack()
+                goToHome()
+            } else
+                showToast(WRONG_USER)
         }
+    }
+
+    private fun goToHome() {
+        val intent = Intent(requireActivity(), HomeActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     override fun showError(error: IOException) {
@@ -60,8 +79,7 @@ class LoginFragment : BaseFragmentWithTransition<FragmentLoginBinding>(), LoginC
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        loginPresenter.deAttach()
+    companion object {
+        const val WRONG_USER = "Wrong User"
     }
 }

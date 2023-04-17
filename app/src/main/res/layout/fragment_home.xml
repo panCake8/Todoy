@@ -293,12 +293,14 @@
         android:id="@+id/add_FAB"
         android:layout_width="@dimen/fab_size"
         android:layout_height="@dimen/fab_size"
+        android:layout_marginBottom="@dimen/margin_large"
         android:backgroundTint="@color/primary_color"
         android:elevation="@dimen/elevation_small"
         android:importantForAccessibility="no"
+        android:padding="@dimen/padding_medium"
         android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="@id/card_view_recently"
-        app:layout_constraintEnd_toEndOf="@id/card_view_recently"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
 
         app:tint="@color/background" />
 
