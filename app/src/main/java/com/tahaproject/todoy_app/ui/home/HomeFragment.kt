@@ -18,7 +18,7 @@ import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosRe
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.home.presenter.*
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import com.tahaproject.todoy_app.ui.presenter.IHomeContract
 import com.tahaproject.todoy_app.ui.register.RegisterActivity
 import com.tahaproject.todoy_app.ui.search.SearchFragment

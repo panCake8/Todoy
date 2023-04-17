@@ -2,25 +2,19 @@ package com.tahaproject.todoy_app.ui.register.signup.presenter
 
 import com.tahaproject.todoy_app.data.apiManger.auth.signup.SignUpApi
 import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
+import java.io.IOException
 
-class SignUpPresenter : SignUpContract.Presenter {
-    private var view: SignUpContract.View? = null
+class SignUpPresenter(private val view: SignUpContract.View) : SignUpContract.Presenter {
     private val signUpApi = SignUpApi()
     override fun fetchData(signUpRequest: SignUpRequest) {
-        view?.let { view ->
-            signUpApi.signUp(signUpRequest, { signUpResponse ->
-                view.showData(signUpResponse)
-            }, { ioException ->
-                view.showError(ioException)
-            }, this)
-        }
+        signUpApi.signUp(signUpRequest, ::showSuccessMessage, ::showErrorMessage)
     }
 
-    override fun attach(signUpView: SignUpContract.View) {
-        this.view = signUpView
+    private fun showSuccessMessage(message: String) {
+        view.showSuccessMessage(message)
     }
 
-    override fun deAttach() {
-        this.view = null
+    private fun showErrorMessage(error: IOException) {
+        view.showErrorMessage(error)
     }
 }

@@ -1,6 +1,5 @@
 package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
-import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
@@ -18,7 +17,7 @@ import java.io.IOException
 
 
 class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
-    private val client =
+    override val client =
         OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor())
             .addInterceptor(TodoInterceptor(token))
@@ -32,17 +31,21 @@ class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
         val formBody = FormBody.Builder().add(Constants.Todo.TITLE, personalTodoRequest.title)
             .add(Constants.Todo.DESCRIPTION, personalTodoRequest.description)
             .build()
+
         val request = postRequest(formBody, Constants.EndPoints.personalTodo)
+
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, SingleTodoTask::class.java)
+                if (response.isSuccessful) {
+                    response.body?.string().let { jsonString ->
+                        gson.fromJson(jsonString, SingleTodoTask::class.java)
+                    }
+                    onSuccess(Constants.ADDED)
                 }
-                onSuccess(Constants.ADDED)
             }
 
         })
@@ -51,23 +54,23 @@ class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
 
     override fun getPersonalTodos(
         onSuccess: (ToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit, presenter: HomePresenter
+        onFailed: (IOException) -> Unit
     ) {
         val request = getRequest(Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                if (e is UnAuthorizedException) {
-                    presenter.onUnauthorizedError()
-                }
+//                    presenter.onUnauthorizedError()
                 onFailed(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
-                presenter.onHome()
-                response.body?.string().let { jsonString ->
-                    val personalTodosResponse =
-                        gson.fromJson(jsonString, ToDosResponse::class.java)
-                    onSuccess(personalTodosResponse)
+//                presenter.onHome()
+                if (response.isSuccessful) {
+                    response.body?.string().let { jsonString ->
+                        val personalTodosResponse =
+                            gson.fromJson(jsonString, ToDosResponse::class.java)
+                        onSuccess(personalTodosResponse)
+                    }
                 }
             }
 
@@ -83,17 +86,21 @@ class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
         val formBody = FormBody.Builder().add(Constants.Todo.ID, personalTodoUpdateRequest.id)
             .add(Constants.Todo.STATUS, personalTodoUpdateRequest.status.toString())
             .build()
+
         val request = putRequest(formBody, Constants.EndPoints.personalTodo)
+
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, ToDosResponse::class.java)
+                if (response.isSuccessful) {
+                    response.body?.string().let { jsonString ->
+                        gson.fromJson(jsonString, ToDosResponse::class.java)
+                    }
+                    onSuccess(Constants.UPDATED)
                 }
-                onSuccess(Constants.UPDATED)
             }
 
         })

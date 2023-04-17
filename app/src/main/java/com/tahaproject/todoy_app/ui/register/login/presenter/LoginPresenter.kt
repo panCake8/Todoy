@@ -16,7 +16,6 @@ class LoginPresenter(private val view: LoginContract.IView) : LoginContract.IPre
     override fun validateUserName(userName: String) {
         if (userName.isEmpty())
             view.showMessage("You should fill inputs")
-
     }
 
     private fun getToken(loginResponse: LoginResponse) {

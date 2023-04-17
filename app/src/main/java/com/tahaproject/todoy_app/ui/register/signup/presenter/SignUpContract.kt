@@ -6,13 +6,11 @@ import java.io.IOException
 
 interface SignUpContract {
     interface View {
-        fun showData(signUpResponse: SignUpResponse)
-        fun showError(error: IOException)
+        fun showSuccessMessage(message:String)
+        fun showErrorMessage(error: IOException)
     }
 
     interface Presenter {
         fun fetchData(signUpRequest: SignUpRequest)
-        fun attach(signUpView: View)
-        fun deAttach()
     }
 }
