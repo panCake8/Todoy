@@ -9,6 +9,7 @@ import com.tahaproject.todoy_app.data.models.requests.LoginRequest
 import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.home.HomeFragment
 import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
 import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
 import com.tahaproject.todoy_app.ui.register.signup.SignUpFragment
@@ -27,25 +28,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        onLogin()
+        onClickLoginButton()
         goToSignUp()
 
     }
 
-    private fun onLogin() {
+    private fun onClickLoginButton() {
 
         binding.loginButton.setOnClickListener {
             val username = binding.editTextUsername.text.toString()
             val password = binding.editTextPassword.text.toString()
             presenter.fetchData(LoginRequest(username, password))
-
         }
     }
     private fun goToSignUp(){
         binding.textviewSignUp.setOnClickListener {
             parentFragmentManager.commit {
                 replace(R.id.fragment_register_container, SignUpFragment())
-                addToBackStack(SIGNUP)
                 setReorderingAllowed(true)
             }
         }
@@ -54,7 +53,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
     override fun onSuccess(loginResponse: LoginResponse) {
         requireActivity().runOnUiThread {
             if (loginResponse.isSuccess) {
-                //go to home screen
+
+                parentFragmentManager.commit {
+                    replace(R.id.fragment_home_container, HomeFragment())
+                    setReorderingAllowed(true)
+                }
+
             } else showToast(SUCCESS_LOGIN)
         }
     }
@@ -79,6 +83,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
         const val SUCCESS_LOGIN = "success login"
 
     }
-
-
 }
