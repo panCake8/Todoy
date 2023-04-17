@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.login
+package com.tahaproject.todoy_app.ui.register.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,7 @@ import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
 import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
 import com.tahaproject.todoy_app.ui.register.signup.SignUpFragment
+import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
@@ -44,7 +45,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
         binding.textviewSignUp.setOnClickListener {
             parentFragmentManager.commit {
                 replace(R.id.fragment_register_container, SignUpFragment())
-                addToBackStack("signup")
+                addToBackStack(SIGNUP)
                 setReorderingAllowed(true)
             }
         }
@@ -69,9 +70,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
         binding.editTextPassword.error = passwordMassage
     }
 
+    override fun getToken(token: String?) {
+       SharedPreferenceUtil(requireContext()).saveToken(token!!)
+    }
+
     companion object {
-        const val INCORRECT_INPUT = "your username or password is incorrect"
+        const val SIGNUP = "signup"
         const val SUCCESS_LOGIN = "success login"
+
     }
 
 
