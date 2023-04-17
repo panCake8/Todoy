@@ -7,12 +7,11 @@ import androidx.fragment.app.commit
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.requests.LoginRequest
 import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
-
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
 import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
-import com.tahaproject.todoy_app.ui.signup.SignUpFragment
+import com.tahaproject.todoy_app.ui.register.signup.SignUpFragment
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
@@ -44,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
     private fun goToSignUp(){
         binding.textviewSignUp.setOnClickListener {
             parentFragmentManager.commit {
-                replace(R.id.fragment_register_container,SignUpFragment())
+                replace(R.id.fragment_register_container, SignUpFragment())
                 addToBackStack("signup")
                 setReorderingAllowed(true)
             }
