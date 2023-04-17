@@ -77,39 +77,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                true,
-                R.id.fragment_home_container,
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                true,
+//                R.id.fragment_home_container,
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.addFAB.setOnClickListener {
