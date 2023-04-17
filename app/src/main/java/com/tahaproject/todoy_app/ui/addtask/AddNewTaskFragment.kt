@@ -7,18 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApiImpl
-import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
+import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
+import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
 import com.tahaproject.todoy_app.ui.addtask.presenter.IAddNewTaskContract
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskPresenter
-import com.tahaproject.todoy_app.ui.baseview.BaseBottomSheetDialogFragment
+import com.tahaproject.todoy_app.ui.base.BaseBottomSheetDialogFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
 
-class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>(), IAddNewTaskContract.View {
+class AddNewTaskFragment(val token: String) : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>(), IAddNewTaskContract.View {
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddNewTaskBinding
         get() = FragmentAddNewTaskBinding::inflate
@@ -30,12 +30,11 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addNewTaskPresenter = AddNewTaskPresenter(this, PersonalTodoApiImpl(requireContext()), TeamTodoApiImpl(requireContext()))
+        addNewTaskPresenter = AddNewTaskPresenter(this, PersonalTodoApi(token) , TeamTodoApi(token))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         chooseGroup()
         addCallback()
