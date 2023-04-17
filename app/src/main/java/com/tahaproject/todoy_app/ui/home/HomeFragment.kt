@@ -19,20 +19,24 @@ import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.presenter.IHomeContract
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
+import java.io.IOException
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
     private val fakeDataManager = FakeDataManager()
     private var makeAllTodosList: List<Todo> = emptyList()
+    override val presenter: HomePresenter
+        get() = HomePresenter(this, requireContext())
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        makeAllTodosList = presenter.personalData + presenter.teamData
+//        makeAllTodosList = presenter.personalData + presenter.teamData
         Log.i("makeAllTodosList", makeAllTodosList.toString())
     }
 
@@ -154,7 +158,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.deAttach()
     }
 
     // TODO: make others like this
@@ -198,7 +201,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
             }
     }
 
-    override val presenter: HomePresenter
-        get() = HomePresenter(requireContext())
+    // TODO navigate to login screen
+    override fun navigateToLoginScreen() {
+    }
+
+    override fun showPersonalData(personalData: ToDosResponse) {
+        binding.text.text = presenter.personalData1.last().title
+
+//        binding.personalTodos = personalData.value
+//        binding.teamTodos = teamData.value
+    }
+
+    override fun showTeamData(teamData: ToDosResponse) {
+        binding.textViewTeam.text = presenter.teamData1.last().title
+//        binding.personalTodos = personalData.value
+//        binding.teamTodos = teamData.value
+    }
+
+
+    override fun showError(ioException: IOException) {
+        // TODO show error
+        Log.i("error", ioException.message.toString())
+    }
 
 }

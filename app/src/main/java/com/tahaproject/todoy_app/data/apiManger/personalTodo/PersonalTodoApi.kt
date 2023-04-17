@@ -64,7 +64,6 @@ class PersonalTodoApi( context: Context) : ApiRequest(), IPersonalTodoApi {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                presenter.onHome()
                 response.body?.string().let { jsonString ->
                     val personalTodosResponse =
                         gson.fromJson(jsonString, ToDosResponse::class.java)
