@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.ui.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,39 +12,42 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.tahaproject.todoy_app.data.FakeDataManager
+import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.responses.TeamToDosResponse
+import com.tahaproject.todoy_app.data.responses.TeamTodoUpdateResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.presenter.IHomeContract
-import com.tahaproject.todoy_app.ui.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.activities.RegisterActivity
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
+import com.tahaproject.todoy_app.ui.home.presenter.*
+import com.tahaproject.todoy_app.ui.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.presenter.IHomeContract
+import com.tahaproject.todoy_app.ui.search.SearchFragment
+import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
+import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
+import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
+import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
+class HomeFragment : BaseFragment<HomePresenter,FragmentHomeBinding>(), IHomeContract.IView {
 
-class HomeFragment : BaseFragment<HomePresenter, FragmentHomeBinding>(), IHomeContract.IView {
-
-    private val fakeDataManager = FakeDataManager()
     private lateinit var personalTodosResponse: PersonalTodosResponse.PersonalTodo
-    override val presenter: HomePresenter
-        get() = TODO()
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        personalTodosResponse =
-//            arguments?.getParcelable(Constants.Home)!!
+        presenter = HomePresenter()
+        presenter.attach(this)
+        presenter.fetchData()
     }
 
-
     private val getPieChartDataList: List<PieEntry> = listOf(
-        PieEntry(getDonePercentage(), Constants.DONE_STRING),
-        PieEntry(getInProgressPercentage(), Constants.IN_PROGRESS_STRING),
-        PieEntry(getTodoPercentage(), Constants.TODO_STRING)
+        PieEntry(15f, "Done"),
+        PieEntry(60f, "In progress"),
+        PieEntry(35f, "Todo")
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,58 +62,58 @@ class HomeFragment : BaseFragment<HomePresenter, FragmentHomeBinding>(), IHomeCo
 
     private fun setListeners(binding: FragmentHomeBinding) {
         binding.viewAllTeam.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                TeamTodoFragment(),
-//                TeamTodoFragment::class.java.name
-//            )
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                TeamTodoFragment(),
+                TeamTodoFragment::class.java.name
+            )
         }
 
         binding.viewAllPersonal.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                PersonalTodoFragment(),
-//                PersonalTodoFragment::class.java.name
-//            )
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                PersonalTodoFragment(),
+                PersonalTodoFragment::class.java.name
+            )
 
         }
 
         binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                DetailsTodoFragment(),
-//                DetailsTodoFragment::class.java.name
-//            )
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
         }
 
         binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                DetailsTodoFragment(),
-//                DetailsTodoFragment::class.java.name
-//            )
+            transitionTo(
+                true,
+                R.id.fragment_home_container,
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -163,35 +167,50 @@ class HomeFragment : BaseFragment<HomePresenter, FragmentHomeBinding>(), IHomeCo
         return data
     }
 
-    fun showData(personalResponse: PersonalTodosResponse.PersonalTodo?) {
+    override fun showPersonalToDoData(personalTodosResponse: PersonalTodosResponse) {
+    requireActivity().runOnUiThread {
+        binding.personalTasksLeft.text=personalTodosResponse.value.size.toString()
+
+    }
+
+    }
+
+    override fun showTeamToDoData(teamTodoUpdateResponse: TeamTodoUpdateResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToLoginScreen() {
+        parentFragmentManager.popBackStack()
+        val intent = Intent(requireActivity(), RegisterActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
+    override fun navigateToHomeScreen() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showData(personalResponse: PersonalTodosResponse) {
         requireActivity().runOnUiThread {
-//            binding.textViewRecentlyTitle.text = personalResponse?.title
-//            binding.textViewRecentlyBody.text = personalResponse?.description
-//            binding.recentlyCardTime.text = personalResponse?.creationTime
+            personalTodosResponse = personalResponse.value.last()
+            binding.textViewRecentlyTitle.text = personalResponse.value.last().title
+            binding.textViewRecentlyBody.text = personalResponse.value.last().description
+            binding.recentlyCardTime.text = personalResponse.value.last().creationTime
         }
 
     }
 
-    private fun getTaskStatusCount(status: Int): Int =
-        makeAllTodosList(fakeDataManager).count { (it as? PersonalTodosResponse.PersonalTodo)?.status == status || (it as? TeamToDosResponse.TeamToDo)?.status == status }
+    override fun showError(ioException: IOException) {
+        requireActivity().runOnUiThread {
+            ioException.localizedMessage?.let { showToast(it) }
+        }
 
-    private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
-    private fun getTodoPercentage() =
-        getTodoCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
+    }
 
-    private fun getDoneCount(): Int = getTaskStatusCount(Constants.DONE_STATUS)
-    private fun getDonePercentage() =
-        getDoneCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
-
-    private fun getInProgressCount(): Int = getTaskStatusCount(Constants.IN_PROGRESS_STATUS)
-    private fun getInProgressPercentage() =
-        getInProgressCount().todoPercentage(makeAllTodosList(fakeDataManager).size)
-
-    private fun Int.todoPercentage(totalCount: Int) =
-        (this.toFloat() / totalCount.toFloat()) * Constants.ONE_HUNDRED_PERCENT
-
-    private fun makeAllTodosList(fakeDataManager: FakeDataManager) =
-        fakeDataManager.personalTodosList + fakeDataManager.teamToDosList
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.deAttach()
+    }
 
     companion object {
         private val LABELS_COLORS = listOf(
@@ -200,24 +219,8 @@ class HomeFragment : BaseFragment<HomePresenter, FragmentHomeBinding>(), IHomeCo
             Color.parseColor("#0077B6")
         )
         const val NEW_TASK_TAG = "newTaskTag"
-
-        fun newInstance(personalTodosResponse: PersonalTodosResponse.PersonalTodo) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(Constants.Home, personalTodosResponse)
-                }
-            }
     }
 
-    override fun navigateToLoginScreen() {
-        TODO("Not yet implemented")
-    }
-
-    override fun navigateToHomeScreen() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showError(ioException: IOException) {
-        TODO("Not yet implemented")
-    }
+    override val presenter: HomePresenter
+        get() = HomePresenter(this,requireContext())
 }
