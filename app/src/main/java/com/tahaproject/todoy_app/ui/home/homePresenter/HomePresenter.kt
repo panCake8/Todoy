@@ -26,7 +26,7 @@ class HomePresenter(private val view: IHomeContract.IView, token: String) :
                 Log.i("personalData", personalData.toString())
             }, { ioException ->
                 view.showError(ioException)
-            }, this)
+            })
         }
     }
 
@@ -38,7 +38,7 @@ class HomePresenter(private val view: IHomeContract.IView, token: String) :
 
             }, { ioException ->
                 view.showError(ioException)
-            }, this)
+            })
 
 
         }

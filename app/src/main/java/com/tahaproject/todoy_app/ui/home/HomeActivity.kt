@@ -5,10 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.ActivityHomeBinding
-import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.base.BaseActivity
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import com.tahaproject.todoy_app.ui.presenter.IHomeContract
 import com.tahaproject.todoy_app.ui.register.RegisterActivity
 import com.tahaproject.todoy_app.util.showToast
@@ -34,11 +35,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomePresenter>(), IHomeCo
         presenter.fetchPersonalData()
     }
 
-    override fun showPersonalToDoData(personalTodoResponse: List<Todo>) {
+
+
+
+
+    override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         TODO("Not yet implemented")
     }
 
-    override fun showTeamToDoData(teamTodoResponse: List<Todo>) {
+    override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
         TODO("Not yet implemented")
     }
 
