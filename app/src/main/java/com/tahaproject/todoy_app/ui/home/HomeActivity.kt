@@ -35,10 +35,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomePresenter>(), IHomeCo
         presenter.fetchPersonalData()
     }
 
-
-
-
-
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         TODO("Not yet implemented")
     }
