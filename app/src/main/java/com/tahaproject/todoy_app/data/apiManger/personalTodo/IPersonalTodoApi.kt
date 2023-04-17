@@ -1,24 +1,24 @@
 package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
-import com.tahaproject.todoy_app.data.requests.PersonalTodoUpdateRequest
-import com.tahaproject.todoy_app.data.requests.PersonalTodoRequest
-import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.ui.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
+import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
+import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import java.io.IOException
 
 interface IPersonalTodoApi {
     fun createPersonalTodo(
-        personalTodoRequest: PersonalTodoRequest, onSuccess: (String) -> Unit,
+        personalTodoRequest: SingleTodoTask, onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )
 
     fun getPersonalTodos(
-        onSuccess: (PersonalTodosResponse) -> Unit,
+        onSuccess: (ToDosResponse) -> Unit,
         onFailed: (IOException) -> Unit, presenter: HomePresenter
     )
 
     fun updatePersonalTodosStatus(
-        personalTodoUpdateRequest: PersonalTodoUpdateRequest,
+        personalTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     )

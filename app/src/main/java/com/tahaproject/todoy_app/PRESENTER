@@ -1,0 +1,16 @@
+class SignUpPresenter(private val view: ISignUpContract.IView) : ISignUpContract.IPresenter {
+    private val signUpApi: ISignUpApi = SignUpApi()
+    override fun fetchData(signUpRequest: SignUpRequest) {
+        signUpApi.signUp(signUpRequest, ::showData, ::showError, this)
+    }
+
+
+    private fun showData(signUpResponse: SignUpResponse) {
+        view.showData(signUpResponse)
+    }
+
+
+    private fun showError(ioException: IOException) {
+        view.showError(ioException)
+    }
+}

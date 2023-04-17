@@ -23,7 +23,10 @@ open class ApiRequest {
             body
         ).build()
 
+
     open fun getRequest(endPoint: String): Request = makeRequest(endPoint).get().build()
+    open fun getLoginRequest(endPoint: String, credentials: String): Request =
+        makeRequest(Constants.EndPoints.login).addHeader(Constants.AUTH, credentials).get().build()
 
     open fun putRequest(body: FormBody, endPoint: String): Request =
         makeRequest(endPoint).put(
