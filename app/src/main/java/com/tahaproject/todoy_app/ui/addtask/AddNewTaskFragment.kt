@@ -18,25 +18,27 @@ import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
 
-class AddNewTaskFragment(val token: String) : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding>(), IAddNewTaskContract.View {
+class AddNewTaskFragment(val token: String) : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding, AddNewTaskPresenter>(), IAddNewTaskContract.View {
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddNewTaskBinding
         get() = FragmentAddNewTaskBinding::inflate
 
+    override val addNewTaskPresenter: AddNewTaskPresenter
+        get() = AddNewTaskPresenter(this, PersonalTodoApi(token) , TeamTodoApi(token))
+
     private var selectedTaskChip: TaskChip = TaskChip.PERSONAL
-    private lateinit var addNewTaskPresenter: IAddNewTaskContract.Presenter
 
     override fun getLayoutResourceId(): Int = R.layout.fragment_add_new_task
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addNewTaskPresenter = AddNewTaskPresenter(this, PersonalTodoApi(token) , TeamTodoApi(token))
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        chooseGroup()
+
         addCallback()
 
     }
@@ -52,6 +54,8 @@ class AddNewTaskFragment(val token: String) : BaseBottomSheetDialogFragment<Frag
     }
 
     private fun addCallback() {
+        chooseGroup()
+
         binding.chipTeamTodo.setOnClickListener { onChipTeamClicked() }
 
         binding.chipPersonalTodo.setOnClickListener { onChipPersonalClicked() }
