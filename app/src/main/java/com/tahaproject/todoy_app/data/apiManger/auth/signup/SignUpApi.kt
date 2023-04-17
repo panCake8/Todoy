@@ -17,7 +17,7 @@ class SignUpApi : ApiRequest(), ISignUpApi {
 
     override fun signUp(
         signUpRequest: SignUpRequest,
-        onSuccess: (SignUpResponse) -> Unit,
+        onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit,
     ) {
         val formBody = FormBody.Builder().add(USER_NAME, signUpRequest.username)
@@ -35,9 +35,8 @@ class SignUpApi : ApiRequest(), ISignUpApi {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
-                        val signUpResponse =
-                            gson.fromJson(jsonString, SignUpResponse::class.java)
-                        onSuccess(signUpResponse)
+                        gson.fromJson(jsonString, SignUpResponse::class.java)
+                        onSuccess(SUCCESS)
                     }
                 }
             }
@@ -48,6 +47,7 @@ class SignUpApi : ApiRequest(), ISignUpApi {
         const val USER_NAME = "username"
         const val PASSWORD = "password"
         const val TEAM_ID = "teamId"
+        const val SUCCESS = "Success"
     }
 
 }

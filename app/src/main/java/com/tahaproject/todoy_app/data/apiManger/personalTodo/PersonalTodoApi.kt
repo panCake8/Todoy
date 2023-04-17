@@ -59,11 +59,8 @@ class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
         val request = getRequest(Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                if (e is UnAuthorizedException) {
 //                    presenter.onUnauthorizedError()
-                    onFailed(e)
-                }
-
+                onFailed(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
