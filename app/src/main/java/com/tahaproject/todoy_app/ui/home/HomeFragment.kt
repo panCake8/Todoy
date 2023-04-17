@@ -1,6 +1,6 @@
 package com.tahaproject.todoy_app.ui.home
 
-import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -103,7 +103,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>() {
         }
 
         binding.addFAB.setOnClickListener {
-            AddNewTaskFragment().show(parentFragmentManager, NEW_TASK_TAG)
+            AddNewTaskFragment(token).show(parentFragmentManager, NEW_TASK_TAG)
         }
     }
 

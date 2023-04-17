@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.tahaproject.todoy_app.databinding.ActivityHomeBinding
-import com.tahaproject.todoy_app.ui.home.presenter.HomeContract
-import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomeContract
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import com.tahaproject.todoy_app.ui.base.BaseActivity
 import com.tahaproject.todoy_app.ui.register.RegisterActivity
 import com.tahaproject.todoy_app.util.showToast

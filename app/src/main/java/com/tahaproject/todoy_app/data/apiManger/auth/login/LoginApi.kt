@@ -12,19 +12,20 @@ import okhttp3.Response
 import java.io.IOException
 
 class LoginApi : ApiRequest(), ILoginApi {
+    override val client: OkHttpClient
+        get() = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
+
     override fun login(
         loginRequest: LoginRequest,
         onSuccess: (LoginResponse) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
         val credentials = Credentials.basic(loginRequest.username, loginRequest.password)
-        val loginClient = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
         val request = getLoginRequest(Constants.EndPoints.login, credentials)
-        loginClient.newCall(request).enqueue(object : Callback {
+        client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
@@ -38,4 +39,6 @@ class LoginApi : ApiRequest(), ILoginApi {
 
         })
     }
+
+
 }

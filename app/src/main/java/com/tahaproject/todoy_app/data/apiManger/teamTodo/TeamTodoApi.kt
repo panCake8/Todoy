@@ -1,14 +1,12 @@
 package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
 
-import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -18,8 +16,8 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class TeamTodoApi(token:String) : ApiRequest(), ITeamTodoApi {
-    private val client =
+class TeamTodoApi(token: String) : ApiRequest(), ITeamTodoApi {
+    override val client =
         OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor())
             .addInterceptor(TodoInterceptor(token))
@@ -43,10 +41,12 @@ class TeamTodoApi(token:String) : ApiRequest(), ITeamTodoApi {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, SingleTodoTask::class.java)
+                if (response.isSuccessful) {
+                    response.body?.string().let { jsonString ->
+                        gson.fromJson(jsonString, SingleTodoTask::class.java)
+                    }
+                    onSuccess(Constants.ADDED)
                 }
-                onSuccess(Constants.ADDED)
             }
 
         })
@@ -55,8 +55,7 @@ class TeamTodoApi(token:String) : ApiRequest(), ITeamTodoApi {
 
     override fun getTeamTodos(
         onSuccess: (ToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit,
-        homePresenter: HomePresenter
+        onFailed: (IOException) -> Unit
     ) {
         val request = getRequest(Constants.EndPoints.teamTodo)
         client.newCall(request).enqueue(object : Callback {
@@ -65,9 +64,11 @@ class TeamTodoApi(token:String) : ApiRequest(), ITeamTodoApi {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.body?.string().let { jsonString ->
-                    val teamTodosResponse = gson.fromJson(jsonString, ToDosResponse::class.java)
-                    onSuccess(teamTodosResponse)
+                if (response.isSuccessful) {
+                    response.body?.string().let { jsonString ->
+                        val teamTodosResponse = gson.fromJson(jsonString, ToDosResponse::class.java)
+                        onSuccess(teamTodosResponse)
+                    }
                 }
             }
 
@@ -90,11 +91,12 @@ class TeamTodoApi(token:String) : ApiRequest(), ITeamTodoApi {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.body?.string().let { jsonString ->
-                    gson.fromJson(jsonString, ToDosResponse::class.java)
+                if (response.isSuccessful) {
+                    response.body?.string().let { jsonString ->
+                        gson.fromJson(jsonString, ToDosResponse::class.java)
+                    }
+                    onSuccess(Constants.UPDATED)
                 }
-                onSuccess(Constants.UPDATED)
-
             }
 
         })
