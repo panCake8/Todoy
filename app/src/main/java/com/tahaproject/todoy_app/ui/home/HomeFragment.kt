@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -13,15 +14,13 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.responses.TeamTodoUpdateResponse
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
-import com.tahaproject.todoy_app.ui.activities.RegisterActivity
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.home.presenter.*
-import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.presenter.IHomeContract
+import com.tahaproject.todoy_app.ui.register.RegisterActivity
 import com.tahaproject.todoy_app.ui.search.SearchFragment
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
@@ -31,17 +30,14 @@ import com.tahaproject.todoy_app.util.CustomPercentFormatter
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class HomeFragment : BaseFragment<HomePresenter,FragmentHomeBinding>(), IHomeContract.IView {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
 
-    private lateinit var personalTodosResponse: PersonalTodosResponse.PersonalTodo
+    private lateinit var personalTodosResponse: ToDosResponse
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = HomePresenter()
-        presenter.attach(this)
-        presenter.fetchData()
     }
 
     private val getPieChartDataList: List<PieEntry> = listOf(
@@ -121,6 +117,15 @@ class HomeFragment : BaseFragment<HomePresenter,FragmentHomeBinding>(), IHomeCon
         }
     }
 
+    private fun transitionTo(
+        b: Boolean,
+        fragmentHomeContainer: Int = R.id.fragment_register_container,
+        detailsTodoFragment:Fragment,
+        name: String,
+    ) {
+
+    }
+
     private fun renderPieChart(pieChart: PieChart) {
         setPieChartDesign(pieChart)
         val dataSet = PieDataSet(getPieChartDataList, Constants.EMPTY_STRING)
@@ -167,17 +172,17 @@ class HomeFragment : BaseFragment<HomePresenter,FragmentHomeBinding>(), IHomeCon
         return data
     }
 
-    override fun showPersonalToDoData(personalTodosResponse: PersonalTodosResponse) {
-    requireActivity().runOnUiThread {
-        binding.personalTasksLeft.text=personalTodosResponse.value.size.toString()
+
+
+    override fun showTeamToDoData(teamTodoResponse:ToDosResponse) {
+        requireActivity().runOnUiThread {
+
+
+
+        }
 
     }
 
-    }
-
-    override fun showTeamToDoData(teamTodoUpdateResponse: TeamTodoUpdateResponse) {
-        TODO("Not yet implemented")
-    }
 
     override fun navigateToLoginScreen() {
         parentFragmentManager.popBackStack()
@@ -190,12 +195,12 @@ class HomeFragment : BaseFragment<HomePresenter,FragmentHomeBinding>(), IHomeCon
         TODO("Not yet implemented")
     }
 
-    override fun showData(personalResponse: PersonalTodosResponse) {
+    override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            personalTodosResponse = personalResponse.value.last()
-            binding.textViewRecentlyTitle.text = personalResponse.value.last().title
-            binding.textViewRecentlyBody.text = personalResponse.value.last().description
-            binding.recentlyCardTime.text = personalResponse.value.last().creationTime
+            personalTodosResponse = personalTodoResponse
+            binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
+            binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
+            binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
         }
 
     }
@@ -207,10 +212,7 @@ class HomeFragment : BaseFragment<HomePresenter,FragmentHomeBinding>(), IHomeCon
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
-    }
+
 
     companion object {
         private val LABELS_COLORS = listOf(
@@ -222,5 +224,5 @@ class HomeFragment : BaseFragment<HomePresenter,FragmentHomeBinding>(), IHomeCon
     }
 
     override val presenter: HomePresenter
-        get() = HomePresenter(this,requireContext())
+        get() = HomePresenter(this, "")
 }

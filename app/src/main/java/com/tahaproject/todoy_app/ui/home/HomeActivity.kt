@@ -5,15 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.ActivityHomeBinding
-import com.tahaproject.todoy_app.ui.home.presenter.HomeContract
 import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.base.BaseActivity
+import com.tahaproject.todoy_app.ui.presenter.IHomeContract
 import com.tahaproject.todoy_app.ui.register.RegisterActivity
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class HomeActivity : BaseActivity<ActivityHomeBinding, HomePresenter>(), HomeContract.HomeView {
+class HomeActivity : BaseActivity<ActivityHomeBinding, HomePresenter>(), IHomeContract.IView {
 
     override val bindingInflate: (LayoutInflater) -> ActivityHomeBinding
         get() = ActivityHomeBinding::inflate
@@ -31,6 +32,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomePresenter>(), HomeCon
     private fun setUp() {
         presenter.fetchTeamData()
         presenter.fetchPersonalData()
+    }
+
+    override fun showPersonalToDoData(personalTodoResponse: List<Todo>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showTeamToDoData(teamTodoResponse: List<Todo>) {
+        TODO("Not yet implemented")
     }
 
     override fun navigateToLoginScreen() {
@@ -54,5 +63,5 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomePresenter>(), HomeCon
 
 
     override val presenter: HomePresenter
-        get() = HomePresenter(this)
+        get() = HomePresenter(this,"")
 }
