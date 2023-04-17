@@ -103,7 +103,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>() {
         }
 
         binding.addFAB.setOnClickListener {
-            AddNewTaskFragment().show(parentFragmentManager, NEW_TASK_TAG)
+            AddNewTaskFragment(token).show(parentFragmentManager, NEW_TASK_TAG)
         }
     }
 
