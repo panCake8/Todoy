@@ -3,7 +3,7 @@ package com.tahaproject.todoy_app.data.apiManger.teamTodo
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.presenter.HomeContract
+import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import java.io.IOException
 
 interface ITeamTodoApi {
@@ -16,7 +16,7 @@ interface ITeamTodoApi {
     fun getTeamTodos(
         onSuccess: (ToDosResponse) -> Unit,
         onFailed: (IOException) -> Unit,
-        homePresenter: HomeContract.HomePresenter
+        homePresenter: HomePresenter
     )
 
     fun updateTeamTodosStatus(

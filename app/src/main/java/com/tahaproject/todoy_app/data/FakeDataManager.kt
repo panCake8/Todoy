@@ -1,11 +1,6 @@
 package com.tahaproject.todoy_app.data
 
-
-import com.tahaproject.todoy_app.data.responses.PersonalTodosResponse
-import com.tahaproject.todoy_app.data.responses.TeamToDosResponse
-
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
-
 
 class FakeDataManager {
     val personalTodosList = listOf(

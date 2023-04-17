@@ -1,22 +1,19 @@
-package com.tahaproject.todoy_app.ui
+package com.tahaproject.todoy_app.ui.home
 
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.fragment.app.commit
-import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.ActivityHomeBinding
-import com.tahaproject.todoy_app.ui.presenter.HomeContract
-import com.tahaproject.todoy_app.ui.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.home.presenter.HomeContract
+import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.base.BaseActivity
+import com.tahaproject.todoy_app.ui.register.RegisterActivity
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class HomeActivity : BaseActivity<ActivityHomeBinding,HomePresenter>(), HomeContract.HomeView {
+class HomeActivity : BaseActivity<ActivityHomeBinding, HomePresenter>(), HomeContract.HomeView {
 
     override val bindingInflate: (LayoutInflater) -> ActivityHomeBinding
         get() = ActivityHomeBinding::inflate
@@ -32,7 +29,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomePresenter>(), HomeCont
     }
 
     private fun setUp() {
-        presenter.attach(this)
         presenter.fetchTeamData()
         presenter.fetchPersonalData()
     }
@@ -44,10 +40,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomePresenter>(), HomeCont
     }
 
     override fun navigateToHomeScreen() {
-        supportFragmentManager.commit {
-            replace(R.id.fragment_home_container, HomeFragment(), HomeFragment::class.java.name)
-            setReorderingAllowed(true)
-        }
+//        supportFragmentManager.commit {
+//            replace(R.id.fragment_home_container, HomeFragment(), HomeFragment::class.java.name)
+//            setReorderingAllowed(true)
+//        }
     }
 
     override fun showError(ioException: IOException) {
@@ -56,10 +52,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomePresenter>(), HomeCont
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
-    }
 
     override val presenter: HomePresenter
         get() = HomePresenter(this)

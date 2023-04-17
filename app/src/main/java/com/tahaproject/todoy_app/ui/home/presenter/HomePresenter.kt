@@ -1,7 +1,6 @@
-import com.tahaproject.todoy_app.ui.presenter.HomeContract
+package com.tahaproject.todoy_app.ui.home.presenter
 
 
-import android.content.Context
 import android.util.Log
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.IPersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi

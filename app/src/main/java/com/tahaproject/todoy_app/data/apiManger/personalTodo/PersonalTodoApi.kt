@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
+import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
@@ -7,8 +8,6 @@ import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.presenter.HomeContract
-
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -52,7 +51,7 @@ class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
 
     override fun getPersonalTodos(
         onSuccess: (ToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit, presenter: HomeContract.HomePresenter
+        onFailed: (IOException) -> Unit, presenter: HomePresenter
     ) {
         val request = getRequest(Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {

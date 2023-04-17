@@ -1,18 +1,16 @@
-package com.tahaproject.todoy_app.ui.signup
+package com.tahaproject.todoy_app.ui.register.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.BuildConfig
-import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
 import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse
-import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.signup.presenter.SignUpContract
-import com.tahaproject.todoy_app.ui.signup.presenter.SignUpPresenter
+import com.tahaproject.todoy_app.ui.register.signup.presenter.SignUpContract
+import com.tahaproject.todoy_app.ui.register.signup.presenter.SignUpPresenter
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 

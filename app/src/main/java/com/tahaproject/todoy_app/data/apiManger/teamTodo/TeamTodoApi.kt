@@ -8,8 +8,7 @@ import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.presenter.HomeContract
-
+import com.tahaproject.todoy_app.ui.home.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -57,7 +56,7 @@ class TeamTodoApi(token:String) : ApiRequest(), ITeamTodoApi {
     override fun getTeamTodos(
         onSuccess: (ToDosResponse) -> Unit,
         onFailed: (IOException) -> Unit,
-        homePresenter: HomeContract.HomePresenter
+        homePresenter: HomePresenter
     ) {
         val request = getRequest(Constants.EndPoints.teamTodo)
         client.newCall(request).enqueue(object : Callback {
