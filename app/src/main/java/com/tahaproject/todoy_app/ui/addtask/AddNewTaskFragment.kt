@@ -14,17 +14,23 @@ import com.tahaproject.todoy_app.ui.addtask.presenter.IAddNewTaskContract
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskPresenter
 import com.tahaproject.todoy_app.ui.base.BaseBottomSheetDialogFragment
 import com.tahaproject.todoy_app.util.Constants
+import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
 
-class AddNewTaskFragment(val token: String) : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding, AddNewTaskPresenter>(), IAddNewTaskContract.View {
+class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding, AddNewTaskPresenter>(), IAddNewTaskContract.View {
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddNewTaskBinding
         get() = FragmentAddNewTaskBinding::inflate
 
+    private val sharedPreferenceUtil by lazy {
+        SharedPreferenceUtil(requireContext())
+    }
+
+    // get the token
     override val addNewTaskPresenter: AddNewTaskPresenter
-        get() = AddNewTaskPresenter(this, PersonalTodoApi(token) , TeamTodoApi(token))
+        get() = AddNewTaskPresenter(this, PersonalTodoApi(sharedPreferenceUtil.getToken()) , TeamTodoApi(sharedPreferenceUtil.getToken()))
 
     private var selectedTaskChip: TaskChip = TaskChip.PERSONAL
 
@@ -37,10 +43,7 @@ class AddNewTaskFragment(val token: String) : BaseBottomSheetDialogFragment<Frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         addCallback()
-
     }
 
     private fun chooseGroup() {
