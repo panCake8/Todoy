@@ -36,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(),
             val password = binding.editTextPassword.text.toString()
             presenter.validateUserName(username)
             presenter.validateUserName(password)
-            login(username,password)
+            login(username, password)
             if (!validateUserName(username))
                 binding.editTextUsername.error = "You have to enter Your user name"
             else if (!validatePassword(password))
@@ -56,25 +56,29 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(),
     private fun validateUserName(username: String) = username.isNotEmpty()
     private fun validatePassword(password: String) = password.isNotEmpty()
     private fun login(username: String, password: String) {
-        presenter.fetchData(LoginRequest(username, password))
+//        presenter.fetchData(LoginRequest(username, password))
     }
 
-    override fun showData(loginResponse: LoginResponse) {
-        requireActivity().runOnUiThread {
-            if (loginResponse.isSuccess) {
-                // TODO see if this is correct when make it empty if null
-                SharedPreferenceUtil(requireContext()).saveToken(loginResponse.value.token ?: "")
-                parentFragmentManager.popBackStack()
-                goToHome()
-            } else
-                showToast(WRONG_USER)
-        }
-    }
+//    override fun showToken(loginResponse: LoginResponse) {
+//        requireActivity().runOnUiThread {
+//            if (loginResponse.isSuccess) {
+//                // TODO see if this is correct when make it empty if null
+//                SharedPreferenceUtil(requireContext()).saveToken(loginResponse.value.token ?: "")
+//                parentFragmentManager.popBackStack()
+//                goToHome()
+//            } else
+//                showToast(WRONG_USER)
+//        }
+//    }
 
     private fun goToHome() {
         val intent = Intent(requireActivity(), HomeActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
+    }
+
+    override fun getToken(token: String) {
+        TODO("Not yet implemented")
     }
 
     override fun showError(error: IOException) {
