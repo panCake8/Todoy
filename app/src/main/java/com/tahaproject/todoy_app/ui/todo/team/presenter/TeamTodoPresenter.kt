@@ -2,22 +2,20 @@ package com.tahaproject.todoy_app.ui.todo.team.presenter
 
 import android.content.Context
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.ITeamTodoApi
-import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApiImpl
+import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
 import com.tahaproject.todoy_app.ui.todo.personal.presenter.IPersonalTodoContract
 import java.io.IOException
 
-class TeamTodoContract(private val view: IPersonalTodoContract.IView):
+class TeamTodoPresenter(private val view: IPersonalTodoContract.IView, token: String):
     IPersonalTodoContract.IPresenter{
     private lateinit var context: Context
-    private lateinit var homePresenter: HomePresenter
-    private val teamTodoRequestImpl: ITeamTodoApi = TeamTodoApiImpl(context)
+    private val teamTodoRequestImpl: ITeamTodoApi = TeamTodoApi(token)
 
 
     override fun fetchData(singleTodoTask: SingleTodoTask) {
-        teamTodoRequestImpl.getTeamTodos(::showData,::showError, homePresenter)
+        teamTodoRequestImpl.getTeamTodos(::showData,::showError)
     }
 
 
