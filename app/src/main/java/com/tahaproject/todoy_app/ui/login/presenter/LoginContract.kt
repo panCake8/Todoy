@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.ui.login.presenter
 
+import androidx.fragment.app.Fragment
 import com.tahaproject.todoy_app.data.models.requests.LoginRequest
 import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
 import java.io.IOException
@@ -20,7 +21,8 @@ interface LoginContract {
         fun onLoginSuccess(loginResponse: LoginResponse)
         fun onLoginFailed(e: IOException)
 
-        fun validate(loginRequest: LoginRequest):Boolean
+        fun isValid(loginRequest: LoginRequest):Boolean
+
 
 
     }
