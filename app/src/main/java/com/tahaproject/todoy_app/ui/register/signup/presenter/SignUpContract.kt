@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.signup.presenter
+package com.tahaproject.todoy_app.ui.register.signup.presenter
 
 import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
 import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse

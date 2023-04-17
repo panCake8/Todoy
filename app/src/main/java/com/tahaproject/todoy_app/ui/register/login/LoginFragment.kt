@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.login
+package com.tahaproject.todoy_app.ui.register.login
 
 
 import android.content.Intent
@@ -7,15 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.data.models.requests.LoginRequest
-import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
-import com.tahaproject.todoy_app.ui.HomeActivity
+import com.tahaproject.todoy_app.ui.home.HomeActivity
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
-import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
-import com.tahaproject.todoy_app.util.SharedPreferenceUtil
-import com.tahaproject.todoy_app.util.showToast
+import com.tahaproject.todoy_app.ui.register.login.presenter.LoginContract
+import com.tahaproject.todoy_app.ui.register.login.presenter.LoginPresenter
 import java.io.IOException
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(),
