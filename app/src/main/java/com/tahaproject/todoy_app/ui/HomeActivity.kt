@@ -32,7 +32,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomePresenter>(), HomeCont
     }
 
     private fun setUp() {
-        presenter.attach(this)
         presenter.fetchTeamData()
         presenter.fetchPersonalData()
     }
@@ -44,10 +43,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomePresenter>(), HomeCont
     }
 
     override fun navigateToHomeScreen() {
-        supportFragmentManager.commit {
-            replace(R.id.fragment_home_container, HomeFragment(), HomeFragment::class.java.name)
-            setReorderingAllowed(true)
-        }
+//        supportFragmentManager.commit {
+//            replace(R.id.fragment_home_container, HomeFragment(), HomeFragment::class.java.name)
+//            setReorderingAllowed(true)
+//        }
     }
 
     override fun showError(ioException: IOException) {
@@ -56,10 +55,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomePresenter>(), HomeCont
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.deAttach()
-    }
 
     override val presenter: HomePresenter
         get() = HomePresenter(this)

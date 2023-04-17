@@ -1,6 +1,6 @@
 package com.tahaproject.todoy_app.ui.home
 
-import HomePresenter
+import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -23,7 +23,7 @@ import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding,HomePresenter>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>() {
     private val fakeDataManager = FakeDataManager()
     private var makeAllTodosList: List<Todo> = emptyList()
 
