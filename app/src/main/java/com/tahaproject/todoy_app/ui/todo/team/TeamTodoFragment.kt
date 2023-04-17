@@ -24,7 +24,7 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding>() {
 
     override fun addCallBack() {
         binding.appBarTeamTodo.setNavigationOnClickListener {
-            back()
+
         }
     }
 

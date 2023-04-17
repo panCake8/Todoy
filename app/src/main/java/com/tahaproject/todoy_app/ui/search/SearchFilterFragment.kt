@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentSearchFilterBinding
-import com.tahaproject.todoy_app.ui.baseview.BaseBottomSheetDialogFragment
+import com.tahaproject.todoy_app.ui.base.BaseBottomSheetDialogFragment
 
 
 class SearchFilterFragment : BaseBottomSheetDialogFragment<FragmentSearchFilterBinding>() {

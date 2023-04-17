@@ -7,9 +7,9 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class ToDosResponse(
-    override val value: List<Todo>,
+data class SingleToDoResponse(
+    override val value: Todo,
     override val message: String?,
     override val isSuccess: Boolean,
-) : IBaseResponse<List<Todo>> by BaseResponse(value, message, isSuccess), Parcelable
+) : IBaseResponse<Todo> by BaseResponse(value, message, isSuccess), Parcelable
 

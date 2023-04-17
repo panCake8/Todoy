@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.activities.presenter
+package com.tahaproject.todoy_app.ui.presenter
 
 import java.io.IOException
 
@@ -13,8 +13,6 @@ interface HomeContract {
     interface HomePresenter {
         fun fetchPersonalData()
         fun fetchTeamData()
-        fun attach(homeView: HomeView)
-        fun deAttach()
         fun onUnauthorizedError()
         fun onHome()
     }

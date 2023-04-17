@@ -1,14 +1,13 @@
-package com.tahaproject.todoy_app.data.apiManger.teamTodo
+package com.tahaproject.todoy_app.data.apiManger.personalTodo
 
-
-import android.content.Context
 import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
+import com.tahaproject.todoy_app.data.interceptors.UnAuthorizedException
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.ui.activities.presenter.HomePresenter
+import com.tahaproject.todoy_app.ui.presenter.HomePresenter
 import com.tahaproject.todoy_app.util.Constants
 import okhttp3.Call
 import okhttp3.Callback
@@ -18,24 +17,22 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi {
+class PersonalTodoApi(token: String) : ApiRequest(), IPersonalTodoApi {
     private val client =
         OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor())
-            .addInterceptor(TodoInterceptor(context))
+            .addInterceptor(TodoInterceptor(token))
+            .addInterceptor(logInterceptor)
             .build()
 
-    override fun createTeamTodo(
-        teamTodoRequest: SingleTodoTask,
-        onSuccess: (String) -> Unit,
+    override fun createPersonalTodo(
+        personalTodoRequest: SingleTodoTask, onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
-        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, teamTodoRequest.title)
-            .add(Constants.Todo.DESCRIPTION, teamTodoRequest.description)
-            .add(Constants.Todo.ASSIGNEE, teamTodoRequest.assignee)
-
+        val formBody = FormBody.Builder().add(Constants.Todo.TITLE, personalTodoRequest.title)
+            .add(Constants.Todo.DESCRIPTION, personalTodoRequest.description)
             .build()
-        val request = postRequest(formBody, Constants.EndPoints.teamTodo)
+        val request = postRequest(formBody, Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
@@ -52,37 +49,41 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
 
     }
 
-    override fun getTeamTodos(
+    override fun getPersonalTodos(
         onSuccess: (ToDosResponse) -> Unit,
-        onFailed: (IOException) -> Unit,
-        homePresenter: HomePresenter
+        onFailed: (IOException) -> Unit, presenter: HomePresenter
     ) {
-        val request = getRequest(Constants.EndPoints.teamTodo)
+        val request = getRequest(Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                if (e is UnAuthorizedException) {
+                    presenter.onUnauthorizedError()
+                }
                 onFailed(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
+                presenter.onHome()
                 response.body?.string().let { jsonString ->
-                    val teamTodosResponse = gson.fromJson(jsonString, ToDosResponse::class.java)
-                    onSuccess(teamTodosResponse)
+                    val personalTodosResponse =
+                        gson.fromJson(jsonString, ToDosResponse::class.java)
+                    onSuccess(personalTodosResponse)
                 }
             }
 
         })
+
     }
 
-
-    override fun updateTeamTodosStatus(
-        teamTodoUpdateRequest: UpdateTodoTask,
+    override fun updatePersonalTodosStatus(
+        personalTodoUpdateRequest: UpdateTodoTask,
         onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
-        val formBody = FormBody.Builder().add(Constants.Todo.ID, teamTodoUpdateRequest.id)
-            .add(Constants.Todo.STATUS, teamTodoUpdateRequest.status.toString())
+        val formBody = FormBody.Builder().add(Constants.Todo.ID, personalTodoUpdateRequest.id)
+            .add(Constants.Todo.STATUS, personalTodoUpdateRequest.status.toString())
             .build()
-        val request = putRequest(formBody, Constants.EndPoints.teamTodo)
+        val request = putRequest(formBody, Constants.EndPoints.personalTodo)
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
@@ -93,12 +94,9 @@ class TeamTodoApiImpl(private val context: Context) : ApiRequest(), ITeamTodoApi
                     gson.fromJson(jsonString, ToDosResponse::class.java)
                 }
                 onSuccess(Constants.UPDATED)
-
             }
 
         })
 
     }
-
-
 }

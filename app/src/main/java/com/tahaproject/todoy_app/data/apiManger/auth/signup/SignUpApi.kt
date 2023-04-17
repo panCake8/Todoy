@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
 
-class SignUpApiImpl : ApiRequest(), ISignUpApi {
+class SignUpApi : ApiRequest(), ISignUpApi {
 
     override fun signUp(
         signUpRequest: SignUpRequest,
