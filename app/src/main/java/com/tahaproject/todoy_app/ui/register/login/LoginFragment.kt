@@ -10,8 +10,8 @@ import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginRespon
 import com.tahaproject.todoy_app.databinding.FragmentLoginBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.home.HomeFragment
-import com.tahaproject.todoy_app.ui.login.presenter.LoginContract
-import com.tahaproject.todoy_app.ui.login.presenter.LoginPresenter
+import com.tahaproject.todoy_app.ui.register.login.presenter.LoginContract
+import com.tahaproject.todoy_app.ui.register.login.presenter.LoginPresenter
 import com.tahaproject.todoy_app.ui.register.signup.SignUpFragment
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast

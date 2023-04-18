@@ -1,15 +1,13 @@
 package com.tahaproject.todoy_app.ui.todo.team
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.databinding.FragmentTeamTodoBinding
-import com.tahaproject.todoy_app.ui.search.presenter.TeamPresenter
 import com.tahaproject.todoy_app.ui.todo.ToDoFragment
+import com.tahaproject.todoy_app.ui.todo.team.presenter.TeamTodoPresenter
 
 
-class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding,TeamPresenter>() {
+class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding,TeamTodoPresenter>() {
     override fun setup() {
 
     }
@@ -19,7 +17,7 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding,TeamPresenter>() {
 
     }
 
-    override val presenter: TeamPresenter
+    override val presenter: TeamTodoPresenter
         get() = TODO("Not yet implemented")
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTeamTodoBinding
         get() = TODO("Not yet implemented")
