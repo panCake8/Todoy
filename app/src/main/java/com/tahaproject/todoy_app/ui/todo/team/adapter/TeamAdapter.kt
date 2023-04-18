@@ -17,6 +17,7 @@ class TeamAdapter(private val list: List<Todo>) :
         ItemCardTeamTodoBinding::inflate
 
 
+    //add view bind
     override fun bindViews(binding: ItemCardTeamTodoBinding, currentItem: Todo) {
         binding.apply {
             textViewTitleTeamTodo.text = currentItem.title
