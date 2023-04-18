@@ -1,20 +1,29 @@
-package com.tahaproject.todoy_app.ui.register.login.presenter
+package com.tahaproject.todoy_app.ui.login.presenter
+
 import com.tahaproject.todoy_app.data.models.requests.LoginRequest
 import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginResponse
 import java.io.IOException
 
 
 interface LoginContract {
-    interface IView {
-        fun getToken(token:String)
-        fun showError(error: IOException)
+    interface IView{
 
-        fun showMessage(message:String)
+        fun onSuccess(loginResponse: LoginResponse)
+        fun onFailRequest(error: IOException)
+        fun showInvalidMassage(usernameMassage:String,passwordMassage:String)
+        fun getToken(token:String?)
+
     }
 
-    interface IPresenter {
-        fun fetchToken(loginRequest: LoginRequest)
+    interface IPresenter{
 
-        fun validateUserName(userName:String)
+        fun fetchData(loginRequest: LoginRequest)
+        fun onLoginSuccess(loginResponse: LoginResponse)
+        fun onLoginFailed(e: IOException)
+
+        fun isValid(loginRequest: LoginRequest):Boolean
+
+
+
     }
 }

@@ -6,7 +6,6 @@ object Constants {
     const val URL = "https://team-todo-62dmq.ondigitalocean.app"
     const val AUTH = "Authorization"
     const val BEARER = "Bearer"
-    const val EMPTY_STRING = "Bearer"
     const val ONE_HUNDRED_PERCENT: Int = 100
     const val TODO_STATUS: Int = 0
     const val IN_PROGRESS_STATUS: Int = 1

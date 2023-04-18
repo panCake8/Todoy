@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.register.login.presenter
+package com.tahaproject.todoy_app.ui.login.presenter
 
 import com.tahaproject.todoy_app.data.apiManger.auth.login.ILoginApi
 import com.tahaproject.todoy_app.data.apiManger.auth.login.LoginApi
@@ -9,21 +9,37 @@ import java.io.IOException
 
 class LoginPresenter(private val view: LoginContract.IView) : LoginContract.IPresenter {
     private val loginRequestApiImpl: ILoginApi = LoginApi()
-    override fun fetchToken(loginRequest: LoginRequest) {
-        loginRequestApiImpl.login(loginRequest, ::getToken, ::showError)
+    override fun fetchData(loginRequest: LoginRequest) {
+        if (isValid(loginRequest)) {
+            loginRequestApiImpl.login(loginRequest, ::onLoginSuccess, ::onLoginFailed)
+        }
     }
 
-    override fun validateUserName(userName: String) {
-        if (userName.isEmpty())
-            view.showMessage("You should fill inputs")
+    private fun isValidUsername(username: String) = username.isNotEmpty()
+    private fun isValidPassword(password: String) = password.isNotEmpty()
+
+    override fun onLoginSuccess(result: LoginResponse) {
+        view.onSuccess(result)
+        view.getToken(result.value.token)
     }
 
-    private fun getToken(loginResponse: LoginResponse) {
-        view.getToken(loginResponse.value.token.toString())
+    override fun onLoginFailed(e: IOException) {
+
     }
 
-    private fun showError(ioException: IOException) {
-        view.showError(ioException)
+    override fun isValid(loginRequest: LoginRequest): Boolean {
+        return if (!isValidUsername(loginRequest.username)) {
+                    view.showInvalidMassage("please enter your username", "")
+                    false
+                }
+                else if (!isValidPassword(loginRequest.password)) {
+                    view.showInvalidMassage("", "please enter your password")
+                    false
+                }
+                else {
+                    true
+                }
     }
 
 }
+
