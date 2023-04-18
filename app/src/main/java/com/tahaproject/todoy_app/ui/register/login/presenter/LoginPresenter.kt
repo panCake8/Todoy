@@ -9,36 +9,38 @@ import java.io.IOException
 
 class LoginPresenter(private val view: LoginContract.IView) : LoginContract.IPresenter {
     private val loginRequestApiImpl: ILoginApi = LoginApi()
-    override fun fetchData(loginRequest: LoginRequest) {
-        if (isValid(loginRequest)) {
-            loginRequestApiImpl.login(loginRequest, ::onLoginSuccess, ::onLoginFailed)
+    override fun fetchData(userName: String, password: String) {
+        if (isValid(userName, password)) {
+            loginRequestApiImpl.login(
+                LoginRequest(userName, password),
+                ::onLoginSuccess,
+                ::onLoginFailed
+            )
         }
     }
 
-    private fun isValidUsername(username: String) = username.isNotEmpty()
+    private fun isValidUsername(userName: String) = userName.isNotEmpty()
     private fun isValidPassword(password: String) = password.isNotEmpty()
 
-    override fun onLoginSuccess(result: LoginResponse) {
-        view.onSuccess(result)
-        view.getToken(result.value.token)
+    override fun onLoginSuccess(loginResponse: LoginResponse) {
+        loginResponse.value.token?.let { view.getToken(it) }
+        view.onSuccess()
     }
 
     override fun onLoginFailed(e: IOException) {
-
+        view.onFailRequest(e)
     }
 
-    override fun isValid(loginRequest: LoginRequest): Boolean {
-        return if (!isValidUsername(loginRequest.username)) {
-                    view.showInvalidMassage("please enter your username", "")
-                    false
-                }
-                else if (!isValidPassword(loginRequest.password)) {
-                    view.showInvalidMassage("", "please enter your password")
-                    false
-                }
-                else {
-                    true
-                }
+    override fun isValid(userName: String, password: String): Boolean {
+        return if (!isValidUsername(userName)) {
+            view.showInvalidUserNameMassage("please enter your userName")
+            false
+        } else if (!isValidPassword(password)) {
+            view.showInvalidPasswordMassage("please enter your password")
+            false
+        } else {
+            true
+        }
     }
 
 }
