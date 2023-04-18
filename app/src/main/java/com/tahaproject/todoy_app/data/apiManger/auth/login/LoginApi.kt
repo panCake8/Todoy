@@ -12,15 +12,17 @@ import okhttp3.Response
 import java.io.IOException
 
 class LoginApi : ApiRequest(), ILoginApi {
+    override val client: OkHttpClient
+        get() = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
+
     override fun login(
         loginRequest: LoginRequest,
         onSuccess: (LoginResponse) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
         val credentials = Credentials.basic(loginRequest.username, loginRequest.password)
-        val loginClient = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
         val request = getLoginRequest(Constants.EndPoints.login, credentials)
-        loginClient.newCall(request).enqueue(object : Callback {
+        client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
             }
@@ -31,11 +33,12 @@ class LoginApi : ApiRequest(), ILoginApi {
                         val loginResponse = gson.fromJson(jsonString, LoginResponse::class.java)
                         onSuccess(loginResponse)
                     }
-
-                }
-
+                } else
+                    onFailed(IOException("Invalid username or password"))
             }
 
         })
     }
+
+
 }

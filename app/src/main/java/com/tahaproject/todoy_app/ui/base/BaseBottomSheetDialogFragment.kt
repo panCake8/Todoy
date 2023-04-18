@@ -10,10 +10,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tahaproject.todoy_app.R
 
-abstract class BaseBottomSheetDialogFragment<VB : ViewBinding> : BottomSheetDialogFragment() {
+abstract class BaseBottomSheetDialogFragment<VB : ViewBinding, T> : BottomSheetDialogFragment() {
     private var _binding: VB? = null
     val binding get() = _binding!!
     abstract val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> VB
+    abstract val addNewTaskPresenter: T
 
     protected abstract fun getLayoutResourceId(): Int
 

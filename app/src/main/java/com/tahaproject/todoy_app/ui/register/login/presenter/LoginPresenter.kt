@@ -9,22 +9,39 @@ import java.io.IOException
 
 class LoginPresenter(private val view: LoginContract.IView) : LoginContract.IPresenter {
     private val loginRequestApiImpl: ILoginApi = LoginApi()
-    override fun fetchToken(loginRequest: LoginRequest) {
-        loginRequestApiImpl.login(loginRequest, ::getToken, ::showError)
+    override fun fetchData(userName: String, password: String) {
+        if (isValid(userName, password)) {
+            loginRequestApiImpl.login(
+                LoginRequest(userName, password),
+                ::onLoginSuccess,
+                ::onLoginFailed
+            )
+        }
     }
 
-    override fun validateUserName(userName: String) {
-        if (userName.isEmpty())
-            view.showMessage("You should fill inputs")
+    private fun isValidUsername(userName: String) = userName.isNotEmpty()
+    private fun isValidPassword(password: String) = password.isNotEmpty()
 
+    override fun onLoginSuccess(loginResponse: LoginResponse) {
+        loginResponse.value.token?.let { view.getToken(it) }
+        view.onSuccess()
     }
 
-    private fun getToken(loginResponse: LoginResponse) {
-        view.getToken(loginResponse.value.token.toString())
+    override fun onLoginFailed(e: IOException) {
+        view.onFailRequest(e)
     }
 
-    private fun showError(ioException: IOException) {
-        view.showError(ioException)
+    override fun isValid(userName: String, password: String): Boolean {
+        return if (!isValidUsername(userName)) {
+            view.showInvalidUserNameMassage("please enter your userName")
+            false
+        } else if (!isValidPassword(password)) {
+            view.showInvalidPasswordMassage("please enter your password")
+            false
+        } else {
+            true
+        }
     }
 
 }
+
