@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -33,12 +34,9 @@ import java.io.IOException
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
 
     private lateinit var personalTodosResponse: ToDosResponse
+    private lateinit var progressBar: ProgressBar
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     private val getPieChartDataList: List<PieEntry> = listOf(
         PieEntry(15f, "Done"),
@@ -48,6 +46,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewTextStatistics.visibility = View.GONE;
+        binding.viewTextCategory.visibility = View.GONE;
+        binding.pieChart.visibility = View.GONE;
+        binding.personalCard.visibility = View.GONE;
+        binding.teamCard.visibility = View.GONE;
+        binding.recently.visibility = View.GONE;
+        binding.recently.visibility = View.GONE;
+        binding.cardViewRecently.visibility= View.GONE;
+        progressBar = binding.progressBar
         addCallBacks()
     }
 
@@ -197,6 +204,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
+            progressBar.visibility = View.GONE
+            binding.viewTextStatistics.visibility = View.VISIBLE;
+            binding.viewTextCategory.visibility = View.VISIBLE;
+            binding.pieChart.visibility = View.VISIBLE;
+            binding.personalCard.visibility = View.VISIBLE;
+            binding.teamCard.visibility = View.VISIBLE;
+            binding.recently.visibility = View.VISIBLE;
+            binding.recently.visibility = View.VISIBLE;
+            binding.cardViewRecently.visibility= View.VISIBLE;
             personalTodosResponse = personalTodoResponse
             binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
             binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
@@ -207,6 +223,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showError(ioException: IOException) {
         requireActivity().runOnUiThread {
+            progressBar.visibility = View.GONE
             ioException.localizedMessage?.let { showToast(it) }
         }
 
