@@ -1,24 +1,36 @@
 package com.tahaproject.todoy_app.ui.todo.team.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.databinding.ItemCardTeamTodoBinding
 import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-
+import androidx.recyclerview.widget.RecyclerView
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
+import com.tahaproject.todoy_app.databinding.ItemCardTeamTodoBinding
+import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 
 class TeamAdapter(private val view: List<ToDosResponse>) :
     BaseRecyclerAdapter<ToDosResponse, ItemCardTeamTodoBinding>(view) {
+
+
+class TeamAdapter(private val list: List<Todo>) :
+    BaseRecyclerAdapter<Todo, ItemCardTeamTodoBinding>(list) {
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCardTeamTodoBinding =
         ItemCardTeamTodoBinding::inflate
 
-    override fun bindViews(binding: ItemCardTeamTodoBinding) {
+
+    //add view bind
+    override fun bindViews(binding: ItemCardTeamTodoBinding, currentItem: Todo) {
         binding.apply {
-            //textViewTitleTeamTodo.text = list[0].title
-            //textViewAssignName.text = list[0].assignee
-            //textViewBodyTeamTodo.text = list[0].description
-            //textViewStatus.text = list[0].status.toString()
-            //textViewCreationTime.text = list[0].creationTime
+            textViewTitleTeamTodo.text = currentItem.title
+            textViewAssignName.text = currentItem.assignee
+            textViewBodyTeamTodo.text = currentItem.description
+            textViewStatus.text = currentItem.status.toString()
+            textViewCreationTime.text = currentItem.creationTime
         }
     }
+
 }
