@@ -26,15 +26,15 @@ class LoginApi : ApiRequest(), ILoginApi {
             override fun onFailure(call: Call, e: IOException) {
                 onFailed(e)
             }
+
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
                         val loginResponse = gson.fromJson(jsonString, LoginResponse::class.java)
                         onSuccess(loginResponse)
                     }
-
-                }
-
+                } else
+                    onFailed(IOException("Invalid username or password"))
             }
 
         })

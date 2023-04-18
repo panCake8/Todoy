@@ -6,24 +6,18 @@ import java.io.IOException
 
 
 interface LoginContract {
-    interface IView{
-
-        fun onSuccess(loginResponse: LoginResponse)
+    interface IView {
+        fun onSuccess()
         fun onFailRequest(error: IOException)
-        fun showInvalidMassage(usernameMassage:String,passwordMassage:String)
-        fun getToken(token:String?)
-
+        fun showInvalidUserNameMassage(userNameMessage: String)
+        fun showInvalidPasswordMassage(passwordMessage: String)
+        fun getToken(token: String)
     }
 
-    interface IPresenter{
-
-        fun fetchData(loginRequest: LoginRequest)
+    interface IPresenter {
+        fun fetchData(userName: String, password: String)
         fun onLoginSuccess(loginResponse: LoginResponse)
         fun onLoginFailed(e: IOException)
-
-        fun isValid(loginRequest: LoginRequest):Boolean
-
-
-
+        fun isValid(userName: String, password: String): Boolean
     }
 }
