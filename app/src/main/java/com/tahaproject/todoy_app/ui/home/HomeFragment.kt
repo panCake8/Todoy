@@ -27,13 +27,19 @@ import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
+import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
 
+
+   lateinit var sharedPreferenceUtil : SharedPreferenceUtil
+
+
     private lateinit var personalTodosResponse: ToDosResponse
-    override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
+        override
+    val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +58,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
     private fun addCallBacks() {
+        sharedPreferenceUtil= SharedPreferenceUtil(this.requireContext())
+
         renderPieChart(binding.pieChart)
         setListeners(binding)
     }
@@ -59,8 +67,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     private fun setListeners(binding: FragmentHomeBinding) {
         binding.viewAllTeam.setOnClickListener {
             transitionTo(
-                true,
-                R.id.fragment_home_container,
                 TeamTodoFragment(),
                 TeamTodoFragment::class.java.name
             )
@@ -68,8 +74,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
         binding.viewAllPersonal.setOnClickListener {
             transitionTo(
-                true,
-                R.id.fragment_home_container,
                 PersonalTodoFragment(),
                 PersonalTodoFragment::class.java.name
             )
@@ -95,21 +99,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         }
 
         binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
+            transitionTo(
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                DetailsTodoFragment(),
-//                DetailsTodoFragment::class.java.name
-//            )
+            transitionTo(
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -117,14 +117,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         }
     }
 
+
+
+
+    // transition between fragments
     private fun transitionTo(
-        b: Boolean,
-        fragmentHomeContainer: Int = R.id.fragment_register_container,
-        detailsTodoFragment:Fragment,
+        fragment: Fragment,
         name: String,
     ) {
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.add(R.id.fragment_home_container, fragment)
+        transaction.addToBackStack(name)
+            .commit()
 
     }
+
+
+
+
 
     private fun renderPieChart(pieChart: PieChart) {
         setPieChartDesign(pieChart)
@@ -173,10 +183,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
 
-
-    override fun showTeamToDoData(teamTodoResponse:ToDosResponse) {
+    override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-
 
 
         }
@@ -213,7 +221,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
 
-
     companion object {
         private val LABELS_COLORS = listOf(
             Color.parseColor("#00B4D8"),
@@ -224,5 +231,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
     override val presenter: HomePresenter
-        get() = HomePresenter(this, "")
+        get() = HomePresenter(this, sharedPreferenceUtil.getToken())
 }
