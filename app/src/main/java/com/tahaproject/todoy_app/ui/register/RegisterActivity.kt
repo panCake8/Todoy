@@ -40,6 +40,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         }
     }
 
+
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (supportFragmentManager.findFragmentByTag(LoginFragment::class.java.name) in supportFragmentManager.fragments) {
             supportFragmentManager.popBackStackImmediate()
@@ -47,5 +49,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         super.onBackPressed()
 
     }
+
 
 }
