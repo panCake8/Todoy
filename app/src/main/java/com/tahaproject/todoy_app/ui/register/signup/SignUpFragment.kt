@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.ui.register.signup
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +42,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), S
         parentFragmentManager.popBackStack()
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun onSignUp() {
         val username = binding.editTextUsername.text.toString()
         val password = binding.editTextPassword.text.toString()
@@ -51,7 +53,6 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), S
 
     override fun onSuccess() {
         requireActivity().runOnUiThread {
-            Toast.makeText(requireContext(), SuccessMessage.SIGNUP_SUCCESSFULLY,Toast.LENGTH_SHORT).show()
             toLogin()
         }
     }

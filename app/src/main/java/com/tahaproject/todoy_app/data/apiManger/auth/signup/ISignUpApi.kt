@@ -7,7 +7,7 @@ import java.io.IOException
 interface ISignUpApi {
     fun signUp(
         signUpRequest: SignUpRequest,
-        onSuccess: (SignUpResponse) -> Unit,
+        onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit,
     )
 }

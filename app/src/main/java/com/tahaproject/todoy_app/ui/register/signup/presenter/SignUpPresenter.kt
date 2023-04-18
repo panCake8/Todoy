@@ -1,6 +1,9 @@
 package com.tahaproject.todoy_app.ui.register.signup.presenter
 
 import com.tahaproject.todoy_app.BuildConfig
+import com.tahaproject.todoy_app.data.apiManger.auth.login.ILoginApi
+import com.tahaproject.todoy_app.data.apiManger.auth.login.LoginApi
+import com.tahaproject.todoy_app.data.apiManger.auth.signup.ISignUpApi
 import com.tahaproject.todoy_app.data.apiManger.auth.signup.SignUpApi
 import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
 import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse
@@ -10,7 +13,7 @@ import com.tahaproject.todoy_app.util.ErrorMessage
 import java.io.IOException
 
 class SignUpPresenter(private val view: SignUpContract.View) : SignUpContract.Presenter {
-    private val signUpApi = SignUpApi()
+    private val signUpApi : ISignUpApi= SignUpApi()
     override fun fetchData(username: String, password: String,confirmPassword:String) {
         if(isValid(username,password,confirmPassword )){
             signUpApi.signUp(
@@ -21,7 +24,7 @@ class SignUpPresenter(private val view: SignUpContract.View) : SignUpContract.Pr
         }
     }
 
-    override fun onSignUpSuccess(signUpResponse: SignUpResponse) {
+    override fun onSignUpSuccess(message: String) {
        view.onSuccess()
     }
 

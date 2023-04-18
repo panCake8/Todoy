@@ -4,6 +4,7 @@ import com.tahaproject.todoy_app.data.ApiRequest
 import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
 import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse
 import com.tahaproject.todoy_app.util.Constants
+import com.tahaproject.todoy_app.util.SuccessMessage
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.FormBody
@@ -38,8 +39,8 @@ class SignUpApi : ApiRequest(), ISignUpApi {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
-                        var response = gson.fromJson(jsonString, SignUpResponse::class.java)
-                        onSuccess(response)
+                      gson.fromJson(jsonString, SignUpResponse::class.java)
+                        onSuccess(SuccessMessage.SIGNUP_SUCCESSFULLY)
                     }
                 }
             }

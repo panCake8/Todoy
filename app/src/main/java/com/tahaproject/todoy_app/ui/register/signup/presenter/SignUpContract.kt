@@ -16,7 +16,7 @@ interface SignUpContract {
 
     interface Presenter {
         fun fetchData(username: String,password:String,confirmPassword:String)
-        fun onSignUpSuccess(signUpResponse:SignUpResponse)
+        fun onSignUpSuccess(message:String)
         fun onSignUpFailed(e:IOException)
         fun isValid(username: String,password:String,confirmPassword:String):Boolean
 
