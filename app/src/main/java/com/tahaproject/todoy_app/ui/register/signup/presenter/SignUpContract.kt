@@ -6,11 +6,19 @@ import java.io.IOException
 
 interface SignUpContract {
     interface View {
-        fun showSuccessMessage(message:String)
-        fun showErrorMessage(error: IOException)
+        fun onSuccess()
+        fun onFailedRequest(error: IOException)
+        fun showInvalidUserNameMessage(message: String)
+        fun showInvalidPasswordMessage(message: String)
+        fun showNotMatchPasswordMessage(message: String)
+
     }
 
     interface Presenter {
-        fun fetchData(signUpRequest: SignUpRequest)
+        fun fetchData(username: String,password:String,confirmPassword:String)
+        fun onSignUpSuccess(signUpResponse:SignUpResponse)
+        fun onSignUpFailed(e:IOException)
+        fun isValid(username: String,password:String,confirmPassword:String):Boolean
+
     }
 }
