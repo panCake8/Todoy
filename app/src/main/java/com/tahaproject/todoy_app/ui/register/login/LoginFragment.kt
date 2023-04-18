@@ -50,7 +50,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
             replace(
                 R.id.fragment_register_container,
                 SignUpFragment(),
-                SignUpFragment::class.java.name
+                LoginFragment::class.java.name
             )
             addToBackStack(LoginFragment::class.java.name)
             setReorderingAllowed(true)
