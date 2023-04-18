@@ -33,11 +33,9 @@ import java.io.IOException
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
 
-
    lateinit var sharedPreferenceUtil : SharedPreferenceUtil
 
 
-    private lateinit var personalTodosResponse: ToDosResponse
         override
     val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
@@ -81,21 +79,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         }
 
         binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
+            transitionTo(
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-//            transitionTo(
-//                true,
-//                R.id.fragment_home_container,
-//                DetailsTodoFragment(),
-//                DetailsTodoFragment::class.java.name
-//            )
+            transitionTo(
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
         }
 
         binding.editTextSearch.setOnClickListener {
@@ -185,12 +179,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-
+            binding.teamTasksLeft.text=teamTodoResponse.value.count { it.status != 2 }.toString()
 
         }
 
     }
-
 
     override fun navigateToLoginScreen() {
         parentFragmentManager.popBackStack()
@@ -205,7 +198,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            personalTodosResponse = personalTodoResponse
             binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
             binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
             binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
@@ -217,9 +209,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         requireActivity().runOnUiThread {
             ioException.localizedMessage?.let { showToast(it) }
         }
-
     }
-
 
     companion object {
         private val LABELS_COLORS = listOf(
