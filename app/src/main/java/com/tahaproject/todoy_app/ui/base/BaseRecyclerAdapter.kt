@@ -15,10 +15,10 @@ abstract class BaseRecyclerAdapter<T, VB : ViewBinding>(private var list: List<T
     }
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
-        bindViews(holder.binding)
+        bindViews(holder.binding,list[position])
     }
 
-    abstract fun bindViews(binding: VB)
+    abstract fun bindViews(binding: VB,currentItem: T)
 
     override fun getItemCount() = list.size ?: 0
 
