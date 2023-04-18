@@ -9,11 +9,10 @@ import com.tahaproject.todoy_app.ui.addtask.presenter.IAddNewTaskContract
 import java.io.IOException
 
 class IDetailsPresenter
-    (
+    (private val view: IDetailsContract.View,
     private val personalTodoApi: IPersonalTodoApi,
-    private val teamTodoApi: ITeamTodoApi,
-    private val view: IDetailsContract.View
-)
+    private val teamTodoApi: ITeamTodoApi
+    )
 
     : IDetailsContract.IPresenter {
     override fun updateTeamTodoTask(
