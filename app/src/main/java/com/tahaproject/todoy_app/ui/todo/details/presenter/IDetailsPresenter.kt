@@ -5,33 +5,45 @@ import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.ITeamTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
+import com.tahaproject.todoy_app.ui.addtask.presenter.IAddNewTaskContract
 import java.io.IOException
 
-class IDetailsPresenter(token: String) : IDetailsContract.IPresenter {
-    private val personalTodoApiImpl: IPersonalTodoApi = PersonalTodoApi(token)
-    private val teamTodoApi: ITeamTodoApi = TeamTodoApi(token)
+class IDetailsPresenter
+    (
+    private val personalTodoApi: IPersonalTodoApi,
+    private val teamTodoApi: ITeamTodoApi,
+    private val view: IDetailsContract.View
+)
+
+    : IDetailsContract.IPresenter {
     override fun updateTeamTodoTask(
-        teamTodoUpdateRequest: UpdateTodoTask,
-        onSuccess: (String) -> Unit,
-        onFailed: (IOException) -> Unit
+        teamTodoUpdateRequest: UpdateTodoTask
     ) {
         teamTodoApi
             .updateTeamTodosStatus(
-                teamTodoUpdateRequest, onSuccess, onFailed
+                teamTodoUpdateRequest,
+                ::onTaskSuccess,
+                ::onTaskFailed
             )
     }
 
     override fun updatePersonalTodoTask(
-        personalTodoUpdateRequest: UpdateTodoTask,
-        onSuccess: (String) -> Unit,
-        onFailed: (IOException) -> Unit
+        personalTodoUpdateRequest: UpdateTodoTask
     ) {
-        personalTodoApiImpl
-            .updatePersonalTodosStatus(
-                personalTodoUpdateRequest, onSuccess, onFailed
-            )
+        personalTodoApi.updatePersonalTodosStatus(
+            personalTodoUpdateRequest,
+            ::onTaskSuccess,
+            ::onTaskFailed
+        )
+
     }
 
+    private fun onTaskSuccess(successMessage: String) {
+        view.showTaskUpdated(successMessage)
+    }
 
+    private fun onTaskFailed(error: IOException) {
+        view.showError(error)
+    }
 }
 

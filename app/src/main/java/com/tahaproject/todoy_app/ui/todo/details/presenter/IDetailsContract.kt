@@ -1,20 +1,20 @@
 package com.tahaproject.todoy_app.ui.todo.details.presenter
 
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
-import java.io.IOException
+import okio.IOException
 
 interface IDetailsContract {
+    interface View {
+        fun showTaskUpdated(successMessage: String)
+        fun showError(error: IOException)
+    }
     interface IPresenter {
         fun updateTeamTodoTask(
-            teamTodoUpdateRequest: UpdateTodoTask,
-            onSuccess: (String) -> Unit,
-            onFailed: (IOException) -> Unit
+            teamTodoUpdateRequest: UpdateTodoTask
         )
 
         fun updatePersonalTodoTask(
-            personalTodoUpdateRequest: UpdateTodoTask,
-            onSuccess: (String) -> Unit,
-            onFailed: (IOException) -> Unit
+            personalTodoUpdateRequest: UpdateTodoTask
         )
     }
 }
