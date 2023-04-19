@@ -6,7 +6,7 @@ import java.io.IOException
 
 interface SignUpContract {
     interface View {
-        fun onSuccess()
+        fun onSuccess(message: String)
         fun onFailedRequest(error: IOException)
         fun showInvalidUserNameMessage(message: String)
         fun showInvalidPasswordMessage(message: String)

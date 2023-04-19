@@ -25,7 +25,7 @@ class SignUpPresenter(private val view: SignUpContract.View) : SignUpContract.Pr
     }
 
     override fun onSignUpSuccess(message: String) {
-       view.onSuccess()
+       view.onSuccess(message)
     }
 
     override fun onSignUpFailed(e: IOException) {

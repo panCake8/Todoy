@@ -22,7 +22,7 @@ class SignUpApi : ApiRequest(), ISignUpApi {
 
     override fun signUp(
         signUpRequest: SignUpRequest,
-        onSuccess: (SignUpResponse) -> Unit,
+        onSuccess: (String) -> Unit,
         onFailed: (IOException) -> Unit
     ) {
         val formBody = FormBody.Builder().add(USER_NAME, signUpRequest.username)
