@@ -10,7 +10,7 @@ import java.io.IOException
 
 class TeamTodoPresenter(private val view: ITeamTodoContract.IView, token: String):
     ITeamTodoContract.IPresenter{
-    private lateinit var context: Context
+
     private val teamTodoRequestImpl: ITeamTodoApi = TeamTodoApi(token)
 
 

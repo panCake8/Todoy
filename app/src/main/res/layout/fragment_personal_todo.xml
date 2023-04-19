@@ -28,12 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar_stroke">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
             <com.google.android.material.chip.Chip
                 style="@style/Chips_choice"
                 android:layout_weight="1"
@@ -51,7 +45,6 @@
                 android:layout_weight="1"
                 android:checked="false"
                 android:text="@string/todo" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.google.android.material.chip.ChipGroup>
 
