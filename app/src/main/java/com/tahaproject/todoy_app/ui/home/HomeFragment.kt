@@ -20,11 +20,9 @@ import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
-import com.tahaproject.todoy_app.ui.presenter.IHomeContract
+import com.tahaproject.todoy_app.ui.home.activityPresenter.ActivityPresenter
+import com.tahaproject.todoy_app.ui.home.activityPresenter.ActivityContract
 import com.tahaproject.todoy_app.ui.register.RegisterActivity
-import com.tahaproject.todoy_app.ui.search.SearchFragment
-import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
@@ -33,22 +31,18 @@ import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
-
-
-
-
-
+class HomeFragment : BaseFragment<FragmentHomeBinding, ActivityPresenter>(),
+    ActivityContract.IView {
     override
     val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
+
     private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
     private lateinit var allTodos: MutableList<Todo>
     private lateinit var progressBar: ProgressBar
 
-
-
-
+    override val presenter: ActivityPresenter
+        get() = ActivityPresenter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     private fun addCallBacks() {
         sharedPreferenceUtil = SharedPreferenceUtil(this.requireContext())
-
+        presenter.token = sharedPreferenceUtil.getToken()
         renderPieChart(binding.pieChart)
         setListeners(binding)
     }
@@ -81,31 +75,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
+//            transitionTo(
+//                SearchFragment(),
+//                SearchFragment::class.java.name
+//            )
         }
 
         binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
+//            transitionTo(
+//                DetailsTodoFragment(),
+//                DetailsTodoFragment::class.java.name
+//            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -156,7 +150,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         legend.xOffset = 12f
         legend.yOffset = 12f
         legend.orientation = Legend.LegendOrientation.VERTICAL
-
     }
 
 
@@ -174,14 +167,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
 
-    override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
-        requireActivity().runOnUiThread {
-            allTodos.addAll(teamTodoResponse.value)
-            binding.teamTasksLeft.text = teamTodoResponse.value.count { it.status != 2 }.toString()
-
-        }
-
-    }
+//    override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
+//        requireActivity().runOnUiThread {
+//            allTodos.addAll(teamTodoResponse.value)
+//            binding.teamTasksLeft.text = teamTodoResponse.value.count { it.status != 2 }.toString()
+//
+//        }
+//
+//    }
 
     override fun navigateToLoginScreen() {
         parentFragmentManager.popBackStack()
@@ -191,7 +184,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
     override fun navigateToHomeScreen() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun noInternet() {
+
     }
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
@@ -212,6 +209,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
         }
+    }
+
+    override fun serverError() {
+
     }
 
     private val getPieChartDataList: List<PieEntry> = listOf(
@@ -245,11 +246,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         )
         const val NEW_TASK_TAG = "newTaskTag"
     }
+
     private fun toggleProgressBarVisibility(show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
         progressBar.visibility = visibility
     }
-    private fun  toggleHomeViewsVisibility(show: Boolean) {
+
+    private fun toggleHomeViewsVisibility(show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
         binding.viewTextStatistics.visibility = visibility
         binding.viewTextCategory.visibility = visibility
@@ -259,6 +262,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         binding.recently.visibility = visibility
         binding.cardViewRecently.visibility = visibility
     }
-    override val presenter: HomePresenter
-        get() = HomePresenter(this, sharedPreferenceUtil.getToken())
 }

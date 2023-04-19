@@ -16,10 +16,6 @@ class SignUpApi : ApiRequest(), ISignUpApi {
     override val client: OkHttpClient
         get() = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
 
-
-
-
-
     override fun signUp(
         signUpRequest: SignUpRequest,
         onSuccess: (String) -> Unit,
@@ -39,16 +35,19 @@ class SignUpApi : ApiRequest(), ISignUpApi {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
-                      gson.fromJson(jsonString, SignUpResponse::class.java)
+                        gson.fromJson(jsonString, SignUpResponse::class.java)
                         onSuccess(SuccessMessage.SIGNUP_SUCCESSFULLY)
                     }
-                }
+                } else
+                    onFailed(IOException(USED))
             }
         })
     }
+
     companion object {
         const val USER_NAME = "username"
         const val PASSWORD = "password"
         const val TEAM_ID = "teamId"
+        const val USED = "Used!"
     }
 }
