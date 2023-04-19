@@ -53,8 +53,8 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), S
 
     override fun onSuccess(message: String) {
         requireActivity().runOnUiThread {
+         showToast(message)
             toLogin()
-            showToast(message)
         }
     }
 
