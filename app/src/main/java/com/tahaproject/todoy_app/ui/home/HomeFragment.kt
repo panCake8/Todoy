@@ -46,14 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewTextStatistics.visibility = View.GONE;
-        binding.viewTextCategory.visibility = View.GONE;
-        binding.pieChart.visibility = View.GONE;
-        binding.personalCard.visibility = View.GONE;
-        binding.teamCard.visibility = View.GONE;
-        binding.recently.visibility = View.GONE;
-        binding.recently.visibility = View.GONE;
-        binding.cardViewRecently.visibility= View.GONE;
+        toggleHomeViewsVisibility(false)
         progressBar = binding.progressBar
         addCallBacks()
     }
@@ -204,15 +197,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            progressBar.visibility = View.GONE
-            binding.viewTextStatistics.visibility = View.VISIBLE;
-            binding.viewTextCategory.visibility = View.VISIBLE;
-            binding.pieChart.visibility = View.VISIBLE;
-            binding.personalCard.visibility = View.VISIBLE;
-            binding.teamCard.visibility = View.VISIBLE;
-            binding.recently.visibility = View.VISIBLE;
-            binding.recently.visibility = View.VISIBLE;
-            binding.cardViewRecently.visibility= View.VISIBLE;
+            toggleProgressBarVisibility(false)
+            toggleHomeViewsVisibility(true)
             personalTodosResponse = personalTodoResponse
             binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
             binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
@@ -223,7 +209,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showError(ioException: IOException) {
         requireActivity().runOnUiThread {
-            progressBar.visibility = View.GONE
+            toggleProgressBarVisibility(false)
             ioException.localizedMessage?.let { showToast(it) }
         }
 
@@ -239,7 +225,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         )
         const val NEW_TASK_TAG = "newTaskTag"
     }
-
+    private fun toggleProgressBarVisibility(show: Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        progressBar.visibility = visibility
+    }
+    private fun  toggleHomeViewsVisibility(show: Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        binding.viewTextStatistics.visibility = visibility
+        binding.viewTextCategory.visibility = visibility
+        binding.pieChart.visibility = visibility
+        binding.personalCard.visibility = visibility
+        binding.teamCard.visibility = visibility
+        binding.recently.visibility = visibility
+        binding.cardViewRecently.visibility = visibility
+    }
     override val presenter: HomePresenter
         get() = HomePresenter(this, "")
 }
