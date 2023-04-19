@@ -61,22 +61,25 @@ import okio.IOException
      private fun viewDetails(tasKDetails: Todo?){
          binding.textViewTaskTitle.text = tasKDetails?.title
          binding.textViewTaskDescription.text = tasKDetails?.description
-         when(tasKDetails?.status){
-             0->
-             {binding.textViewTaskStats.text = TODO
-                    binding.button.text= START_TASK}
-             1->
-             { binding.textViewTaskStats.text = IN_PROGRESS
-                 binding.button.text= DONE}
-             2->
-             {binding.textViewTaskStats.text = DONE
-                 binding.button.visibility= View.GONE}
-         }
+         checkStatus(tasKDetails)
          if(tasKDetails?.assignee=="")
              binding.chipMemberName.visibility= View.GONE
          else
              binding.chipMemberName.text = tasKDetails?.assignee
 
+     }
+     private fun  checkStatus(tasKDetails: Todo?){
+         when(tasKDetails?.status){
+             0->onChangeStatus(TODO,START_TASK,true)
+             1->onChangeStatus(IN_PROGRESS,DONE,true)
+             2->onChangeStatus(DONE,"",false)
+         }
+     }
+     private fun onChangeStatus(status:String,buttonText:String,show:Boolean){
+         val visibility = if (show) View.VISIBLE else View.GONE
+         binding.textViewTaskStats.text = status
+         binding.button.text= buttonText
+         binding.button.visibility= visibility
      }
      fun newInstance(tasKDetails: Todo) =
         DetailsTodoFragment().apply {
