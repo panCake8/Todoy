@@ -16,6 +16,6 @@ interface IPersonalTodoContract {
 
     interface IPresenter{
 
-        fun fetchData(singleTodoTask: SingleTodoTask)
+        fun fetchData()
     }
 }
