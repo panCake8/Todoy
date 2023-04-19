@@ -8,16 +8,16 @@ import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosRe
 import com.tahaproject.todoy_app.ui.todo.personal.presenter.IPersonalTodoContract
 import java.io.IOException
 
-class TeamTodoPresenter(private val view: IPersonalTodoContract.IView, token: String):
-    IPersonalTodoContract.IPresenter{
+class TeamTodoPresenter(private val view: ITeamTodoContract.IView) :
+    ITeamTodoContract.IPresenter {
+
+    lateinit var token: String
     private lateinit var context: Context
     private val teamTodoRequestImpl: ITeamTodoApi = TeamTodoApi(token)
 
-
-    override fun fetchData(singleTodoTask: SingleTodoTask) {
-        teamTodoRequestImpl.getTeamTodos(::showData,::showError)
+    override fun fetchData() {
+        teamTodoRequestImpl.getTeamTodos(::showData, ::showError)
     }
-
 
 
     private fun showData(toDosResponse: ToDosResponse) {
@@ -25,8 +25,7 @@ class TeamTodoPresenter(private val view: IPersonalTodoContract.IView, token: St
     }
 
 
-
-    private fun showError(ioException: IOException){
+    private fun showError(ioException: IOException) {
         view.showError(ioException)
     }
 

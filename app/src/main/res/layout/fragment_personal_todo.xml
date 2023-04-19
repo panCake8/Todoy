@@ -75,6 +75,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_personal_todo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/no_height"
         android:layout_marginTop="@dimen/margin_large"
