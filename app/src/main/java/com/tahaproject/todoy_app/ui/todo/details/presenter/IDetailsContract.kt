@@ -4,7 +4,7 @@ import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import okio.IOException
 
 interface IDetailsContract {
-    interface View {
+    interface IView {
         fun showTaskUpdated(successMessage: String)
         fun showError(error: IOException)
     }

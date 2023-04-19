@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
-import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentDetailsBinding
@@ -19,15 +17,15 @@ import okio.IOException
 
  class DetailsTodoFragment :
      BaseFragment<FragmentDetailsBinding,IDetailsPresenter>()
-    ,IDetailsContract.View
+    ,IDetailsContract.IView
  {
+     lateinit var updateTodoTask: UpdateTodoTask
      private val sharedPreferenceUtil by lazy {
          SharedPreferenceUtil(requireContext())
      }
      override val presenter: IDetailsPresenter
-         get() = IDetailsPresenter(this,
-             PersonalTodoApi(sharedPreferenceUtil.getToken()),
-             TeamTodoApi(sharedPreferenceUtil.getToken()))
+         get() = IDetailsPresenter(this,sharedPreferenceUtil.getToken())
+
      override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean)
     -> FragmentDetailsBinding
         get() = FragmentDetailsBinding::inflate
@@ -36,51 +34,42 @@ import okio.IOException
         super.onViewCreated(view, savedInstanceState)
         val tasKDetails = arguments?.
         getParcelable(Constants.TASK_DETAILS) as Todo?
-        var updateTodoTask = UpdateTodoTask(tasKDetails!!.id,tasKDetails.status)
+         updateTodoTask = UpdateTodoTask(tasKDetails!!.id,tasKDetails.status)
         viewDetails(tasKDetails)
-        addCallBacks(updateTodoTask)
+        addCallBacks()
     }
-
-    private fun addCallBacks(updateTodoTask: UpdateTodoTask) {
-    onClickBack()
-        onClickButton(updateTodoTask)
+    private fun addCallBacks() {
+        onBack()
+        onClickButton()
     }
-     private fun onClickBack(){
+     private fun onBack(){
          binding.appBarDetails.setNavigationOnClickListener {
-             activity?.onBackPressed()
+             parentFragmentManager.popBackStack()
          }
      }
-     private fun onClickButton( updateTodoTask: UpdateTodoTask){
+     private fun onClickButton(){
          if (updateTodoTask.status==0){
              updateTodoTask.status =1
-             binding.button.setOnClickListener {
-                 presenter.updateTeamTodoTask(updateTodoTask)
-                 binding.button.text = "Done"
-                 binding.textViewTaskStats.text="in progress"
-             }
+             onUpdate(IN_PROGRESS,true)
          }
          else{
              updateTodoTask.status =2
-             binding.button.setOnClickListener {
-                 presenter.updateTeamTodoTask(updateTodoTask)
-                 binding.button.visibility = View.GONE
-                 binding.textViewTaskStats.text="Done"
+             onUpdate(DONE,false)
          }
+     }
 
-     }
-     }
      private fun viewDetails(tasKDetails: Todo?){
          binding.textViewTaskTitle.text = tasKDetails?.title
          binding.textViewTaskDescription.text = tasKDetails?.description
          when(tasKDetails?.status){
              0->
-             {binding.textViewTaskStats.text = "Todo"
-                    binding.button.text="Start Task"}
+             {binding.textViewTaskStats.text = TODO
+                    binding.button.text= START_TASK}
              1->
-             { binding.textViewTaskStats.text = "In progress"
-                 binding.button.text="done"}
+             { binding.textViewTaskStats.text = IN_PROGRESS
+                 binding.button.text= DONE}
              2->
-             {binding.textViewTaskStats.text = "Done"
+             {binding.textViewTaskStats.text = DONE
                  binding.button.visibility= View.GONE}
          }
          if(tasKDetails?.assignee=="")
@@ -95,7 +84,15 @@ import okio.IOException
                 putParcelable(Constants.TASK_DETAILS ,tasKDetails)
             }
         }
-
+    private fun onUpdate(stats:String,show:Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        binding.button.setOnClickListener {
+            presenter.updateTeamTodoTask(updateTodoTask)
+            binding.button.text = DONE
+            binding.textViewTaskStats.text= stats
+            binding.button.visibility= visibility
+        }
+    }
 
     override fun showTaskUpdated(successMessage: String) {
         showToast(successMessage)
@@ -104,4 +101,10 @@ import okio.IOException
     override fun showError(error: IOException) {
         showToast(error)
     }
+     companion object {
+         const val DONE ="Done"
+         const val IN_PROGRESS ="In Progress"
+         const val TODO ="Todo"
+         const val START_TASK ="Start_Task"
+     }
  }
