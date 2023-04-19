@@ -8,8 +8,8 @@ import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosRe
 import com.tahaproject.todoy_app.ui.todo.personal.presenter.IPersonalTodoContract
 import java.io.IOException
 
-class TeamTodoPresenter(private val view: IPersonalTodoContract.IView, token: String):
-    IPersonalTodoContract.IPresenter{
+class TeamTodoPresenter(private val view: ITeamTodoContract.IView, token: String):
+    ITeamTodoContract.IPresenter{
     private lateinit var context: Context
     private val teamTodoRequestImpl: ITeamTodoApi = TeamTodoApi(token)
 
