@@ -20,7 +20,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         get() = RegisterPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         super.onCreate(savedInstanceState)
         setup()
     }

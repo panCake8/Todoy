@@ -1,5 +1,6 @@
 package com.tahaproject.todoy_app.data.interceptors
 
+import com.tahaproject.todoy_app.util.ErrorMessage
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -11,11 +12,9 @@ class AuthInterceptor : Interceptor {
 
         if (response.code == 401) {
             // Handle the error 401 (unauthorized) here
-            throw UnAuthorizedException()
+            throw IOException(ErrorMessage.UNAUTHORIZED)
         }
 
         return response
     }
 }
-
-class UnAuthorizedException : IOException("Unauthorized")
