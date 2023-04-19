@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -34,20 +35,25 @@ import java.io.IOException
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
 
-    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
-    private lateinit var allTodos: MutableList<Todo>
+
+
+
 
     override
     val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
+    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
+    private lateinit var allTodos: MutableList<Todo>
+    private lateinit var progressBar: ProgressBar
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toggleHomeViewsVisibility(false)
+        progressBar = binding.progressBar
         addCallBacks()
     }
 
@@ -190,6 +196,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
+            toggleProgressBarVisibility(false)
+            toggleHomeViewsVisibility(true)
             allTodos.addAll(personalTodoResponse.value)
             binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
             binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
@@ -200,6 +208,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showError(ioException: IOException) {
         requireActivity().runOnUiThread {
+            toggleProgressBarVisibility(false)
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
         }
@@ -236,7 +245,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         )
         const val NEW_TASK_TAG = "newTaskTag"
     }
-
+    private fun toggleProgressBarVisibility(show: Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        progressBar.visibility = visibility
+    }
+    private fun  toggleHomeViewsVisibility(show: Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        binding.viewTextStatistics.visibility = visibility
+        binding.viewTextCategory.visibility = visibility
+        binding.pieChart.visibility = visibility
+        binding.personalCard.visibility = visibility
+        binding.teamCard.visibility = visibility
+        binding.recently.visibility = visibility
+        binding.cardViewRecently.visibility = visibility
+    }
     override val presenter: HomePresenter
         get() = HomePresenter(this, sharedPreferenceUtil.getToken())
 }
