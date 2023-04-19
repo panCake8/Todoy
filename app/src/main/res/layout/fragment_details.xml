@@ -50,7 +50,7 @@
         tools:text="@string/test" />
 
     <TextView
-        android:id="@+id/text_view_task_body"
+        android:id="@+id/text_view_task_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
@@ -82,6 +82,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_view_task_stats" />
 
     <Button
+
         android:id="@+id/button"
         style="@style/Button"
         android:layout_marginVertical="@dimen/margin_xx_large"
@@ -89,7 +90,7 @@
         android:text="@string/test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_task_body" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_task_description" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
