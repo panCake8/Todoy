@@ -73,20 +73,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
             )
 
         }
-/*
-        binding.editTextSearch.setOnClickListener {
-            transitionTo(
-                SearchFragment(),
-                SearchFragment::class.java.name
-            )
-        }
-
-        binding.cardViewRecently.setOnClickListener {
-            transitionTo(
-                DetailsTodoFragment(),
-                DetailsTodoFragment::class.java.name
-            )
-        }
 
         binding.editTextSearch.setOnClickListener {
             transitionTo(
@@ -101,7 +87,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
                 DetailsTodoFragment::class.java.name
             )
         }
-*/
+
+        binding.editTextSearch.setOnClickListener {
+            transitionTo(
+                SearchFragment(),
+                SearchFragment::class.java.name
+            )
+        }
+
+        binding.cardViewRecently.setOnClickListener {
+            transitionTo(
+                DetailsTodoFragment(),
+                DetailsTodoFragment::class.java.name
+            )
+        }
+
         binding.addFAB.setOnClickListener {
             AddNewTaskFragment().show(parentFragmentManager, NEW_TASK_TAG)
         }
