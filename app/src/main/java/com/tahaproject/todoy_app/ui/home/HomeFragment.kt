@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
@@ -33,10 +34,10 @@ import java.io.IOException
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeContract.IView {
 
-   lateinit var sharedPreferenceUtil : SharedPreferenceUtil
+    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
+    private lateinit var allTodos: MutableList<Todo>
 
-
-        override
+    override
     val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
@@ -44,11 +45,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
         super.onCreate(savedInstanceState)
     }
 
-    private val getPieChartDataList: List<PieEntry> = listOf(
-        PieEntry(15f, "Done"),
-        PieEntry(60f, "In progress"),
-        PieEntry(35f, "Todo")
-    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
     private fun addCallBacks() {
-        sharedPreferenceUtil= SharedPreferenceUtil(this.requireContext())
+        sharedPreferenceUtil = SharedPreferenceUtil(this.requireContext())
 
         renderPieChart(binding.pieChart)
         setListeners(binding)
@@ -77,7 +73,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
             )
 
         }
-
+/*
         binding.editTextSearch.setOnClickListener {
             transitionTo(
                 SearchFragment(),
@@ -105,13 +101,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
                 DetailsTodoFragment::class.java.name
             )
         }
-
+*/
         binding.addFAB.setOnClickListener {
             AddNewTaskFragment().show(parentFragmentManager, NEW_TASK_TAG)
         }
     }
-
-
 
 
     // transition between fragments
@@ -127,12 +121,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
     }
 
 
-
-
-
     private fun renderPieChart(pieChart: PieChart) {
         setPieChartDesign(pieChart)
-        val dataSet = PieDataSet(getPieChartDataList, Constants.EMPTY_STRING)
+        val dataSet = PieDataSet(getPieChartDataList, "")
         pieChart.data = createFormattedPieData(dataSet, pieChart)
         pieChart.invalidate()
         pieChart.animateY(1500, Easing.EaseInOutQuad)
@@ -179,7 +170,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            binding.teamTasksLeft.text=teamTodoResponse.value.count { it.status != 2 }.toString()
+            allTodos.addAll(teamTodoResponse.value)
+            binding.teamTasksLeft.text = teamTodoResponse.value.count { it.status != 2 }.toString()
 
         }
 
@@ -198,6 +190,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
+            allTodos.addAll(personalTodoResponse.value)
             binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
             binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
             binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
@@ -207,9 +200,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), IHomeCo
 
     override fun showError(ioException: IOException) {
         requireActivity().runOnUiThread {
+            allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
         }
     }
+
+    private val getPieChartDataList: List<PieEntry> = listOf(
+        PieEntry(getDonePercentage(), Constants.DONE_STRING),
+        PieEntry(getInProgressPercentage(), Constants.IN_PROGRESS_STRING),
+        PieEntry(getTodoPercentage(), Constants.TODO_STRING)
+    )
+
+    private fun getTaskStatusCount(status: Int): Int =
+        allTodos.count { it.status == status }
+
+    private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
+    private fun getTodoPercentage() = getTodoCount().todoPercentage(allTodos.size)
+
+    private fun getDoneCount(): Int = getTaskStatusCount(Constants.DONE_STATUS)
+    private fun getDonePercentage() = getDoneCount().todoPercentage(allTodos.size)
+
+    private fun getInProgressCount(): Int = getTaskStatusCount(Constants.IN_PROGRESS_STATUS)
+    private fun getInProgressPercentage() =
+        getInProgressCount().todoPercentage(allTodos.size)
+
+    private fun Int.todoPercentage(totalCount: Int) =
+        (this.toFloat() / totalCount.toFloat()) * Constants.ONE_HUNDRED_PERCENT
+
 
     companion object {
         private val LABELS_COLORS = listOf(
