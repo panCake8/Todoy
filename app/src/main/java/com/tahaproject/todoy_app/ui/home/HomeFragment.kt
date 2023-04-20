@@ -103,17 +103,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            if (personalTodoResponse.value.isEmpty()) {
-                // todo do any thing :)
-            } else {
-                personalTodo = personalTodoResponse.value.last()
-                allTodos.addAll(personalTodoResponse.value)
-                if (allTodos.isNotEmpty()) {
-                    binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
-                    binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
-                    binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
-                    binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
-                }
+            personalTodo = personalTodoResponse.value.last()
+            allTodos.addAll(personalTodoResponse.value)
+            if (allTodos.isNotEmpty()) {
+                binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
+                binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
+                binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
+                binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
             }
         }
     }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/swipeRefreshLayout"
-    android:layout_margin="@dimen/margin_large"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeRefreshLayout"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_large">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,219 +12,219 @@
         android:layout_marginHorizontal="@dimen/margin_large"
         android:background="@color/background">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_home"
-        android:layout_width="@dimen/lottie_height"
-        android:layout_height="@dimen/lottie_height"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/home_animation" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_home"
+            android:layout_width="@dimen/lottie_height"
+            android:layout_height="@dimen/lottie_height"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/home_animation" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_large"
-        android:foregroundTint="@color/primary_color"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_large"
+            android:foregroundTint="@color/primary_color"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/view_text_statistics"
-        style="@style/Text.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:fontFamily="@font/roboto"
-        android:text="@string/text_view_statistics"
-        app:layout_constraintStart_toStartOf="@+id/lottie_home"
-        app:layout_constraintTop_toBottomOf="@id/lottie_home" />
+        <TextView
+            android:id="@+id/view_text_statistics"
+            style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:fontFamily="@font/roboto"
+            android:text="@string/text_view_statistics"
+            app:layout_constraintStart_toStartOf="@+id/lottie_home"
+            app:layout_constraintTop_toBottomOf="@id/lottie_home" />
 
 
-    <com.tahaproject.todoy_app.ui.home.PieChart.CustomPieChartView
-        android:id="@+id/pie_chart"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_statistics" />
-
-    <TextView
-        android:id="@+id/view_text_category"
-        style="@style/Text.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:text="@string/text_view_category"
-        app:layout_constraintStart_toStartOf="@+id/lottie_home"
-        app:layout_constraintTop_toBottomOf="@+id/pie_chart"
-
-        />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/personal_card"
-        android:layout_width="@dimen/no_size"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:backgroundTint="@color/card_todo_background"
-        app:cardCornerRadius="@dimen/radius_large"
-        app:cardElevation="@dimen/no_elevation"
-        app:layout_constraintStart_toStartOf="@+id/view_text_category"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_category"
-        app:layout_constraintWidth_percent="0.48">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.tahaproject.todoy_app.ui.home.PieChart.CustomPieChartView
+            android:id="@+id/pie_chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_text_statistics" />
 
-            <TextView
-                android:id="@+id/text_view_personal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/padding_large"
-                android:maxLines="1"
-                android:text="@string/personal_todo"
-                app:drawableStartCompat="@drawable/ic_personal"
-                app:layout_constraintBottom_toTopOf="@id/personal_tasks_left"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+        <TextView
+            android:id="@+id/view_text_category"
+            style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@string/text_view_category"
+            app:layout_constraintStart_toStartOf="@+id/lottie_home"
+            app:layout_constraintTop_toBottomOf="@+id/pie_chart"
 
-                app:layout_constraintTop_toTopOf="parent" />
+            />
 
-            <TextView
-                android:id="@+id/personal_tasks_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginVertical="@dimen/margin_large"
-                android:text="@string/text_tasks_left"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_personal"
-                app:layout_constraintTop_toTopOf="parent" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/personal_card"
+            android:layout_width="@dimen/no_size"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:backgroundTint="@color/card_todo_background"
+            app:cardCornerRadius="@dimen/radius_large"
+            app:cardElevation="@dimen/no_elevation"
+            app:layout_constraintStart_toStartOf="@+id/view_text_category"
+            app:layout_constraintTop_toBottomOf="@+id/view_text_category"
+            app:layout_constraintWidth_percent="0.48">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_view_personal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/padding_large"
+                    android:maxLines="1"
+                    android:text="@string/personal_todo"
+                    app:drawableStartCompat="@drawable/ic_personal"
+                    app:layout_constraintBottom_toTopOf="@id/personal_tasks_left"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/personal_tasks_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="@dimen/margin_large"
+                    android:text="@string/text_tasks_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_personal"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <Button
-                android:id="@+id/view_all_personal"
-                style="@style/ButtonHomeViewAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
+                <Button
+                    android:id="@+id/view_all_personal"
+                    style="@style/ButtonHomeViewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
 
-                android:layout_marginBottom="@dimen/margin_large"
-                android:text="@string/text_view_all"
+                    android:layout_marginBottom="@dimen/margin_large"
+                    android:text="@string/text_view_all"
 
-                android:textSize="@dimen/text_medium"
+                    android:textSize="@dimen/text_medium"
 
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/personal_tasks_left" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/personal_tasks_left" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/team_card"
-        android:layout_width="@dimen/no_size"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:backgroundTint="@color/card_todo_background"
-        app:cardCornerRadius="@dimen/radius_large"
-        app:cardElevation="@dimen/no_elevation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_text_category"
-        app:layout_constraintWidth_percent="0.48"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/team_card"
+            android:layout_width="@dimen/no_size"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:backgroundTint="@color/card_todo_background"
+            app:cardCornerRadius="@dimen/radius_large"
+            app:cardElevation="@dimen/no_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_text_category"
+            app:layout_constraintWidth_percent="0.48"
 
-        >
+            >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_view_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/padding_large"
+                    android:maxLines="1"
+                    android:text="@string/team_todo"
+                    app:drawableStartCompat="@drawable/ic_team"
+                    app:layout_constraintBottom_toTopOf="@id/team_tasks_left"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/team_tasks_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="@dimen/margin_large"
+                    android:text="@string/text_tasks_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_team"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <Button
+                    android:id="@+id/view_all_team"
+                    style="@style/ButtonHomeViewAll"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+
+                    android:layout_marginBottom="@dimen/margin_large"
+                    android:text="@string/text_view_all"
+
+                    android:textSize="@dimen/text_medium"
+
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/team_tasks_left" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/recently"
+            style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/text_view_recently"
+            app:layout_constraintStart_toStartOf="@+id/lottie_home"
+            app:layout_constraintTop_toBottomOf="@+id/personal_card" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_recently"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/text_view_team"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/padding_large"
-                android:maxLines="1"
-                android:text="@string/team_todo"
-                app:drawableStartCompat="@drawable/ic_team"
-                app:layout_constraintBottom_toTopOf="@id/team_tasks_left"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/team_tasks_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginVertical="@dimen/margin_large"
-                android:text="@string/text_tasks_left"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_team"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <Button
-                android:id="@+id/view_all_team"
-                style="@style/ButtonHomeViewAll"
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
-
-                android:layout_marginBottom="@dimen/margin_large"
-                android:text="@string/text_view_all"
-
-                android:textSize="@dimen/text_medium"
-
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/team_tasks_left" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-    <TextView
-        android:id="@+id/recently"
-        style="@style/Text.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:text="@string/text_view_recently"
-        app:layout_constraintStart_toStartOf="@+id/lottie_home"
-        app:layout_constraintTop_toBottomOf="@+id/personal_card" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_recently"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:backgroundTint="@color/card_todo_background"
-        app:cardCornerRadius="@dimen/radius_large"
-        app:cardElevation="@dimen/no_elevation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recently">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:backgroundTint="@color/card_todo_background"
+            app:cardCornerRadius="@dimen/radius_large"
+            app:cardElevation="@dimen/no_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recently">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/root_card"
@@ -294,27 +294,27 @@
         </androidx.cardview.widget.CardView>
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/no_height"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recently" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/no_height"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recently" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_FAB"
-        android:layout_width="@dimen/fab_size"
-        android:layout_height="@dimen/fab_size"
-        android:layout_marginBottom="@dimen/margin_large"
-        android:backgroundTint="@color/primary_color"
-        android:elevation="@dimen/elevation_small"
-        android:importantForAccessibility="no"
-        android:padding="@dimen/padding_medium"
-        android:src="@drawable/solar_pen_new_round_broken"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_FAB"
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:backgroundTint="@color/primary_color"
+            android:elevation="@dimen/elevation_small"
+            android:importantForAccessibility="no"
+            android:padding="@dimen/padding_medium"
+            android:src="@drawable/solar_pen_new_round_broken"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
 
             app:tint="@color/background" />
 
