@@ -7,19 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tahaproject.todoy_app.R
-import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
-import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
 import com.tahaproject.todoy_app.ui.addtask.presenter.IAddNewTaskContract
 import com.tahaproject.todoy_app.ui.addtask.presenter.AddNewTaskPresenter
 import com.tahaproject.todoy_app.ui.base.BaseBottomSheetDialogFragment
-import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
 
-class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding, AddNewTaskPresenter>(), IAddNewTaskContract.View {
+class AddNewTaskFragment :
+    BaseBottomSheetDialogFragment<FragmentAddNewTaskBinding, AddNewTaskPresenter>(),
+    IAddNewTaskContract.View {
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddNewTaskBinding
         get() = FragmentAddNewTaskBinding::inflate
@@ -29,20 +28,16 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
     }
 
     // get the token
-    override val addNewTaskPresenter: AddNewTaskPresenter
-        get() = AddNewTaskPresenter(this, PersonalTodoApi(sharedPreferenceUtil.getToken()) , TeamTodoApi(sharedPreferenceUtil.getToken()))
+    override val addNewTaskPresenter: AddNewTaskPresenter by lazy { AddNewTaskPresenter(this) }
+
 
     private var selectedTaskChip: TaskChip = TaskChip.PERSONAL
 
     override fun getLayoutResourceId(): Int = R.layout.fragment_add_new_task
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        addNewTaskPresenter.token = sharedPreferenceUtil.getToken()
         addCallback()
     }
 
@@ -87,8 +82,6 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
             TaskChip.TEAM -> addNewTaskPresenter.addTeamTask(title, description, assignee)
             TaskChip.PERSONAL -> addNewTaskPresenter.addPersonalTask(title, description)
         }
-        showToast(Constants.ADDED)
-        hideBottomSheet()
     }
 
     private fun showAssignee() {
@@ -107,17 +100,23 @@ class AddNewTaskFragment : BaseBottomSheetDialogFragment<FragmentAddNewTaskBindi
 
     private fun ViewGroup.transitionVisibility(view: View, visibility: Int) {
         if (view.visibility != visibility) {
-            TransitionManager.beginDelayedTransition(this )
+            TransitionManager.beginDelayedTransition(this)
             view.visibility = visibility
         }
     }
 
     override fun showTaskAdded(successMessage: String) {
-        showToast(successMessage)
+        requireActivity().runOnUiThread {
+            showToast(successMessage)
+            hideBottomSheet()
+        }
+
     }
 
     override fun showError(error: IOException) {
-        showToast(error)
+        requireActivity().runOnUiThread {
+            showToast(error)
+        }
     }
 
     private fun hideBottomSheet() {

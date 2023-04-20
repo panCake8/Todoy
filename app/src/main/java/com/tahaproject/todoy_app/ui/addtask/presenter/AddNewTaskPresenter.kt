@@ -5,28 +5,26 @@ import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.ITeamTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
-import com.tahaproject.todoy_app.data.models.responses.loginResponse.LoginValue
 import java.io.IOException
 
 class AddNewTaskPresenter(
-    private val view: IAddNewTaskContract.View,
-    private val personalTodoApi: IPersonalTodoApi,
-    private val teamTodoApi: ITeamTodoApi
+    private val view: IAddNewTaskContract.View
+
 ) : IAddNewTaskContract.Presenter {
-
-
-
+    lateinit var token: String
+    private lateinit var personalTodoApi: IPersonalTodoApi
+    private lateinit var teamTodoApi: ITeamTodoApi
     override fun addPersonalTask(title: String, description: String) {
-
+        personalTodoApi = PersonalTodoApi(token)
+        teamTodoApi = TeamTodoApi(token)
         val singleTodoTask = SingleTodoTask(title, description)
-
         personalTodoApi.createPersonalTodo(singleTodoTask, ::onTaskSuccess, ::onTaskFailed)
     }
 
     override fun addTeamTask(title: String, description: String, assignee: String) {
-
-        val singleTodoTask = SingleTodoTask( title, description, assignee)
-
+        personalTodoApi = PersonalTodoApi(token)
+        teamTodoApi = TeamTodoApi(token)
+        val singleTodoTask = SingleTodoTask(title, description, assignee)
         teamTodoApi.createTeamTodo(singleTodoTask, ::onTaskSuccess, ::onTaskFailed)
     }
 

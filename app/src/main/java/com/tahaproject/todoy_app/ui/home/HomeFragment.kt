@@ -36,8 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
-    override val presenter: HomePresenter
-        get() = HomePresenter(this)
+    override val presenter: HomePresenter by lazy { HomePresenter(this) }
 
     private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
     private var allTodos = mutableListOf<Todo>()
@@ -61,6 +60,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     private fun setup() {
         renderPieChart(binding.pieChart)
+        presenter.fetchPersonalData()
+        presenter.fetchTeamData()
     }
 
     private fun addCallBacks() {
@@ -171,36 +172,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         return data
     }
 
-
-//    override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
-//        requireActivity().runOnUiThread {
-//            allTodos.addAll(teamTodoResponse.value)
-//            binding.teamTasksLeft.text = teamTodoResponse.value.count { it.status != 2 }.toString()
-//
-//        }
-//
-//    }
-
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
             toggleProgressBarVisibility(false)
             toggleHomeViewsVisibility(true)
             allTodos.addAll(personalTodoResponse.value)
-            binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
-            binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
-            binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
+            if (allTodos.isNotEmpty()) {
+                binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
+                binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
+                binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
+                binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
+            }
         }
-
     }
 
     override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            toggleProgressBarVisibility(false)
-            toggleHomeViewsVisibility(true)
-            allTodos.addAll(teamTodoResponse.value)
-            binding.textViewRecentlyTitle.text = teamTodoResponse.value.last().title
-            binding.textViewRecentlyBody.text = teamTodoResponse.value.last().description
-            binding.recentlyCardTime.text = teamTodoResponse.value.last().creationTime
+            if (allTodos.isNotEmpty()) {
+                toggleProgressBarVisibility(false)
+                toggleHomeViewsVisibility(true)
+                allTodos.addAll(teamTodoResponse.value)
+                binding.teamTasksLeft.text = teamTodoResponse.value.size.toString()
+            }
         }
     }
 

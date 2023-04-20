@@ -12,11 +12,13 @@ import java.io.IOException
 class HomePresenter(private val view: HomeContract.IView) :
     HomeContract.IPresenter {
     lateinit var token: String
-    private val personalTodoApiImpl: IPersonalTodoApi = PersonalTodoApi(token)
-    private val teamTodoApi: ITeamTodoApi = TeamTodoApi(token)
+    private lateinit var personalTodoApiImpl: IPersonalTodoApi
+    private lateinit var teamTodoApi: ITeamTodoApi
 
 
     override fun fetchPersonalData() {
+        personalTodoApiImpl = PersonalTodoApi(token)
+        teamTodoApi = TeamTodoApi(token)
         personalTodoApiImpl.getPersonalTodos(::onSuccessPersonalTodo, ::onFailed)
     }
 
