@@ -61,5 +61,6 @@
     <dimen name="no_height">0dp</dimen>
     <dimen name="edit_text_height">36dp</dimen>
     <dimen name="lottie_height">140dp</dimen>
+    <dimen name="Button_Group_Height">70dp</dimen>
 
 </resources>
