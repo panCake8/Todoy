@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/swipeRefreshLayout"
+    android:layout_margin="@dimen/margin_large"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/margin_large"
-    android:background="@color/background">
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/margin_large"
+        android:background="@color/background">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_home"
@@ -220,72 +226,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recently">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/root_card"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/padding_large"
-            android:paddingVertical="@dimen/padding_medium">
-
-            <TextView
-                android:id="@+id/text_view_recently_title"
-
-                style="@style/Text.TitleToDo"
-                android:fontFamily="@font/roboto"
-                android:text="@string/home_recently_card_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/text_view_recently_body"
-                style="@style/Text.BodyToDo"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/root_card"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto"
-                android:maxLines="2"
-                android:text="@string/recently_card_body"
-                android:textSize="@dimen/text_medium"
-                app:layout_constraintTop_toBottomOf="@id/text_view_recently_title" />
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/padding_large"
+                android:paddingVertical="@dimen/padding_medium">
 
-            <View
-                android:id="@+id/view_recently_card_seperator"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/small_stroke"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@color/line_todo_personal_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_recently_body" />
+                <TextView
+                    android:id="@+id/text_view_recently_title"
 
+                    style="@style/Text.TitleToDo"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/home_recently_card_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/recently_card_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:drawablePadding="@dimen/padding_medium"
-                android:text="@string/home_recently_card_time"
-                app:drawableStartCompat="@drawable/clock_count_down"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
+                <TextView
+                    android:id="@+id/text_view_recently_body"
+                    style="@style/Text.BodyToDo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
+                    android:maxLines="2"
+                    android:text="@string/recently_card_body"
+                    android:textSize="@dimen/text_medium"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_recently_title" />
 
-            <TextView
-                android:id="@+id/recently_card_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:drawablePadding="@dimen/padding_medium"
-                android:text="@string/home_recently_card_date"
-                app:drawableStartCompat="@drawable/calendar_blank"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:id="@+id/view_recently_card_seperator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/small_stroke"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="@color/line_todo_personal_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_recently_body" />
 
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/recently_card_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:text="@string/home_recently_card_time"
+                    app:drawableStartCompat="@drawable/clock_count_down"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
+
+                <TextView
+                    android:id="@+id/recently_card_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:text="@string/home_recently_card_date"
+                    app:drawableStartCompat="@drawable/calendar_blank"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_recently_card_seperator" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
 
 
     <com.airbnb.lottie.LottieAnimationView
@@ -309,6 +315,8 @@
         android:src="@drawable/solar_pen_new_round_broken"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/background" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            app:tint="@color/background" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

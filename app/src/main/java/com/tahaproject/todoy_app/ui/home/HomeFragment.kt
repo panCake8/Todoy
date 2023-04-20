@@ -83,6 +83,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         binding.addFAB.setOnClickListener {
             AddNewTaskFragment().show(parentFragmentManager, NEW_TASK_TAG)
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            setup()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
 
@@ -98,13 +103,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            personalTodo = personalTodoResponse.value.last()
-            allTodos.addAll(personalTodoResponse.value)
-            if (allTodos.isNotEmpty()) {
-                binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
-                binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
-                binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
-                binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
+            if (personalTodoResponse.value.isEmpty()) {
+                // todo do any thing :)
+            } else {
+                personalTodo = personalTodoResponse.value.last()
+                allTodos.addAll(personalTodoResponse.value)
+                if (allTodos.isNotEmpty()) {
+                    binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
+                    binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
+                    binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
+                    binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
+                }
             }
         }
     }
