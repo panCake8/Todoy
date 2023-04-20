@@ -38,7 +38,9 @@ class DetailsTodoFragment :
 
     private fun addCallBacks() {
         onBack()
-        onClickButton()
+        binding.button.setOnClickListener {
+            onClickButton()
+        }
     }
 
     private fun onBack() {
@@ -51,10 +53,11 @@ class DetailsTodoFragment :
         if (updateTodoTask.status == 0) {
             updateTodoTask.status = 1
             onUpdate(IN_PROGRESS, true)
-            presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, 1))
+            presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 1))
         } else {
             updateTodoTask.status = 2
             onUpdate(DONE, false)
+            presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 2))
         }
     }
 
@@ -86,16 +89,16 @@ class DetailsTodoFragment :
 
     private fun onUpdate(stats: String, show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
-        binding.button.setOnClickListener {
-            presenter.updateTeamTodoTask(updateTodoTask)
-            binding.button.text = DONE
-            binding.textViewTaskStats.text = stats
-            binding.button.visibility = visibility
-        }
+        binding.button.text = DONE
+        binding.textViewTaskStats.text = stats
+        binding.button.visibility = visibility
     }
 
     override fun showTaskUpdated(successMessage: String) {
-        showToast(successMessage)
+        requireActivity().runOnUiThread {
+            showToast(successMessage)
+        }
+
     }
 
     override fun showError(error: IOException) {
