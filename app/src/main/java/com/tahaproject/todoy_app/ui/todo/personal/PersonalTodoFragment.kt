@@ -29,18 +29,18 @@ private lateinit var personalAdapter : PersonalAdapter
 
     override fun setup() {
         sharedPreferenceUtil = SharedPreferenceUtil(requireContext())
-
+        searchPersonal()
     }
 
     override fun addCallBack() {
 
     }
-    private fun search(){
+    private fun searchPersonal(){
         binding.searchBar.addTextChangedListener {
-            getTeamTodoData()
+            personalAdapterData()
         }
     }
-    private fun getTeamTodoData(){
+    private fun personalAdapterData(){
         val filterList: List<Todo> = toDosResponse.value.filter {
             it.title == Constants.Todo.TITLE
                     &&
@@ -49,7 +49,7 @@ private lateinit var personalAdapter : PersonalAdapter
                     it.assignee == Constants.Todo.ASSIGNEE
         }
         personalAdapter = PersonalAdapter(filterList)
-
+        binding.recyclerPersonalTodo.adapter = personalAdapter
     }
 
     override val presenter: PersonalTodoPresenter

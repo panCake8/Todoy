@@ -40,12 +40,12 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     override fun setup() {
         chooseGroup()
         setChipClickListeners()
-        search()
+        searchTeam()
     }
 
     override fun addCallBack() {
     }
-    private fun search(){
+    private fun searchTeam(){
         binding.searchBar.addTextChangedListener {
             getTeamTodoData()
         }
