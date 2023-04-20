@@ -12,17 +12,6 @@
         android:layout_marginHorizontal="@dimen/margin_large"
         android:background="@color/background">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_home"
-            android:layout_width="@dimen/lottie_height"
-            android:layout_height="@dimen/lottie_height"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/home_animation" />
-
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -44,8 +33,8 @@
             android:layout_marginTop="@dimen/margin_large"
             android:fontFamily="@font/roboto"
             android:text="@string/text_view_statistics"
-            app:layout_constraintStart_toStartOf="@+id/lottie_home"
-            app:layout_constraintTop_toBottomOf="@id/lottie_home" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.tahaproject.todoy_app.ui.home.PieChart.CustomPieChartView
@@ -64,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/text_view_category"
-            app:layout_constraintStart_toStartOf="@+id/lottie_home"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pie_chart"
 
             />
@@ -211,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/text_view_recently"
-            app:layout_constraintStart_toStartOf="@+id/lottie_home"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/personal_card" />
 
         <androidx.cardview.widget.CardView
