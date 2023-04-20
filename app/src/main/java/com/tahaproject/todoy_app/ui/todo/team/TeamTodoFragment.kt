@@ -151,7 +151,6 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             binding.recyclerviewTeamTodo.visibility = View.VISIBLE
             binding.lottie.visibility = View.GONE
         }
-        showLoading()
     }
 
     override fun onClickItem(item: Todo) {

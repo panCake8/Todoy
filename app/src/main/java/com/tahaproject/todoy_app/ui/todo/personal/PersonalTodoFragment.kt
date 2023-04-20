@@ -154,7 +154,6 @@ class PersonalTodoFragment : BaseFragment<FragmentPersonalTodoBinding, PersonalT
             binding.recyclerPersonalTodo.visibility = View.VISIBLE
             binding.lottie.visibility = View.GONE
         }
-        showLoading()
     }
 
     override fun onClickItem(item: Todo) {
