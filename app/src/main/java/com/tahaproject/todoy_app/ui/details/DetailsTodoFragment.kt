@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.todo.details
+package com.tahaproject.todoy_app.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentDetailsBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.todo.details.presenter.IDetailsContract
-import com.tahaproject.todoy_app.ui.todo.details.presenter.IDetailsPresenter
+import com.tahaproject.todoy_app.ui.details.presenter.IDetailsContract
+import com.tahaproject.todoy_app.ui.details.presenter.IDetailsPresenter
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast

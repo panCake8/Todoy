@@ -7,13 +7,10 @@ import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 
 
-class TeamAdapter(list: List<Todo>, private val listener: TeamAdapterListener) :
-    BaseRecyclerAdapter<Todo, ItemCardTeamTodoBinding>(list) {
+class TeamAdapter(todos: List<Todo>, private val listener: TeamAdapterListener) :
+    BaseRecyclerAdapter<Todo, ItemCardTeamTodoBinding>(todos) {
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCardTeamTodoBinding =
         ItemCardTeamTodoBinding::inflate
-
-
-    //add view bind
     override fun bindViews(binding: ItemCardTeamTodoBinding, currentItem: Todo) {
         binding.apply {
             textViewTitleTeamTodo.text = currentItem.title

@@ -17,26 +17,31 @@ class HomePresenter(private val view: HomeContract.IView) :
 
 
     override fun fetchPersonalData() {
+        view.showLoading()
         personalTodoApiImpl = PersonalTodoApi(token)
         personalTodoApiImpl.getPersonalTodos(::onSuccessPersonalTodo, ::onFailed)
     }
 
     override fun fetchTeamData() {
+        view.showLoading()
         teamTodoApi = TeamTodoApi(token)
         teamTodoApi.getTeamTodos(::onSuccessTeamTodo, ::onFailed)
     }
 
     private fun onSuccessPersonalTodo(toDosResponse: ToDosResponse) {
         view.showPersonalToDoData(toDosResponse)
+        view.hideLoading()
     }
 
     private fun onSuccessTeamTodo(toDosResponse: ToDosResponse) {
         view.showTeamToDoData(toDosResponse)
         view.showChart()
+        view.hideLoading()
     }
 
     private fun onFailed(ioException: IOException) {
         view.showError(ioException)
+        view.hideLoading()
     }
 
 

@@ -1,4 +1,4 @@
-package com.tahaproject.todoy_app.ui.todo.details.presenter
+package com.tahaproject.todoy_app.ui.details.presenter
 
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import okio.IOException

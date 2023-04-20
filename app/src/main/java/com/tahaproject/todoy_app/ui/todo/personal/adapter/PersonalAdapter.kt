@@ -7,8 +7,11 @@ import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 
 
-class PersonalAdapter(view: List<Todo>, private val listener: PersonalAdapterListener) :
-    BaseRecyclerAdapter<Todo, ItemCardPersonalTodoBinding>(view) {
+class PersonalAdapter(
+    todos: List<Todo>,
+    private val listener: PersonalAdapterListener
+) :
+    BaseRecyclerAdapter<Todo, ItemCardPersonalTodoBinding>(todos) {
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCardPersonalTodoBinding =
         ItemCardPersonalTodoBinding::inflate
 
@@ -22,6 +25,5 @@ class PersonalAdapter(view: List<Todo>, private val listener: PersonalAdapterLis
                 listener.onClickItem(currentItem)
             }
         }
-
     }
 }
