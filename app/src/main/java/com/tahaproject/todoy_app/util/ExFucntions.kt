@@ -11,3 +11,6 @@ fun AppCompatActivity.showToast(message: Any) {
 fun Fragment.showToast(message: Any) {
     Toast.makeText(requireContext(), message.toString(), Toast.LENGTH_SHORT).show()
 }
+
+fun Int.todoPercentage(totalCount: Int) =
+    (this.toFloat() / totalCount.toFloat()) * Constants.ONE_HUNDRED_PERCENT

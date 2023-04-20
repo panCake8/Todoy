@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import com.tahaproject.todoy_app.R
-
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentTeamTodoBinding
-
 import com.tahaproject.todoy_app.ui.home.HomeActivity
 import com.tahaproject.todoy_app.ui.todo.ToDoFragment
 import com.tahaproject.todoy_app.ui.todo.team.adapter.TeamAdapter
