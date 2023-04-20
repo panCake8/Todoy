@@ -42,7 +42,7 @@ android {
 
     dependencies {
 
-        implementation 'androidx.core:core-ktx:1.10.0'
+        implementation 'androidx.core:core-ktx:1.9.0'
         implementation 'androidx.appcompat:appcompat:1.6.1'
 
         implementation 'com.google.android.material:material:1.8.0'
@@ -58,12 +58,16 @@ android {
         androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
         //splash screen
         implementation 'androidx.core:core-splashscreen:1.0.0'
+
         //fragment
         implementation("androidx.fragment:fragment-ktx:1.5.6")
+
         //chart
         implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
         //circle image
         implementation 'com.mikhaellopez:circularimageview:4.3.0'
+
         //encrypted shared pref
         implementation "androidx.security:security-crypto:1.1.0-alpha05"
 
@@ -71,6 +75,9 @@ android {
 
         //lottie
         implementation "com.airbnb.android:lottie:6.0.0"
+
+        // swiper refresh layout
+        implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     }
 }
