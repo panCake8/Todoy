@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentTeamTodoBinding
 import com.tahaproject.todoy_app.ui.home.HomeActivity
 import com.tahaproject.todoy_app.ui.todo.ToDoFragment
+import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.adapter.TeamAdapter
+import com.tahaproject.todoy_app.ui.todo.team.adapter.TeamAdapterListener
 import com.tahaproject.todoy_app.ui.todo.team.presenter.ITeamTodoContract
 import com.tahaproject.todoy_app.ui.todo.team.presenter.TeamTodoPresenter
 import com.tahaproject.todoy_app.util.Constants
@@ -20,7 +23,7 @@ import java.io.IOException
 
 
 class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter>(),
-    ITeamTodoContract.IView {
+    ITeamTodoContract.IView, TeamAdapterListener {
 
     override val presenter: TeamTodoPresenter
         get() = TeamTodoPresenter(this, SharedPreferenceUtil(activity as HomeActivity).getToken())
@@ -41,7 +44,6 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
 
 
     override fun setup() {
-        chooseGroup()
         setChipClickListeners()
         presenter.fetchData()
     }
@@ -50,6 +52,7 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
         binding.appBarTeamTodo.setNavigationOnClickListener {
             parentFragmentManager.popBackStack()
         }
+        chooseGroup()
     }
 
     private fun chooseGroup() {
@@ -90,14 +93,14 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             TaskChip.DONE -> toDosResponse.value.filter { it.status == Constants.DONE_STATUS }
         }
 
-        adapter = TeamAdapter(filteredList)
+        adapter = TeamAdapter(filteredList, this)
         binding.recyclerviewTeamTodo.adapter = adapter
     }
 
     override fun showTodos(toDosResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
             this.toDosResponse = toDosResponse
-            adapter = TeamAdapter(toDosResponse.value)
+            adapter = TeamAdapter(toDosResponse.value, this)
             binding.recyclerviewTeamTodo.adapter = adapter
         }
 
@@ -111,6 +114,18 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
 
     enum class TaskChip {
         TODO, IN_PROGRESS, DONE
+    }
+
+    override fun onClickItem(item: Todo) {
+        parentFragmentManager.commit {
+            replace(
+                R.id.fragment_home_container,
+                DetailsTodoFragment.newInstance(item),
+                DetailsTodoFragment::class.java.name
+            )
+            addToBackStack(TeamTodoFragment::class.java.name)
+            setReorderingAllowed(true)
+        }
     }
 }
 

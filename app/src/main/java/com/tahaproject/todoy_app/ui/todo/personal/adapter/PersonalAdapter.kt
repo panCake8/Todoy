@@ -7,17 +7,20 @@ import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 
 
-class PersonalAdapter(private val view: List<Todo>) :
+class PersonalAdapter(view: List<Todo>, private val listener: PersonalAdapterListener) :
     BaseRecyclerAdapter<Todo, ItemCardPersonalTodoBinding>(view) {
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCardPersonalTodoBinding =
         ItemCardPersonalTodoBinding::inflate
 
-    override fun bindViews(binding: ItemCardPersonalTodoBinding, currentItem: Todo){
+    override fun bindViews(binding: ItemCardPersonalTodoBinding, currentItem: Todo) {
         binding.apply {
-           textViewTitlePersonalTodo.text = currentItem.title
+            textViewTitlePersonalTodo.text = currentItem.title
             textViewBodyPersonalTodo.text = currentItem.description
             textViewCreationTime.text = currentItem.status.toString()
             textViewStatus.text = currentItem.status.toString()
+            root.setOnClickListener {
+                listener.onClickItem(currentItem)
+            }
         }
 
     }
