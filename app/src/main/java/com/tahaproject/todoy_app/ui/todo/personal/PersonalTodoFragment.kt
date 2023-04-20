@@ -51,11 +51,15 @@ class PersonalTodoFragment : BaseFragment<FragmentPersonalTodoBinding, PersonalT
 
     private fun addCallBack() {
         binding.chipGroupPersonalTodo.setOnCheckedStateChangeListener { _, checkedId ->
-            selectedTaskChip = when (checkedId[0]) {
-                R.id.chip_todo -> TaskChip.TODO
-                R.id.chip_inProgress -> TaskChip.IN_PROGRESS
-                R.id.chip_done -> TaskChip.DONE
-                else -> TaskChip.TODO
+            if (checkedId.size == 0) {
+                presenter.fetchData()
+            } else {
+                selectedTaskChip = when (checkedId[0]) {
+                    R.id.chip_todo -> TaskChip.TODO
+                    R.id.chip_inProgress -> TaskChip.IN_PROGRESS
+                    R.id.chip_done -> TaskChip.DONE
+                    else -> TaskChip.TODO
+                }
             }
         }
         binding.appBarPersonalTodo.setNavigationOnClickListener {

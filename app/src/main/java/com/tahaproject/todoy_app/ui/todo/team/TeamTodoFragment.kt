@@ -22,7 +22,6 @@ import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-
 class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter>(),
     TeamTodoContract.IView, TeamAdapterListener {
 
@@ -35,6 +34,7 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     private lateinit var toDosResponse: ToDosResponse
     private lateinit var adapter: TeamAdapter
     private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup()
@@ -61,11 +61,15 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             back()
         }
         binding.chipGroupTeamTodo.setOnCheckedStateChangeListener { _, checkedId ->
-            selectedTaskChip = when (checkedId[0]) {
-                R.id.chip_todo -> TaskChip.TODO
-                R.id.chip_inProgress -> TaskChip.IN_PROGRESS
-                R.id.chip_done -> TaskChip.DONE
-                else -> TaskChip.TODO //Default
+            if (checkedId.size == 0) {
+                presenter.fetchData()
+            } else {
+                selectedTaskChip = when (checkedId[0]) {
+                    R.id.chip_todo -> TaskChip.TODO
+                    R.id.chip_inProgress -> TaskChip.IN_PROGRESS
+                    R.id.chip_done -> TaskChip.DONE
+                    else -> TaskChip.TODO //Default
+                }
             }
         }
         binding.searchBar.addTextChangedListener {
@@ -119,6 +123,7 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             error.localizedMessage?.let { showToast(it) }
         }
     }
+
     private fun showErrorImage() {
         binding.recyclerviewTeamTodo.visibility = View.GONE
         binding.imgNoInternet.visibility = View.VISIBLE
@@ -131,7 +136,6 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     override fun serverError() {
         showErrorImage()
     }
-
 
     override fun showLoading() {
         requireActivity().runOnUiThread {
@@ -156,7 +160,6 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             }
             hideLoading()
         }
-
     }
 
     override fun hideAnimation() {
