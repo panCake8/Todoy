@@ -50,35 +50,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_task_title"
         tools:ignore="Autofill" />
+    <TextView
+        android:id="@+id/Category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constrainStart_toStartOf="parent"
+        android:text="@string/Category"
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title"
+        style="@style/Text.Title"
+        />
     <LinearLayout
+
+        android:layout_marginTop="@dimen/margin_large"
+        android:orientation="horizontal"
         android:id="@+id/button_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/Button_Group_Height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title">
+        app:layout_constraintTop_toBottomOf="@id/Category"
+        >
 
         <Button
             android:id="@+id/buttonPersonalTodo"
             style="@style/Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginStart="@dimen/margin_large"
             android:text="@string/personal_add_new_task" />
 
         <Button
             android:id="@+id/buttonTeamTodo"
             style="@style/Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/team_add_new_task"
             app:layout_constraintBottom_toBottomOf="@+id/buttonPersonalTodo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonPersonalTodo"
-            app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title"
+            />
 
     </LinearLayout>
 
