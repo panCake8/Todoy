@@ -14,3 +14,18 @@ fun Fragment.showToast(message: Any) {
 
 fun Int.todoPercentage(totalCount: Int) =
     (this.toFloat() / totalCount.toFloat()) * Constants.ONE_HUNDRED_PERCENT
+
+fun <T> List<T>.filterBySearch(
+    query: String,
+    vararg propertiesToSearch: (T) -> String
+): List<T> {
+    if (query.isEmpty()) {
+        return this
+    }
+
+    return filter { item ->
+        propertiesToSearch.any { property ->
+            property(item).contains(query, ignoreCase = true)
+        }
+    }
+}
