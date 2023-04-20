@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseRecyclerAdapter<T, VB : ViewBinding>(private var list: List<T>) :
+abstract class BaseRecyclerAdapter<T, VB : ViewBinding>(var list: List<T>) :
     RecyclerView.Adapter<BaseRecyclerAdapter<T, VB>.BaseRecycleViewHolder>() {
     abstract val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> VB
 
