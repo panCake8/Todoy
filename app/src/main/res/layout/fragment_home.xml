@@ -224,6 +224,7 @@
         app:layout_constraintTop_toBottomOf="@id/recently">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/yassen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingHorizontal="@dimen/padding_large"
