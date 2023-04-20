@@ -43,36 +43,24 @@ class AddNewTaskFragment :
         addCallback()
     }
 
-    private fun chooseGroup() {
-        binding.choiceGroupChips.setOnCheckedStateChangeListener { _, checkedId ->
-            selectedTaskChip = when (checkedId[0]) {
-                R.id.chip_personal_todo -> TaskChip.PERSONAL
-                R.id.chip_Team_todo -> TaskChip.TEAM
-                else -> TaskChip.PERSONAL // Default value
-            }
-        }
-    }
-
     private fun addCallback() {
-        chooseGroup()
-
-        binding.chipTeamTodo.setOnClickListener { onChipTeamClicked() }
-
-        binding.chipPersonalTodo.setOnClickListener { onChipPersonalClicked() }
-
+        binding.buttonPersonalTodo.setOnClickListener { onButtonPersonalTodoClicked() }
+        binding.buttonTeamTodo.setOnClickListener { onButtonTeamTodoClicked() }
         binding.buttonAdd.setOnClickListener { onButtonAddClicked() }
     }
 
-    private fun onChipTeamClicked() {
-        selectedTaskChip = TaskChip.TEAM
-        binding.chipPersonalTodo.isChecked = false
-        showAssignee()
+    private fun onButtonPersonalTodoClicked() {
+        selectedTaskChip = TaskChip.PERSONAL
+        binding.buttonPersonalTodo.isSelected = true
+        binding.buttonTeamTodo.isSelected = false
+        hideAssignee()
     }
 
-    private fun onChipPersonalClicked() {
-        selectedTaskChip = TaskChip.PERSONAL
-        binding.chipTeamTodo.isChecked = false
-        hideAssignee()
+    private fun onButtonTeamTodoClicked() {
+        selectedTaskChip = TaskChip.TEAM
+        binding.buttonPersonalTodo.isSelected = false
+        binding.buttonTeamTodo.isSelected = true
+        showAssignee()
     }
 
     private fun onButtonAddClicked() {

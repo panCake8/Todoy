@@ -50,37 +50,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_task_title"
         tools:ignore="Autofill" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/choice_group_chips"
-        style="@style/ChipGroupBottomSheet"
-        android:layout_height="@dimen/chip_group_height"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginEnd="@dimen/margin_medium"
+    <LinearLayout
+        android:id="@+id/button_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_personal_todo"
-            style="@style/Chips_choice"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <Button
+            android:id="@+id/buttonPersonalTodo"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="true"
+            android:layout_marginStart="@dimen/margin_large"
             android:text="@string/personal_add_new_task" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_Team_todo"
-            style="@style/Chips_choice"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <Button
+            android:id="@+id/buttonTeamTodo"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false"
-            android:text="@string/team_add_new_task" />
+            android:text="@string/team_add_new_task"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonPersonalTodo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonPersonalTodo"
+            app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title" />
 
-
-    </com.google.android.material.chip.ChipGroup>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textview_add_assignee_name"
@@ -91,7 +91,7 @@
         android:textSize="@dimen/text_medium"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choice_group_chips" />
+        app:layout_constraintTop_toBottomOf="@+id/button_group" />
 
     <EditText
         android:id="@+id/editText_add_assignee_name"
