@@ -31,7 +31,7 @@ class PersonalAdapter(
             textViewTitlePersonalTodo.text = currentItem.title
             textViewBodyPersonalTodo.text = currentItem.description
             textViewCreationTime.text = currentItem.creationTime.substring(0,10)
-            textViewStatus.text = currentItem.status.toString()
+            textViewStatus.text = currentItem.creationTime.substring(11,16)
             root.setOnClickListener {
                 listener.onClickItem(currentItem)
             }

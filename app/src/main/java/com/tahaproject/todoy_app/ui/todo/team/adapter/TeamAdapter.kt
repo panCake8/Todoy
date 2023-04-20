@@ -28,7 +28,7 @@ class TeamAdapter(
             textViewTitleTeamTodo.text = currentItem.title
             textViewAssignName.text = currentItem.assignee
             textViewBodyTeamTodo.text = currentItem.description
-            textViewStatus.text = currentItem.status.toString()
+            textViewStatus.text = currentItem.creationTime.substring(11,16)
             textViewCreationTime.text = currentItem.creationTime.substring(0,10)
             root.setOnClickListener {
                 listener.onClickItem(currentItem)
