@@ -1,13 +1,12 @@
 package com.tahaproject.todoy_app.ui.home
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -20,45 +19,51 @@ import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentHomeBinding
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.home.activityPresenter.ActivityPresenter
-import com.tahaproject.todoy_app.ui.home.activityPresenter.ActivityContract
-import com.tahaproject.todoy_app.ui.register.RegisterActivity
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomeContract
+import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
+import com.tahaproject.todoy_app.util.todoPercentage
 import java.io.IOException
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, ActivityPresenter>(),
-    ActivityContract.IView {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
+    HomeContract.IView {
     override
     val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
-    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
-    private lateinit var allTodos: MutableList<Todo>
-    private lateinit var progressBar: ProgressBar
+    override val presenter: HomePresenter
+        get() = HomePresenter(this)
 
-    override val presenter: ActivityPresenter
-        get() = ActivityPresenter(this)
+    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
+    private var allTodos = mutableListOf<Todo>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        prepareToken()
+    }
+
+    private fun prepareToken() {
+        sharedPreferenceUtil = SharedPreferenceUtil(requireContext())
+        presenter.token = sharedPreferenceUtil.getToken()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setup()
         toggleHomeViewsVisibility(false)
-        progressBar = binding.progressBar
         addCallBacks()
     }
 
-    private fun addCallBacks() {
-        sharedPreferenceUtil = SharedPreferenceUtil(this.requireContext())
-        presenter.token = sharedPreferenceUtil.getToken()
+    private fun setup() {
         renderPieChart(binding.pieChart)
-        setListeners(binding)
     }
 
-    private fun setListeners(binding: FragmentHomeBinding) {
+    private fun addCallBacks() {
         binding.viewAllTeam.setOnClickListener {
             transitionTo(
                 TeamTodoFragment(),
@@ -113,11 +118,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, ActivityPresenter>(),
         fragment: Fragment,
         name: String,
     ) {
-        val transaction = parentFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_home_container, fragment)
-        transaction.addToBackStack(name)
-            .commit()
-
+        parentFragmentManager.commit {
+            replace(R.id.fragment_home_container, fragment, name)
+            addToBackStack(name)
+            setReorderingAllowed(true)
+        }
     }
 
 
@@ -176,21 +181,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, ActivityPresenter>(),
 //
 //    }
 
-    override fun navigateToLoginScreen() {
-        parentFragmentManager.popBackStack()
-        val intent = Intent(requireActivity(), RegisterActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
-    }
-
-    override fun navigateToHomeScreen() {
-
-    }
-
-    override fun noInternet() {
-
-    }
-
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
             toggleProgressBarVisibility(false)
@@ -203,16 +193,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, ActivityPresenter>(),
 
     }
 
+    override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
+        requireActivity().runOnUiThread {
+            toggleProgressBarVisibility(false)
+            toggleHomeViewsVisibility(true)
+            allTodos.addAll(teamTodoResponse.value)
+            binding.textViewRecentlyTitle.text = teamTodoResponse.value.last().title
+            binding.textViewRecentlyBody.text = teamTodoResponse.value.last().description
+            binding.recentlyCardTime.text = teamTodoResponse.value.last().creationTime
+        }
+    }
+
     override fun showError(ioException: IOException) {
         requireActivity().runOnUiThread {
             toggleProgressBarVisibility(false)
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
         }
-    }
-
-    override fun serverError() {
-
     }
 
     private val getPieChartDataList: List<PieEntry> = listOf(
@@ -234,22 +231,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, ActivityPresenter>(),
     private fun getInProgressPercentage() =
         getInProgressCount().todoPercentage(allTodos.size)
 
-    private fun Int.todoPercentage(totalCount: Int) =
-        (this.toFloat() / totalCount.toFloat()) * Constants.ONE_HUNDRED_PERCENT
-
-
-    companion object {
-        private val LABELS_COLORS = listOf(
-            Color.parseColor("#00B4D8"),
-            Color.parseColor("#03045E"),
-            Color.parseColor("#0077B6")
-        )
-        const val NEW_TASK_TAG = "newTaskTag"
-    }
 
     private fun toggleProgressBarVisibility(show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
-        progressBar.visibility = visibility
+        binding.progressBar.visibility = visibility
     }
 
     private fun toggleHomeViewsVisibility(show: Boolean) {
@@ -261,5 +246,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, ActivityPresenter>(),
         binding.teamCard.visibility = visibility
         binding.recently.visibility = visibility
         binding.cardViewRecently.visibility = visibility
+    }
+
+    companion object {
+        private val LABELS_COLORS = listOf(
+            Color.parseColor("#00B4D8"),
+            Color.parseColor("#03045E"),
+            Color.parseColor("#0077B6")
+        )
+        const val NEW_TASK_TAG = "newTaskTag"
     }
 }
