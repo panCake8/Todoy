@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.airbnb.lottie.LottieDrawable
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
@@ -148,6 +149,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             binding.teamCard.visibility = View.VISIBLE
             binding.recently.visibility = View.VISIBLE
             binding.cardViewRecently.visibility = View.VISIBLE
+        }
+    }
+
+    override fun showAnimation() {
+        requireActivity().runOnUiThread {
+            binding.cardViewRecently.visibility = View.GONE
+            binding.lottie.apply {
+                visibility = View.VISIBLE
+                setAnimation(R.raw.home_animation)
+                repeatCount = LottieDrawable.INFINITE
+                playAnimation()
+            }
+        }
+
+    }
+
+    override fun hideAnimation() {
+        requireActivity().runOnUiThread {
+            binding.cardViewRecently.visibility = View.VISIBLE
+            binding.lottie.visibility = View.GONE
         }
     }
 

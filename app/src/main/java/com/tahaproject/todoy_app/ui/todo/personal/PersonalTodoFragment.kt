@@ -132,18 +132,25 @@ class PersonalTodoFragment : BaseFragment<FragmentPersonalTodoBinding, PersonalT
     }
 
     override fun showAnimation() {
-        binding.recyclerPersonalTodo.visibility = View.GONE
-        binding.lottie.apply {
-            visibility = View.VISIBLE
-            setAnimation(R.raw.notasks)
-            repeatCount = LottieDrawable.INFINITE
-            playAnimation()
+        requireActivity().runOnUiThread {
+            binding.recyclerPersonalTodo.visibility = View.GONE
+            binding.lottie.apply {
+                visibility = View.VISIBLE
+                setAnimation(R.raw.notasks)
+                repeatCount = LottieDrawable.INFINITE
+                playAnimation()
+            }
+            hideLoading()
         }
+
     }
 
     override fun hideAnimation() {
-        binding.recyclerPersonalTodo.visibility = View.VISIBLE
-        binding.lottie.visibility = View.GONE
+        requireActivity().runOnUiThread {
+            binding.recyclerPersonalTodo.visibility = View.VISIBLE
+            binding.lottie.visibility = View.GONE
+        }
+        showLoading()
     }
 
     override fun onClickItem(item: Todo) {

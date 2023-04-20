@@ -129,18 +129,25 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     }
 
     override fun showAnimation() {
-        binding.recyclerviewTeamTodo.visibility = View.GONE
-        binding.lottie.apply {
-            visibility = View.VISIBLE
-            setAnimation(R.raw.notasks)
-            repeatCount = LottieDrawable.INFINITE
-            playAnimation()
+        requireActivity().runOnUiThread {
+            binding.recyclerviewTeamTodo.visibility = View.GONE
+            binding.lottie.apply {
+                visibility = View.VISIBLE
+                setAnimation(R.raw.notasks)
+                repeatCount = LottieDrawable.INFINITE
+                playAnimation()
+            }
+            hideLoading()
         }
+
     }
 
     override fun hideAnimation() {
-        binding.recyclerviewTeamTodo.visibility = View.VISIBLE
-        binding.lottie.visibility = View.GONE
+        requireActivity().runOnUiThread {
+            binding.recyclerviewTeamTodo.visibility = View.VISIBLE
+            binding.lottie.visibility = View.GONE
+        }
+        showLoading()
     }
 
     override fun onClickItem(item: Todo) {
