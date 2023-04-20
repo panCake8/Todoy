@@ -7,13 +7,9 @@ import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import java.io.IOException
 
-class IDetailsPresenter
-    (
-    private val IView: IDetailsContract.IView,
-    token: String
-) : IDetailsContract.IPresenter {
-    private val personalTodoApi: IPersonalTodoApi = PersonalTodoApi(token)
-    private val teamTodoApi: ITeamTodoApi = TeamTodoApi(token)
+class DetailsPresenter(private val view: DetailsContract.IView) : DetailsContract.IPresenter {
+    private lateinit var personalTodoApi: IPersonalTodoApi
+    private lateinit var teamTodoApi: ITeamTodoApi
     override fun updateTeamTodoTask(
         teamTodoUpdateRequest: UpdateTodoTask
     ) {
@@ -22,6 +18,11 @@ class IDetailsPresenter
             ::onTaskSuccess,
             ::onTaskFailed
         )
+    }
+
+    fun initApis(token: String) {
+        personalTodoApi = PersonalTodoApi(token)
+        teamTodoApi = TeamTodoApi(token)
     }
 
     override fun updatePersonalTodoTask(
@@ -36,11 +37,11 @@ class IDetailsPresenter
     }
 
     private fun onTaskSuccess(successMessage: String) {
-        IView.showTaskUpdated(successMessage)
+        view.showTaskUpdated(successMessage)
     }
 
     private fun onTaskFailed(error: IOException) {
-        IView.showError(error)
+        view.showError(error)
     }
 }
 

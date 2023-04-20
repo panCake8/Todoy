@@ -8,21 +8,18 @@ import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentDetailsBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
-import com.tahaproject.todoy_app.ui.details.presenter.IDetailsContract
-import com.tahaproject.todoy_app.ui.details.presenter.IDetailsPresenter
+import com.tahaproject.todoy_app.ui.details.presenter.DetailsContract
+import com.tahaproject.todoy_app.ui.details.presenter.DetailsPresenter
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import okio.IOException
 
 class DetailsTodoFragment :
-    BaseFragment<FragmentDetailsBinding, IDetailsPresenter>(), IDetailsContract.IView {
-    lateinit var updateTodoTask: UpdateTodoTask
-    private val sharedPreferenceUtil by lazy {
-        SharedPreferenceUtil(requireContext())
-    }
-    override val presenter: IDetailsPresenter
-        get() = IDetailsPresenter(this, sharedPreferenceUtil.getToken())
+    BaseFragment<FragmentDetailsBinding, DetailsPresenter>(), DetailsContract.IView {
+    private lateinit var updateTodoTask: UpdateTodoTask
+    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
+    override val presenter: DetailsPresenter by lazy { DetailsPresenter(this) }
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean)
     -> FragmentDetailsBinding
@@ -32,38 +29,49 @@ class DetailsTodoFragment :
         super.onViewCreated(view, savedInstanceState)
         val tasKDetails = arguments?.getParcelable(Constants.TASK_DETAILS) as Todo?
         updateTodoTask = UpdateTodoTask(tasKDetails!!.id, tasKDetails.status)
+        setup()
         viewDetails(tasKDetails)
         addCallBacks()
     }
 
+    private fun setup() {
+        sharedPreferenceUtil = SharedPreferenceUtil(requireContext())
+        presenter.initApis(sharedPreferenceUtil.getToken())
+    }
+
     private fun addCallBacks() {
-        onBack()
+        binding.appBarDetails.setNavigationOnClickListener {
+            back()
+        }
         binding.button.setOnClickListener {
             onClickButton()
         }
     }
 
-    private fun onBack() {
-        binding.appBarDetails.setNavigationOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
+    private fun back() {
+        parentFragmentManager.popBackStack()
     }
 
     private fun onClickButton() {
-        if (updateTodoTask.status == 0) {
-            updateTodoTask.status = 1
+        if (updateTodoTask.status == TODO_STATUS) {
+            updateTodoTask.status = IN_PROGRESS_STATUS
             onUpdate(IN_PROGRESS, true)
             if (binding.chipMemberName.text == "")
-                presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 1))
+                presenter.updatePersonalTodoTask(
+                    UpdateTodoTask(
+                        updateTodoTask.id,
+                        IN_PROGRESS_STATUS
+                    )
+                )
             else
-                presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, 1))
+                presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, IN_PROGRESS_STATUS))
         } else {
-            updateTodoTask.status = 2
+            updateTodoTask.status = DONE_STATUS
             onUpdate(DONE, false)
             if (binding.chipMemberName.text == "")
-                presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 2))
+                presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, DONE_STATUS))
             else
-                presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, 2))
+                presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, DONE_STATUS))
         }
     }
 
@@ -80,9 +88,9 @@ class DetailsTodoFragment :
 
     private fun checkStatus(tasKDetails: Todo?) {
         when (tasKDetails?.status) {
-            0 -> onChangeStatus(TODO, START_TASK, true)
-            1 -> onChangeStatus(IN_PROGRESS, DONE, true)
-            2 -> onChangeStatus(DONE, "", false)
+            TODO_STATUS -> onChangeStatus(TODO, START_TASK, true)
+            IN_PROGRESS_STATUS -> onChangeStatus(IN_PROGRESS, DONE, true)
+            DONE_STATUS -> onChangeStatus(DONE, "", false)
         }
     }
 
@@ -126,5 +134,9 @@ class DetailsTodoFragment :
         const val IN_PROGRESS = "In Progress"
         const val TODO = "Todo"
         const val START_TASK = "Start_Task"
+
+        const val DONE_STATUS = 2
+        const val IN_PROGRESS_STATUS = 1
+        const val TODO_STATUS = 0
     }
 }
