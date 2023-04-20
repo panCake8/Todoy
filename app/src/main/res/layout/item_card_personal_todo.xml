@@ -42,7 +42,8 @@
             style="@style/TextTimeCard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
-            tools:text="21:22" />
+            tools:text="21:22"
+            app:drawableStartCompat="@drawable/calendar_blank" />
 
         <TextView
             android:id="@+id/text_view_status"

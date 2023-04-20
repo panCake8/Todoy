@@ -113,6 +113,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
                 binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
                 binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
                 binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
+
                 binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
             } else
                 binding.cardViewRecently.visibility = View.GONE
@@ -180,7 +181,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             binding.cardViewRecently.visibility = View.GONE
             binding.lottie.apply {
                 visibility = View.VISIBLE
-                setAnimation(R.raw.home_animation)
+                setAnimation(R.raw.pointer_to_add_task)
                 repeatCount = LottieDrawable.INFINITE
                 playAnimation()
             }
