@@ -8,6 +8,7 @@ interface HomeContract {
     interface IView {
         fun showPersonalToDoData(personalTodoResponse: ToDosResponse)
         fun showTeamToDoData(teamTodoResponse: ToDosResponse)
+        fun showChart()
 
         fun showError(ioException: IOException)
     }
