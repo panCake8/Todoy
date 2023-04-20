@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentTeamTodoBinding
 import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
@@ -24,14 +23,14 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     ITeamTodoContract.IView {
 
 
-  \
+
     override val presenter: TeamTodoPresenter
         get() = TeamTodoPresenter(this, SharedPreferenceUtil(activity as HomeActivity).getToken())
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTeamTodoBinding
         get() = FragmentTeamTodoBinding::inflate
 
-    private var selectedTaskChip: AddNewTaskFragment.TaskChip = AddNewTaskFragment.TaskChip.TODO
+    private var selectedTaskChip:TaskChip = TaskChip.TODO
 
     private lateinit var toDosResponse: ToDosResponse
     private lateinit var adapter: TeamAdapter
@@ -65,10 +64,10 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     private fun chooseGroup() {
         binding.chipGroupTeamTodo.setOnCheckedStateChangeListener { _, checkedId ->
             selectedTaskChip = when (checkedId[0]) {
-                R.id.chip_todo -> AddNewTaskFragment.TaskChip.TODO
-                R.id.chip_inProgress -> askChip.IN_PROGRESS
-                R.id.chip_done -> AddNewTaskFragment.TaskChip.DONE
-                else -> AddNewTaskFragment.TaskChip.TODO
+                R.id.chip_todo -> TaskChip.TODO
+                R.id.chip_inProgress -> TaskChip.IN_PROGRESS
+                R.id.chip_done -> TaskChip.DONE
+                else -> TaskChip.TODO
             }
         }
     }
@@ -113,10 +112,9 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             Toast.makeText(requireContext(), "${error.message}", Toast.LENGTH_SHORT).show()
         }
     }
+    enum class TaskChip {
+        TODO, IN_PROGRESS, DONE
+    }
 }
 
-    private fun initView(toDosResponse: ToDosResponse) {
 
-enum class TaskChip {
-    TODO, IN_PROGRESS, DONE
-}
