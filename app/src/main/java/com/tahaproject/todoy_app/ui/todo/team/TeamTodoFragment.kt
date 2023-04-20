@@ -119,6 +119,19 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             error.localizedMessage?.let { showToast(it) }
         }
     }
+    private fun showErrorImage() {
+        binding.recyclerviewTeamTodo.visibility = View.GONE
+        binding.imgNoInternet.visibility = View.VISIBLE
+    }
+
+    override fun noInternet() {
+        showErrorImage()
+    }
+
+    override fun serverError() {
+        showErrorImage()
+    }
+
 
     override fun showLoading() {
         requireActivity().runOnUiThread {

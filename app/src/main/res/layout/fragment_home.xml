@@ -229,6 +229,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/root_card"
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent"
                 android:paddingHorizontal="@dimen/padding_large"
                 android:paddingVertical="@dimen/padding_medium">
@@ -320,3 +321,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
