@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.github.mikephil.charting.animation.Easing
@@ -62,7 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     private fun setup() {
-        renderPieChart(binding.pieChart)
+        renderPieChart()
         presenter.fetchPersonalData()
         presenter.fetchTeamData()
     }
@@ -128,46 +127,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         }
     }
 
-
-    private fun renderPieChart(pieChart: PieChart) {
-        setPieChartDesign(pieChart)
-        val dataSet = PieDataSet(pieChartHelper.pieChartDataList, "")
-        pieChart.data = createFormattedPieData(dataSet, pieChart)
-        pieChart.invalidate()
-        pieChart.animateY(1500, Easing.EaseInOutQuad)
-    }
-
-    private fun setPieChartDesign(pieChart: PieChart) {
-        pieChart.apply {
-            setUsePercentValues(true)
-            setEntryLabelTextSize(12f)
-            setDrawCenterText(true)
-            setEntryLabelColor(Color.WHITE)
-            isDrawHoleEnabled = true
-            description.isEnabled = false
-            legend.apply {
-                isEnabled = true
-                horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-                verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-                xOffset = 12f
-                yOffset = 12f
-                orientation = Legend.LegendOrientation.VERTICAL
-            }
-        }
-
-    }
-
-    private fun createFormattedPieData(dataSet: PieDataSet, pieChart: PieChart): PieData {
-        dataSet.colors = LABELS_COLORS
-        dataSet.sliceSpace = 5f
-        dataSet.selectionShift = 10f
-        dataSet.valueTextSize = 12f
-        dataSet.valueFormatter = CustomPercentFormatter(pieChart)
-        val data = PieData(dataSet)
-        data.setDrawValues(true)
-        data.setValueTextColor(Color.WHITE)
-        data.setValueTextSize(12f)
-        return data
+    private fun renderPieChart() {
+        binding.pieChart.renderPieChartData(pieChartHelper.pieChartDataList)
     }
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
@@ -222,11 +183,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     companion object {
-        private val LABELS_COLORS = listOf(
-            Color.parseColor("#00B4D8"),
-            Color.parseColor("#03045E"),
-            Color.parseColor("#0077B6")
-        )
-        const val NEW_TASK_TAG = "newTaskTag"
+        const val NEW_TASK_TAG = "new_task_tag"
     }
 }
