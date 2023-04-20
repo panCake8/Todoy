@@ -102,6 +102,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
+        if (!isAdded) return
         requireActivity().runOnUiThread {
             personalTodo = personalTodoResponse.value.last()
             allTodos.addAll(personalTodoResponse.value)
@@ -115,6 +116,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
+        if (!isAdded) return
         requireActivity().runOnUiThread {
             allTodos.addAll(teamTodoResponse.value)
             if (allTodos.isNotEmpty()) {
@@ -125,6 +127,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showError(ioException: IOException) {
+        if (!isAdded) return
+
         requireActivity().runOnUiThread {
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
@@ -132,6 +136,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showLoading() {
+        if (!isAdded) return
+
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.VISIBLE
             binding.viewTextStatistics.visibility = View.INVISIBLE
@@ -145,6 +151,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun hideLoading() {
+        if (!isAdded) return
+
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.GONE
             binding.viewTextStatistics.visibility = View.VISIBLE
@@ -158,6 +166,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showAnimation() {
+        if (!isAdded) return
+
         requireActivity().runOnUiThread {
             binding.cardViewRecently.visibility = View.GONE
             binding.lottie.apply {
@@ -171,6 +181,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun hideAnimation() {
+        if (!isAdded) return
+
         requireActivity().runOnUiThread {
             binding.cardViewRecently.visibility = View.VISIBLE
             binding.lottie.visibility = View.GONE
@@ -183,6 +195,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     private fun renderPieChart() {
+        if (!isAdded) return
         requireActivity().runOnUiThread {
             binding.pieChart.renderPieChartData(pieChartHelper.pieChartDataList)
         }
