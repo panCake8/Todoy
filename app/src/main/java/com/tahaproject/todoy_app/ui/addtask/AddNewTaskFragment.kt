@@ -39,7 +39,7 @@ class AddNewTaskFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addNewTaskPresenter.token = sharedPreferenceUtil.getToken()
+        addNewTaskPresenter.initApis(sharedPreferenceUtil.getToken())
         addCallback()
     }
 
@@ -118,6 +118,24 @@ class AddNewTaskFragment :
     override fun showError(error: IOException) {
         requireActivity().runOnUiThread {
             showToast(error)
+        }
+    }
+
+    override fun showInvalidTitleMassage(titleMessage: String) {
+        requireActivity().runOnUiThread {
+            showToast(titleMessage)
+        }
+    }
+
+    override fun showInvalidDescriptionMassage(descriptionMessage: String) {
+        requireActivity().runOnUiThread {
+            showToast(descriptionMessage)
+        }
+    }
+
+    override fun showInvalidAssigneeMassage(assigneeMessage: String) {
+        requireActivity().runOnUiThread {
+            showToast(assigneeMessage)
         }
     }
 
