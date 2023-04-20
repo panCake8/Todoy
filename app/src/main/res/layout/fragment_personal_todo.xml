@@ -41,44 +41,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar_stroke"
         tools:ignore="RtlHardcoded" />
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group_personal_todo"
         style="@style/ChipGroupTodo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar">
-       
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:singleSelection="true">
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_done"
-        style="@style/Chips_choice"
-        android:layout_marginTop="@dimen/padding_large"
-        android:checked="true"
-        android:text="@string/done"
-        app:layout_constraintEnd_toStartOf="@+id/chip_inProgress"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_done"
+            style="@style/Chips_choice"
+            android:layout_marginTop="@dimen/padding_large"
+            android:checked="true"
+            android:text="@string/done"
+            app:layout_constraintEnd_toStartOf="@+id/chip_inProgress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_inProgress"
-        style="@style/Chips_choice"
-        android:checked="false"
-        android:text="@string/in_progress"
-        app:layout_constraintEnd_toStartOf="@+id/chip_todo"
-        app:layout_constraintStart_toEndOf="@+id/chip_done"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_stroke"
-        app:layout_constraintTop_toTopOf="@id/chip_done" />
-                
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_todo"
-        style="@style/Chips_choice"
-        android:checked="false"
-        android:text="@string/todo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chip_inProgress"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_stroke"
-        app:layout_constraintTop_toTopOf="@id/chip_inProgress" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_inProgress"
+            style="@style/Chips_choice"
+            android:checked="false"
+            android:text="@string/in_progress"
+            app:layout_constraintEnd_toStartOf="@+id/chip_todo"
+            app:layout_constraintStart_toEndOf="@+id/chip_done"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_stroke"
+            app:layout_constraintTop_toTopOf="@id/chip_done" />
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_todo"
+            style="@style/Chips_choice"
+            android:checked="false"
+            android:text="@string/todo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/chip_inProgress"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_stroke"
+            app:layout_constraintTop_toTopOf="@id/chip_inProgress" />
+
+
+    </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_personal_todo"
@@ -90,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chip_todo"
+        app:layout_constraintTop_toBottomOf="@id/chip_group_personal_todo"
         tools:listitem="@layout/item_card_personal_todo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

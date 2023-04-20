@@ -1,6 +1,8 @@
 package com.tahaproject.todoy_app.ui.todo.team
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -16,7 +18,9 @@ import com.tahaproject.todoy_app.ui.todo.team.presenter.ITeamTodoContract
 import com.tahaproject.todoy_app.ui.todo.team.presenter.TeamTodoPresenter
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
+import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
+
 
 
 class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter>(),
@@ -35,14 +39,24 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     private lateinit var toDosResponse: ToDosResponse
     private lateinit var adapter: TeamAdapter
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setup()
+        addCallBack()
+    }
+
 
     override fun setup() {
         chooseGroup()
         setChipClickListeners()
         searchTeam()
+        presenter.fetchData()
     }
 
     override fun addCallBack() {
+        binding.appBarTeamTodo.setNavigationOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
     private fun searchTeam(){
         binding.searchBar.addTextChangedListener {
@@ -95,7 +109,7 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
 
         val filteredList: List<Todo> = when (status) {
             TaskChip.TODO -> toDosResponse.value.filter { it.status == Constants.TODO_STATUS }
-            TaskChip.IN_PROGRESS -> toDosResponse.value.filter  { it.status == Constants.IN_PROGRESS_STATUS}
+            TaskChip.IN_PROGRESS -> toDosResponse.value.filter { it.status == Constants.IN_PROGRESS_STATUS }
             TaskChip.DONE -> toDosResponse.value.filter { it.status == Constants.DONE_STATUS }
         }
 
@@ -104,17 +118,21 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     }
 
     override fun showTodos(toDosResponse: ToDosResponse) {
-        this.toDosResponse = toDosResponse
+        requireActivity().runOnUiThread {
+            this.toDosResponse = toDosResponse
+            adapter = TeamAdapter(toDosResponse.value)
+            binding.recyclerviewTeamTodo.adapter = adapter
+        }
+
     }
 
     override fun showError(error: IOException) {
         requireActivity().runOnUiThread {
-            Toast.makeText(requireContext(), "${error.message}", Toast.LENGTH_SHORT).show()
+            error.localizedMessage?.let { showToast(it) }
         }
     }
+
     enum class TaskChip {
         TODO, IN_PROGRESS, DONE
     }
 }
-
-

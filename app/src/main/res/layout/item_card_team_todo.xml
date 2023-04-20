@@ -33,7 +33,6 @@
             style="@style/Text.BodyToDo"
             android:ellipsize="end"
             android:maxLines="2"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_title_team_todo"
             tools:text="Lorem ipsum dolor sit amet consectetur. Nec aliquam feugiat maecenas  accumsan..." />

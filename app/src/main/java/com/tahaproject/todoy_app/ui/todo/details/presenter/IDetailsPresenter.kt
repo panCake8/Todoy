@@ -8,21 +8,20 @@ import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import java.io.IOException
 
 class IDetailsPresenter
-    (private val IView: IDetailsContract.IView,
-     private val token : String
-    )
-    : IDetailsContract.IPresenter {
+    (
+    private val IView: IDetailsContract.IView,
+    token: String
+) : IDetailsContract.IPresenter {
     private val personalTodoApi: IPersonalTodoApi = PersonalTodoApi(token)
     private val teamTodoApi: ITeamTodoApi = TeamTodoApi(token)
     override fun updateTeamTodoTask(
         teamTodoUpdateRequest: UpdateTodoTask
     ) {
-        teamTodoApi
-            .updateTeamTodosStatus(
-                teamTodoUpdateRequest,
-                ::onTaskSuccess,
-                ::onTaskFailed
-            )
+        teamTodoApi.updateTeamTodosStatus(
+            teamTodoUpdateRequest,
+            ::onTaskSuccess,
+            ::onTaskFailed
+        )
     }
 
     override fun updatePersonalTodoTask(

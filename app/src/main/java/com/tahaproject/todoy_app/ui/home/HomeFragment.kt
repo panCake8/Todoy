@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.github.mikephil.charting.animation.Easing
@@ -21,6 +22,7 @@ import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.home.homePresenter.HomeContract
 import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
+import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.Constants
@@ -37,6 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         get() = FragmentHomeBinding::inflate
 
     override val presenter: HomePresenter by lazy { HomePresenter(this) }
+
+    private lateinit var personalTodo: Todo
 
     private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
     private var allTodos = mutableListOf<Todo>()
@@ -86,12 +90,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 //                SearchFragment::class.java.name
 //            )
         }
-
-        binding.cardViewRecently.setOnClickListener {
-//            transitionTo(
-//                DetailsTodoFragment(),
-//                DetailsTodoFragment::class.java.name
-//            )
+        binding.yassen.setOnClickListener {
+            transitionTo(
+                DetailsTodoFragment.newInstance(personalTodo),
+                DetailsTodoFragment::class.java.name
+            )
         }
 
         binding.editTextSearch.setOnClickListener {
@@ -143,7 +146,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             setEntryLabelColor(Color.WHITE)
             isDrawHoleEnabled = true
             description.isEnabled = false
-
             setPieChartLegendDesign(legend)
         }
 
@@ -174,6 +176,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
+            personalTodo = personalTodoResponse.value.last()
             toggleProgressBarVisibility(false)
             toggleHomeViewsVisibility(true)
             allTodos.addAll(personalTodoResponse.value)

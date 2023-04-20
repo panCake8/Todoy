@@ -120,7 +120,7 @@
         <item name="android:layout_marginEnd">@dimen/margin_large</item>
         <item name="android:layout_marginBottom">@dimen/margin_medium</item>
         <item name="android:backgroundTint">@color/card_todo_background</item>
-        <item name="cornerRadius">@dimen/radius_large</item>
+        <item name="cardCornerRadius">@dimen/radius_large</item>
         <item name="cardElevation">@dimen/no_elevation</item>
     </style>
 
