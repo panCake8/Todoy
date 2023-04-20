@@ -13,7 +13,6 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
@@ -25,15 +24,10 @@ import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
-import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.CustomPercentFormatter
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
-import com.tahaproject.todoy_app.util.todoPercentage
 import java.io.IOException
-import com.tahaproject.todoy_app.ui.home.toggleProgressBarVisibility
-import com.tahaproject.todoy_app.ui.home.toggleHomeViewsVisibility
-import com.tahaproject.todoy_app.ui.home.updateUI
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     HomeContract.IView {
@@ -162,9 +156,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         }
 
     }
-
-
-
 
     private fun createFormattedPieData(dataSet: PieDataSet, pieChart: PieChart): PieData {
         dataSet.colors = LABELS_COLORS
