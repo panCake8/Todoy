@@ -3,10 +3,13 @@ package com.tahaproject.todoy_app.ui.todo.team
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
+
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 import com.tahaproject.todoy_app.databinding.FragmentTeamTodoBinding
+import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.home.HomeActivity
 import com.tahaproject.todoy_app.ui.todo.ToDoFragment
 import com.tahaproject.todoy_app.ui.todo.team.adapter.TeamAdapter
@@ -17,17 +20,18 @@ import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import java.io.IOException
 
 
-
 class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter>(),
-    ITeamTodoContract.IView{
+    ITeamTodoContract.IView {
 
+
+  \
     override val presenter: TeamTodoPresenter
         get() = TeamTodoPresenter(this, SharedPreferenceUtil(activity as HomeActivity).getToken())
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTeamTodoBinding
         get() = FragmentTeamTodoBinding::inflate
 
-    private var selectedTaskChip: TaskChip = TaskChip.TODO
+    private var selectedTaskChip: AddNewTaskFragment.TaskChip = AddNewTaskFragment.TaskChip.TODO
 
     private lateinit var toDosResponse: ToDosResponse
     private lateinit var adapter: TeamAdapter
@@ -36,18 +40,35 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     override fun setup() {
         chooseGroup()
         setChipClickListeners()
+        search()
     }
 
     override fun addCallBack() {
+    }
+    private fun search(){
+        binding.searchBar.addTextChangedListener {
+            getTeamTodoData()
+        }
+    }
+    private fun getTeamTodoData(){
+       val filterList: List<Todo> = toDosResponse.value.filter {
+            it.title == Constants.Todo.TITLE
+                    &&
+                    it.description == Constants.Todo.DESCRIPTION
+                    &&
+                    it.assignee == Constants.Todo.ASSIGNEE
+        }
+        adapter = TeamAdapter(filterList)
+        binding.recyclerviewTeamTodo.adapter = adapter
     }
 
     private fun chooseGroup() {
         binding.chipGroupTeamTodo.setOnCheckedStateChangeListener { _, checkedId ->
             selectedTaskChip = when (checkedId[0]) {
-                R.id.chip_todo -> TaskChip.TODO
-                R.id.chip_inProgress -> TaskChip.IN_PROGRESS
-                R.id.chip_done -> TaskChip.DONE
-                else -> TaskChip.TODO
+                R.id.chip_todo -> AddNewTaskFragment.TaskChip.TODO
+                R.id.chip_inProgress -> askChip.IN_PROGRESS
+                R.id.chip_done -> AddNewTaskFragment.TaskChip.DONE
+                else -> AddNewTaskFragment.TaskChip.TODO
             }
         }
     }
@@ -94,6 +115,7 @@ class TeamTodoFragment : ToDoFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     }
 }
 
+    private fun initView(toDosResponse: ToDosResponse) {
 
 enum class TaskChip {
     TODO, IN_PROGRESS, DONE
