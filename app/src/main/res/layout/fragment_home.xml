@@ -298,7 +298,7 @@
         android:elevation="@dimen/elevation_small"
         android:importantForAccessibility="no"
         android:padding="@dimen/padding_medium"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/solar_pen_new_round_broken"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
