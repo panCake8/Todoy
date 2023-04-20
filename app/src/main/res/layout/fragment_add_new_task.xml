@@ -50,27 +50,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_task_title"
         tools:ignore="Autofill" />
+
     <TextView
         android:id="@+id/Category"
+        style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constrainStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
         android:text="@string/Category"
-        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title"
-        style="@style/Text.Title"
-        />
+        app:layout_constrainStart_toStartOf="@+id/textview_task_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title" />
+
     <LinearLayout
 
-        android:layout_marginTop="@dimen/margin_large"
-        android:orientation="horizontal"
         android:id="@+id/button_group"
         android:layout_width="match_parent"
         android:layout_height="@dimen/Button_Group_Height"
+        android:layout_marginTop="@dimen/margin_large"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Category"
-        >
+        app:layout_constraintTop_toBottomOf="@id/Category">
 
         <Button
             android:id="@+id/buttonPersonalTodo"
@@ -90,8 +93,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/buttonPersonalTodo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonPersonalTodo"
-            app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/editText_add_Task_Title" />
 
     </LinearLayout>
 
