@@ -1,7 +1,6 @@
 package com.tahaproject.todoy_app.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,32 +73,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             )
 
         }
-
-        binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
-        }
-        binding.yassen.setOnClickListener {
+        binding.rootCard.setOnClickListener {
             transitionTo(
                 DetailsTodoFragment.newInstance(personalTodo),
                 DetailsTodoFragment::class.java.name
             )
-        }
-
-        binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
-        }
-
-        binding.cardViewRecently.setOnClickListener {
-//            transitionTo(
-//                DetailsTodoFragment(),
-//                DetailsTodoFragment::class.java.name
-//            )
         }
 
         binding.addFAB.setOnClickListener {
