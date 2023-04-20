@@ -180,7 +180,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             binding.cardViewRecently.visibility = View.GONE
             binding.lottie.apply {
                 visibility = View.VISIBLE
-                setAnimation(R.raw.home_animation)
+                setAnimation(R.raw.add_task)
                 repeatCount = LottieDrawable.INFINITE
                 playAnimation()
             }
