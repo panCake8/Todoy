@@ -9,6 +9,8 @@ interface TeamTodoContract {
         fun showError(error: IOException)
         fun showLoading()
         fun hideLoading()
+        fun noInternet()
+        fun serverError()
     }
 
     interface IPresenter {
