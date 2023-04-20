@@ -29,6 +29,9 @@ import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import com.tahaproject.todoy_app.util.todoPercentage
 import java.io.IOException
+import com.tahaproject.todoy_app.ui.home.toggleProgressBarVisibility
+import com.tahaproject.todoy_app.ui.home.toggleHomeViewsVisibility
+import com.tahaproject.todoy_app.ui.home.updateUI
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     HomeContract.IView {
@@ -40,6 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
     private var allTodos = mutableListOf<Todo>()
+    private lateinit var pieChartHelper: PieChartHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +57,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pieChartHelper = PieChartHelper(allTodos)
         setup()
         toggleHomeViewsVisibility(false)
         addCallBacks()
@@ -129,7 +134,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     private fun renderPieChart(pieChart: PieChart) {
         setPieChartDesign(pieChart)
-        val dataSet = PieDataSet(getPieChartDataList, "")
+        val dataSet = PieDataSet(pieChartHelper.pieChartDataList, "")
         pieChart.data = createFormattedPieData(dataSet, pieChart)
         pieChart.invalidate()
         pieChart.animateY(1500, Easing.EaseInOutQuad)
@@ -143,19 +148,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             setEntryLabelColor(Color.WHITE)
             isDrawHoleEnabled = true
             description.isEnabled = false
-
-            setPieChartLegendDesign(legend)
+            legend.apply {
+                isEnabled = true
+                horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+                verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+                xOffset = 12f
+                yOffset = 12f
+                orientation = Legend.LegendOrientation.VERTICAL
+            }
         }
 
     }
 
     private fun setPieChartLegendDesign(legend: Legend) {
-        legend.isEnabled = true
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-        legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-        legend.xOffset = 12f
-        legend.yOffset = 12f
-        legend.orientation = Legend.LegendOrientation.VERTICAL
     }
 
 
@@ -204,25 +209,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             ioException.localizedMessage?.let { showToast(it) }
         }
     }
-
-    private val getPieChartDataList: List<PieEntry> = listOf(
-        PieEntry(getDonePercentage(), Constants.DONE_STRING),
-        PieEntry(getInProgressPercentage(), Constants.IN_PROGRESS_STRING),
-        PieEntry(getTodoPercentage(), Constants.TODO_STRING)
-    )
-
-    private fun getTaskStatusCount(status: Int): Int =
-        allTodos.count { it.status == status }
-
-    private fun getTodoCount(): Int = getTaskStatusCount(Constants.TODO_STATUS)
-    private fun getTodoPercentage() = getTodoCount().todoPercentage(allTodos.size)
-
-    private fun getDoneCount(): Int = getTaskStatusCount(Constants.DONE_STATUS)
-    private fun getDonePercentage() = getDoneCount().todoPercentage(allTodos.size)
-
-    private fun getInProgressCount(): Int = getTaskStatusCount(Constants.IN_PROGRESS_STATUS)
-    private fun getInProgressPercentage() =
-        getInProgressCount().todoPercentage(allTodos.size)
 
 
     private fun toggleProgressBarVisibility(show: Boolean) {
