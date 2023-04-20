@@ -53,11 +53,17 @@ class DetailsTodoFragment :
         if (updateTodoTask.status == 0) {
             updateTodoTask.status = 1
             onUpdate(IN_PROGRESS, true)
-            presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 1))
+            if (binding.chipMemberName.text == "")
+                presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 1))
+            else
+                presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, 1))
         } else {
             updateTodoTask.status = 2
             onUpdate(DONE, false)
-            presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 2))
+            if (binding.chipMemberName.text == "")
+                presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, 2))
+            else
+                presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, 2))
         }
     }
 
@@ -102,7 +108,10 @@ class DetailsTodoFragment :
     }
 
     override fun showError(error: IOException) {
-        showToast(error)
+        requireActivity().runOnUiThread {
+            showToast(error)
+        }
+
     }
 
     companion object {

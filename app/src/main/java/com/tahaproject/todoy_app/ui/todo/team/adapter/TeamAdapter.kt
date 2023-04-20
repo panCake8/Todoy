@@ -7,7 +7,7 @@ import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
 
 
-class TeamAdapter(private val list: List<Todo>) :
+class TeamAdapter(list: List<Todo>, private val listener: TeamAdapterListener) :
     BaseRecyclerAdapter<Todo, ItemCardTeamTodoBinding>(list) {
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCardTeamTodoBinding =
         ItemCardTeamTodoBinding::inflate
@@ -21,6 +21,9 @@ class TeamAdapter(private val list: List<Todo>) :
             textViewBodyTeamTodo.text = currentItem.description
             textViewStatus.text = currentItem.status.toString()
             textViewCreationTime.text = currentItem.creationTime
+            root.setOnClickListener {
+                listener.onClickItem(currentItem)
+            }
         }
     }
 

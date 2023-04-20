@@ -93,7 +93,7 @@ class TeamTodoApi(token: String) : ApiRequest(), ITeamTodoApi {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     response.body?.string().let { jsonString ->
-                        gson.fromJson(jsonString, ToDosResponse::class.java)
+                        gson.fromJson(jsonString, UpdateTodoTask::class.java)
                     }
                     onSuccess(Constants.UPDATED)
                 }
