@@ -11,7 +11,6 @@ interface TeamTodoContract {
         fun hideLoading()
         fun noInternet()
         fun serverError()
-    }
 
     interface IPresenter {
         fun fetchData()

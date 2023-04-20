@@ -5,19 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.tahaproject.todoy_app.BuildConfig
-import com.tahaproject.todoy_app.data.models.requests.SignUpRequest
-import com.tahaproject.todoy_app.data.models.responses.signupResponse.SignUpResponse
 import com.tahaproject.todoy_app.databinding.FragmentSignupBinding
 import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.register.signup.presenter.SignUpContract
 import com.tahaproject.todoy_app.ui.register.signup.presenter.SignUpPresenter
-import com.tahaproject.todoy_app.util.SuccessMessage
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
 
-class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), SignUpContract.View {
+class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpPresenter>(), SignUpContract.View {
 
 
     override val bindingInflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignupBinding
@@ -30,6 +25,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), S
         super.onViewCreated(view, savedInstanceState)
         addCallBacks()
     }
+
     private fun addCallBacks() {
         binding.textviewLogin.setOnClickListener {
             toLogin()
@@ -38,22 +34,23 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), S
             onSignUp()
         }
     }
-    private  fun toLogin(){
+
+    private fun toLogin() {
         parentFragmentManager.popBackStack()
     }
 
     @SuppressLint("SuspiciousIndentation")
     private fun onSignUp() {
-        val username = binding.editTextUsername.toString()
-        val password = binding.editTextPassword.toString()
-        val confirmPassword = binding.editTextConfirmPassword.toString()
-            presenter.fetchData(username,password,confirmPassword)
+        val username = binding.editTextUsername.text.toString()
+        val password = binding.editTextPassword.text.toString()
+        val confirmPassword = binding.editTextConfirmPassword.text.toString()
+        presenter.fetchData(username, password, confirmPassword)
 
     }
 
     override fun onSuccess(message: String) {
         requireActivity().runOnUiThread {
-         showToast(message)
+            showToast(message)
             toLogin()
         }
     }
@@ -68,19 +65,19 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), S
 
     override fun showInvalidUserNameMessage(message: String) {
         requireActivity().runOnUiThread {
-            binding.editTextUsername.error =message
+            binding.editTextUsername.error = message
         }
     }
 
     override fun showInvalidPasswordMessage(message: String) {
         requireActivity().runOnUiThread {
-            binding.editTextPassword.error =message
+            binding.editTextPassword.error = message
         }
     }
 
     override fun showNotMatchPasswordMessage(message: String) {
         requireActivity().runOnUiThread {
-            binding.editTextConfirmPassword.error =message
+            binding.editTextConfirmPassword.error = message
         }
     }
 }

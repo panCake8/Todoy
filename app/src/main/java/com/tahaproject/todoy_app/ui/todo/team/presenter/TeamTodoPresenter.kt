@@ -18,8 +18,13 @@ class TeamTodoPresenter(private val view: TeamTodoContract.IView) :
     }
 
     private fun showData(toDosResponse: ToDosResponse) {
-        view.showTodos(toDosResponse)
-        view.hideLoading()
+        if (toDosResponse.value.isEmpty())
+            view.showAnimation()
+        else {
+            view.showTodos(toDosResponse)
+            view.hideLoading()
+            view.hideAnimation()
+        }
     }
 
     private fun showError(ioException: IOException) {

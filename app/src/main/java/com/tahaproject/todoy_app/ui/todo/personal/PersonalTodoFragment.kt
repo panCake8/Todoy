@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.commit
+import com.airbnb.lottie.LottieDrawable
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
@@ -68,6 +70,9 @@ class PersonalTodoFragment : BaseFragment<FragmentPersonalTodoBinding, PersonalT
         }
         binding.chipDone.setOnClickListener {
             onChipDoneClicked()
+        }
+        binding.searchBar.addTextChangedListener {
+            adapter.filterPersonalTodosBySearch(it.toString())
         }
     }
 
@@ -140,6 +145,27 @@ class PersonalTodoFragment : BaseFragment<FragmentPersonalTodoBinding, PersonalT
     override fun hideLoading() {
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    override fun showAnimation() {
+        requireActivity().runOnUiThread {
+            binding.recyclerPersonalTodo.visibility = View.GONE
+            binding.lottie.apply {
+                visibility = View.VISIBLE
+                setAnimation(R.raw.notasks)
+                repeatCount = LottieDrawable.INFINITE
+                playAnimation()
+            }
+            hideLoading()
+        }
+
+    }
+
+    override fun hideAnimation() {
+        requireActivity().runOnUiThread {
+            binding.recyclerPersonalTodo.visibility = View.VISIBLE
+            binding.lottie.visibility = View.GONE
         }
     }
 

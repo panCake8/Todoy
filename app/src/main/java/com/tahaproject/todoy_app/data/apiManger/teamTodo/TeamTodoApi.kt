@@ -2,18 +2,21 @@ package com.tahaproject.todoy_app.data.apiManger.teamTodo
 
 
 import com.tahaproject.todoy_app.data.ApiRequest
+import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
 import com.tahaproject.todoy_app.data.interceptors.AuthInterceptor
 import com.tahaproject.todoy_app.data.interceptors.TodoInterceptor
 import com.tahaproject.todoy_app.data.models.requests.SingleTodoTask
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.util.Constants
+import com.tahaproject.todoy_app.util.ErrorMessage
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
+import java.net.UnknownHostException
 
 
 class TeamTodoApi(token: String) : ApiRequest(), ITeamTodoApi {
@@ -60,7 +63,10 @@ class TeamTodoApi(token: String) : ApiRequest(), ITeamTodoApi {
         val request = getRequest(Constants.EndPoints.teamTodo)
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                onFailed(e)
+                if (e is UnknownHostException)
+                    onFailed(IOException(ErrorMessage.NO_INTERNET))
+                else
+                    onFailed(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -69,7 +75,12 @@ class TeamTodoApi(token: String) : ApiRequest(), ITeamTodoApi {
                         val teamTodosResponse = gson.fromJson(jsonString, ToDosResponse::class.java)
                         onSuccess(teamTodosResponse)
                     }
-                }
+                } else if (response.code == PersonalTodoApi.UNAUTH)
+                    onFailed(IOException(ErrorMessage.UNAUTHORIZED))
+                else if (response.code in 500..600)
+                    onFailed(IOException(ErrorMessage.SERVER_ERROR))
+                else
+                    onFailed(IOException(response.message))
             }
 
         })

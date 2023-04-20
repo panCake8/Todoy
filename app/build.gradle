@@ -48,24 +48,40 @@ android {
         implementation 'com.google.android.material:material:1.8.0'
         implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
         def okhttp_version = "4.9.1"
+        //noinspection GradleDependency
         implementation("com.squareup.okhttp3:okhttp:$okhttp_version")
+        //noinspection GradleDependency
         implementation("com.squareup.okhttp3:logging-interceptor:$okhttp_version")
-        implementation 'com.google.code.gson:gson:2.9.0'
+        implementation 'com.google.code.gson:gson:2.10.1'
         testImplementation 'junit:junit:4.13.2'
         androidTestImplementation 'androidx.test.ext:junit:1.1.5'
         androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
         //splash screen
         implementation 'androidx.core:core-splashscreen:1.0.0'
+
         //fragment
         implementation("androidx.fragment:fragment-ktx:1.5.6")
+
         //chart
         implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
         //circle image
         implementation 'com.mikhaellopez:circularimageview:4.3.0'
+
         //encrypted shared pref
         implementation "androidx.security:security-crypto:1.1.0-alpha05"
 
         implementation 'com.github.MindorksOpenSource:EditDrawableText:1.1.0'
 
+        //lottie
+        implementation "com.airbnb.android:lottie:6.0.0"
+
+        // swiper refresh layout
+        implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
     }
+}
+
+dependencies {
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

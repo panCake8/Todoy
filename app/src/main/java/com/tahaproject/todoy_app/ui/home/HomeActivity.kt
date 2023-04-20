@@ -29,6 +29,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, ActivityPresenter>(),
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setUp()
+        addCallBack()
     }
 
     private fun setUp() {
@@ -37,30 +38,52 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, ActivityPresenter>(),
         presenter.fetchPersonalData()
     }
 
+    private fun addCallBack() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            presenter.fetchPersonalData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         this.personalTodoResponse = personalTodoResponse
     }
 
     override fun navigateToLoginScreen() {
         runOnUiThread {
+            hideErrorImage()
             val intent = Intent(this@HomeActivity, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
+
     }
 
     override fun navigateToHomeScreen() {
         runOnUiThread {
+            hideErrorImage()
             supportFragmentManager.commit {
                 replace(R.id.fragment_home_container, HomeFragment(), HomeFragment::class.java.name)
                 setReorderingAllowed(true)
             }
+
         }
     }
 
-    private fun showErrorImage() {
-        binding.fragmentHomeContainer.visibility = View.GONE
-        binding.imgNoInternet.visibility = View.VISIBLE
+    override fun showErrorImage() {
+        runOnUiThread {
+            binding.fragmentHomeContainer.visibility = View.GONE
+            binding.imgNoInternet.visibility = View.VISIBLE
+        }
+
+    }
+
+    override fun hideErrorImage() {
+        runOnUiThread {
+            binding.fragmentHomeContainer.visibility = View.VISIBLE
+            binding.imgNoInternet.visibility = View.GONE
+        }
+
     }
 
     override fun noInternet() {

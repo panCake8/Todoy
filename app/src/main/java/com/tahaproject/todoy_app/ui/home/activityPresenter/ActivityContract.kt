@@ -12,6 +12,8 @@ interface ActivityContract {
         fun noInternet()
         fun showError(ioException: IOException)
         fun serverError()
+        fun showErrorImage()
+        fun hideErrorImage()
     }
 
     interface IPresenter {

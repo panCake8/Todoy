@@ -29,8 +29,13 @@ class HomePresenter(private val view: HomeContract.IView) :
     }
 
     private fun onSuccessPersonalTodo(toDosResponse: ToDosResponse) {
-        view.showPersonalToDoData(toDosResponse)
-        view.hideLoading()
+        if (toDosResponse.value.isEmpty())
+            view.showAnimation()
+        else {
+            view.showPersonalToDoData(toDosResponse)
+            view.hideLoading()
+            view.hideAnimation()
+        }
     }
 
     private fun onSuccessTeamTodo(toDosResponse: ToDosResponse) {

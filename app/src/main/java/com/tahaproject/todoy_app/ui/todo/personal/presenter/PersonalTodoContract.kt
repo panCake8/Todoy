@@ -12,7 +12,6 @@ interface PersonalTodoContract {
         fun noInternet()
         fun serverError()
 
-    }
 
     interface IPresenter {
         fun fetchData()
