@@ -9,8 +9,9 @@ interface HomeContract {
         fun showPersonalToDoData(personalTodoResponse: ToDosResponse)
         fun showTeamToDoData(teamTodoResponse: ToDosResponse)
         fun showChart()
-
         fun showError(ioException: IOException)
+        fun showLoading()
+        fun hideLoading()
     }
 
     interface IPresenter {

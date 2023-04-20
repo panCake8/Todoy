@@ -11,22 +11,46 @@ class AddNewTaskPresenter(
     private val view: IAddNewTaskContract.View
 
 ) : IAddNewTaskContract.Presenter {
-    lateinit var token: String
     private lateinit var personalTodoApi: IPersonalTodoApi
     private lateinit var teamTodoApi: ITeamTodoApi
     override fun addPersonalTask(title: String, description: String) {
-        personalTodoApi = PersonalTodoApi(token)
-        teamTodoApi = TeamTodoApi(token)
-        val singleTodoTask = SingleTodoTask(title, description)
-        personalTodoApi.createPersonalTodo(singleTodoTask, ::onTaskSuccess, ::onTaskFailed)
+        if (isValid(title, description, null)) {
+            val singleTodoTask = SingleTodoTask(title, description)
+            personalTodoApi.createPersonalTodo(singleTodoTask, ::onTaskSuccess, ::onTaskFailed)
+        }
     }
 
-    override fun addTeamTask(title: String, description: String, assignee: String) {
+    override fun addTeamTask(title: String, description: String, assignee: String?) {
+        if (isValid(title, description, assignee)) {
+            val singleTodoTask = assignee?.let { SingleTodoTask(title, description, it) }
+            singleTodoTask?.let { teamTodoApi.createTeamTodo(it, ::onTaskSuccess, ::onTaskFailed) }
+        }
+    }
+
+    fun initApis(token: String) {
         personalTodoApi = PersonalTodoApi(token)
         teamTodoApi = TeamTodoApi(token)
-        val singleTodoTask = SingleTodoTask(title, description, assignee)
-        teamTodoApi.createTeamTodo(singleTodoTask, ::onTaskSuccess, ::onTaskFailed)
     }
+
+    override fun isValid(title: String, description: String, assignee: String?): Boolean {
+        return if (!isValidTitle(title)) {
+            view.showInvalidTitleMassage("please enter title")
+            false
+        } else if (!isValidDescription(description)) {
+            view.showInvalidDescriptionMassage("please enter description")
+            false
+        } else if (isValidAssignee(assignee) == false) {
+            view.showInvalidAssigneeMassage("please enter assignee name")
+            false
+        } else {
+            true
+        }
+    }
+
+    private fun isValidTitle(title: String) = title.isNotEmpty()
+    private fun isValidDescription(description: String) = description.isNotEmpty()
+
+    private fun isValidAssignee(assignee: String?) = assignee?.isNotEmpty()
 
     private fun onTaskSuccess(successMessage: String) {
         view.showTaskAdded(successMessage)

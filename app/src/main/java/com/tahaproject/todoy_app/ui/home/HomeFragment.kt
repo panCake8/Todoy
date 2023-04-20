@@ -1,7 +1,6 @@
 package com.tahaproject.todoy_app.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.home.homePresenter.HomeContract
 import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
 import com.tahaproject.todoy_app.ui.home.PieChart.PieChartHelper
-import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
+import com.tahaproject.todoy_app.ui.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
@@ -50,7 +49,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup()
-        toggleHomeViewsVisibility(false)
         addCallBacks()
     }
 
@@ -74,32 +72,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             )
 
         }
-
-        binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
-        }
-        binding.yassen.setOnClickListener {
+        binding.rootCard.setOnClickListener {
             transitionTo(
                 DetailsTodoFragment.newInstance(personalTodo),
                 DetailsTodoFragment::class.java.name
             )
-        }
-
-        binding.editTextSearch.setOnClickListener {
-//            transitionTo(
-//                SearchFragment(),
-//                SearchFragment::class.java.name
-//            )
-        }
-
-        binding.cardViewRecently.setOnClickListener {
-//            transitionTo(
-//                DetailsTodoFragment(),
-//                DetailsTodoFragment::class.java.name
-//            )
         }
 
         binding.addFAB.setOnClickListener {
@@ -121,8 +98,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
             personalTodo = personalTodoResponse.value.last()
-            toggleProgressBarVisibility(false)
-            toggleHomeViewsVisibility(true)
             allTodos.addAll(personalTodoResponse.value)
             if (allTodos.isNotEmpty()) {
                 binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
@@ -137,8 +112,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         requireActivity().runOnUiThread {
             allTodos.addAll(teamTodoResponse.value)
             if (allTodos.isNotEmpty()) {
-                toggleProgressBarVisibility(false)
-                toggleHomeViewsVisibility(true)
                 allTodos.addAll(teamTodoResponse.value)
                 binding.teamTasksLeft.text = teamTodoResponse.value.size.toString()
             }
@@ -147,9 +120,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun showError(ioException: IOException) {
         requireActivity().runOnUiThread {
-            toggleProgressBarVisibility(false)
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
+        }
+    }
+
+    override fun showLoading() {
+        requireActivity().runOnUiThread {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.viewTextStatistics.visibility = View.INVISIBLE
+            binding.viewTextCategory.visibility = View.INVISIBLE
+            binding.pieChart.visibility = View.INVISIBLE
+            binding.personalCard.visibility = View.INVISIBLE
+            binding.teamCard.visibility = View.INVISIBLE
+            binding.recently.visibility = View.INVISIBLE
+            binding.cardViewRecently.visibility = View.INVISIBLE
+        }
+    }
+
+    override fun hideLoading() {
+        requireActivity().runOnUiThread {
+            binding.progressBar.visibility = View.GONE
+            binding.viewTextStatistics.visibility = View.VISIBLE
+            binding.viewTextCategory.visibility = View.VISIBLE
+            binding.pieChart.visibility = View.VISIBLE
+            binding.personalCard.visibility = View.VISIBLE
+            binding.teamCard.visibility = View.VISIBLE
+            binding.recently.visibility = View.VISIBLE
+            binding.cardViewRecently.visibility = View.VISIBLE
         }
     }
 
@@ -162,23 +160,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         requireActivity().runOnUiThread {
             binding.pieChart.renderPieChartData(pieChartHelper.pieChartDataList)
         }
-    }
-
-
-    private fun toggleProgressBarVisibility(show: Boolean) {
-        val visibility = if (show) View.VISIBLE else View.GONE
-        binding.progressBar.visibility = visibility
-    }
-
-    private fun toggleHomeViewsVisibility(show: Boolean) {
-        val visibility = if (show) View.VISIBLE else View.GONE
-        binding.viewTextStatistics.visibility = visibility
-        binding.viewTextCategory.visibility = visibility
-        binding.pieChart.visibility = visibility
-        binding.personalCard.visibility = visibility
-        binding.teamCard.visibility = visibility
-        binding.recently.visibility = visibility
-        binding.cardViewRecently.visibility = visibility
     }
 
     companion object {
