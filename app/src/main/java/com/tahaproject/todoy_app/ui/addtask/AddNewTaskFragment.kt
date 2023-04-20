@@ -6,6 +6,7 @@ import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.FragmentAddNewTaskBinding
@@ -50,13 +51,21 @@ class AddNewTaskFragment :
     }
 
     private fun onButtonPersonalTodoClicked() {
+        val color = ContextCompat.getColor(requireContext(),R.color.secondary_color )
         selectedTaskChip = TaskChip.PERSONAL
+        val color2 = ContextCompat.getColor(requireContext(),R.color.primary_color )
+        binding.buttonTeamTodo.setBackgroundColor(color)
+        binding.buttonPersonalTodo.setBackgroundColor(color2)
         binding.buttonPersonalTodo.isSelected = true
         binding.buttonTeamTodo.isSelected = false
         hideAssignee()
     }
 
     private fun onButtonTeamTodoClicked() {
+        val color = ContextCompat.getColor(requireContext(),R.color.secondary_color )
+        val color2 = ContextCompat.getColor(requireContext(),R.color.primary_color )
+        binding.buttonPersonalTodo.setBackgroundColor(color)
+        binding.buttonTeamTodo.setBackgroundColor(color2)
         selectedTaskChip = TaskChip.TEAM
         binding.buttonPersonalTodo.isSelected = false
         binding.buttonTeamTodo.isSelected = true
