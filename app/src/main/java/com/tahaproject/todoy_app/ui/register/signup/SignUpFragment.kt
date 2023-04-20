@@ -44,9 +44,9 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding,SignUpPresenter >(), S
 
     @SuppressLint("SuspiciousIndentation")
     private fun onSignUp() {
-        val username = binding.editTextUsername.text.toString()
-        val password = binding.editTextPassword.text.toString()
-        val confirmPassword = binding.editTextConfirmPassword.text.toString()
+        val username = binding.editTextUsername.toString()
+        val password = binding.editTextPassword.toString()
+        val confirmPassword = binding.editTextConfirmPassword.toString()
             presenter.fetchData(username,password,confirmPassword)
 
     }
