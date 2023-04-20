@@ -50,6 +50,7 @@
         <TextView
             android:id="@+id/text_view_creation_time"
             style="@style/TextTimeCard"
+            app:drawableStartCompat="@drawable/calendar_blank"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
             tools:text="21:22" />
