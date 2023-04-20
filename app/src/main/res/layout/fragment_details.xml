@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_details_container"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -39,15 +40,16 @@
         app:layout_constraintStart_toStartOf="@id/text_view_task_title"
         app:layout_constraintTop_toBottomOf="@id/text_view_task_title"
         tools:text="test" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_member_name"
-        style="@style/Chips_choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/text_view_assign_name"
+        style="@style/Text.AssignNameToDo"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:paddingHorizontal="@dimen/assignee_text_padding"
+        android:paddingVertical="@dimen/padding_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/text_view_task_title"
-        tools:text="@string/test" />
+        tools:text="Yassen" />
 
     <TextView
         android:id="@+id/text_view_task_description"
@@ -78,7 +80,7 @@
         android:drawablePadding="@dimen/margin_x_small"
         android:text="@string/test"
         app:drawableStartCompat="@drawable/calendar_blank"
-        app:layout_constraintEnd_toEndOf="@+id/chip_member_name"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_assign_name"
         app:layout_constraintTop_toBottomOf="@id/text_view_task_stats" />
 
     <Button
@@ -91,6 +93,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_task_description" />
+    <ImageView
+        android:id="@+id/img_no_internet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/description"
+        android:src="@drawable/no_internet_connection"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

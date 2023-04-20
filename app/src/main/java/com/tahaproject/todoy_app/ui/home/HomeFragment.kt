@@ -112,7 +112,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
                 binding.cardViewRecently.visibility = View.VISIBLE
                 binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
                 binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
-                binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
+                binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime.substring(11,16)
+                binding.recentlyCardDate.text = personalTodoResponse.value.last().creationTime.substring(0,10)
 
                 binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
             } else
