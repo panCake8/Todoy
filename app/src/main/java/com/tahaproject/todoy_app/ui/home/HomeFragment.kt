@@ -71,7 +71,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
                 PersonalTodoFragment(),
                 PersonalTodoFragment::class.java.name
             )
-
         }
         binding.rootCard.setOnClickListener {
             transitionTo(
@@ -95,7 +94,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     private fun transitionTo(fragment: Fragment, name: String) {
         parentFragmentManager.commit {
             replace(R.id.fragment_home_container, fragment, name)
-            addToBackStack(name)
+            addToBackStack(HomeFragment::class.java.name)
             setReorderingAllowed(true)
         }
     }
