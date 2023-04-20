@@ -7,12 +7,11 @@ import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.ITeamTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
-import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
-import com.tahaproject.todoy_app.ui.presenter.IHomeContract
 
 
-class HomePresenter(private val view: IHomeContract.IView, token: String) :
-    IHomeContract.IPresenter {
+class HomePresenter(private val view: HomeContract.IView) :
+    HomeContract.IPresenter {
+     lateinit var token: String
     private val personalTodoApiImpl: IPersonalTodoApi = PersonalTodoApi(token)
     private val teamTodoApi: ITeamTodoApi = TeamTodoApi(token)
 
@@ -43,8 +42,6 @@ class HomePresenter(private val view: IHomeContract.IView, token: String) :
 
         }
     }
-
-
 
 
     override fun onUnauthorizedError() {
