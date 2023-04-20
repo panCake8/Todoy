@@ -3,7 +3,6 @@ package com.tahaproject.todoy_app.ui.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.commit
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.databinding.ActivityRegisterBinding
@@ -39,14 +38,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         }
     }
 
-
-    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (supportFragmentManager.findFragmentByTag(LoginFragment::class.java.name) in supportFragmentManager.fragments) {
-            supportFragmentManager.popBackStackImmediate()
-        }
         super.onBackPressed()
-
     }
 
 

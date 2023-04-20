@@ -36,24 +36,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
         binding.textviewSignUp.setOnClickListener {
             goToSignUp()
         }
-//        binding.editTextPassword.setDrawableClickListener(object : onDrawableClickListener {
-//            override fun onClick(target: DrawablePosition) {
-//                when (target) {
-//                    DrawablePosition.LEFT -> {}
-//                    DrawablePosition.RIGHT -> {
-//                        if (showPassword) {
-//                            binding.editTextPassword.transformationMethod =
-//                                HideReturnsTransformationMethod.getInstance()
-//                            showPassword = false
-//                        } else if (!showPassword) {
-//                            binding.editTextPassword.transformationMethod =
-//                                PasswordTransformationMethod.getInstance()
-//                            showPassword = true
-//                        }
-//                    }
-//                }
-//            }
-//        })
     }
 
     private fun fetchData() {

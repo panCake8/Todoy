@@ -14,7 +14,6 @@ import com.tahaproject.todoy_app.ui.base.BaseActivity
 import com.tahaproject.todoy_app.ui.home.activityPresenter.ActivityPresenter
 import com.tahaproject.todoy_app.ui.home.activityPresenter.ActivityContract
 import com.tahaproject.todoy_app.ui.register.RegisterActivity
-import com.tahaproject.todoy_app.ui.register.login.LoginFragment
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import java.io.IOException
@@ -101,12 +100,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, ActivityPresenter>(),
         showErrorImage()
     }
 
-    @Deprecated("Deprecated in Java")
+
     override fun onBackPressed() {
-        if (supportFragmentManager.findFragmentByTag(HomeFragment::class.java.name) in supportFragmentManager.fragments) {
-            supportFragmentManager.popBackStackImmediate()
-        }
-        super.onBackPressed()
+        if (supportFragmentManager.findFragmentByTag(HomeFragment::class.java.name) == supportFragmentManager.fragments.first()) {
+            finish()
+        } else
+            super.onBackPressed()
 
     }
 
