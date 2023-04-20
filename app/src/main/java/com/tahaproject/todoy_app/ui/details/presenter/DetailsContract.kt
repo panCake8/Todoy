@@ -7,6 +7,8 @@ interface DetailsContract {
     interface IView {
         fun showTaskUpdated(successMessage: String)
         fun showError(error: IOException)
+        fun noInternet()
+        fun serverError()
     }
 
     interface IPresenter {

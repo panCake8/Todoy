@@ -11,6 +11,9 @@ import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.details.presenter.DetailsContract
 import com.tahaproject.todoy_app.ui.details.presenter.DetailsPresenter
 import com.tahaproject.todoy_app.util.Constants
+import com.tahaproject.todoy_app.util.Constants.DONE_STATUS
+import com.tahaproject.todoy_app.util.Constants.IN_PROGRESS_STATUS
+import com.tahaproject.todoy_app.util.Constants.TODO_STATUS
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
 import okio.IOException
@@ -56,7 +59,7 @@ class DetailsTodoFragment :
         if (updateTodoTask.status == TODO_STATUS) {
             updateTodoTask.status = IN_PROGRESS_STATUS
             onUpdate(IN_PROGRESS, true)
-            if (binding.chipMemberName.text == "")
+            if (binding.textViewAssignName.text == "")
                 presenter.updatePersonalTodoTask(
                     UpdateTodoTask(
                         updateTodoTask.id,
@@ -68,21 +71,23 @@ class DetailsTodoFragment :
         } else {
             updateTodoTask.status = DONE_STATUS
             onUpdate(DONE, false)
-            if (binding.chipMemberName.text == "")
+            if (binding.textViewAssignName.text == Constants.PERSONAL)
                 presenter.updatePersonalTodoTask(UpdateTodoTask(updateTodoTask.id, DONE_STATUS))
             else
                 presenter.updateTeamTodoTask(UpdateTodoTask(updateTodoTask.id, DONE_STATUS))
         }
     }
 
-    private fun viewDetails(tasKDetails: Todo?) {
-        binding.textViewTaskTitle.text = tasKDetails?.title
-        binding.textViewTaskDescription.text = tasKDetails?.description
+    private fun viewDetails(tasKDetails: Todo) {
+        binding.textViewTaskTime.text= tasKDetails.creationTime.substring(11,16)
+        binding.textViewTaskDate.text= tasKDetails.creationTime.substring(0,10)
+        binding.textViewTaskTitle.text = tasKDetails.title
+        binding.textViewTaskDescription.text = tasKDetails.description
         checkStatus(tasKDetails)
-        if (tasKDetails?.assignee == "")
-            binding.chipMemberName.visibility = View.GONE
+        if (tasKDetails.assignee == Constants.PERSONAL)
+            binding.textViewAssignName.visibility = View.GONE
         else
-            binding.chipMemberName.text = tasKDetails?.assignee
+            binding.textViewAssignName.text = tasKDetails.assignee
 
     }
 
@@ -120,6 +125,18 @@ class DetailsTodoFragment :
             showToast(error)
         }
 
+    }
+    private fun showErrorImage() {
+        binding.fragmentDetailsContainer.visibility = View.GONE
+        binding.imgNoInternet.visibility = View.VISIBLE
+    }
+
+    override fun noInternet() {
+        showErrorImage()
+    }
+
+    override fun serverError() {
+        showErrorImage()
     }
 
     companion object {

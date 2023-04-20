@@ -13,7 +13,7 @@ object Constants {
     const val DONE_STRING: String = "Done"
     const val TASK_DETAILS: String = "taskDetails"
     const val EMPTY_STRING: String = "todoId"
-
+    const val PERSONAL = "personal"
     const val SHORT_NAME = 4
     const val SHORT_PASSWORD = 8
 
