@@ -57,8 +57,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), Logi
     }
 
     private fun fetchData() {
-        val username = binding.editTextUsername.text.toString()
-        val password = binding.editTextPassword.text.toString()
+        val username = binding.editTextUsername.toString()
+        val password = binding.editTextPassword.toString()
         presenter.fetchData(username, password)
     }
 
