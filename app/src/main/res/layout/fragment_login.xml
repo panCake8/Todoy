@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,46 +25,59 @@
         app:layout_constraintTop_toBottomOf="@+id/app_bar_login" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_username"
-        style="@style/input_text_field"
+        android:id="@+id/layout_username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_large"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="@dimen/edit_text_height"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/username_hint"
         android:importantForAutofill="no"
-        android:paddingHorizontal="@dimen/padding_large"
+        app:hintTextColor="@color/medium_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_image">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background_style"
-            android:hint="@string/username_hint"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            tools:ignore="TextViewEdits" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_password"
-        style="@style/HintInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password_hint"
-        android:importantForAutofill="no"
-        android:padding="@dimen/padding_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_username"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/roboto"
             android:importantForAutofill="no"
-            android:inputType="textPassword" />
+            android:inputType="textPersonName"
+            android:textColor="@color/dark_black"
+            android:textSize="@dimen/text_medium" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/password_hint"
+        android:importantForAutofill="no"
+        app:hintTextColor="@color/medium_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_username"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/roboto"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/dark_black"
+            android:textSize="@dimen/text_medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_password" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_password" />
 
     <TextView
         android:id="@+id/do_not_have_an_account"

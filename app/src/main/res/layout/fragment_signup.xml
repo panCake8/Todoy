@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,73 +27,88 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar_toolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_username"
-        style="@style/input_text_field"
+        android:id="@+id/layout_username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_x_large"
-        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginTop="@dimen/edit_text_height"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/username_hint"
         android:importantForAutofill="no"
-
+        app:hintTextColor="@color/medium_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_view_cover">
-        <EditText
+        app:layout_constraintTop_toBottomOf="@+id/image_view_cover">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background_style"
-            android:hint="@string/username_hint"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/roboto"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            tools:ignore="TextViewEdits" />
+            android:textColor="@color/dark_black"
+            android:textSize="@dimen/text_medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_password"
-        style="@style/HintInput"
+        android:id="@+id/layout_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@drawable/edit_text_background"
         android:hint="@string/password_hint"
         android:importantForAutofill="no"
-        android:paddingTop="@dimen/padding_medium"
-        android:paddingHorizontal="@dimen/padding_large"
+        app:hintTextColor="@color/medium_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_username"
+        app:layout_constraintTop_toBottomOf="@id/layout_username"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/roboto"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            tools:ignore="LabelFor" />
+            android:textColor="@color/dark_black"
+            android:textSize="@dimen/text_medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_confirm_password"
-        style="@style/HintInput"
+        android:id="@+id/layout_confirm_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password_confirmation"
+        android:layout_marginHorizontal="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/password_hint"
         android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:paddingTop="@dimen/padding_medium"
-        android:paddingHorizontal="@dimen/padding_large"
+        app:hintTextColor="@color/medium_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_password"
+        app:layout_constraintTop_toBottomOf="@id/layout_password"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/roboto"
             android:importantForAutofill="no"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/dark_black"
+            android:textSize="@dimen/text_medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,7 +120,7 @@
         android:text="@string/signUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_confirm_password" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_confirm_password" />
 
     <TextView
         android:id="@+id/do_have_an_account"
