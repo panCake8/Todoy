@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.airbnb.lottie.LottieDrawable
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
@@ -82,6 +83,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         binding.addFAB.setOnClickListener {
             AddNewTaskFragment().show(parentFragmentManager, NEW_TASK_TAG)
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            setup()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
 
@@ -97,13 +103,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
-            personalTodo = personalTodoResponse.value.last()
-            allTodos.addAll(personalTodoResponse.value)
-            if (allTodos.isNotEmpty()) {
-                binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
-                binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
-                binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
-                binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
+            if (personalTodoResponse.value.isEmpty()) {
+                // todo do any thing :)
+            } else {
+                personalTodo = personalTodoResponse.value.last()
+                allTodos.addAll(personalTodoResponse.value)
+                if (allTodos.isNotEmpty()) {
+                    binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
+                    binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
+                    binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
+                    binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
+                }
             }
         }
     }
@@ -148,6 +158,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             binding.teamCard.visibility = View.VISIBLE
             binding.recently.visibility = View.VISIBLE
             binding.cardViewRecently.visibility = View.VISIBLE
+        }
+    }
+
+    override fun showAnimation() {
+        requireActivity().runOnUiThread {
+            binding.cardViewRecently.visibility = View.GONE
+            binding.lottie.apply {
+                visibility = View.VISIBLE
+                setAnimation(R.raw.home_animation)
+                repeatCount = LottieDrawable.INFINITE
+                playAnimation()
+            }
+        }
+
+    }
+
+    override fun hideAnimation() {
+        requireActivity().runOnUiThread {
+            binding.cardViewRecently.visibility = View.VISIBLE
+            binding.lottie.visibility = View.GONE
         }
     }
 

@@ -12,6 +12,8 @@ interface HomeContract {
         fun showError(ioException: IOException)
         fun showLoading()
         fun hideLoading()
+        fun showAnimation()
+        fun hideAnimation()
     }
 
     interface IPresenter {

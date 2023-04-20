@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.commit
+import com.airbnb.lottie.LottieDrawable
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
@@ -129,6 +130,28 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    override fun showAnimation() {
+        requireActivity().runOnUiThread {
+            binding.recyclerviewTeamTodo.visibility = View.GONE
+            binding.lottie.apply {
+                visibility = View.VISIBLE
+                setAnimation(R.raw.notasks)
+                repeatCount = LottieDrawable.INFINITE
+                playAnimation()
+            }
+            hideLoading()
+        }
+
+    }
+
+    override fun hideAnimation() {
+        requireActivity().runOnUiThread {
+            binding.recyclerviewTeamTodo.visibility = View.VISIBLE
+            binding.lottie.visibility = View.GONE
+        }
+        showLoading()
     }
 
     override fun onClickItem(item: Todo) {

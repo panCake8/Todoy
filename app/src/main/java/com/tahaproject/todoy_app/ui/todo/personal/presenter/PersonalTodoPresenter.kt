@@ -17,8 +17,13 @@ class PersonalTodoPresenter(private val view: PersonalTodoContract.IView) :
     }
 
     private fun showTodos(toDosResponse: ToDosResponse) {
-        view.showTodos(toDosResponse)
-        view.hideLoading()
+        if (toDosResponse.value.isEmpty())
+            view.showAnimation()
+        else {
+            view.showTodos(toDosResponse)
+            view.hideLoading()
+            view.hideAnimation()
+        }
     }
 
 
