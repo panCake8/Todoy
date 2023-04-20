@@ -102,21 +102,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             personalTodo = personalTodoResponse.value.last()
             allTodos.addAll(personalTodoResponse.value)
             if (allTodos.isNotEmpty()) {
+                binding.cardViewRecently.visibility = View.VISIBLE
                 binding.textViewRecentlyTitle.text = personalTodoResponse.value.last().title
                 binding.textViewRecentlyBody.text = personalTodoResponse.value.last().description
                 binding.recentlyCardTime.text = personalTodoResponse.value.last().creationTime
                 binding.personalTasksLeft.text = personalTodoResponse.value.size.toString()
-            }
+            } else
+                binding.cardViewRecently.visibility = View.GONE
         }
     }
 
     override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             allTodos.addAll(teamTodoResponse.value)
             if (allTodos.isNotEmpty()) {
@@ -127,7 +133,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showError(ioException: IOException) {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
@@ -135,7 +143,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showLoading() {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.VISIBLE
             binding.viewTextStatistics.visibility = View.INVISIBLE
@@ -144,12 +154,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             binding.personalCard.visibility = View.INVISIBLE
             binding.teamCard.visibility = View.INVISIBLE
             binding.recently.visibility = View.INVISIBLE
-            binding.cardViewRecently.visibility = View.INVISIBLE
         }
     }
 
     override fun hideLoading() {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.GONE
             binding.viewTextStatistics.visibility = View.VISIBLE
@@ -158,12 +169,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             binding.personalCard.visibility = View.VISIBLE
             binding.teamCard.visibility = View.VISIBLE
             binding.recently.visibility = View.VISIBLE
-            binding.cardViewRecently.visibility = View.VISIBLE
         }
     }
 
     override fun showAnimation() {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             binding.cardViewRecently.visibility = View.GONE
             binding.lottie.apply {
@@ -177,7 +189,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun hideAnimation() {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             binding.cardViewRecently.visibility = View.VISIBLE
             binding.lottie.visibility = View.GONE
@@ -190,7 +204,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     private fun renderPieChart() {
-        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                .not()
+        ) return
         requireActivity().runOnUiThread {
             binding.pieChart.renderPieChartData(pieChartHelper.pieChartDataList)
         }
