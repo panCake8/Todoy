@@ -13,7 +13,7 @@ class PersonalAdapter(
     private var todos: List<Todo>,
     private val listener: PersonalAdapterListener
 ) :
-    BaseRecyclerAdapter<Todo, ItemCardPersonalTodoBinding>(todos), Filterable {
+    BaseRecyclerAdapter<Todo, ItemCardPersonalTodoBinding>(todos) {
     private var filteredTodos: List<Todo> = todos
 
     fun filter(query: String) {
@@ -46,9 +46,7 @@ class PersonalAdapter(
         }
     }
 
-    override fun getFilter(): Filter {
-        TODO("Not yet implemented")
-    }
+
 
 
 }
