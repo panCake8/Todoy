@@ -5,7 +5,9 @@ import com.tahaproject.todoy_app.data.apiManger.personalTodo.PersonalTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.ITeamTodoApi
 import com.tahaproject.todoy_app.data.apiManger.teamTodo.TeamTodoApi
 import com.tahaproject.todoy_app.data.models.requests.UpdateTodoTask
+import com.tahaproject.todoy_app.util.ErrorMessage
 import java.io.IOException
+import java.net.UnknownHostException
 
 class DetailsPresenter(private val view: DetailsContract.IView) : DetailsContract.IPresenter {
     private lateinit var personalTodoApi: IPersonalTodoApi
@@ -41,7 +43,19 @@ class DetailsPresenter(private val view: DetailsContract.IView) : DetailsContrac
     }
 
     private fun onTaskFailed(error: IOException) {
-        view.showError(error)
+        when (error.message) {
+            UnknownHostException(ErrorMessage.NO_INTERNET).message -> {
+                view.noInternet()
+                view.showError(error)
+            }
+
+            IOException(ErrorMessage.SERVER_ERROR).message -> {
+                view.serverError()
+                view.showError(error)
+            }
+
+            else -> view.showError(error)
+        }
     }
 }
 

@@ -83,7 +83,7 @@
 
     <Button
 
-        android:id="@+id/button"
+        android:id="@+id/button_details"
         style="@style/Button"
         android:layout_marginVertical="@dimen/margin_xx_large"
         android:layout_marginTop="@dimen/margin_large"
@@ -91,6 +91,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_task_description" />
+    <ImageView
+        android:id="@+id/img_no_internet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/description"
+        android:src="@drawable/no_internet_connection"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

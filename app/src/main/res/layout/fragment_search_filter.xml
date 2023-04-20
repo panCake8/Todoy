@@ -104,7 +104,7 @@
         tools:ignore="Autofill,TextFields" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_details"
         style="@style/Button"
         android:layout_marginTop="@dimen/margin_large"
         android:text="@string/add"
