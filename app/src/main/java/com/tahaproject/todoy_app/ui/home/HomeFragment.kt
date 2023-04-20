@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.Lifecycle
 import com.airbnb.lottie.LottieDrawable
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
@@ -101,6 +102,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             personalTodo = personalTodoResponse.value.last()
             allTodos.addAll(personalTodoResponse.value)
@@ -114,6 +116,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             allTodos.addAll(teamTodoResponse.value)
             if (allTodos.isNotEmpty()) {
@@ -124,6 +127,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showError(ioException: IOException) {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
@@ -131,6 +135,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showLoading() {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.VISIBLE
             binding.viewTextStatistics.visibility = View.INVISIBLE
@@ -144,6 +149,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun hideLoading() {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             binding.progressBar.visibility = View.GONE
             binding.viewTextStatistics.visibility = View.VISIBLE
@@ -157,6 +163,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun showAnimation() {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             binding.cardViewRecently.visibility = View.GONE
             binding.lottie.apply {
@@ -170,6 +177,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     override fun hideAnimation() {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             binding.cardViewRecently.visibility = View.VISIBLE
             binding.lottie.visibility = View.GONE
@@ -182,6 +190,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
     }
 
     private fun renderPieChart() {
+        if (!isAdded || viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED).not()) return
         requireActivity().runOnUiThread {
             binding.pieChart.renderPieChartData(pieChartHelper.pieChartDataList)
         }
