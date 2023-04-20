@@ -3,7 +3,6 @@ package com.tahaproject.todoy_app.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen

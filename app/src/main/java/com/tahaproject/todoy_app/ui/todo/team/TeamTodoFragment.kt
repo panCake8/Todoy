@@ -2,10 +2,8 @@ package com.tahaproject.todoy_app.ui.todo.team
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.databinding.FragmentTeamTodoBinding
-import com.tahaproject.todoy_app.ui.presenter.IHomeContract
 import com.tahaproject.todoy_app.ui.todo.ToDoFragment
 import com.tahaproject.todoy_app.ui.todo.team.adapter.TeamAdapter
 import com.tahaproject.todoy_app.ui.todo.team.presenter.ITeamTodoContract

@@ -6,17 +6,14 @@ import java.io.IOException
 
 interface HomeContract {
     interface IView {
-        fun showPersonalToDoData(personalTodoResponse : ToDosResponse)
-        fun showTeamToDoData(teamTodoResponse : ToDosResponse)
-        fun navigateToLoginScreen()
-        fun navigateToHomeScreen()
+        fun showPersonalToDoData(personalTodoResponse: ToDosResponse)
+        fun showTeamToDoData(teamTodoResponse: ToDosResponse)
+
         fun showError(ioException: IOException)
     }
 
     interface IPresenter {
         fun fetchPersonalData()
         fun fetchTeamData()
-        fun onUnauthorizedError()
-        fun onHome()
     }
 }
