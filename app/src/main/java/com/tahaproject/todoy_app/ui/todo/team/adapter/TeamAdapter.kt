@@ -6,6 +6,7 @@ import android.widget.Filterable
 import com.tahaproject.todoy_app.databinding.ItemCardTeamTodoBinding
 import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
+import com.tahaproject.todoy_app.util.filterBySearch
 
 
 class TeamAdapter(
@@ -13,21 +14,11 @@ class TeamAdapter(
     private val listener: TeamAdapterListener
 ) :
     BaseRecyclerAdapter<Todo, ItemCardTeamTodoBinding>(todos) {
-    private var filteredTodos: List<Todo> = todos
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCardTeamTodoBinding =
         ItemCardTeamTodoBinding::inflate
 
-    fun filter(query: String) {
-        val filteredTodos = if (query.isEmpty()) {
-            todos
-        } else {
-            todos.filter {
-                it.title.contains(query, ignoreCase = true) || it.description.contains(
-                    query,
-                    ignoreCase = true
-                ) || it.assignee.contains(query, ignoreCase = true)
-            }
-        }
+    fun filterTeamTodosBySearch(query: String) {
+        val filteredTodos = todos.filterBySearch(query, Todo::title, Todo::description, Todo::assignee)
         this.list = filteredTodos
         notifyDataSetChanged()
     }

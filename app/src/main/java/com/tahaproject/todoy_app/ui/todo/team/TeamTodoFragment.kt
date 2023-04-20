@@ -68,7 +68,7 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             }
         }
         binding.searchBar.addTextChangedListener {
-            adapter.filter(it.toString())
+            adapter.filterTeamTodosBySearch(it.toString())
         }
     }
 

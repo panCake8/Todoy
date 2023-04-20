@@ -7,6 +7,7 @@ import android.widget.Filterable
 import com.tahaproject.todoy_app.databinding.ItemCardPersonalTodoBinding
 import com.tahaproject.todoy_app.ui.base.BaseRecyclerAdapter
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
+import com.tahaproject.todoy_app.util.filterBySearch
 
 
 class PersonalAdapter(
@@ -14,19 +15,10 @@ class PersonalAdapter(
     private val listener: PersonalAdapterListener
 ) :
     BaseRecyclerAdapter<Todo, ItemCardPersonalTodoBinding>(todos) {
-    private var filteredTodos: List<Todo> = todos
 
-    fun filter(query: String) {
-        val filteredTodos = if (query.isEmpty()) {
-            todos
-        } else {
-            todos.filter {
-                it.title.contains(query, ignoreCase = true) || it.description.contains(
-                    query,
-                    ignoreCase = true
-                )
-            }
-        }
+
+    fun filterPersonalTodosBySearch(query: String) {
+        val filteredTodos = todos.filterBySearch(query, Todo::title, Todo::description)
         this.list = filteredTodos
         notifyDataSetChanged()
     }
@@ -45,8 +37,6 @@ class PersonalAdapter(
             }
         }
     }
-
-
 
 
 }

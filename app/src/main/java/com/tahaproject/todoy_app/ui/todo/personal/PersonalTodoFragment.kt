@@ -71,7 +71,7 @@ class PersonalTodoFragment : BaseFragment<FragmentPersonalTodoBinding, PersonalT
             onChipDoneClicked()
         }
         binding.searchBar.addTextChangedListener {
-            adapter.filter(it.toString())
+            adapter.filterPersonalTodosBySearch(it.toString())
         }
     }
 
