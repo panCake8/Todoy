@@ -31,7 +31,7 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
 
     private var selectedTaskChip: TaskChip = TaskChip.TODO
 
-    private lateinit var toDosResponse: ToDosResponse
+    private var toDosResponse: ToDosResponse? = null
     private lateinit var adapter: TeamAdapter
     private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
 
@@ -61,9 +61,7 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
             back()
         }
         binding.chipGroupTeamTodo.setOnCheckedStateChangeListener { _, checkedId ->
-            if (checkedId.size == 0) {
-                presenter.fetchData()
-            } else {
+            if (checkedId.size != 0 && toDosResponse != null) {
                 selectedTaskChip = when (checkedId[0]) {
                     R.id.chip_todo -> TaskChip.TODO
                     R.id.chip_inProgress -> TaskChip.IN_PROGRESS
@@ -82,15 +80,15 @@ class TeamTodoFragment : BaseFragment<FragmentTeamTodoBinding, TeamTodoPresenter
     }
 
     private fun onChipTodoClicked() {
-        processClickedChipData(toDosResponse, TaskChip.TODO)
+        toDosResponse?.let { processClickedChipData(it, TaskChip.TODO) }
     }
 
     private fun onChipInProgressClicked() {
-        processClickedChipData(toDosResponse, TaskChip.IN_PROGRESS)
+        toDosResponse?.let { processClickedChipData(it, TaskChip.IN_PROGRESS) }
     }
 
     private fun onChipDoneClicked() {
-        processClickedChipData(toDosResponse, TaskChip.DONE)
+        toDosResponse?.let { processClickedChipData(it, TaskChip.DONE) }
     }
 
     private fun processClickedChipData(toDosResponse: ToDosResponse, status: TaskChip) {
