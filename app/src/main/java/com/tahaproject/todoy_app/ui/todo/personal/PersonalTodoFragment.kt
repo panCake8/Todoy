@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import com.tahaproject.todoy_app.R
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.ToDosResponse
 import com.tahaproject.todoy_app.data.models.responses.todosListResponse.Todo
@@ -13,6 +14,7 @@ import com.tahaproject.todoy_app.ui.todo.ToDoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.adapter.PersonalAdapter
 import com.tahaproject.todoy_app.ui.todo.personal.presenter.IPersonalTodoContract
 import com.tahaproject.todoy_app.ui.todo.personal.presenter.PersonalTodoPresenter
+import com.tahaproject.todoy_app.ui.todo.team.adapter.TeamAdapter
 import com.tahaproject.todoy_app.util.Constants
 import com.tahaproject.todoy_app.util.SharedPreferenceUtil
 import com.tahaproject.todoy_app.util.showToast
@@ -42,11 +44,28 @@ class PersonalTodoFragment : ToDoFragment<FragmentPersonalTodoBinding, PersonalT
         chooseGroup()
         setChipClickListeners()
         presenter.fetchData()
+        searchPersonal()
     }
     override fun addCallBack() {
         binding.appBarPersonalTodo.setNavigationOnClickListener {
             parentFragmentManager.popBackStack()
         }
+    }
+    private fun searchPersonal(){
+        binding.searchBar.addTextChangedListener {
+            getPersonalTodo()
+        }
+    }
+    private fun getPersonalTodo(){
+        val filterList: List<Todo> = toDosResponse.value.filter {
+            it.title == Constants.Todo.TITLE
+                    &&
+                    it.description == Constants.Todo.DESCRIPTION
+                    &&
+                    it.assignee == Constants.Todo.ASSIGNEE
+        }
+        adapter = PersonalAdapter(filterList)
+        binding.recyclerPersonalTodo.adapter = adapter
     }
 
     private fun chooseGroup() {
