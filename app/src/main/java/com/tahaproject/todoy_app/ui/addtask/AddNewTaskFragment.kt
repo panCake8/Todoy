@@ -51,9 +51,9 @@ class AddNewTaskFragment :
     }
 
     private fun onButtonPersonalTodoClicked() {
-        val color = ContextCompat.getColor(requireContext(),R.color.secondary_color )
+        val color = ContextCompat.getColor(requireContext(),R.color.primary_color )
         selectedTaskChip = TaskChip.PERSONAL
-        val color2 = ContextCompat.getColor(requireContext(),R.color.primary_color )
+        val color2 = ContextCompat.getColor(requireContext(),R.color.secondary_color )
         binding.buttonTeamTodo.setBackgroundColor(color)
         binding.buttonPersonalTodo.setBackgroundColor(color2)
         binding.buttonPersonalTodo.isSelected = true
@@ -62,8 +62,8 @@ class AddNewTaskFragment :
     }
 
     private fun onButtonTeamTodoClicked() {
-        val color = ContextCompat.getColor(requireContext(),R.color.secondary_color )
-        val color2 = ContextCompat.getColor(requireContext(),R.color.primary_color )
+        val color = ContextCompat.getColor(requireContext(),R.color.primary_color )
+        val color2 = ContextCompat.getColor(requireContext(),R.color.secondary_color )
         binding.buttonPersonalTodo.setBackgroundColor(color)
         binding.buttonTeamTodo.setBackgroundColor(color2)
         selectedTaskChip = TaskChip.TEAM
