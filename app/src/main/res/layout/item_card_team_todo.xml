@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardTodo">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/padding_large"
+        android:paddingBottom="@dimen/padding_large">
+
+        <TextView
+            android:id="@+id/text_view_title_team_todo"
+            style="@style/Text.TitleToDo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Note title" />
+
+        <TextView
+            android:id="@+id/text_view_assign_name"
+            style="@style/Text.AssignNameToDo"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:paddingHorizontal="@dimen/assignee_text_padding"
+            android:paddingVertical="@dimen/padding_small"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_body_team_todo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_title_team_todo"
+            tools:text="Yassen" />
+
+        <TextView
+            android:id="@+id/text_view_body_team_todo"
+            style="@style/Text.BodyToDo"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_title_team_todo"
+            tools:text="Lorem ipsum dolor sit amet consectetur. Nec aliquam feugiat maecenas  accumsan..." />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_stroke"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:background="@color/line_todo_personal_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_body_team_todo" />
+
+        <TextView
+            android:id="@+id/text_view_creation_time"
+            style="@style/TextTimeCard"
+            app:drawableStartCompat="@drawable/calendar_blank"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            tools:text="21:22" />
+
+        <TextView
+            android:id="@+id/text_view_status"
+            style="@style/TextTimeCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            tools:text="3 April 2022" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
