@@ -18,11 +18,11 @@ class HomePresenter(private val view: HomeContract.IView) :
 
     override fun fetchPersonalData() {
         personalTodoApiImpl = PersonalTodoApi(token)
-        teamTodoApi = TeamTodoApi(token)
         personalTodoApiImpl.getPersonalTodos(::onSuccessPersonalTodo, ::onFailed)
     }
 
     override fun fetchTeamData() {
+        teamTodoApi = TeamTodoApi(token)
         teamTodoApi.getTeamTodos(::onSuccessTeamTodo, ::onFailed)
     }
 
@@ -32,6 +32,7 @@ class HomePresenter(private val view: HomeContract.IView) :
 
     private fun onSuccessTeamTodo(toDosResponse: ToDosResponse) {
         view.showTeamToDoData(toDosResponse)
+        view.showChart()
     }
 
     private fun onFailed(ioException: IOException) {

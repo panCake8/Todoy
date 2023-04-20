@@ -1,6 +1,7 @@
 package com.tahaproject.todoy_app.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.tahaproject.todoy_app.ui.addtask.AddNewTaskFragment
 import com.tahaproject.todoy_app.ui.base.BaseFragment
 import com.tahaproject.todoy_app.ui.home.homePresenter.HomeContract
 import com.tahaproject.todoy_app.ui.home.homePresenter.HomePresenter
-import com.tahaproject.todoy_app.ui.home.pieChart.PieChartHelper
+import com.tahaproject.todoy_app.ui.home.PieChart.PieChartHelper
 import com.tahaproject.todoy_app.ui.todo.details.DetailsTodoFragment
 import com.tahaproject.todoy_app.ui.todo.personal.PersonalTodoFragment
 import com.tahaproject.todoy_app.ui.todo.team.TeamTodoFragment
@@ -48,14 +49,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pieChartHelper = PieChartHelper(allTodos)
         setup()
         toggleHomeViewsVisibility(false)
         addCallBacks()
     }
 
     private fun setup() {
-        renderPieChart()
         presenter.fetchPersonalData()
         presenter.fetchTeamData()
     }
@@ -110,10 +109,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
 
     // transition between fragments
-    private fun transitionTo(
-        fragment: Fragment,
-        name: String,
-    ) {
+    private fun transitionTo(fragment: Fragment, name: String) {
         parentFragmentManager.commit {
             replace(R.id.fragment_home_container, fragment, name)
             addToBackStack(name)
@@ -121,9 +117,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
         }
     }
 
-    private fun renderPieChart() {
-        binding.pieChart.renderPieChartData(pieChartHelper.pieChartDataList)
-    }
 
     override fun showPersonalToDoData(personalTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
@@ -142,6 +135,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
 
     override fun showTeamToDoData(teamTodoResponse: ToDosResponse) {
         requireActivity().runOnUiThread {
+            allTodos.addAll(teamTodoResponse.value)
             if (allTodos.isNotEmpty()) {
                 toggleProgressBarVisibility(false)
                 toggleHomeViewsVisibility(true)
@@ -156,6 +150,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(),
             toggleProgressBarVisibility(false)
             allTodos = mutableListOf()
             ioException.localizedMessage?.let { showToast(it) }
+        }
+    }
+
+    override fun showChart() {
+        pieChartHelper = PieChartHelper(allTodos)
+        renderPieChart()
+    }
+
+    private fun renderPieChart() {
+        requireActivity().runOnUiThread {
+            binding.pieChart.renderPieChartData(pieChartHelper.pieChartDataList)
         }
     }
 
